@@ -3,20 +3,31 @@ import { connect } from 'react-redux'
 import  * as actions from '../actions/actionCreator'
 import { bindActionCreators } from 'redux'
 import Followings from '../components/Followings'
-import Activities from '../components/Activities'
+import Activities  from '../components/Activities'
+import FetchOnScroll  from '../components/FetchOnScroll'
 
 class App extends Component {
   render () {
-    const { initSession, currentUser }=this.props
-
-    return (
+    const { initSession, currentUser, fetchActivities, nextHref }=this.props
+     return (
       <div>
         {
           currentUser
             ? <div className="dashboard-content">
-              <div >{currentUser.username}</div>
-              <Followings {...this.props}/>
-              <Activities {...this.props}/>
+              <div className="dashboard-content-main">
+
+              <Activities {...this.props}
+                          scrollFunc={fetchActivities.bind(null, nextHref)}
+              />
+              </div>
+
+              <div className="dashboard-content-side">
+
+                <Followings
+                  {...this.props}
+                />
+
+              </div>
             </div>
             : <button onClick={initSession.bind(null)}>
               Login1
@@ -33,8 +44,8 @@ function mapStateToProps (state) {
     currentUser: auth.get('user'),
     followings: user.get('followings'),
     activities: user.get('activities'),
-    nextHref:user.get('activitiesNextHref'),
-    activitiesRequestInProcess:user.get('activitiesRequestInProcess')
+    nextHref: user.get('activitiesNextHref'),
+    activitiesRequestInProcess: user.get('activitiesRequestInProcess')
   }
 }
 

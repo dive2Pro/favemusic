@@ -1,8 +1,9 @@
 import React, { Component } from 'react'
 import FetchOnScroll from './FetchOnScroll'
+import Track from '../components/Track'
+
 class ActivitiesContainer extends Component {
   activitiesDom () {
-
     const { activities }=this.props
     console.info('activities= ', activities)
     return (
@@ -11,7 +12,9 @@ class ActivitiesContainer extends Component {
         <ul>
           {activities.map((act, idx) => {
             return (
-              <li key={idx}>act.username</li>
+              <li key={idx}>
+                <Track activity={act.toJSON()}/>
+              </li>
             )
           })}
         </ul>
@@ -29,7 +32,6 @@ class ActivitiesContainer extends Component {
   }
 
   render () {
-
     return (
       <div>
         <div>{this.activitiesDom()}</div>
@@ -39,4 +41,4 @@ class ActivitiesContainer extends Component {
   }
 }
 
-export default FetchOnScroll(ActivitiesContainer)
+export default FetchOnScroll(ActivitiesContainer);

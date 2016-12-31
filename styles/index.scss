@@ -1,9 +1,4 @@
-@import "./components/dashboard";
-
-*, *:before, *:after {
-  box-sizing: border-box;
-}
-
-body {
-
-}
+@import "custom/variable";
+@import "custom/main";
+@import "components/dashboard";
+@import "components/track";
