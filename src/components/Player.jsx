@@ -15,13 +15,14 @@ class Player extends Component {
   }
 
   togglePlay () {
-    const { togglePlayTrack, isPlaying }=this.props
+    const { togglePlayTrack, isPlaying } = this.props
     togglePlayTrack(!isPlaying)
   }
 
   renderNav () {
-    const { isPlaying, activeTrack }=this.props
-    const { origin }=activeTrack
+    const { isPlaying, activeTrack } = this.props
+    if (!activeTrack)return
+    const { origin } = activeTrack
     const { stream_url }=origin
     return (
       <div className="player-content">
