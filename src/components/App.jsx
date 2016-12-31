@@ -2,38 +2,9 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import  * as actions from '../actions/actionCreator'
 import { bindActionCreators } from 'redux'
+import Followings from './Followings'
+
 class App extends Component {
-  constructor (props) {
-    super(props)
-
-    this.getFollowingsDom = this.getFollowingsDom.bind(this)
-
-  }
-
-  getFollowingsDom () {
-    const { followings } =this.props
-    console.info(followings)
-    return (
-      <div>
-        <h1>Following people</h1>
-        {
-          followings
-          && (
-            <ul>
-              {followings.toJSON().map((following, idx) => {
-                return (
-                  <li key={idx}>
-                    {following.username}
-                  </li>
-                )
-              })}
-            </ul>
-          )
-        }
-      </div>
-    )
-  }
-
   render () {
     const { initSession, currentUser }=this.props
 
@@ -43,7 +14,7 @@ class App extends Component {
           currentUser
             ? <div>
               <div>{currentUser.username}</div>
-              {this.getFollowingsDom()}
+              <Followings {...this.props}/>
             </div>
             : <button onClick={initSession.bind(null)}>
               Login1

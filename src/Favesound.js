@@ -2,14 +2,14 @@ import React, { Component } from 'react';
 import store, { reduxHistory } from './store'
 import { Router, Route, IndexRoute }from 'react-router'
 import { Provider } from 'react-redux'
-import Main from './components/Main'
+import Dashboard from './components/Dashboard'
 import App from './components/App'
 import Callback from './components/Callback'
 
 const routes = (
-  <Route path="/" component={Main}>
+  <Route path="/" component={Dashboard}>
     <IndexRoute component={App}/>
-    <Route path='/app' component={App}/>
+    <Route path='/dashboard' component={Dashboard}/>
     <Route path='/callback' component={Callback}/>
   </Route>
 )

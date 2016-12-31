@@ -28,7 +28,6 @@ export function initSession () {
 
     SC.connect().then(session => {
       Cookies.set(OAUTH_TOKEN, session.oauth_token)
-
       dispatch(setSession(session))
       dispatch(fetchUser(session.oauth_token))
     })
