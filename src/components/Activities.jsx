@@ -4,7 +4,7 @@ import Track from '../components/Track'
 
 class ActivitiesContainer extends Component {
   activitiesDom () {
-    const { activities }=this.props
+    const { activities, activateTrack }=this.props
     console.info('activities= ', activities)
     return (
       <div>
@@ -13,7 +13,7 @@ class ActivitiesContainer extends Component {
           {activities.map((act, idx) => {
             return (
               <li key={idx}>
-                <Track activity={act.toJSON()}/>
+                <Track activity={act.toJSON()} activateTrack={activateTrack}/>
               </li>
             )
           })}

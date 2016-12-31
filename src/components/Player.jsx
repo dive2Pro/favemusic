@@ -1,31 +1,51 @@
 import React, { Component } from 'react'
-
+import ReactDOM from 'react-dom'
+import { addAccessToken } from '../utils/soundcloundApi'
 class Player extends Component {
   constructor (props) {
     super(props)
+    this.togglePlay = this.togglePlay.bind(this)
+  }
+
+  componentDidUpdate () {
+    let audioElement = ReactDOM.findDOMNode(this.refs.audio)
+    if (!audioElement)return
+    const { isPlaying }=this.props
+    isPlaying ? audioElement.play() : audioElement.pause()
+  }
+
+  togglePlay () {
+    const { togglePlayTrack, isPlaying }=this.props
+    togglePlayTrack(!isPlaying)
   }
 
   renderNav () {
+    const { isPlaying, activeTrack }=this.props
+    const { origin }=activeTrack
+    const { stream_url }=origin
     return (
       <div className="player-content">
         <div>
           <i className="fa fa-step-backward">&nbsp;</i>
         </div>
-        <div>
-          <i className={`fa fa-play`}>&nbsp;</i>
+        <div >
+          <i onClick={() => this.togglePlay()}
+             className={`fa ${isPlaying ? 'fa-pause' : 'fa-play'}`}>&nbsp;</i>
         </div>
         <div>
           <i className="fa fa-step-forward">&nbsp;</i>
         </div>
-        <audio src="#">
+        <audio ref='audio' id="audio"
+               src={addAccessToken(stream_url, '?')}>
         </audio>
       </div>
     )
   }
 
   render () {
+    const { activeTrack }=this.props
     return (
-      <div className="player player-visible">
+      <div className={`player ${activeTrack && 'player-visible'}`}>
         {this.renderNav()}
       </div>
 

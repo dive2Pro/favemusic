@@ -14,24 +14,19 @@ class App extends Component {
         {
           currentUser
             ? <div className="dashboard">
-
-
               <div className="dashboard-content">
                 <div className="dashboard-content-main">
                   <Activities {...this.props}
                               scrollFunc={fetchActivities.bind(null, nextHref)}
                   />
                 </div>
-
                 <div className="dashboard-content-side">
                   <Followings
                     {...this.props}
                   />
                 </div>
               </div>
-              <div className="dashboard-player">
-                <Player {...this.props}/>
-              </div>
+              <Player {...this.props}/>
             </div>
             : <button onClick={initSession.bind(null)}>
               Login1
@@ -42,14 +37,16 @@ class App extends Component {
   }
 }
 function mapStateToProps (state) {
-  const { auth, user }=state
+  const { auth, user, player }=state
   console.info(state)
   return {
     currentUser: auth.get('user'),
     followings: user.get('followings'),
     activities: user.get('activities'),
     nextHref: user.get('activitiesNextHref'),
-    activitiesRequestInProcess: user.get('activitiesRequestInProcess')
+    activitiesRequestInProcess: user.get('activitiesRequestInProcess'),
+    isPlaying: player.get('isPlaying'),
+    activeTrack: player.get('activeTrack')
   }
 }
 

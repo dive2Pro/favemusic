@@ -8,7 +8,7 @@ export default function (url) {
   const accessToken = Cookies.get(OAUTH_TOKEN)
   return `//api.soundcloud.com/${url}&oauth_token=${accessToken}`
 }
-export function addAccessToken (url) {
+export function addAccessToken (url, symbol) {
   const accessToken = Cookies.get(OAUTH_TOKEN)
-  return `${url}&oauth_token=${accessToken}`
+  return `${url}${symbol}oauth_token=${accessToken}`
 }

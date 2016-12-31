@@ -17,7 +17,7 @@ export default class Track extends Component {
 
   render () {
 
-    const { activity } =this.props
+    const { activity, activateTrack } =this.props
     const { origin, type }=activity
     if (!origin)return (<div></div>)
     const { user, title, permalink_url, artwork_url } =origin
@@ -25,7 +25,8 @@ export default class Track extends Component {
 
     return (
       <div className="track">
-        <div className="track-img">
+        <div className="track-img"
+             onClick={activateTrack.bind(null, activity)}>
           {this.renderImage(artwork_url, title, avatar_url)}
           <div className="track-img-overlay">
             <i className="fa fa-play"> </i>
@@ -33,7 +34,7 @@ export default class Track extends Component {
         </div>
         <div className="track-content">
           <a href={permalink_url}>
-            <i className={getTrackIcon(type)}></i> &nbsp; {username} - {title}</a>
+            <i className={getTrackIcon(type)}> </i> &nbsp; {username} - {title}</a>
         </div>
       </div>
     )

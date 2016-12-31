@@ -3,7 +3,11 @@
  */
 import { initSession } from './auth'
 import { fetchActivities } from './user'
+import { togglePlayTrack, activateTrack } from './player'
+
 export  {
   initSession,
-  fetchActivities
+  fetchActivities,
+  togglePlayTrack,
+  activateTrack
 }

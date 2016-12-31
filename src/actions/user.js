@@ -53,7 +53,7 @@ export function fetchFollowings (user, nextHref) {
 export function fetchActivities (nextHref) {
   let activitiesUrl
   if (nextHref) {
-    activitiesUrl = addAccessToken(nextHref)
+    activitiesUrl = addAccessToken(nextHref, '&')
   } else {
     activitiesUrl = apiUrl(`me/activities?limit=50&offset=0`)
   }
