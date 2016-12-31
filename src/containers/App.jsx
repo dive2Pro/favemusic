@@ -13,8 +13,8 @@ class App extends Component {
       <div>
         {
           currentUser
-            ? <div>
-              <div>{currentUser.username}</div>
+            ? <div className="dashboard-content">
+              <div >{currentUser.username}</div>
               <Followings {...this.props}/>
               <Activities {...this.props}/>
             </div>
@@ -32,7 +32,9 @@ function mapStateToProps (state) {
   return {
     currentUser: auth.get('user'),
     followings: user.get('followings'),
-    activities: user.get('activities')
+    activities: user.get('activities'),
+    nextHref:user.get('activitiesNextHref'),
+    activitiesRequestInProcess:user.get('activitiesRequestInProcess')
   }
 }
 

@@ -5,30 +5,46 @@ import * as actionTypes from '../constants/actionTypes'
 import { List, Map, fromJS }from 'immutable'
 
 function mergeFollowings (state, followings) {
-  console.info(followings)
+  console.info('followings = ',followings)
   return state.updateIn([ 'followings' ], list => list.concat(followings))
 
 }
 
 function mergeActivities (state, activities) {
-  console.info(activities)
+  console.info('activities = ',activities)
   return state.updateIn([ 'activities' ], list => list.concat(activities))
+}
 
+function setActivitiesRequestNextHref (state, nextHref) {
+  return state.set('activitiesNextHref', nextHref)
+}
+
+function setActivitiesRequestInProcess (state, inProcess) {
+  return state.set('activitiesRequestInProcess', inProcess)
 }
 
 const initialState = Map({
   followings: List(),
-  activities: List()
+  activities: List(),
+  activitiesNextHref: null,
+  activitiesRequestInProcess: false
 })
 
 export default function (state = initialState, action) {
   switch ( action.type ) {
     case actionTypes.MERGE_FOLLOWINGS:
-      console.info('followings = ', action)
+
       return mergeFollowings(state, fromJS(action.followings))
+
     case actionTypes.MERGE_ACTIVITIES:
-      console.info('activities = ', action)
+
       return mergeActivities(state, fromJS(action.activities))
+
+    case actionTypes.SET_ACTIVITIES_REQUEST_IN_PROCESS:
+      return setActivitiesRequestInProcess(state, action.inProcess)
+
+    case actionTypes.SET_ACTIVITIES_REQUEST_NEXT_HREF:
+      return setActivitiesRequestNextHref(state, action.nextHref)
 
     default:
       return state

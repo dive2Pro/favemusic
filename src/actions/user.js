@@ -1,7 +1,7 @@
 /**
  * Created by hyc on 16-12-31.
  */
-import apiUrl from '../utils/soundcloundApi'
+import apiUrl, { addAccessToken } from '../utils/soundcloundApi'
 import Cookies from 'js-cookie'
 import * as actionTypes from '../constants/actionTypes'
 import { OAUTH_TOKEN } from '../constants/authentification'
@@ -16,6 +16,19 @@ function mergeActivities (activities) {
   return {
     type: actionTypes.MERGE_ACTIVITIES,
     activities
+  }
+}
+
+function setActivitiesNextHref (nextHref) {
+  return {
+    type: actionTypes.SET_ACTIVITIES_REQUEST_NEXT_HREF,
+    nextHref
+  }
+}
+function setActivitiesRequestInProcess (inProcess) {
+  return {
+    type: actionTypes.SET_ACTIVITIES_REQUEST_IN_PROCESS,
+    inProcess
   }
 }
 
@@ -37,15 +50,34 @@ export function fetchFollowings (user, nextHref) {
   }
 }
 
-export function fetchActivities (user) {
+export function fetchActivities (nextHref) {
+  let activitiesUrl
+  if (nextHref) {
+    activitiesUrl = addAccessToken(nextHref)
+  } else {
+    activitiesUrl = apiUrl(`me/activities?limit=200&offset=0`)
+  }
 
-  const activitiesUrl = apiUrl(`me/activities?limit=200&offset=0`)
+  return (dispatch, getState) => {
+    const activitiesRequestInProcess = getState().user.get('activitiesRequestInProcess')
+    if (activitiesRequestInProcess) {
+      return;
+    }
+    console.info('activitiesUrl = ', activitiesUrl)
+    dispatch(setActivitiesRequestInProcess(true))
 
-  return dispatch => {
     return fetch(activitiesUrl)
       .then(response => response.json())
       .then(data => {
+        console.info(data, ' activities !!!')
         dispatch(mergeActivities(data.collection))
+        dispatch(setActivitiesNextHref(data.next_href))
+        dispatch(setActivitiesRequestInProcess(false))
+
+      }).catch(err => {
+
+        dispatch(setActivitiesRequestInProcess(false))
+
       })
   }
 }

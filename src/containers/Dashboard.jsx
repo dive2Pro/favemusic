@@ -5,7 +5,7 @@ import * as actions from '../actions/actionCreator'
 const Main = React.createClass({
   render: function () {
     return (
-      <div className="dash">
+      <div className="dashboard">
         <h1>
           Hey man!
         </h1>

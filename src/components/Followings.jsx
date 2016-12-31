@@ -3,8 +3,6 @@ class Followings extends Component {
 
   render () {
     const { followings } =this.props
-    console.info(followings)
-
     return (
       <div>
         <h1>Following people</h1>

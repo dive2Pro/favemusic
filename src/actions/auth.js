@@ -41,7 +41,7 @@ function fetchUser (token) {
       .then(me => {
         dispatch(setUser(me))
         dispatch(fetchFollowings(me))
-        dispatch(fetchActivities(me))
+        dispatch(fetchActivities())
 
       })
 
