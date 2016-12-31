@@ -2,8 +2,8 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import  * as actions from '../actions/actionCreator'
 import { bindActionCreators } from 'redux'
-import Followings from './Followings'
-import Activities from './Activities'
+import Followings from '../components/Followings'
+import Activities from '../components/Activities'
 
 class App extends Component {
   render () {
