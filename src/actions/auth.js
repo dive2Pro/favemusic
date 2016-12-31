@@ -1,12 +1,11 @@
 /**
  * Created by hyc on 16-12-31.
  */
-import * as actionTypes from '../constants/index'
+import * as actionTypes from '../constants/actionTypes'
 import SC from 'soundcloud'
-import { CLIENT_ID, REDIRECT_URI }  from '../constants/index'
+import { CLIENT_ID, REDIRECT_URI, OAUTH_TOKEN }  from '../constants/authentification'
 import Cookies from 'js-cookie'
-import { fetchFollowings ,fetchActivities} from './user'
-const OAUTH_TOKEN = 'accessToken'
+import { fetchFollowings, fetchActivities } from './user'
 
 function setSession (session) {
   return {

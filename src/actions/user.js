@@ -2,7 +2,8 @@
  * Created by hyc on 16-12-31.
  */
 import Cookies from 'js-cookie'
-import * as actionTypes from '../constants/index'
+import * as actionTypes from '../constants/actionTypes'
+import { OAUTH_TOKEN } from '../constants/authentification'
 function mergeFollowings (followings) {
   return {
     type: actionTypes.MERGE_FOLLOWINGS,
@@ -18,7 +19,7 @@ function mergeActivities (activities) {
 }
 
 export function fetchFollowings (user, nextHref) {
-  const accessToken = Cookies.get('accessToken')
+  const accessToken = Cookies.get(OAUTH_TOKEN)
   const initHref = `//api.soundcloud.com/users/${user.id}/followings?limit=200&offset=0&oauth_token=${accessToken}`
   const followingsUrl = nextHref || initHref
 
@@ -36,7 +37,7 @@ export function fetchFollowings (user, nextHref) {
 }
 
 export function fetchActivities (user) {
-  const accessToken = Cookies.get('accessToken')
+  const accessToken = Cookies.get(OAUTH_TOKEN)
   const activitiesUrl = `//api.soundcloud.com/me/activities?limit=200&offset=0&oauth_token=${accessToken}`;
 
   return dispatch => {

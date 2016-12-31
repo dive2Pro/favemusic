@@ -1,7 +1,7 @@
 /**
  * Created by hyc on 16-12-31.
  */
-import * as actionTypes from '../constants/index'
+import * as actionTypes from '../constants/actionTypes'
 
 import { Map } from 'immutable'
 
