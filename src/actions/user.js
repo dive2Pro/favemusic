@@ -10,6 +10,13 @@ function mergeFollowings (followings) {
   }
 }
 
+function mergeActivities (activities) {
+  return {
+    type: actionTypes.MERGE_ACTIVITIES,
+    activities
+  }
+}
+
 export function fetchFollowings (user, nextHref) {
   const accessToken = Cookies.get('accessToken')
   const initHref = `//api.soundcloud.com/users/${user.id}/followings?limit=200&offset=0&oauth_token=${accessToken}`
@@ -24,6 +31,19 @@ export function fetchFollowings (user, nextHref) {
         if (data.nextHref) {
           console.info(data.nextHref)
         }
+      })
+  }
+}
+
+export function fetchActivities (user) {
+  const accessToken = Cookies.get('accessToken')
+  const activitiesUrl = `//api.soundcloud.com/me/activities?limit=200&offset=0&oauth_token=${accessToken}`;
+
+  return dispatch => {
+    return fetch(activitiesUrl)
+      .then(response => response.json())
+      .then(data => {
+        dispatch(mergeActivities(data.collection))
       })
   }
 }

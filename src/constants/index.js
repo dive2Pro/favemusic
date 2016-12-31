@@ -7,5 +7,6 @@ export const SET_AUTH = 'SET_AUTH'
 export const SET_SESSION = 'SET_SESSION'
 export const SET_USER = 'SET_USER'
 export const MERGE_FOLLOWINGS = 'MERGE_FOLLOWINGS'
+export const MERGE_ACTIVITIES = 'MERGE_ACTIVITIES'
 
 

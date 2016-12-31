@@ -5,7 +5,7 @@ import * as actionTypes from '../constants/index'
 import SC from 'soundcloud'
 import { CLIENT_ID, REDIRECT_URI }  from '../constants/index'
 import Cookies from 'js-cookie'
-import { fetchFollowings } from './user'
+import { fetchFollowings ,fetchActivities} from './user'
 const OAUTH_TOKEN = 'accessToken'
 
 function setSession (session) {
@@ -42,6 +42,8 @@ function fetchUser (token) {
       .then(me => {
         dispatch(setUser(me))
         dispatch(fetchFollowings(me))
+        dispatch(fetchActivities(me))
+
       })
 
   }

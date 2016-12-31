@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 import  * as actions from '../actions/actionCreator'
 import { bindActionCreators } from 'redux'
 import Followings from './Followings'
+import Activities from './Activities'
 
 class App extends Component {
   render () {
@@ -15,6 +16,7 @@ class App extends Component {
             ? <div>
               <div>{currentUser.username}</div>
               <Followings {...this.props}/>
+              <Activities {...this.props}/>
             </div>
             : <button onClick={initSession.bind(null)}>
               Login1
@@ -29,7 +31,8 @@ function mapStateToProps (state) {
   console.info(state)
   return {
     currentUser: auth.get('user'),
-    followings: user.get('followings')
+    followings: user.get('followings'),
+    activities: user.get('activities')
   }
 }
 
