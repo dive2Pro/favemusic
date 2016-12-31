@@ -114,6 +114,7 @@ module.exports = {
           /\.svg$/,
           /\.scss$/
         ],
+        
         loader: 'url',
         query: {
           limit: 10000,

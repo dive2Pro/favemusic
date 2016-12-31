@@ -4,29 +4,33 @@ import  * as actions from '../actions/actionCreator'
 import { bindActionCreators } from 'redux'
 import Followings from '../components/Followings'
 import Activities  from '../components/Activities'
-import FetchOnScroll  from '../components/FetchOnScroll'
+import Player  from '../components/Player'
 
 class App extends Component {
   render () {
     const { initSession, currentUser, fetchActivities, nextHref }=this.props
-     return (
+    return (
       <div>
         {
           currentUser
-            ? <div className="dashboard-content">
-              <div className="dashboard-content-main">
+            ? <div className="dashboard">
 
-              <Activities {...this.props}
-                          scrollFunc={fetchActivities.bind(null, nextHref)}
-              />
+
+              <div className="dashboard-content">
+                <div className="dashboard-content-main">
+                  <Activities {...this.props}
+                              scrollFunc={fetchActivities.bind(null, nextHref)}
+                  />
+                </div>
+
+                <div className="dashboard-content-side">
+                  <Followings
+                    {...this.props}
+                  />
+                </div>
               </div>
-
-              <div className="dashboard-content-side">
-
-                <Followings
-                  {...this.props}
-                />
-
+              <div className="dashboard-player">
+                <Player {...this.props}/>
               </div>
             </div>
             : <button onClick={initSession.bind(null)}>
