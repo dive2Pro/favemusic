@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './Favesound';
-import './index.css';
+import    '../styles/index.scss'
 
 ReactDOM.render(
   <App />,

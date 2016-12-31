@@ -1,6 +1,7 @@
 /**
  * Created by hyc on 16-12-31.
  */
+import apiUrl from '../utils/soundcloundApi'
 import Cookies from 'js-cookie'
 import * as actionTypes from '../constants/actionTypes'
 import { OAUTH_TOKEN } from '../constants/authentification'
@@ -37,8 +38,8 @@ export function fetchFollowings (user, nextHref) {
 }
 
 export function fetchActivities (user) {
-  const accessToken = Cookies.get(OAUTH_TOKEN)
-  const activitiesUrl = `//api.soundcloud.com/me/activities?limit=200&offset=0&oauth_token=${accessToken}`;
+
+  const activitiesUrl = apiUrl(`me/activities?limit=200&offset=0`)
 
   return dispatch => {
     return fetch(activitiesUrl)

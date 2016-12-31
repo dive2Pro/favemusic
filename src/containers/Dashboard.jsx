@@ -5,11 +5,10 @@ import * as actions from '../actions/actionCreator'
 const Main = React.createClass({
   render: function () {
     return (
-      <div>
+      <div className="dash">
         <h1>
           Hey man!
         </h1>
-
         {this.props.children}
       </div>);
   }
