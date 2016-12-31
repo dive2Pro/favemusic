@@ -1,8 +1,9 @@
 /**
  * Created by hyc on 16-12-31.
  */
-import { auth } from './auth'
+import { initSession } from './auth'
+import { fetchFollowings } from './user'
 
 export  {
-  auth
+  initSession
 }

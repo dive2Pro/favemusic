@@ -4,7 +4,6 @@ import * as actions from '../actions/actionCreator'
 
 const Main = React.createClass({
   render: function () {
-    console.info(this.props)
     return (
       <div>
         <h1>
@@ -17,11 +16,11 @@ const Main = React.createClass({
 })
 
 function mapStateToProps (state) {
-  console.info(state)
+
   return state
 }
 
-const MyMain=connect(mapStateToProps, actions)(Main)
+const MyMain = connect(mapStateToProps, actions)(Main)
 
 export default MyMain
 

@@ -5,10 +5,6 @@ import { Provider } from 'react-redux'
 import Main from './components/Main'
 import App from './components/App'
 import Callback from './components/Callback'
-import { CLIENT_ID, REDIRECT_URI }  from './constants/index'
-import SC from 'soundcloud'
-
-SC.initialize({ client_id: CLIENT_ID, redirect_uri: REDIRECT_URI })
 
 const routes = (
   <Route path="/" component={Main}>

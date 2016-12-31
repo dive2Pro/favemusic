@@ -9,7 +9,9 @@ import thunk from 'redux-thunk'
 
 const createStoreWithMiddleware = applyMiddleware(thunk)(createStore)
 
-const store = createStoreWithMiddleware(reduxRooter)
+const store = createStoreWithMiddleware(reduxRooter,
+  window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+)
 
 const reduxHistory = syncHistoryWithStore(browserHistory, store)
 if (module.hot) {
