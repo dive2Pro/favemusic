@@ -4,6 +4,7 @@ import * as actions from '../actions/actionCreator'
 import { bindActionCreators } from 'redux'
 import Followings from '../components/Followings'
 import Activities from '../components/Activities'
+import Header from '../components/Header'
 import Player from '../components/Player'
 import Playlist from '../components/Playlist'
 
@@ -19,6 +20,7 @@ class App extends Component {
         {
           currentUser
             ? <div className="dashboard">
+              <Header {...this.props} />
               <div className="dashboard-content">
                 <div className="dashboard-content-main">
                   <Activities {...this.props}
@@ -43,7 +45,7 @@ class App extends Component {
   }
 }
 function mapStateToProps(state) {
-  const { auth, user, player,environment } = state
+  const { auth, user, player, environment } = state
   console.info(state)
   return {
     currentUser: auth.get('user'),
@@ -54,7 +56,7 @@ function mapStateToProps(state) {
     isPlaying: player.get('isPlaying'),
     activeTrack: player.get('activeTrack'),
     playlist: player.get('playlist'),
-    isOpenPlaylist:environment.get('isOpenPlaylist')
+    isOpenPlaylist: environment.get('isOpenPlaylist')
   }
 }
 

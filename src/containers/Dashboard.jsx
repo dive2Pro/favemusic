@@ -5,10 +5,7 @@ import * as actions from '../actions/actionCreator'
 const Main = React.createClass({
   render: function () {
     return (
-      <div className="dashboard">
-        <h1>
-          Hey man!
-        </h1>
+      <div>
         {this.props.children}
       </div>);
   }

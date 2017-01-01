@@ -34,5 +34,9 @@
                 }
             }
         }
-    
+
+        .active-track &-action{
+            opacity: 1;
+            margin: auto ($padding/2)
+        }
 }
