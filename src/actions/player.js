@@ -45,10 +45,10 @@ export function activateTrack(track) {
     const preActiveTrack = player.get('activeTrack')
       , isPlaying = player.get('isPlaying')
     const isAPT = isActivePlayingTrack(preActiveTrack, track, isPlaying)
-    // console.info('isAPT = ', isAPT)
+    console.info('isAPT = ', isAPT)
     dispatch(togglePlayTrack(!isAPT))
     dispatch(setActiveTrack(track))
-    dispatch(setTrackInPlaylist(track))
+    dispatch(setTrackInPlaylist(track)) 
   }
 }
 
@@ -76,6 +76,21 @@ export function removeTrackFromPlaylist(track) {
       dispatch(togglePlaylist(true))
     }
     dispatch(removeFromPlaylist(track))
+  }
+}
+
+export function addTrackToPlaylist(track) {
+  return (dispath, getState) => {
+    const size = getState().player.get('playlist').size
+    if (size) {
+
+      dispath(setTrackInPlaylist(track))
+      
+    } else {
+
+      dispath(setActiveTrack(track))
+
+    }
   }
 }
 

@@ -3,8 +3,8 @@ import FetchOnScroll from './FetchOnScroll'
 import Track from '../components/Track'
 
 class ActivitiesContainer extends Component {
-  activitiesDom () {
-    const { activities, activateTrack }=this.props
+  activitiesDom() {
+    const { activities, activateTrack } = this.props
     console.info('activities= ', activities)
     return (
       <div>
@@ -13,7 +13,7 @@ class ActivitiesContainer extends Component {
           {activities.map((act, idx) => {
             return (
               <li key={idx}>
-                <Track activity={act.toJSON()} activateTrack={activateTrack}/>
+                <Track activity={act.toJSON()} activateTrack={activateTrack} {...this.props} />
               </li>
             )
           })}
@@ -22,7 +22,7 @@ class ActivitiesContainer extends Component {
     )
   }
 
-  activitiesRequestDom () {
+  activitiesRequestDom() {
     const { activitiesRequestInProcess } = this.props
     if (activitiesRequestInProcess) {
       return (<div>Loading</div>)
@@ -31,7 +31,7 @@ class ActivitiesContainer extends Component {
     }
   }
 
-  render () {
+  render() {
     return (
       <div>
         <div>{this.activitiesDom()}</div>
