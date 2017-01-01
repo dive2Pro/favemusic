@@ -13,6 +13,7 @@ const routes = (
     <Route path='/callback' component={Callback}/>
   </Route>
 )
+
 class Favesound extends Component {
   render () {
     return (

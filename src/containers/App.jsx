@@ -1,14 +1,19 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import  * as actions from '../actions/actionCreator'
+import * as actions from '../actions/actionCreator'
 import { bindActionCreators } from 'redux'
 import Followings from '../components/Followings'
-import Activities  from '../components/Activities'
-import Player  from '../components/Player'
+import Activities from '../components/Activities'
+import Player from '../components/Player'
+import Playlist from '../components/Playlist'
 
 class App extends Component {
-  render () {
-    const { initSession, currentUser, fetchActivities, nextHref }=this.props
+  componentDidMount() {
+    const {init} = this.props
+    init()
+  }
+  render() {
+    const { initSession, currentUser, fetchActivities, nextHref } = this.props
     return (
       <div>
         {
@@ -17,16 +22,17 @@ class App extends Component {
               <div className="dashboard-content">
                 <div className="dashboard-content-main">
                   <Activities {...this.props}
-                              scrollFunc={fetchActivities.bind(null, nextHref)}
-                  />
+                    scrollFunc={fetchActivities.bind(null, nextHref)}
+                    />
                 </div>
                 <div className="dashboard-content-side">
                   <Followings
                     {...this.props}
-                  />
+                    />
                 </div>
               </div>
-              <Player {...this.props}/>
+              <Playlist {...this.props} />
+              <Player {...this.props} />
             </div>
             : <button onClick={initSession.bind(null)}>
               Login1
@@ -36,8 +42,8 @@ class App extends Component {
     )
   }
 }
-function mapStateToProps (state) {
-  const { auth, user, player }=state
+function mapStateToProps(state) {
+  const { auth, user, player,environment } = state
   console.info(state)
   return {
     currentUser: auth.get('user'),
@@ -46,11 +52,13 @@ function mapStateToProps (state) {
     nextHref: user.get('activitiesNextHref'),
     activitiesRequestInProcess: user.get('activitiesRequestInProcess'),
     isPlaying: player.get('isPlaying'),
-    activeTrack: player.get('activeTrack')
+    activeTrack: player.get('activeTrack'),
+    playlist: player.get('playlist'),
+    isOpenPlaylist:environment.get('isOpenPlaylist')
   }
 }
 
-function mapDispathToProps (dispatch) {
+function mapDispathToProps(dispatch) {
   let actionCreators = bindActionCreators(actions, dispatch)
   console.info(' ')
   return actionCreators

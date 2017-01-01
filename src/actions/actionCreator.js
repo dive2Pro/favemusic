@@ -1,13 +1,17 @@
 /**
  * Created by hyc on 16-12-31.
  */
-import { initSession } from './auth'
+import { init, initSession } from './auth'
+import { togglePlaylist } from './environment'
 import { fetchActivities } from './user'
-import { togglePlayTrack, activateTrack } from './player'
+import { togglePlayTrack, activateTrack, removeTrackFromPlaylist } from './player'
 
-export  {
+export {
+  init,
   initSession,
   fetchActivities,
   togglePlayTrack,
-  activateTrack
+  activateTrack,
+  togglePlaylist,
+  removeTrackFromPlaylist
 }

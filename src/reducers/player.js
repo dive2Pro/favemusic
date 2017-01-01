@@ -1,19 +1,45 @@
 /**
  * Created by hyc on 17-1-1.
  */
-import { Map } from 'immutable'
+import { Map, List } from 'immutable'
 import * as actionTypes from '../constants/actionTypes'
 const initialState = Map({
   activeTrack: null,
-  isPlaying: false
+  isPlaying: false,
+  playlist: List()
 })
 
+function setTrackInPlaylist(state, track) {
+  const item = state.get('playlist').find(obj => obj.origin.id === track.origin.id)
+  if (item) return state
+  
+  return state.updateIn(['playlist'], list => list.push(track))
+}
+
+function removeTrackFromPlaylist(state, track) {
+  return state.updateIn(['playlist'], list => list.remove(list.indexOf(track)))
+}
+function deactivateTrack(state) {
+  return state.set('activeTrack', null)
+  // .set('playlist', List()).set('isPlaying', false)
+}
+
 export default function (state = initialState, action) {
-  switch ( action.type ) {
+  switch (action.type) {
     case actionTypes.SET_IS_PLAYING:
       return state.set('isPlaying', action.isPlaying)
+
     case actionTypes.SET_ACTIVE_TRACK:
       return state.set('activeTrack', action.activeTrack)
+
+    case actionTypes.SET_TRACK_IN_PLAYLIST:
+      return setTrackInPlaylist(state, action.track)
+
+    case actionTypes.REMOVE_TRACK_FROM_PLAYLIST:
+      return removeTrackFromPlaylist(state, action.track)
+
+    case actionTypes.DEACTIVE_TRACK:
+      return deactivateTrack(state)
     default:
       return state
   }

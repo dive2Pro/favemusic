@@ -20,6 +20,15 @@ function setUser (user) {
   }
 }
 
+export function init() {
+  return dispatch => {
+    const oauth_token=Cookies.get(OAUTH_TOKEN)
+    if (oauth_token) {
+      dispatch(fetchUser(oauth_token))
+    }
+  }
+}
+
 export function initSession () {
 
   return dispatch => {
