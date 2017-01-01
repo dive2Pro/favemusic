@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { isActivePlayingTrack } from '../utils/player'
+import { isSameTrackAndPlaying } from '../utils/player'
 export default class MiniTrack extends Component {
  
   renderImage(artwork_url, title, avatar_url) {
@@ -14,7 +14,7 @@ export default class MiniTrack extends Component {
     const {origin} = track
     const {artwork_url, title, user} = origin
     const {avatar_url, permalink_url, username} = user
-    const trackIsPlaying = isActivePlayingTrack(activeTrack, track, isPlaying)
+    const trackIsPlaying = isSameTrackAndPlaying(activeTrack, track, isPlaying)
     return (
       <div className='mini-track'>
         <div className='mini-track-img'>

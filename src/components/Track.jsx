@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { getTrackIcon } from '../utils/track'
-import { isActivePlayingTrack } from '../utils/player.js'
+import { isSameTrackAndPlaying } from '../utils/player.js'
 export default class Track extends Component {
 
   constructor(props) {
@@ -21,7 +21,7 @@ export default class Track extends Component {
     const {stream_url} = origin
     if (!stream_url) return
 
-    const currentTrackIsPlaying = isActivePlayingTrack(activeTrack, activity, isPlaying)
+    const currentTrackIsPlaying = isSameTrackAndPlaying(activeTrack, activity, isPlaying)
 
     return (
       <div className="track-img-overlay">

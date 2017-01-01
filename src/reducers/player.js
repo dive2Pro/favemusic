@@ -3,6 +3,7 @@
  */
 import { Map, List } from 'immutable'
 import * as actionTypes from '../constants/actionTypes'
+import { isSameTrack } from '../utils/player'
 const initialState = Map({
   activeTrack: null,
   isPlaying: false,
@@ -10,9 +11,9 @@ const initialState = Map({
 })
 
 function setTrackInPlaylist(state, track) {
-  const item = state.get('playlist').find(obj => obj.origin.id === track.origin.id)
+  const item = state.get('playlist').find(isSameTrack(track))
   if (item) return state
-  
+
   return state.updateIn(['playlist'], list => list.push(track))
 }
 
@@ -21,7 +22,6 @@ function removeTrackFromPlaylist(state, track) {
 }
 function deactivateTrack(state) {
   return state.set('activeTrack', null)
-  // .set('playlist', List()).set('isPlaying', false)
 }
 
 export default function (state = initialState, action) {

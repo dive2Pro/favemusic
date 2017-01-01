@@ -2,7 +2,7 @@
  * Created by hyc on 17-1-1.
  */
 import * as actionTypes from '../constants/actionTypes'
-import { isActivePlayingTrack } from '../utils/player'
+import { isSameTrackAndPlaying, isSameTrack } from '../utils/player'
 import { togglePlaylist } from './environment'
 function setIsPlaying(isPlaying) {
   return {
@@ -44,11 +44,11 @@ export function activateTrack(track) {
     // check is the same Track
     const preActiveTrack = player.get('activeTrack')
       , isPlaying = player.get('isPlaying')
-    const isAPT = isActivePlayingTrack(preActiveTrack, track, isPlaying)
+    const isAPT = isSameTrackAndPlaying(preActiveTrack, track, isPlaying)
     console.info('isAPT = ', isAPT)
     dispatch(togglePlayTrack(!isAPT))
     dispatch(setActiveTrack(track))
-    dispatch(setTrackInPlaylist(track)) 
+    dispatch(setTrackInPlaylist(track))
   }
 }
 
@@ -63,10 +63,10 @@ export function removeTrackFromPlaylist(track) {
     const player = getState().player
     const preActiveTrack = player.get('activeTrack')
       , isPlaying = player.get('isPlaying')
-    const isAPT = isActivePlayingTrack(preActiveTrack, track, isPlaying)
+    const isAPT = isSameTrack(preActiveTrack)(track)
 
     if (isAPT) {
-      dispatch(activeNextTrack(preActiveTrack))
+      dispatch(activeIterateTrack(preActiveTrack))
     }
     // if only one track deactivateTrack
     const playlist = player.get('playlist')
@@ -82,29 +82,31 @@ export function removeTrackFromPlaylist(track) {
 export function addTrackToPlaylist(track) {
   return (dispath, getState) => {
     const size = getState().player.get('playlist').size
-    if (size) {
-
-      dispath(setTrackInPlaylist(track))
-      
-    } else {
-
+    if (!size) {
       dispath(setActiveTrack(track))
-
     }
+    dispath(setTrackInPlaylist(track))
   }
 }
 
-export function activeNextTrack(activeTrack) {
+export function activeIterateTrack(activeTrack, iterate = 1) {
   return (dispatch, getState) => {
     const player = getState().player
 
     const playlist = player.get('playlist')
-    const index = playlist.findIndex(obj => obj.origin.id === activeTrack.origin.id)
-    const nextTrack = playlist.get(index + 1)
-    if (nextTrack) {
-      dispatch(setActiveTrack(nextTrack))
+    const iterateTrack = getIterateTrack(playlist, activeTrack, iterate)
+
+    if (iterateTrack) {
+      dispatch(setActiveTrack(iterateTrack))
+      togglePlayTrack(true)
     } else {
       dispatch(togglePlayTrack(false))
     }
   }
+}
+
+function getIterateTrack(playlist, activeTrack, iterate) {
+  const index = playlist.findIndex(isSameTrack(activeTrack))
+  const iterateTrack = playlist.get(index + iterate)
+  return iterateTrack
 }

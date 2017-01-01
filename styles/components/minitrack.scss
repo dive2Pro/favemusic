@@ -1,14 +1,16 @@
 .mini-track{
-        display: flex;
-        margin: $padding/2;
-        border-bottom:0.5px solid $background;
-
+        display: flex; 
+        border-bottom:$border;
+        height: 40px;
+        overflow: hidden;
+        &:hover &-action{
+            opacity: 1;
+            margin: auto ($padding/2);
+            
+        }
         &-img{
             cursor:pointer;
-            img{
-            height:50px;
-
-            }
+            
         }
 
         &-content{
@@ -16,18 +18,14 @@
             height: 20px;
             padding: $padding/2;
             background: $nav;
-            flex: 1;
-            a{
-                display: block;
-                font-size: 8px;
-                
-            }
+           
         }
 
         &-action{
-            margin: auto ($padding/2);
-            transition:margin 0.2s;
+            transition:all 0.2s;
             transition-timing-function: ease;
+            opacity: 0;
+            
             i{
                 cursor:pointer;
                 font-size: 15px;
