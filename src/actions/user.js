@@ -19,18 +19,6 @@ function mergeActivities(activities) {
   }
 }
 
-function setActivitiesNextHref(nextHref) {
-  return {
-    type: actionTypes.SET_ACTIVITIES_REQUEST_NEXT_HREF,
-    nextHref
-  }
-}
-function setActivitiesRequestInProcess(inProcess) {
-  return {
-    type: actionTypes.SET_ACTIVITIES_REQUEST_IN_PROCESS,
-    inProcess
-  }
-}
 function mergeFollowers(followers) {
   return {
     type: actionTypes.MERGE_FOLLOWERS,
@@ -80,6 +68,20 @@ export function fetchFollowers(user, nextHref) {
   }
 }
 
+function setActivitiesNextHref(nextHref) {
+  return {
+    type: actionTypes.SET_ACTIVITIES_REQUEST_NEXT_HREF,
+    nextHref
+  }
+}
+
+function setActivitiesRequestInProcess(inProcess) {
+  return {
+    type: actionTypes.SET_ACTIVITIES_REQUEST_IN_PROCESS,
+    inProcess
+  }
+}
+
 export function fetchFollowings(user, nextHref) {
   const accessToken = Cookies.get(OAUTH_TOKEN)
   const initHref = `followings?limit=200&offset=0&oauth_token=${accessToken}`
@@ -123,6 +125,49 @@ export function fetchActivities(nextHref) {
       })
       .catch(() => {
         dispatch(setActivitiesRequestInProcess(false))
+      })
+  }
+}
+function mergeFavorites(favorites) {
+  return {
+    type: actionTypes.MERGE_FAVORITES,
+    favorites
+  }
+}
+
+
+// function setFavoritesNextHref(nextHref) {
+//   return {
+//     type: actionTypes.SET_FAVORITES_REQUEST_NEXT_HREF,
+//     nextHref
+//   }
+// }
+
+function setFavoritesRequestInProcess(inProcess) {
+  return {
+    type: actionTypes.SET_FAVORITES_REQUEST_IN_PROCESS,
+    inProcess
+  }
+}
+
+export function fetchFavorites(user, nextHref) {
+  return (dispatch, getState) => {
+    const favoritesRequestInProcess = getState().user.get('favoritesRequestInProcess')
+    if (favoritesRequestInProcess) {
+      return;
+    }
+    const favoritesUrl = getLazyLoadingUrl(user, nextHref, 'favorites?limit=50&offset=0')
+    console.info('FavoritesUrl = ', favoritesUrl)
+    dispatch(setFavoritesRequestInProcess(true))
+
+    return fetch(favoritesUrl)
+      .then(response => response.json())
+      .then(data => {
+        dispatch(mergeFavorites(data.collection))
+        dispatch(setFavoritesRequestInProcess(false))
+      })
+      .catch(() => {
+        dispatch(setFavoritesRequestInProcess(false))
       })
   }
 }

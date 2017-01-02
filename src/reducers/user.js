@@ -30,6 +30,10 @@ function mergeFollowers(state, followers) {
   return state.updateIn(['followers'], list => list.concat(followers))
 }
 
+function mergeFavorites(state, favorites) {
+  return state.updateIn(['favorites'], list => list.concat(favorites))
+}
+
 function setFollowersRequestNextHref(state, nextHref) {
   return state.set('followersNextHref', nextHref)
 }
@@ -37,15 +41,21 @@ function setFollowersRequestNextHref(state, nextHref) {
 function setFollowersRequestInProcess(state, inProcess) {
   return state.set('followersRequestInProcess', inProcess)
 }
+
+function setFavoritesRequestInProcess(state, inProcess) {
+  return state.set('favoritesRequestInProcess', inProcess)
+}
+
 const initialState = Map({
   followings: List(),
   activities: List(),
   followers: List(),
+  favorites: List(),
   activitiesNextHref: null,
   activitiesRequestInProcess: false,
   followersNextHref: null,
   followersRequestInProcess: false,
-
+  favoritesRequestInProcess: false,
 })
 
 export default function (state = initialState, action) {
@@ -71,6 +81,12 @@ export default function (state = initialState, action) {
 
     case actionTypes.SET_ACTIVITIES_REQUEST_NEXT_HREF:
       return setActivitiesRequestNextHref(state, action.nextHref)
+
+    case actionTypes.SET_FAVORITES_REQUEST_IN_PROCESS:
+      return setFavoritesRequestInProcess(state, action.inProcess)
+
+    case actionTypes.MERGE_FAVORITES:
+      return mergeFavorites(state, action.favorites)
 
     default:
       return state

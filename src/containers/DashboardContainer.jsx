@@ -17,7 +17,8 @@ class App extends Component {
   renderContent() {
     const {
       currentUser, fetchActivities, nextHref, followers,
-      followings, followersNextHref, followersRequestInProcess, fetchFollowers
+      followings, followersNextHref, followersRequestInProcess, fetchFollowers,
+      favorites, favoritesRequestInProcess
     } = this.props
 
     return (
@@ -29,14 +30,25 @@ class App extends Component {
           />
         </div>
         <div className="dashboard-content-side">
-          <UserMosaic title="Followings" collections={followings} />
+          <UserMosaic
+            title="Followings"
+            collections={followings}
+            kind="user"
+          />
           <UserMosaic
             title="Followers"
             collections={followers}
-            followersRequestInProcess={followersRequestInProcess}
+            requestInProcess={followersRequestInProcess}
             followersNextHref={followersNextHref}
             fetchFollowers={fetchFollowers}
             user={currentUser}
+            kind="user"
+          />
+          <UserMosaic
+            title="Favorites"
+            kind="track"
+            collections={favorites}
+            requestInProcess={favoritesRequestInProcess}
           />
         </div>
       </div>
@@ -66,10 +78,12 @@ function mapStateToProps(state) {
     currentUser: auth.get('user'),
     followings: user.get('followings'),
     activities: user.get('activities'),
+    favorites: user.get('favorites'),
     nextHref: user.get('activitiesNextHref'),
     activitiesRequestInProcess: user.get('activitiesRequestInProcess'),
     followersNextHref: user.get('followersNextHref'),
     followersRequestInProcess: user.get('followersRequestInProcess'),
+    favoritesRequestInProcess: user.get('favoritesRequestInProcess'),
     followers: user.get('followers'),
     isPlaying: player.get('isPlaying'),
     activeTrack: player.get('activeTrack')

@@ -13,7 +13,8 @@ import Cookies from 'js-cookie'
 import {
   fetchFollowings,
   fetchActivities,
-  fetchFollowers
+  fetchFollowers,
+  fetchFavorites
 } from './user'
 
 function setSession(session) {
@@ -39,6 +40,7 @@ function fetchUser() {
         dispatch(fetchFollowings(me))
         dispatch(fetchFollowers(me))
         dispatch(fetchActivities())
+        dispatch(fetchFavorites(me))
       })
   }
 }

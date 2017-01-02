@@ -14,29 +14,46 @@ class UserMosaic extends Component {
       isMoreToggled: this.isMoreToggled
     })
   }
-  renderUserMosaic() {
-    const { collections } = this.props
-    if (!collections) return ""
 
+  renderUser(user, idx) {
+    const { username, avatar_url, permalink_url } = user
     return (
-      <div className="user-mosaic-content">
-        <ul>
-          {collections.toJSON().map((following, idx) => {
-            const { username, avatar_url, permalink_url } = following
-            return (
-              <li key={idx}>
-                <a href={permalink_url}>
-                  <img
-                    src={avatar_url}
-                    alt={username} height="40" width="40"
-                  />
-                </a>
-              </li>
-            )
-          })}
-        </ul>
-      </div>
+      <li key={idx}>
+        <a href={permalink_url}>
+          <img
+            src={avatar_url}
+            alt={username} height="40" width="40"
+          />
+        </a>
+      </li>
     )
+  }
+
+  renderTrack(track, idx) {
+    if (!track) return ''
+    const { title, artwork_url, permalink_url } = track
+    return (
+      <li key={idx}>
+        <a href={permalink_url}>
+          <img
+            src={artwork_url}
+            alt={title} height="40" width="40"
+          />
+        </a>
+      </li>
+    )
+  }
+
+  renderMosaic() {
+    const { collections, kind } = this.props
+    if (!collections) return ""
+    if (kind === "user") {
+      return (<div className="user-mosaic-content"><ul>{collections.toJSON().map(this.renderUser)}</ul></div>)
+    }
+
+    if (kind === "track") {
+      return (<div className="user-mosaic-content"><ul>{collections.toJSON().map(this.renderTrack)}</ul></div>)
+    }
   }
 
   renderNextButton() {
@@ -66,7 +83,7 @@ class UserMosaic extends Component {
 
         <div className={this.isMoreToggled ? 'more' : ''}>
           {
-            this.renderUserMosaic()
+            this.renderMosaic()
           }
         </div>
         <div className="user-mosaic-action">
