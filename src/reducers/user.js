@@ -2,36 +2,39 @@
  * Created by hyc on 16-12-31.
  */
 import * as actionTypes from '../constants/actionTypes'
-import { List, Map, fromJS } from 'immutable'
+import {
+  List,
+  Map,
+  fromJS
+} from 'immutable'
 
-function mergeFollowings (state, followings) {
+function mergeFollowings(state, followings) {
   console.info('followings = ', followings)
-  return state.updateIn([ 'followings' ], list => list.concat(followings))
-
+  return state.updateIn(['followings'], list => list.concat(followings))
 }
 
-function mergeActivities (state, activities) {
+function mergeActivities(state, activities) {
   console.info('activities = ', activities)
-  return state.updateIn([ 'activities' ], list => list.concat(activities))
+  return state.updateIn(['activities'], list => list.concat(activities))
 }
 
-function setActivitiesRequestNextHref (state, nextHref) {
+function setActivitiesRequestNextHref(state, nextHref) {
   return state.set('activitiesNextHref', nextHref)
 }
 
-function setActivitiesRequestInProcess (state, inProcess) {
+function setActivitiesRequestInProcess(state, inProcess) {
   return state.set('activitiesRequestInProcess', inProcess)
 }
 
-function mergeFollowers (state, followers) {
-  return state.updateIn([ 'followers' ], list => list.concat(followers))
+function mergeFollowers(state, followers) {
+  return state.updateIn(['followers'], list => list.concat(followers))
 }
 
-function setFollowersRequestNextHref (state, nextHref) {
+function setFollowersRequestNextHref(state, nextHref) {
   return state.set('followersNextHref', nextHref)
 }
 
-function setFollowersRequestInProcess (state, inProcess) {
+function setFollowersRequestInProcess(state, inProcess) {
   return state.set('followersRequestInProcess', inProcess)
 }
 const initialState = Map({
@@ -46,7 +49,7 @@ const initialState = Map({
 })
 
 export default function (state = initialState, action) {
-  switch ( action.type ) {
+  switch (action.type) {
     case actionTypes.MERGE_FOLLOWINGS:
 
       return mergeFollowings(state, fromJS(action.followings))
@@ -72,5 +75,4 @@ export default function (state = initialState, action) {
     default:
       return state
   }
-
 }

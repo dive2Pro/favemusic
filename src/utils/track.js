@@ -5,7 +5,7 @@ const ACTIVITY_TYPES = {
   track: 'track'
 }
 
-export function getTrackIcon (type) {
+export function getTrackIcon(type) {
   if (type === ACTIVITY_TYPES.trackRepost) {
     return 'fa fa-retweet';
   }
@@ -18,23 +18,22 @@ export function getTrackIcon (type) {
     return 'fa fa-play';
   }
 }
-export function isNotTrack (track) {
-  let { origin, type }=track
+export function isNotTrack(track) {
+  const { origin, type } = track
   return !origin || !type || type === ACTIVITY_TYPES.playlist || type === ACTIVITY_TYPES.playlistRepost
 }
 
-export function normalizeSamples (samples) {
+export function normalizeSamples(samples) {
   let highestValue = 0
-  for ( const sample of samples ) {
+  for (const sample of samples) {
     if (sample > highestValue) {
       highestValue = sample
     }
   }
-  let newSamples = []
-  for ( const sample of samples ) {
-    let newValue = sample / highestValue
+  const newSamples = []
+  for (const sample of samples) {
+    const newValue = sample / highestValue
     newSamples.push(newValue)
   }
   return newSamples
-
 }

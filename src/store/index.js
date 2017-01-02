@@ -2,14 +2,14 @@
  * Created by hyc on 16-12-31.
  */
 import reduxRooter from '../reducers/index'
-import { createStore, applyMiddleware }from 'redux'
+import { createStore, applyMiddleware } from 'redux'
 import { browserHistory } from 'react-router'
-import  { syncHistoryWithStore } from 'react-router-redux'
-import thunk from 'redux-thunk' 
+import { syncHistoryWithStore } from 'react-router-redux'
+import thunk from 'redux-thunk'
 import createLogger from 'redux-logger';
-const logger=createLogger()
+const logger = createLogger()
 const createStoreWithMiddleware =
-  applyMiddleware(thunk,logger)(createStore)
+  applyMiddleware(thunk, logger)(createStore)
 
 const store = createStoreWithMiddleware(reduxRooter,
   window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()

@@ -9,8 +9,8 @@ function setIsPlaying(isPlaying) {
     type: actionTypes.SET_IS_PLAYING,
     isPlaying
   }
-
 }
+
 function setActiveTrack(activeTrack) {
   return {
     type: actionTypes.SET_ACTIVE_TRACK,
@@ -37,19 +37,10 @@ function deactivateTrack() {
   }
 }
 
-
-export function activateTrack(track) {
-  return (dispatch, getState) => {
-    const player = getState().player
-    // check is the same Track
-    const preActiveTrack = player.get('activeTrack')
-      , isPlaying = player.get('isPlaying')
-    const isAPT = isSameTrackAndPlaying(preActiveTrack, track, isPlaying)
-    console.info('isAPT = ', isAPT)
-    dispatch(togglePlayTrack(!isAPT))
-    dispatch(setActiveTrack(track))
-    dispatch(setTrackInPlaylist(track))
-  }
+function getIterateTrack(playlist, activeTrack, iterate) {
+  const index = playlist.findIndex(isSameTrack(activeTrack))
+  const iterateTrack = playlist.get(index + iterate)
+  return iterateTrack
 }
 
 export function togglePlayTrack(isPlaying) {
@@ -58,26 +49,19 @@ export function togglePlayTrack(isPlaying) {
   }
 }
 
-export function removeTrackFromPlaylist(track) {
+export function activateTrack(track) {
   return (dispatch, getState) => {
-    const player = getState().player
-    const preActiveTrack = player.get('activeTrack')
-      , isPlaying = player.get('isPlaying')
-    const isAPT = isSameTrack(preActiveTrack)(track)
-
-    if (isAPT) {
-      dispatch(activeIterateTrack(preActiveTrack))
-    }
-    // if only one track deactivateTrack
-    const playlist = player.get('playlist')
-    const playlistSize = playlist.size
-    if (playlistSize < 2) {
-      dispatch(deactivateTrack())
-      dispatch(togglePlaylist(true))
-    }
-    dispatch(removeFromPlaylist(track))
+    const player = getState().player,
+      preActiveTrack = player.get('activeTrack'),
+      isPlaying = player.get('isPlaying')
+    const isAPT = isSameTrackAndPlaying(preActiveTrack, track, isPlaying)
+    console.info('isAPT = ', isAPT)
+    dispatch(togglePlayTrack(!isAPT))
+    dispatch(setActiveTrack(track))
+    dispatch(setTrackInPlaylist(track))
   }
 }
+
 
 export function addTrackToPlaylist(track) {
   return (dispath, getState) => {
@@ -105,8 +89,23 @@ export function activeIterateTrack(activeTrack, iterate = 1) {
   }
 }
 
-function getIterateTrack(playlist, activeTrack, iterate) {
-  const index = playlist.findIndex(isSameTrack(activeTrack))
-  const iterateTrack = playlist.get(index + iterate)
-  return iterateTrack
+export function removeTrackFromPlaylist(track) {
+  return (dispatch, getState) => {
+    const player = getState().player
+    const preActiveTrack = player.get('activeTrack')
+    const isAPT = isSameTrack(preActiveTrack)(track)
+
+    if (isAPT) {
+      dispatch(activeIterateTrack(preActiveTrack))
+    }
+    // if only one track deactivateTrack
+    const playlist = player.get('playlist')
+    const playlistSize = playlist.size
+    if (playlistSize < 2) {
+      dispatch(deactivateTrack())
+      dispatch(togglePlaylist(true))
+    }
+    dispatch(removeFromPlaylist(track))
+  }
 }
+

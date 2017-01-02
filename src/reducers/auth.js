@@ -5,12 +5,11 @@ import * as actionTypes from '../constants/actionTypes'
 
 import { Map } from 'immutable'
 
-function setSession (state, action) {
-
+function setSession(state, action) {
   return state.set('session', action.session)
-
 }
-function setUser (state, user) {
+
+function setUser(state, user) {
   console.info('user = ', user)
   return state.set('user', user)
 }
@@ -20,8 +19,7 @@ const initialState = Map({
   user: null
 })
 export default function (state = initialState, action) {
-
-  switch ( action.type ) {
+  switch (action.type) {
     case actionTypes.SET_SESSION:
       return setSession(state, action)
     case actionTypes.SET_USER:

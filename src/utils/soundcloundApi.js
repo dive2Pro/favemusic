@@ -2,7 +2,9 @@
  * Created by hyc on 16-12-31.
  */
 import Cookies from 'js-cookie'
-import { OAUTH_TOKEN } from '../constants/authentification'
+import {
+  OAUTH_TOKEN
+} from '../constants/authentification'
 
 export default function apiUrl(url, symbol) {
   const accessToken = Cookies.get(OAUTH_TOKEN)
@@ -24,6 +26,6 @@ export function getLazyLoadingUrl(user, nextHref, initHref) {
   if (nextHref) {
     return addAccessToken(nextHref, "&")
   } else {
-    return apiUrl(`${urlPrefix}/${initHref}`,'&')
+    return apiUrl(`${urlPrefix}/${initHref}`, '&')
   }
 }

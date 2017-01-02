@@ -1,26 +1,35 @@
 import React, { Component } from 'react'
 class UserMosaic extends Component {
-  constructor (props) {
+  constructor(props) {
     super(props);
     this.state = {
       isMoreToggled: props.isMoreToggled
     }
   }
 
-  renderUserMosaic () {
+  toggleMore() {
+    console.log(this.isMoreToggled)
+    this.isMoreToggled = !this.isMoreToggled
+    this.setState({
+      isMoreToggled: this.isMoreToggled
+    })
+  }
+  renderUserMosaic() {
     const { collections } = this.props
     if (!collections) return ""
 
     return (
-      <div className='user-mosaic-content'>
+      <div className="user-mosaic-content">
         <ul>
           {collections.toJSON().map((following, idx) => {
             const { username, avatar_url, permalink_url } = following
             return (
               <li key={idx}>
                 <a href={permalink_url}>
-                  <img src={avatar_url}
-                       alt={following.username} height='40' width='40'/>
+                  <img
+                    src={avatar_url}
+                    alt={username} height="40" width="40"
+                  />
                 </a>
               </li>
             )
@@ -30,13 +39,14 @@ class UserMosaic extends Component {
     )
   }
 
-  renderNextButton () {
-    const { requestFollowersInProcess, followersNextHref, fetchFollowers, user } = this.props
+  renderNextButton() {
+    const { followersNextHref, fetchFollowers, user } = this.props
     if (!followersNextHref || this.isMoreToggled) {
       return (
         <div>
-          <button className="ghost"
-                  onClick={() => fetchFollowers(user, followersNextHref)}
+          <button
+            className="ghost"
+            onClick={() => fetchFollowers(user, followersNextHref)}
           >LoadMore
           </button>
         </div>
@@ -46,21 +56,12 @@ class UserMosaic extends Component {
     }
   }
 
-  toggleMore () {
-    console.log(this.isMoreToggled)
-    this.isMoreToggled = !this.isMoreToggled
-    this.setState({
-      isMoreToggled: this.isMoreToggled
-    })
 
-  }
-
-  render () {
+  render() {
     return (
       <div className="user-mosaic">
         <h2><a href="#" onClick={() => this.toggleMore()}>
-          {this.props.title} <i
-          className={`fa ${this.isMoreToggled ? 'fa-chevron-up' : 'fa-chevron-down'}`}></i>
+          {this.props.title} <i className={`fa ${this.isMoreToggled ? 'fa-chevron-up' : 'fa-chevron-down'}`} />
         </a></h2>
 
         <div className={this.isMoreToggled ? 'more' : ''}>

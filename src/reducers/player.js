@@ -13,7 +13,6 @@ const initialState = Map({
 function setTrackInPlaylist(state, track) {
   const item = state.get('playlist').find(isSameTrack(track))
   if (item) return state
-
   return state.updateIn(['playlist'], list => list.push(track))
 }
 
@@ -24,7 +23,7 @@ function deactivateTrack(state) {
   return state.set('activeTrack', null)
 }
 
-export default function (state = initialState, action) {
+export default function playerReducer(state = initialState, action) {
   switch (action.type) {
     case actionTypes.SET_IS_PLAYING:
       return state.set('isPlaying', action.isPlaying)

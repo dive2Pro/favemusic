@@ -3,10 +3,18 @@
  */
 import * as actionTypes from '../constants/actionTypes'
 import SC from 'soundcloud'
-import { CLIENT_ID, REDIRECT_URI, OAUTH_TOKEN } from '../constants/authentification'
+import {
+  CLIENT_ID,
+  REDIRECT_URI,
+  OAUTH_TOKEN
+} from '../constants/authentification'
 import apiUrl from '../utils/soundcloundApi'
 import Cookies from 'js-cookie'
-import { fetchFollowings, fetchActivities, fetchFollowers } from './user'
+import {
+  fetchFollowings,
+  fetchActivities,
+  fetchFollowers
+} from './user'
 
 function setSession(session) {
   return {
@@ -14,6 +22,7 @@ function setSession(session) {
     session
   }
 }
+
 function setUser(user) {
   return {
     type: actionTypes.SET_USER,
@@ -21,6 +30,18 @@ function setUser(user) {
   }
 }
 
+function fetchUser() {
+  return dispatch => {
+    fetch(apiUrl('me', '?'))
+      .then(response => response.json())
+      .then(me => {
+        dispatch(setUser(me))
+        dispatch(fetchFollowings(me))
+        dispatch(fetchFollowers(me))
+        dispatch(fetchActivities())
+      })
+  }
+}
 export function init() {
   return dispatch => {
     const oauth_token = Cookies.get(OAUTH_TOKEN)
@@ -31,38 +52,24 @@ export function init() {
 }
 
 export function login() {
-
   return dispatch => {
-    SC.initialize({ client_id: CLIENT_ID, redirect_uri: REDIRECT_URI })
+    SC.initialize({
+      client_id: CLIENT_ID,
+      redirect_uri: REDIRECT_URI
+    })
 
     SC.connect().then(session => {
       Cookies.set(OAUTH_TOKEN, session.oauth_token)
       dispatch(setSession(session))
       dispatch(fetchUser(session.oauth_token))
     })
-
   }
-
 }
 
 export function logout() {
-  return (dispatch, getState) => {
+  return (dispatch) => {
     Cookies.set(OAUTH_TOKEN, null)
     dispatch(setSession(null))
     dispatch(setUser(null))
-  }
-}
-
-function fetchUser(token) {
-  return dispatch => {
-    fetch(apiUrl('me', '?'))
-      .then(response => response.json())
-      .then(me => {
-        dispatch(setUser(me))
-        dispatch(fetchFollowings(me))
-        dispatch(fetchFollowers(me))
-        dispatch(fetchActivities())
-      })
-
   }
 }

@@ -12,9 +12,9 @@ class Player extends Component {
   }
 
   componentDidUpdate() {
-    let audioElement = ReactDOM.findDOMNode(this.refs.audio)
+    const audioElement = ReactDOM.findDOMNode(this.refs.audio)
     if (!audioElement) return
-    const { isPlaying } = this.props
+    const { isPlaying } = this.props;
     isPlaying ? audioElement.play() : audioElement.pause()
   }
 
@@ -24,29 +24,36 @@ class Player extends Component {
   }
 
   renderNav() {
-    const { isPlaying, activeTrack, activeIterateTrack} = this.props
+    const { isPlaying, activeTrack, activeIterateTrack } = this.props
     if (!activeTrack) return
     const { origin } = activeTrack
     const { stream_url } = origin
     return (
       <div className="player-content">
         <div>
-          <i className="fa fa-step-backward"
-            onClick={() => activeIterateTrack(activeTrack, -1)}  >&nbsp;</i>
+          <i
+            className="fa fa-step-backward"
+            onClick={() => activeIterateTrack(activeTrack, -1)}
+          >&nbsp;</i>
         </div>
 
         <div >
-          <i onClick={() => this.togglePlay()}
-            className={`fa ${isPlaying ? 'fa-pause' : 'fa-play'}`}>&nbsp;</i>
+          <i
+            onClick={() => this.togglePlay()}
+            className={`fa ${isPlaying ? 'fa-pause' : 'fa-play'}`}
+          >&nbsp;</i>
         </div>
 
         <div>
-          <i className="fa fa-step-forward"
+          <i
+            className="fa fa-step-forward"
             onClick={() => activeIterateTrack(activeTrack, 1)}
-            >&nbsp;</i>
+          >&nbsp;</i>
         </div>
-        <audio ref='audio' id="audio"
-          src={addAccessToken(stream_url, '?')}>
+        <audio
+          ref="audio" id="audio"
+          src={addAccessToken(stream_url, '?')}
+        >
         </audio>
       </div>
     )
@@ -64,10 +71,11 @@ class Player extends Component {
 }
 
 function mapStateToProps(state) {
-  const {player}=state
+  const { player } = state
   return {
     isPlaying: player.get('isPlaying'),
     activeTrack: player.get('activeTrack'),
   }
 }
-export default connect(mapStateToProps, actions)(Player) 
+
+export default connect(mapStateToProps, actions)(Player)

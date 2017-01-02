@@ -1,12 +1,13 @@
 import React from 'react'
-export default React.createClass({
-  componentDidMount(){
+export default class Callback extends React.Component {
+  componentDidMount() {
     window.setTimeout(opener.SC.connectCallback, 1)
-  },
-  render () {
+  }
+
+  render() {
     return (
       <div>This should be close soon</div>
     )
   }
-})
+}
 

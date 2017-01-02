@@ -4,7 +4,6 @@
 import React, { Component, PropTypes } from 'react';
 
 export default function (InnerComponent) {
-
   class FetchOnScrollComponent extends Component {
     constructor(props) {
       super(props)
@@ -13,15 +12,13 @@ export default function (InnerComponent) {
 
     componentDidMount() {
       window.addEventListener('scroll', this.onScroll)
-
     }
 
     componentWillUnmount() {
-
       window.removeEventListener('scroll', this.onScroll)
     }
 
-    onScroll(event) {
+    onScroll() {
       if (window.innerHeight + window.scrollY >= document.body.offsetHeight - 500) {
         this.props.scrollFunc()
       }

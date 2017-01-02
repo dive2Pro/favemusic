@@ -5,62 +5,61 @@ import apiUrl, { addAccessToken, getLazyLoadingUrl } from '../utils/soundcloundA
 import Cookies from 'js-cookie'
 import * as actionTypes from '../constants/actionTypes'
 import { OAUTH_TOKEN } from '../constants/authentification'
-function mergeFollowings (followings) {
+function mergeFollowings(followings) {
   return {
     type: actionTypes.MERGE_FOLLOWINGS,
     followings
   }
 }
 
-function mergeActivities (activities) {
+function mergeActivities(activities) {
   return {
     type: actionTypes.MERGE_ACTIVITIES,
     activities
   }
 }
 
-function setActivitiesNextHref (nextHref) {
+function setActivitiesNextHref(nextHref) {
   return {
     type: actionTypes.SET_ACTIVITIES_REQUEST_NEXT_HREF,
     nextHref
   }
 }
-function setActivitiesRequestInProcess (inProcess) {
+function setActivitiesRequestInProcess(inProcess) {
   return {
     type: actionTypes.SET_ACTIVITIES_REQUEST_IN_PROCESS,
     inProcess
   }
 }
-function mergeFollowers (followers) {
-
+function mergeFollowers(followers) {
   return {
     type: actionTypes.MERGE_FOLLOWERS,
     followers
   }
-
 }
-function setFollowersRequestInProcess (inProcess) {
+
+function setFollowersRequestInProcess(inProcess) {
   return {
     type: actionTypes.SET_FOLLOWERS_REQUEST_IN_PROCESS,
     inProcess
   }
 }
 
-function setFollowersRequestNexthref (nextHref) {
+function setFollowersRequestNexthref(nextHref) {
   return {
     type: actionTypes.SET_FOLLOWERS_REQUEST_NEXT_HREF,
     nextHref
   }
 }
-export function fetchFollowers (user, nextHref) {
+export function fetchFollowers(user, nextHref) {
   const accessToken = Cookies.get(OAUTH_TOKEN)
   const initHref = `followers?limit=50&offset=0&oauth_token=${accessToken}`
   const followersUrl = getLazyLoadingUrl(user, nextHref, initHref)
 
   return (dispatch, getState) => {
-    let userState = getState().user
+    const userState = getState().user
     const isrequestFollowersInProcess = userState.get('requestFollowersInProcess')
-    if (isrequestFollowersInProcess)return
+    if (isrequestFollowersInProcess) return
 
     dispatch(setFollowersRequestInProcess(true))
 
@@ -74,13 +73,14 @@ export function fetchFollowers (user, nextHref) {
           console.log(data.nextHref);
           dispatch(setFollowersRequestNexthref(data.nextHref))
         }
-      }).catch(err => {
+      })
+      .catch(() => {
         dispatch(setFollowersRequestInProcess(false))
       })
   }
 }
 
-export function fetchFollowings (user, nextHref) {
+export function fetchFollowings(user, nextHref) {
   const accessToken = Cookies.get(OAUTH_TOKEN)
   const initHref = `followings?limit=200&offset=0&oauth_token=${accessToken}`
   const followingsUrl = getLazyLoadingUrl(user, nextHref, initHref)
@@ -98,12 +98,12 @@ export function fetchFollowings (user, nextHref) {
   }
 }
 
-export function fetchActivities (nextHref) {
+export function fetchActivities(nextHref) {
   let activitiesUrl
   if (nextHref) {
     activitiesUrl = addAccessToken(nextHref, '&')
   } else {
-    activitiesUrl = apiUrl(`me/activities?limit=50&offset=0`,'&')
+    activitiesUrl = apiUrl(`me/activities?limit=50&offset=0`, '&')
   }
 
   return (dispatch, getState) => {
@@ -120,11 +120,9 @@ export function fetchActivities (nextHref) {
         dispatch(mergeActivities(data.collection))
         dispatch(setActivitiesNextHref(data.next_href))
         dispatch(setActivitiesRequestInProcess(false))
-
-      }).catch(err => {
-
+      })
+      .catch(() => {
         dispatch(setActivitiesRequestInProcess(false))
-
       })
   }
 }
