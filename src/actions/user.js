@@ -1,7 +1,7 @@
 /**
  * Created by hyc on 16-12-31.
  */
-import apiUrl, { addAccessToken } from '../utils/soundcloundApi'
+import apiUrl, { addAccessToken, getLazyLoadingUrl } from '../utils/soundcloundApi'
 import Cookies from 'js-cookie'
 import * as actionTypes from '../constants/actionTypes'
 import { OAUTH_TOKEN } from '../constants/authentification'
@@ -31,12 +31,59 @@ function setActivitiesRequestInProcess (inProcess) {
     inProcess
   }
 }
+function mergeFollowers (followers) {
+
+  return {
+    type: actionTypes.MERGE_FOLLOWERS,
+    followers
+  }
+
+}
+function setFollowersRequestInProcess (inProcess) {
+  return {
+    type: actionTypes.SET_FOLLOWERS_REQUEST_IN_PROCESS,
+    inProcess
+  }
+}
+
+function setFollowersRequestNexthref (nextHref) {
+  return {
+    type: actionTypes.SET_FOLLOWERS_REQUEST_NEXT_HREF,
+    nextHref
+  }
+}
+export function fetchFollowers (user, nextHref) {
+  const accessToken = Cookies.get(OAUTH_TOKEN)
+  const initHref = `followers?limit=50&offset=0&oauth_token=${accessToken}`
+  const followersUrl = getLazyLoadingUrl(user, nextHref, initHref)
+
+  return (dispatch, getState) => {
+    let userState = getState().user
+    const isrequestFollowersInProcess = userState.get('requestFollowersInProcess')
+    if (isrequestFollowersInProcess)return
+
+    dispatch(setFollowersRequestInProcess(true))
+
+    return fetch(followersUrl)
+      .then(response => response.json())
+      .then(data => {
+        dispatch(mergeFollowers(data.collection))
+        dispatch(setFollowersRequestInProcess(false))
+
+        if (data.nextHref) {
+          console.log(data.nextHref);
+          dispatch(setFollowersRequestNexthref(data.nextHref))
+        }
+      }).catch(err => {
+        dispatch(setFollowersRequestInProcess(false))
+      })
+  }
+}
 
 export function fetchFollowings (user, nextHref) {
   const accessToken = Cookies.get(OAUTH_TOKEN)
-  const initHref = `//api.soundcloud.com/users/${user.id}/followings?limit=200&offset=0&oauth_token=${accessToken}`
-  const followingsUrl = nextHref || initHref
-
+  const initHref = `followings?limit=200&offset=0&oauth_token=${accessToken}`
+  const followingsUrl = getLazyLoadingUrl(user, nextHref, initHref)
   return dispatch => {
     return fetch(followingsUrl)
       .then(response => response.json())
@@ -45,6 +92,7 @@ export function fetchFollowings (user, nextHref) {
 
         if (data.nextHref) {
           console.info(data.nextHref)
+          dispatch(setActivitiesNextHref(data.nextHref))
         }
       })
   }
@@ -69,7 +117,6 @@ export function fetchActivities (nextHref) {
     return fetch(activitiesUrl)
       .then(response => response.json())
       .then(data => {
-        console.info(data, ' activities !!!')
         dispatch(mergeActivities(data.collection))
         dispatch(setActivitiesNextHref(data.next_href))
         dispatch(setActivitiesRequestInProcess(false))

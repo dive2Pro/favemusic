@@ -3,17 +3,17 @@
  */
 import * as actionTypes from '../constants/actionTypes'
 import SC from 'soundcloud'
-import { CLIENT_ID, REDIRECT_URI, OAUTH_TOKEN }  from '../constants/authentification'
+import { CLIENT_ID, REDIRECT_URI, OAUTH_TOKEN } from '../constants/authentification'
 import Cookies from 'js-cookie'
-import { fetchFollowings, fetchActivities } from './user'
+import { fetchFollowings, fetchActivities, fetchFollowers } from './user'
 
-function setSession (session) {
+function setSession(session) {
   return {
     type: actionTypes.SET_SESSION,
     session
   }
 }
-function setUser (user) {
+function setUser(user) {
   return {
     type: actionTypes.SET_USER,
     user
@@ -22,14 +22,14 @@ function setUser (user) {
 
 export function init() {
   return dispatch => {
-    const oauth_token=Cookies.get(OAUTH_TOKEN)
+    const oauth_token = Cookies.get(OAUTH_TOKEN)
     if (oauth_token) {
       dispatch(fetchUser(oauth_token))
     }
   }
 }
 
-export function initSession () {
+export function initSession() {
 
   return dispatch => {
     SC.initialize({ client_id: CLIENT_ID, redirect_uri: REDIRECT_URI })
@@ -43,15 +43,15 @@ export function initSession () {
 
 }
 
-function fetchUser (token) {
+function fetchUser(token) {
   return dispatch => {
     fetch(`//api.soundcloud.com/me?oauth_token=${token}`)
       .then(response => response.json())
       .then(me => {
         dispatch(setUser(me))
         dispatch(fetchFollowings(me))
+        dispatch(fetchFollowers(me))
         dispatch(fetchActivities())
-
       })
 
   }

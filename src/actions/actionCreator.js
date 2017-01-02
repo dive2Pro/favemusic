@@ -3,7 +3,7 @@
  */
 import { init, initSession } from './auth'
 import { togglePlaylist } from './environment'
-import { fetchActivities } from './user'
+import { fetchActivities, fetchFollowers } from './user'
 import {
   togglePlayTrack, activeIterateTrack,
   activateTrack, removeTrackFromPlaylist, addTrackToPlaylist
@@ -13,6 +13,7 @@ export {
   init,
   initSession,
   fetchActivities,
+  fetchFollowers,
   togglePlayTrack,
   activateTrack,
   togglePlaylist,

@@ -33,3 +33,36 @@ a {
   box-sizing: border-box;
 }
 
+button.ghost {
+  display: inline-block;
+  border: 1px solid $mainColor;
+  //height: $padding;
+  line-height: $padding;
+  color: $mainColor;
+  border-radius: 5px;
+  padding: 0.5rem 1.5rem;
+  font-weight: bold;
+  transition: all 0.2s ease;
+  background: transparent;
+  cursor: pointer;
+  &:hover {
+    color: #ffffff;
+    background-color: $mainColor;
+  }
+
+  &:focus {
+    outline: none;
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
+
