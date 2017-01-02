@@ -10,7 +10,7 @@ class Followings extends Component {
   renderFollowings() {
     const { followings } = this.props
     if (!followings) return ""
-    
+
     return (
       <div className='followings-content'>
         <ul>
@@ -42,7 +42,7 @@ class Followings extends Component {
     return (
       <div>
         <h2><a href="#" onClick={() => this.toggleMore()}>
-          Following people <i className={`fa ${this.isMoreToggled ? 'fa-chevron-up' : 'fa-chevron-down'}`}></i>
+          {this.props.title} <i className={`fa ${this.isMoreToggled ? 'fa-chevron-up' : 'fa-chevron-down'}`}></i>
         </a></h2>
 
         <div className={this.isMoreToggled ? 'more' : ''}>

@@ -15,6 +15,7 @@ class App extends Component {
   }
   render() {
     const { initSession, currentUser, fetchActivities, nextHref } = this.props
+    const e$ = Object.create(null)
     return (
       <div>
         {
@@ -24,19 +25,18 @@ class App extends Component {
               <div className="dashboard-content">
                 <div className="dashboard-content-main">
                   <Activities {...this.props}
-                    scrollFunc={fetchActivities.bind(null, nextHref)}
+                    scrollFunc={fetchActivities.bind(e$, nextHref)}
                     />
                 </div>
                 <div className="dashboard-content-side">
-                  <Followings
-                    {...this.props}
-                    />
+                  <Followings title='Followings' {...this.props}/>
+                  <Followings title='Followers' {...this.props}/>
                 </div>
               </div>
               <Playlist {...this.props} />
               <Player {...this.props} />
             </div>
-            : <button onClick={initSession.bind(null)}>
+            : <button onClick={initSession.bind(e$)}>
               Login1
             </button>
         }

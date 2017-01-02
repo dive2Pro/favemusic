@@ -1,7 +1,10 @@
 .followings{
+
+        transition: height .5s;
+        transition-timing-function: ease;
     i{
         opacity: 0;
-        transition: opacity 0.2;
+        transition: opacity 0.2s;
         transition-timing-function: ease;
     }
 

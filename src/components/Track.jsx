@@ -11,7 +11,7 @@ export default class Track extends Component {
   renderImage(artwork_url, title, avatar_url) {
     return (
       <div>
-        <img src={artwork_url || avatar_url} alt={title} />
+        <img src={artwork_url || avatar_url} alt={title} height='90' width='90'/>
       </div>
     )
   }

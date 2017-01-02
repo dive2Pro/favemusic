@@ -5,13 +5,15 @@
   bottom: $padding*3;
   width: $padding*18;
   height: $padding*15;
-  border: $border;
+  border-top: $border;
   overflow: scroll;
   opacity: 0;
   transition: height 0.2s;
   transition-timing-function: ease;
+  pointer-events: none;
   &-visible {
     opacity: 1;
+    pointer-events: all;
   }
   &-content {
     position: relative;
