@@ -1,6 +1,10 @@
 import React, { Component } from 'react'
 import ReactDOM from 'react-dom'
 import { addAccessToken } from '../utils/soundcloundApi'
+import { connect } from 'react-redux';
+import * as actions from '../actions/actionCreator.js'
+
+
 class Player extends Component {
   constructor(props) {
     super(props)
@@ -30,7 +34,7 @@ class Player extends Component {
           <i className="fa fa-step-backward"
             onClick={() => activeIterateTrack(activeTrack, -1)}  >&nbsp;</i>
         </div>
-        
+
         <div >
           <i onClick={() => this.togglePlay()}
             className={`fa ${isPlaying ? 'fa-pause' : 'fa-play'}`}>&nbsp;</i>
@@ -59,4 +63,11 @@ class Player extends Component {
   }
 }
 
-export default Player
+function mapStateToProps(state) {
+  const {player}=state
+  return {
+    isPlaying: player.get('isPlaying'),
+    activeTrack: player.get('activeTrack'),
+  }
+}
+export default connect(mapStateToProps, actions)(Player) 

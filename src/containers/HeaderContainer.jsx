@@ -1,9 +1,11 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import * as actions from '../actions/actionCreator.js'
 
 class Header extends Component {
     renderHeader() {
         const {currentUser, login, logout} = this.props
-        const name=currentUser?currentUser.username:'Welcome'
+        const name = currentUser ? currentUser.username : 'Welcome'
         return (
             <div className='header-content'>
                 <h1>Hello {name}</h1>
@@ -23,5 +25,9 @@ class Header extends Component {
         );
     }
 }
-
-export default Header;
+function mapStateToProps(state) {
+    return {
+        currentUser: state.user.get('user')
+    }
+}
+export default connect(mapStateToProps, actions)(Header)

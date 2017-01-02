@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
-import MiniTrack from './MiniTrack'
-export default class Playlist extends Component {
+import MiniTrack from '../components/MiniTrack'
+import { connect } from 'react-redux';
+import * as actions from '../actions/actionCreator.js'
+class Playlist extends Component {
   renderPlaylist() {
     const { playlist } = this.props
     return (
@@ -34,3 +36,13 @@ export default class Playlist extends Component {
     )
   }
 }
+
+
+function mapStateToProps(state) {
+  const {player,environment}=state
+  return {
+    playlist: player.get('playlist'),
+    isOpenPlaylist: environment.get('isOpenPlaylist'),
+  }
+}
+export default connect(mapStateToProps, actions)(Playlist) 

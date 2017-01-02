@@ -4,9 +4,9 @@ import * as actions from '../actions/actionCreator'
 import { bindActionCreators } from 'redux'
 import UserMosaic from '../components/UserMosaic'
 import Activities from '../components/Activities'
-import Header from '../components/Header'
-import Player from '../components/Player'
-import Playlist from '../components/Playlist'
+import HeaderContainer from './HeaderContainer'
+import PlayerContainer from './PlayerContainer'
+import PlaylistContainer from './PlaylistContainer'
 
 class App extends Component {
   componentDidMount() {
@@ -18,13 +18,13 @@ class App extends Component {
     const {
       currentUser, fetchActivities, nextHref, followers,
       followings, followersNextHref, followersRequestInProcess, fetchFollowers
-    } = this.props 
-    
+    } = this.props
+
     return (
       <div className="dashboard-content">
         <div className="dashboard-content-main">
           <Activities {...this.props}
-            scrollFunc={()=>fetchActivities(nextHref)}
+            scrollFunc={() => fetchActivities(nextHref)}
             />
         </div>
         <div className="dashboard-content-side">
@@ -47,10 +47,10 @@ class App extends Component {
       <div>
         {
           <div className="dashboard">
-            <Header {...this.props} />
+            <HeaderContainer {...this.props} />
             {this.renderContent()}
-            <Playlist {...this.props} />
-            <Player {...this.props} />
+            <PlaylistContainer {...this.props} />
+            <PlayerContainer {...this.props} />
           </div>
 
         }
@@ -70,11 +70,8 @@ function mapStateToProps(state) {
     followersNextHref: user.get('followersNextHref'),
     followersRequestInProcess: user.get('followersRequestInProcess'),
     followers: user.get('followers'),
-
     isPlaying: player.get('isPlaying'),
-    activeTrack: player.get('activeTrack'),
-    playlist: player.get('playlist'),
-    isOpenPlaylist: environment.get('isOpenPlaylist'),
+    activeTrack: player.get('activeTrack')
   }
 }
 
