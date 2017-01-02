@@ -67,7 +67,8 @@ export default class Track extends Component {
     const { activity, activateTrack, isPlaying, idx } = this.props
     const { origin, type } = activity
     if (!origin) return (<div></div>)
-    const { user, title, permalink_url, artwork_url } = origin
+    const { user, title, permalink_url, artwork_url, playback_count,
+      comment_count, download_count, likes_count, reposts_count} = origin
     const { avatar_url, username } = user
 
     return (
@@ -76,11 +77,28 @@ export default class Track extends Component {
           >
           {this.renderImage(artwork_url, title, avatar_url)}
         </div>
+
         <div className="track-content">
-          <div id={`waveform-${idx}`} className="track-content-waveform"></div>
           <a href={permalink_url}>
             <i className={getTrackIcon(type)}> </i> &nbsp; {username} - {title}</a>
-
+          <div id={`waveform-${idx}`} className="track-content-waveform"></div>
+          <div className='track-content-info'>
+            <div className='track-content-info-item'>
+              <i className='fa fa-play'> {playback_count}</i>
+            </div>
+            <div className='track-content-info-item'>
+              <i className='fa fa-heart'> {likes_count}</i>
+            </div>
+            <div className='track-content-info-item'>
+              <i className='fa fa-retweet'> {reposts_count}</i>
+            </div>
+            <div className='track-content-info-item'>
+              <i className='fa fa-comment'> {comment_count}</i>
+            </div>
+            <div className='track-content-info-item'>
+              <i className='fa fa-download'> {download_count}</i>
+            </div>
+          </div>
         </div>
         {this.renderActions(activity, activateTrack, isPlaying)}
       </div>
