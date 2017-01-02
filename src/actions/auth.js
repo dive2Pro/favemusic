@@ -4,9 +4,10 @@
 import * as actionTypes from '../constants/actionTypes'
 import SC from 'soundcloud'
 import { CLIENT_ID, REDIRECT_URI, OAUTH_TOKEN } from '../constants/authentification'
+import apiUrl from '../utils/soundcloundApi'
 import Cookies from 'js-cookie'
 import { fetchFollowings, fetchActivities, fetchFollowers } from './user'
- 
+
 function setSession(session) {
   return {
     type: actionTypes.SET_SESSION,
@@ -54,7 +55,7 @@ export function logout() {
 
 function fetchUser(token) {
   return dispatch => {
-    fetch(`//api.soundcloud.com/me?oauth_token=${token}`)
+    fetch(apiUrl('me', '?'))
       .then(response => response.json())
       .then(me => {
         dispatch(setUser(me))
