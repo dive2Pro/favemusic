@@ -1,43 +1,36 @@
 
 .track {
   display: flex;
-  border-bottom: 0.5px solid $background;
+  margin: ($padding/2) 0;
+  background: $backgroundSecondary;
   &-content {
     width: 100%;
     height: 80px;
     padding: $padding/2;
-    background: $backgroundSecondary;
   }
 
-  &-img {
+  &-actions {
     position: relative;
-    &-overlay {
-      width: 100%;
-      height: 80px;
-      padding: $padding/2;
-      background: rgba(0, 0, 0, 0.5);
-      position: absolute;
-      top: 0;
-      left: 0;
-      opacity: 0;
-      transition: opacity 0.5s;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    opacity: 0;
+    margin: 0;
+    transition: all 0.2s;
+
+    &-item {
       i {
-        position: absolute;
-        left: 50%;
-        top: 35px;
-        font-size: 30px;
-        transform: translateX(-50%);
+        font-size: 20px;
+        cursor: pointer;
       }
-      i.fa-play ,i.fa-pause{
-        top:10px;
-      }
-      i.fa-list{
-        top:65px;
+      &:hover {
+        color: $mainColor;
       }
     }
   }
 
- &:hover .track-img-overlay {
-        opacity: 1;
-      }
+  &:hover .track-actions {
+    opacity: 1;
+    margin: 0 ($padding/2) ;
+  }
 }
