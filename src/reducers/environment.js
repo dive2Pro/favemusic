@@ -1,7 +1,7 @@
 import { Map } from 'immutable'
 import * as actionTypes from '../constants/actionTypes';
 const initialState = Map({
-    isOpenPlaylist: false
+    isOpenPlaylist: true
 })
 
 function setIsOpenPlaylist(state, isOpen) {
