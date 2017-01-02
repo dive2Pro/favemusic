@@ -1,22 +1,23 @@
 import React, { Component } from 'react'
-import { getTrackIcon } from '../utils/track'
+import { getTrackIcon, normalizeSamples, isNotTrack } from '../utils/track'
 import { isSameTrackAndPlaying } from '../utils/player.js'
+import Waveform from 'waveform.js';
 export default class Track extends Component {
 
-  constructor (props) {
+  constructor(props) {
     super(props)
     this.renderImage = this.renderImage.bind(this)
   }
 
-  renderImage (artwork_url, title, avatar_url) {
+  renderImage(artwork_url, title, avatar_url) {
     return (
       <div>
-        <img src={artwork_url || avatar_url} alt={title} height='90' width='90'/>
+        <img src={artwork_url || avatar_url} alt={title} height='90' width='90' />
       </div>
     )
   }
 
-  renderActions (activity, activateTrack, isPlaying) {
+  renderActions(activity, activateTrack, isPlaying) {
     const { activeTrack, addTrackToPlaylist } = this.props
     const { origin } = activity
     const { stream_url } = origin
@@ -28,20 +29,42 @@ export default class Track extends Component {
       <div className="track-actions">
         <div className="track-actions-item">
           <i className={`fa ${currentTrackIsPlaying ? 'fa-pause' : 'fa-play'}`}
-             onClick={() => activateTrack(activity)}> </i>
+            onClick={() => activateTrack(activity)}> </i>
         </div>
 
         <div className="track-actions-item">
           <i className="fa fa-list"
-             onClick={() => addTrackToPlaylist(activity)}> </i>
+            onClick={() => addTrackToPlaylist(activity)}> </i>
         </div>
       </div>
     )
   }
 
-  render () {
+  componentDidMount() {
+    const { activity, activateTrack, isPlaying, idx } = this.props
+    const { origin, type } = activity
+    if (isNotTrack(activity)) return (<div></div>)
+    const { waveform_url, id } = origin
+    if (!waveform_url) return
 
-    const { activity, activateTrack, isPlaying } = this.props
+    const waveform = document.getElementById('waveform-' + idx)
+
+    fetch(waveform_url)
+      .then(response => response.json())
+      .then(data => {
+        new Waveform({
+          container: waveform,
+          innerColor: '#61B25A',
+          data: normalizeSamples(data.samples)
+        })
+      }).catch(err => {
+        console.log(err);
+      })
+  }
+
+  render() {
+
+    const { activity, activateTrack, isPlaying, idx } = this.props
     const { origin, type } = activity
     if (!origin) return (<div></div>)
     const { user, title, permalink_url, artwork_url } = origin
@@ -50,12 +73,14 @@ export default class Track extends Component {
     return (
       <div className="track">
         <div className="track-img"
-        >
+          >
           {this.renderImage(artwork_url, title, avatar_url)}
         </div>
         <div className="track-content">
+          <div id={`waveform-${idx}`} className="track-content-waveform"></div>
           <a href={permalink_url}>
             <i className={getTrackIcon(type)}> </i> &nbsp; {username} - {title}</a>
+
         </div>
         {this.renderActions(activity, activateTrack, isPlaying)}
       </div>

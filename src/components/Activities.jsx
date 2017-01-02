@@ -13,7 +13,7 @@ class ActivitiesContainer extends Component {
           {activities.map((act, idx) => {
             return (
               <li key={idx}>
-                <Track activity={act.toJSON()} activateTrack={activateTrack} {...this.props} />
+                <Track activity={act.toJSON()} idx={idx} activateTrack={activateTrack} {...this.props} />
               </li>
             )
           })}
