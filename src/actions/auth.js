@@ -6,7 +6,7 @@ import SC from 'soundcloud'
 import { CLIENT_ID, REDIRECT_URI, OAUTH_TOKEN } from '../constants/authentification'
 import Cookies from 'js-cookie'
 import { fetchFollowings, fetchActivities, fetchFollowers } from './user'
-
+ 
 function setSession(session) {
   return {
     type: actionTypes.SET_SESSION,
@@ -29,7 +29,7 @@ export function init() {
   }
 }
 
-export function initSession() {
+export function login() {
 
   return dispatch => {
     SC.initialize({ client_id: CLIENT_ID, redirect_uri: REDIRECT_URI })
@@ -39,8 +39,17 @@ export function initSession() {
       dispatch(setSession(session))
       dispatch(fetchUser(session.oauth_token))
     })
+
   }
 
+}
+
+export function logout() {
+  return (dispatch, getState) => {
+    Cookies.set(OAUTH_TOKEN, null)
+    dispatch(setSession(null))
+    dispatch(setUser(null))
+  }
 }
 
 function fetchUser(token) {

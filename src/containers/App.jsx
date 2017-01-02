@@ -9,52 +9,56 @@ import Player from '../components/Player'
 import Playlist from '../components/Playlist'
 
 class App extends Component {
-  componentDidMount () {
+  componentDidMount() {
     const { init } = this.props
     init()
   }
 
-  render () {
+  renderContent() {
     const {
-      initSession, currentUser, fetchActivities, nextHref, followers,
-      followings, followersNextHref, followersRequestInProcess, fetchFollowers,
-      user
+      currentUser, fetchActivities, nextHref, followers,
+      followings, followersNextHref, followersRequestInProcess, fetchFollowers
+    } = this.props 
+    
+    return (
+      <div className="dashboard-content">
+        <div className="dashboard-content-main">
+          <Activities {...this.props}
+            scrollFunc={()=>fetchActivities(nextHref)}
+            />
+        </div>
+        <div className="dashboard-content-side">
+          <UserMosaic title='Followings' collections={followings} />
+          <UserMosaic title='Followers' collections={followers}
+            followersRequestInProcess={followersRequestInProcess}
+            followersNextHref={followersNextHref}
+            fetchFollowers={fetchFollowers}
+            user={currentUser}
+            />
+        </div>
+      </div>
+    )
+  }
+
+  render() {
+    const { currentUser
     } = this.props
-    const e$ = Object.create(null)
     return (
       <div>
         {
-          currentUser
-            ? <div className="dashboard">
-              <Header {...this.props} />
-              <div className="dashboard-content">
-                <div className="dashboard-content-main">
-                  <Activities {...this.props}
-                              scrollFunc={fetchActivities.bind(e$, nextHref)}
-                  />
-                </div>
-                <div className="dashboard-content-side">
-                  <UserMosaic title='Followings' collections={followings}/>
-                  <UserMosaic title='Followers' collections={followers}
-                              followersRequestInProcess={followersRequestInProcess}
-                              followersNextHref={followersNextHref}
-                              fetchFollowers={fetchFollowers}
-                              user={user}
-                  />
-                </div>
-              </div>
-              <Playlist {...this.props} />
-              <Player {...this.props} />
-            </div>
-            : <button onClick={initSession.bind(e$)}>
-              Login1
-            </button>
+          <div className="dashboard">
+            <Header {...this.props} />
+            {this.renderContent()}
+            <Playlist {...this.props} />
+            <Player {...this.props} />
+          </div>
+
         }
       </div>
     )
   }
 }
-function mapStateToProps (state) {
+function mapStateToProps(state) {
   const { auth, user, player, environment } = state
   console.info(state)
   return {
@@ -74,7 +78,7 @@ function mapStateToProps (state) {
   }
 }
 
-function mapDispathToProps (dispatch) {
+function mapDispathToProps(dispatch) {
   let actionCreators = bindActionCreators(actions, dispatch)
   console.info(' ')
   return actionCreators

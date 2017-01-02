@@ -1,7 +1,7 @@
 /**
  * Created by hyc on 16-12-31.
  */
-import { init, initSession } from './auth'
+import { init, login,logout } from './auth'
 import { togglePlaylist } from './environment'
 import { fetchActivities, fetchFollowers } from './user'
 import {
@@ -11,7 +11,8 @@ import {
 
 export {
   init,
-  initSession,
+  login,
+  logout,
   fetchActivities,
   fetchFollowers,
   togglePlayTrack,
