@@ -41,12 +41,12 @@ export function fetchActivitiesByGenre(nextHref: string, genre: string = 'house'
     }
     setActivitiesByGenreRequestInProcess(true)
     return fetch(url)
-        .then((response: ResponseType) => response.json())
-        .then((data: ResponseAfterToJSONType) => {
-          const activities = data.collection.map(wrapInOrigin)
-          dispatch(mergeActivitiesByGenre(activities))
-          dispatch(setActivitiesByGenreNextHref(data.next_href, genre))
-          dispatch(setActivitiesByGenreRequestInProcess(false))
-        })
+      .then((response: ResponseType) => response.json())
+      .then((data: ResponseAfterToJSONType) => {
+        const activities = data.collection.map(wrapInOrigin)
+        dispatch(mergeActivitiesByGenre(activities))
+        dispatch(setActivitiesByGenreNextHref(data.next_href, genre))
+        dispatch(setActivitiesByGenreRequestInProcess(false))
+      })
   }
 }

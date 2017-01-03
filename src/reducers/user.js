@@ -76,11 +76,11 @@ export default function (state = initialState, action) {
       return mergeFollowings(state, fromJS(action.followings))
 
     case actionTypes.SET_ACTIVITIES:
-      return setActivities(state, action.activities)
+      return setActivities(state, fromJS(action.activities))
     case actionTypes.SET_FOLLOWINGS:
-      return setFollowings(state, action.followings)
+      return setFollowings(state, fromJS(action.followings))
     case actionTypes.SET_FOLLOWERS:
-      return setFollowers(state, action.followers)
+      return setFollowers(state, fromJS(action.followers))
 
     case actionTypes.MERGE_ACTIVITIES:
       return mergeActivities(state, fromJS(action.activities))

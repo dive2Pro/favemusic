@@ -1,6 +1,5 @@
 import * as actionTypes from '../constants/actionTypes'
 
-
 export function togglePlaylist(isOpen) {
   return dispatch => {
     dispatch({
