@@ -21,6 +21,7 @@ import {
   setFollowers,
   setActivities
 } from './user'
+import { changeLocation } from './location'
 
 function setSession(session) {
   return {
@@ -57,7 +58,7 @@ export function init() {
       dispatch(fetchUser(oauth_token))
     } else {
       console.info('dispatch - --', routerActions)
-      dispatch(routerActions.push('/browse'))
+      dispatch(changeLocation('/browse'))
     }
   }
 }
@@ -70,7 +71,7 @@ export function login() {
     })
     SC.connect().then(session => {
       Cookies.set(OAUTH_TOKEN, session.oauth_token)
-      dispatch(routerActions.push('/dashboard'))
+      dispatch(changeLocation('/dashboard'))
       dispatch(setSession(session))
       dispatch(fetchUser(session.oauth_token))
     })
@@ -80,7 +81,7 @@ export function login() {
 export function logout() {
   return (dispatch) => {
     Cookies.set(OAUTH_TOKEN, null)
-    dispatch(routerActions.push('/browse'))
+    dispatch(changeLocation('/browse'))
     dispatch(setSession(null))
     dispatch(setUser(null))
     dispatch(setActivities([]))

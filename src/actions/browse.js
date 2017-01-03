@@ -31,14 +31,16 @@ function wrapInOrigin(activity: ActivityType) {
   }
 }
 
-export function fetchActivitiesByGenre(nextHref: string, genre: string = 'house') {
+export function fetchActivitiesByGenre(nextHref: string, genre: string) {
   return (dispatch: ()=>void, getState: ()=>Object) => {
-    const initHref = unauthApiUrl(`tracks?linked_partitioning=1&limit=50&offset=0&tags=${genre}`, '&')
+    const initHref = unauthApiUrl(
+      `tracks?linked_partitioning=1&limit=50&offset=0&tags=${genre}`, '&')
     const url = nextHref || initHref
     const requestInprocess = getState().browse.get('activitiesByGenreInProcess')
     if (requestInprocess) {
       return;
     }
+
     setActivitiesByGenreRequestInProcess(true)
     return fetch(url)
       .then((response: ResponseType) => response.json())

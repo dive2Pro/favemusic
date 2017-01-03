@@ -5,17 +5,20 @@ import HeaderContainer from './HeaderContainer'
 import PlayerContainer from './PlayerContainer'
 import PlaylistContainer from './PlaylistContainer'
 import Activities from '../components/Activities'
+import { DEFAULT_GENRE } from '../constants/browse'
 
 class BrowserContainer extends Component {
   componentDidMount() {
-    const { fetchActivitiesByGenre } = this.props
-    fetchActivitiesByGenre()
+    const { fetchActivitiesByGenre, genre } = this.props
+    fetchActivitiesByGenre("", genre)
   }
 
   renderInnerComopnent() {
-    const { activitiesByGenreInProcess, activitiesByGenre, activateTrack,
-      activitiesByGenreNextHref, fetchActivitiesByGenre } = this.props
-    const nextHref = activitiesByGenreNextHref.get('house')
+    const {
+      activitiesByGenreInProcess, activitiesByGenre, activateTrack,
+      activitiesByGenreNextHref, fetchActivitiesByGenre, genre
+    } = this.props
+    const nextHref = activitiesByGenreNextHref.get(genre)
     return (
       <div>
         <Activities
@@ -23,16 +26,17 @@ class BrowserContainer extends Component {
           activities={activitiesByGenre}
           activitiesRequestInProcess={activitiesByGenreInProcess}
           activateTrack={activateTrack}
-          scrollFunc={() => fetchActivitiesByGenre(nextHref)}
+          scrollFunc={() => fetchActivitiesByGenre(nextHref, genre)}
         />
       </div>
     )
   }
 
   render() {
+    const { genre } = this.props
     return (
       <div>
-        <HeaderContainer />
+        <HeaderContainer genre={genre} />
         {this.renderInnerComopnent()}
         <PlayerContainer />
         <PlaylistContainer />
@@ -40,14 +44,21 @@ class BrowserContainer extends Component {
     );
   }
 }
-function mapStateToProps(state) {
+
+function mapStateToProps(state, ownProps) {
+  console.info('ownProps = ', ownProps)
   const { browse, player } = state
   return {
     activitiesByGenreInProcess: browse.get('activitiesByGenreInProcess'),
     activitiesByGenre: browse.get('activitiesByGenre'),
     activitiesByGenreNextHref: browse.get('activitiesByGenreNextHref'),
-    activateTrack: player.get('activeTrack')
+    activateTrack: player.get('activeTrack'),
+    genre: ownProps.location.query.genre
   }
+}
+
+BrowserContainer.defaultProps = {
+  genre: DEFAULT_GENRE
 }
 
 export default connect(mapStateToProps, actions)(BrowserContainer);
