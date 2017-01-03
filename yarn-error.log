@@ -1,5 +1,5 @@
 Arguments: 
-  /usr/bin/nodejs /usr/share/yarn/bin/yarn.js add eslint -D
+  /usr/bin/nodejs /usr/share/yarn/bin/yarn.js add typescript -D
 
 PATH: 
   /home/hyc/bin:/home/hyc/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/usr/lib/jvm/java-8-oracle/bin:/usr/lib/jvm/java-8-oracle/db/bin:/usr/lib/jvm/java-8-oracle/jre/bin
@@ -32,6 +32,7 @@ npm manifest:
       "css-loader": "0.26.0",
       "detect-port": "1.0.1",
       "dotenv": "2.0.0",
+      "eslint": "^3.12.2",
       "eslint-config-airbnb": "^9.0.1",
       "eslint-loader": "1.6.0",
       "eslint-plugin-flowtype": "2.21.0",
@@ -5723,5 +5724,5 @@ Lockfile:
       window-size "0.1.0"
 
 Trace: 
-  Error: ENOENT: no such file or directory, open '/home/hyc/Desktop/favemusic/node_modules/babel-core/node_modules/minimatch/package.json'
+  Error: ENOENT: no such file or directory, open '/home/hyc/Desktop/favemusic/node_modules/acorn-globals/node_modules/acorn/package.json'
       at Error (native)

@@ -28,6 +28,7 @@ class App extends Component {
             {...this.props}
             scrollFunc={() => fetchActivities(nextHref)}
           />
+
         </div>
         <div className="dashboard-content-side">
           <UserMosaic

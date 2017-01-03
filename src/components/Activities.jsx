@@ -1,28 +1,32 @@
+// @flow
 import React, { Component } from 'react'
 import FetchOnScroll from './FetchOnScroll'
 import Track from '../components/Track'
+type ActivityType = {
 
+};
 class ActivitiesContainer extends Component {
-  activitiesDom() {
+  activitiesDom(): HTMLElement {
     const { activities, activateTrack } = this.props
     console.info('activities= ', activities)
     return (
       <div>
         <h2>activities</h2>
         <ul>
-          {activities.map((act, idx) => {
+          {activities.map((act: ActivityType, idx: number) : number => {
             return (
               <li key={idx}>
                 <Track activity={act.toJSON()} idx={idx} activateTrack={activateTrack} {...this.props} />
-              </li>
-            )
-          })}
+              </li>)
+          }
+        )
+          }
         </ul>
       </div>
     )
   }
 
-  activitiesRequestDom() {
+  activitiesRequestDom(): HTMLElement {
     const { activitiesRequestInProcess } = this.props
     if (activitiesRequestInProcess) {
       return (<div>Loading</div>)
@@ -31,7 +35,7 @@ class ActivitiesContainer extends Component {
     }
   }
 
-  render() {
+  render(): React$Element {
     return (
       <div>
         <div>{this.activitiesDom()}</div>

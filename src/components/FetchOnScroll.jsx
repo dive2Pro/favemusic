@@ -1,11 +1,13 @@
-/**
- * Created by hyc on 16-12-31.
- */
-import React, { Component, PropTypes } from 'react';
+// @flow
 
-export default function (InnerComponent) {
+import React, { Component } from 'react';
+type FetchPropsType = {
+  scrollFunc: () => void
+};
+
+export default function (InnerComponent: HTMLElement): Class<FetchOnScrollComponent> {
   class FetchOnScrollComponent extends Component {
-    constructor(props) {
+    constructor(props: FetchPropsType) {
       super(props)
       this.onScroll = this.onScroll.bind(this)
     }
@@ -24,16 +26,13 @@ export default function (InnerComponent) {
       }
     }
 
-    render() {
+    render(): ?React$Element {
       return (
         InnerComponent && <InnerComponent {...this.props} />
       )
     }
   }
 
-  FetchOnScrollComponent.propTypes = {
-    scrollFunc: PropTypes.func.isRequired
-  }
 
   return FetchOnScrollComponent
 }
