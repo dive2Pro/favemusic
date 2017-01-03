@@ -5,6 +5,7 @@ import { Provider } from 'react-redux'
 import DashboardContainer from './containers/DashboardContainer'
 import App from './containers/App'
 import Callback from './containers/Callback'
+import BrowserContainer from './containers/BrowserContainer'
 import ReactDOM from 'react-dom';
 require('../styles/index.scss')
 require('font-awesome/css/font-awesome.css')
@@ -14,6 +15,7 @@ const routes = (
     <IndexRoute component={App} />
     <Route path="/dashboard" component={DashboardContainer} />
     <Route path="/callback" component={Callback} />
+    <Route path="/browse" component={BrowserContainer} />
     <Route path="/" component={DashboardContainer} />
   </Route>
 )

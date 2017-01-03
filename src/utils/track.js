@@ -37,3 +37,7 @@ export function normalizeSamples(samples) {
   }
   return newSamples
 }
+
+export function isJsonWaveform(waveform_url) {
+  return waveform_url.indexOf('.json') !== -1
+}

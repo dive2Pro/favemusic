@@ -4,6 +4,7 @@
 import { combineReducers } from 'redux'
 import auth from './auth'
 import user from './user'
+import browse from './browse'
 import environment from './environment'
 import { routerReducer } from 'react-router-redux'
 import player from './player'
@@ -15,6 +16,7 @@ export default combineReducers({
   user,
   player,
   environment,
+  browse,
   routing: routerReducer
 
 })

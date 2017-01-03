@@ -3,7 +3,7 @@
  */
 import Cookies from 'js-cookie'
 import {
-  OAUTH_TOKEN
+  OAUTH_TOKEN, CLIENT_ID
 } from '../constants/authentification'
 
 export default function apiUrl(url, symbol) {
@@ -11,6 +11,11 @@ export default function apiUrl(url, symbol) {
   console.log('accessToken = ' + accessToken);
   return `//api.soundcloud.com/${url}${symbol}oauth_token=${accessToken}`
 }
+
+export function unauthApiUrl(url, symbol) {
+  return `//api.soundcloud.com/${url}${symbol}client_id=${CLIENT_ID}`
+}
+
 export function addAccessToken(url, symbol) {
   const accessToken = Cookies.get(OAUTH_TOKEN)
   return `${url}${symbol}oauth_token=${accessToken}`

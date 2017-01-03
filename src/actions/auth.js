@@ -10,6 +10,8 @@ import {
 } from '../constants/authentification'
 import apiUrl from '../utils/soundcloundApi'
 import Cookies from 'js-cookie'
+import { routerActions } from 'react-router-redux'
+
 import {
   fetchFollowings,
   fetchActivities,
@@ -50,8 +52,10 @@ function fetchUser() {
 export function init() {
   return dispatch => {
     const oauth_token = Cookies.get(OAUTH_TOKEN)
-    if (oauth_token) {
+    if (oauth_token !== 'null') {
       dispatch(fetchUser(oauth_token))
+    } else {
+      dispatch(routerActions.push('/browse'))
     }
   }
 }
@@ -62,7 +66,7 @@ export function login() {
       client_id: CLIENT_ID,
       redirect_uri: REDIRECT_URI
     })
-
+    dispatch(routerActions.push('/dashboard'))
     SC.connect().then(session => {
       Cookies.set(OAUTH_TOKEN, session.oauth_token)
       dispatch(setSession(session))
@@ -73,6 +77,7 @@ export function login() {
 
 export function logout() {
   return (dispatch) => {
+    dispatch(routerActions.push('/browse'))
     Cookies.set(OAUTH_TOKEN, null)
     dispatch(setSession(null))
     dispatch(setUser(null))

@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { getTrackIcon, normalizeSamples, isNotTrack } from '../utils/track'
+import { getTrackIcon, normalizeSamples, isNotTrack, isJsonWaveform } from '../utils/track'
 import { isSameTrackAndPlaying } from '../utils/player.js'
 import Waveform from 'waveform.js';
 export default class Track extends Component {
@@ -17,7 +17,12 @@ export default class Track extends Component {
     if (!waveform_url) return
 
     const waveform = document.getElementById('waveform-' + id + "-" + idx)
+    if (isJsonWaveform(waveform_url)) {
+      this.fetchJsonWaveform(waveform_url, waveform)
+    }
+  }
 
+  fetchJsonWaveform(waveform_url, waveform) {
     fetch(waveform_url)
       .then(response => response.json())
       .then(data => {
@@ -31,7 +36,6 @@ export default class Track extends Component {
         console.log(err);
       })
   }
-
   renderImage(artwork_url, title, avatar_url) {
     return (
       <div>

@@ -24,7 +24,8 @@ class Player extends Component {
   }
 
   renderNav() {
-    const { isPlaying, activeTrack, activeIterateTrack } = this.props
+    const { isPlaying, activeTrack, isOpenPlaylist,
+      activeIterateTrack, togglePlaylist } = this.props
     if (!activeTrack) return
     const { origin } = activeTrack
     const { stream_url } = origin
@@ -50,6 +51,12 @@ class Player extends Component {
             onClick={() => activeIterateTrack(activeTrack, 1)}
           >&nbsp;</i>
         </div>
+        <div>
+          <i
+            className="fa fa-list"
+            onClick={() => togglePlaylist(!isOpenPlaylist)}
+          >&nbsp;</i>
+        </div>
         <audio
           ref="audio" id="audio"
           src={addAccessToken(stream_url, '?')}
@@ -71,10 +78,11 @@ class Player extends Component {
 }
 
 function mapStateToProps(state) {
-  const { player } = state
+  const { player, environment } = state
   return {
     isPlaying: player.get('isPlaying'),
     activeTrack: player.get('activeTrack'),
+    isOpenPlaylist: environment.get('isOpenPlaylist')
   }
 }
 
