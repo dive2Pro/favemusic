@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import * as actions from '../actions/actionCreator'
 import { bindActionCreators } from 'redux'
-import UserMosaic from '../components/UserMosaic'
+import ItemList from '../components/ItemList'
 import Activities from '../components/Activities'
 import HeaderContainer from './HeaderContainer'
 import PlayerContainer from './PlayerContainer'
@@ -31,12 +31,12 @@ class App extends Component {
 
         </div>
         <div className="dashboard-content-side">
-          <UserMosaic
+          <ItemList
             title="Followings"
             collections={followings}
             kind="user"
           />
-          <UserMosaic
+          <ItemList
             title="Followers"
             collections={followers}
             requestInProcess={followersRequestInProcess}
@@ -45,7 +45,7 @@ class App extends Component {
             user={currentUser}
             kind="user"
           />
-          <UserMosaic
+          <ItemList
             title="Favorites"
             kind="track"
             collections={favorites}
