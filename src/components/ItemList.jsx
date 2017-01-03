@@ -59,12 +59,13 @@ class UserMosaic extends Component {
         <div><LoadingSpinner /></div>
       )
     }
+    const list = Array.isArray(collections) ? collections : collections.toJSON()
     if (kind === "user") {
-      return (<div className="user-mosaic-content"><ul>{collections.toJSON().map(this.renderUser)}</ul></div>)
+      return (<div className="user-mosaic-content"><ul>{list.map(this.renderUser)}</ul></div>)
     }
 
     if (kind === "track") {
-      return (<div className="user-mosaic-content"><ul>{collections.toJSON().map(this.renderTrack)}</ul></div>)
+      return (<div className="user-mosaic-content"><ul>{list.map(this.renderTrack)}</ul></div>)
     }
   }
 

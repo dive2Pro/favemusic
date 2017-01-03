@@ -14,7 +14,10 @@ import {
   fetchFollowings,
   fetchActivities,
   fetchFollowers,
-  fetchFavorites
+  fetchFavorites,
+  setFollowings,
+  setFollowers,
+  setActivities
 } from './user'
 
 function setSession(session) {
@@ -73,5 +76,8 @@ export function logout() {
     Cookies.set(OAUTH_TOKEN, null)
     dispatch(setSession(null))
     dispatch(setUser(null))
+    dispatch(setActivities([]))
+    dispatch(setFollowers([]))
+    dispatch(setFollowings([]))
   }
 }

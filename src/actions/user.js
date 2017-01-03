@@ -5,6 +5,28 @@ import apiUrl, { addAccessToken, getLazyLoadingUrl } from '../utils/soundcloundA
 import Cookies from 'js-cookie'
 import * as actionTypes from '../constants/actionTypes'
 import { OAUTH_TOKEN } from '../constants/authentification'
+
+export function setFollowers(followers) {
+  return {
+    type: actionTypes.SET_FOLLOWERS,
+    followers
+  }
+}
+
+export function setActivities(activities) {
+  return {
+    type: actionTypes.SET_ACTIVITIES,
+    activities
+  }
+}
+
+export function setFollowings(followings) {
+  return {
+    type: actionTypes.SET_FOLLOWINGS,
+    followings
+  }
+}
+
 function mergeFollowings(followings) {
   return {
     type: actionTypes.MERGE_FOLLOWINGS,

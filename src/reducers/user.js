@@ -46,6 +46,18 @@ function setFavoritesRequestInProcess(state, inProcess) {
   return state.set('favoritesRequestInProcess', inProcess)
 }
 
+function setFollowers(state, followers) {
+  return state.updateIn(['followers'], () => followers)
+}
+
+function setActivities(state, activities) {
+  return state.updateIn(['activities'], () => activities)
+}
+
+function setFollowings(state, followings) {
+  return state.updateIn(['followings'], () => followings)
+}
+
 const initialState = Map({
   followings: List(),
   activities: List(),
@@ -61,11 +73,16 @@ const initialState = Map({
 export default function (state = initialState, action) {
   switch (action.type) {
     case actionTypes.MERGE_FOLLOWINGS:
-
       return mergeFollowings(state, fromJS(action.followings))
 
-    case actionTypes.MERGE_ACTIVITIES:
+    case actionTypes.SET_ACTIVITIES:
+      return setActivities(state, action.activities)
+    case actionTypes.SET_FOLLOWINGS:
+      return setFollowings(state, action.followings)
+    case actionTypes.SET_FOLLOWERS:
+      return setFollowers(state, action.followers)
 
+    case actionTypes.MERGE_ACTIVITIES:
       return mergeActivities(state, fromJS(action.activities))
 
     case actionTypes.MERGE_FOLLOWERS:
