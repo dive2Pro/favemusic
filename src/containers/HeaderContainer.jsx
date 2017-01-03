@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import * as actions from '../actions/actionCreator.js'
-import { DEFAULT_GENRE, GENRES } from '../constants/browse'
+import { DEFAULT_GENRE, GENRES } from '../constants/genre'
 import { Link } from 'react-router'
+import { browse } from '../constants/pathname'
 class Header extends Component {
   constructor(props) {
     super(props)
@@ -10,8 +11,13 @@ class Header extends Component {
   }
 
   renderMenuItem(genreItem, idx) {
+    // const { genre } = this.props
+    // const itemClassName = genre === genreItem ? "menu-item menuitem" : "menu-item"
     return (
-      <Link key={idx} to={`/browse?genre=${genreItem}`}>
+      <Link
+        key={idx} to={`/${browse}?genre=${genreItem}`} activeClassName="menu-item-selected"
+        className="menu-item"
+      >
         {genreItem}
       </Link>
     )

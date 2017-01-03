@@ -5,7 +5,7 @@ import HeaderContainer from './HeaderContainer'
 import PlayerContainer from './PlayerContainer'
 import PlaylistContainer from './PlaylistContainer'
 import Activities from '../components/Activities'
-import { DEFAULT_GENRE } from '../constants/browse'
+import { DEFAULT_GENRE } from '../constants/genre'
 import { dehydrate } from '../utils/immutableUtil'
 type Props = {
   fetchActivitiesByGenre: (nextHref, genre)=>void,
@@ -22,6 +22,7 @@ class BrowserContainer extends Component {
   }
 
   componentDidMount() {
+    if (!this.shouldFetchMoreFiltedActivities()) return
     this.fetchActivitiesByGenreFunc()
   }
 
@@ -31,6 +32,15 @@ class BrowserContainer extends Component {
 
   byGenre(genre) {
     return (activity) => activity.origin.tag_list.indexOf(genre) !== -1
+  }
+
+  /**
+   * need
+   * @returns {boolean}
+   */
+  shouldFetchMoreFiltedActivities() {
+    const { activitiesByGenre, genre } = this.props
+    return dehydrate(activitiesByGenre).filter(this.byGenre(genre)).length <= 20
   }
 
   renderInnerComopnent() {
@@ -68,15 +78,16 @@ class BrowserContainer extends Component {
   }
 }
 
-function mapStateToProps(state, ownProps) {
-  console.info('ownProps = ', ownProps)
+function mapStateToProps(state, routeState) {
+  // console.info('ownProps = ', ownProps)
   const { browse, player } = state
   return {
     activitiesByGenreInProcess: browse.get('activitiesByGenreInProcess'),
     activitiesByGenre: browse.get('activitiesByGenre'),
     activitiesByGenreNextHref: browse.get('activitiesByGenreNextHref'),
     activateTrack: player.get('activeTrack'),
-    genre: ownProps.location.query.genre
+    genre: routeState.location.query.genre,
+    pathname: routeState.location.pathname
   }
 }
 

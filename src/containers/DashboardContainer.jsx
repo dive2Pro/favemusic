@@ -61,7 +61,7 @@ class App extends Component {
       <div>
         {
           <div className="dashboard">
-            <HeaderContainer />
+            <HeaderContainer genre={this.props.genre} />
             {this.renderContent()}
             <PlaylistContainer />
             <PlayerContainer />
@@ -72,7 +72,7 @@ class App extends Component {
     )
   }
 }
-function mapStateToProps(state) {
+function mapStateToProps(state, routeState) {
   const { auth, user, player } = state
   console.info(state)
   return {
@@ -87,7 +87,8 @@ function mapStateToProps(state) {
     favoritesRequestInProcess: user.get('favoritesRequestInProcess'),
     followers: user.get('followers'),
     isPlaying: player.get('isPlaying'),
-    activeTrack: player.get('activeTrack')
+    activeTrack: player.get('activeTrack'),
+    pathname: routeState.location.pathname
   }
 }
 
