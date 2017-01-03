@@ -3,11 +3,12 @@ import React, { Component } from 'react'
 import FetchOnScroll from './FetchOnScroll'
 import Track from '../components/Track'
 import LoadingSpinner from '../components/LoadingSpinner'
+import { dehydrate } from '../utils/immutableUtil'
 type ActivityType = {};
 class ActivitiesContainer extends Component {
   activitiesDom(): HTMLElement {
-    const { activities, activateTrack } = this.props
-    const list = Array.isArray(activities) ? activities : activities.toJSON()
+    const { activities, activateTrack, isPlaying, addTrackToPlaylist } = this.props
+    const list = Array.isArray(activities) ? activities : dehydrate(activities)
     return (
       <div>
         <h2>activities</h2>
@@ -16,7 +17,13 @@ class ActivitiesContainer extends Component {
             (act: ActivityType, idx: number): number => {
               return (
                 <li key={idx}>
-                  <Track activity={act} idx={idx} activateTrack={activateTrack} {...this.props} />
+                  <Track
+                    activity={act}
+                    idx={idx}
+                    activateTrack={activateTrack}
+                    isPlaying={isPlaying}
+                    addTrackToPlaylist={addTrackToPlaylist}
+                  />
                 </li>)
             }
           )

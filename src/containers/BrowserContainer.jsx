@@ -6,27 +6,50 @@ import PlayerContainer from './PlayerContainer'
 import PlaylistContainer from './PlaylistContainer'
 import Activities from '../components/Activities'
 import { DEFAULT_GENRE } from '../constants/browse'
+import { dehydrate } from '../utils/immutableUtil'
+type Props = {
+  fetchActivitiesByGenre: (nextHref, genre)=>void,
+  genre: DEFAULT_GENRE
+}
 
 class BrowserContainer extends Component {
+  props: Props;
+
+  fetchActivitiesByGenreFunc() {
+    const { fetchActivitiesByGenre, genre, activitiesByGenreNextHref } = this.props
+    const nextHref = activitiesByGenreNextHref.get(genre)
+    fetchActivitiesByGenre(nextHref, genre)
+  }
+
   componentDidMount() {
-    const { fetchActivitiesByGenre, genre } = this.props
-    fetchActivitiesByGenre("", genre)
+    this.fetchActivitiesByGenreFunc()
+  }
+
+  componentDidUpdate() {
+    // this.fetchActivitiesByGenre()
+  }
+
+  byGenre(genre) {
+    return (activity) => activity.origin.tag_list.indexOf(genre) !== -1
   }
 
   renderInnerComopnent() {
     const {
       activitiesByGenreInProcess, activitiesByGenre, activateTrack,
-      activitiesByGenreNextHref, fetchActivitiesByGenre, genre
+      addTrackToPlaylist, genre, isPlaying
     } = this.props
-    const nextHref = activitiesByGenreNextHref.get(genre)
+    if (!activitiesByGenre) return
+    const activitiesByGenreD = dehydrate(activitiesByGenre)
+    const filteredActivitiesByGenre = activitiesByGenreD.filter(this.byGenre(genre))
     return (
       <div>
         <Activities
-          {...this.props}
-          activities={activitiesByGenre}
+          activities={filteredActivitiesByGenre}
           activitiesRequestInProcess={activitiesByGenreInProcess}
           activateTrack={activateTrack}
-          scrollFunc={() => fetchActivitiesByGenre(nextHref, genre)}
+          isPlaying={isPlaying}
+          addTrackToPlaylist={addTrackToPlaylist}
+          scrollFunc={() => this.fetchActivitiesByGenreFunc()}
         />
       </div>
     )
@@ -55,10 +78,6 @@ function mapStateToProps(state, ownProps) {
     activateTrack: player.get('activeTrack'),
     genre: ownProps.location.query.genre
   }
-}
-
-BrowserContainer.defaultProps = {
-  genre: DEFAULT_GENRE
 }
 
 export default connect(mapStateToProps, actions)(BrowserContainer);

@@ -3,7 +3,8 @@
   "rules": {
     "react/prop-types": 0,
     "react/jsx-no-bind": 0,
-    "react/prefer-stateless-function":0,    
+    "react/prefer-stateless-function": 0,
+    "react/sort-comp": 0,
     "camelcase": 0,
     "default-case": 0,
     "comma-dangle": 0,
@@ -14,20 +15,28 @@
     "new-cap": 0,
     "no-else-return": 0,
     "semi": 0,
-    "max-len": [1, 120, 2, {
-      "ignoreComments": true
-        }],
+    "max-len": [
+      1,
+      120,
+      2,
+      {
+        "ignoreComments": true
+      }
+    ],
     "no-unused-expressions": "off",
     "arrow-body-style": "off",
-    "prefer-const": ["error", {
-      "destructuring": "any",
-      "ignoreReadBeforeAssign": false
-        }],
+    "prefer-const": [
+      "error",
+      {
+        "destructuring": "any",
+        "ignoreReadBeforeAssign": false
+      }
+    ],
     "one-var": "off",
     "no-underscore-dangle": "off",
     "global-require": "off",
     "no-console": "off",
-    "no-undef":"off",
+    "no-undef": "off",
     "flowtype/boolean-style": [
       2,
       "boolean"
@@ -88,9 +97,12 @@
       "onlyFilesWithFlowAnnotation": true
     }
   },
-  "react/display-name": [0, {
-    "ignoreTranspilerName": true
-    }],
+  "react/display-name": [
+    0,
+    {
+      "ignoreTranspilerName": true
+    }
+  ],
   "parser": "babel-eslint",
   "plugins": [
     "flowtype"
