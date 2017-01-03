@@ -1,6 +1,13 @@
+// @flow
 import React, { Component } from 'react'
+import LoadingSpinner from './LoadingSpinner'
+type MosaicpropsType = {
+  isMoreToggled: boolean,
+  requestInProcess: boolean
+};
+
 class UserMosaic extends Component {
-  constructor(props) {
+  constructor(props: MosaicpropsType) {
     super(props);
     this.state = {
       isMoreToggled: props.isMoreToggled
@@ -15,7 +22,7 @@ class UserMosaic extends Component {
     })
   }
 
-  renderUser(user, idx) {
+  renderUser(user: UserType, idx: number): ReactElement {
     const { username, avatar_url, permalink_url } = user
     return (
       <li key={idx}>
@@ -29,9 +36,10 @@ class UserMosaic extends Component {
     )
   }
 
-  renderTrack(track, idx) {
+  renderTrack(track: TrackType, idx: number) {
     if (!track) return ''
     const { title, artwork_url, permalink_url } = track
+
     return (
       <li key={idx}>
         <a href={permalink_url}>
@@ -45,8 +53,12 @@ class UserMosaic extends Component {
   }
 
   renderMosaic() {
-    const { collections, kind } = this.props
-    if (!collections) return ""
+    const { collections, kind, requestInProcess } = this.props
+    if (!collections || requestInProcess) {
+      return (
+        <div><LoadingSpinner /></div>
+      )
+    }
     if (kind === "user") {
       return (<div className="user-mosaic-content"><ul>{collections.toJSON().map(this.renderUser)}</ul></div>)
     }

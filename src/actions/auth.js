@@ -6,7 +6,7 @@ import SC from 'soundcloud'
 import {
   CLIENT_ID,
   REDIRECT_URI,
-  OAUTH_TOKEN
+  OAUTH_TOKEN,
 } from '../constants/authentification'
 import apiUrl from '../utils/soundcloundApi'
 import Cookies from 'js-cookie'

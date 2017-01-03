@@ -2,6 +2,7 @@
 import React, { Component } from 'react'
 import FetchOnScroll from './FetchOnScroll'
 import Track from '../components/Track'
+import LoadingSpinner from '../components/LoadingSpinner'
 type ActivityType = {
 
 };
@@ -29,7 +30,7 @@ class ActivitiesContainer extends Component {
   activitiesRequestDom(): HTMLElement {
     const { activitiesRequestInProcess } = this.props
     if (activitiesRequestInProcess) {
-      return (<div>Loading</div>)
+      return (<div><LoadingSpinner /></div>)
     } else {
       return (<div>...</div>)
     }

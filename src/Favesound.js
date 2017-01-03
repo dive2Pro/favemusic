@@ -10,10 +10,11 @@ require('../styles/index.scss')
 require('font-awesome/css/font-awesome.css')
 
 const routes = (
-  <Route path="/" component={DashboardContainer}>
+  <Route component={App}>
     <IndexRoute component={App} />
     <Route path="/dashboard" component={DashboardContainer} />
     <Route path="/callback" component={Callback} />
+    <Route path="/" component={DashboardContainer} />
   </Route>
 )
 

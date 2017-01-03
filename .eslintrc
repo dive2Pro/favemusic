@@ -3,6 +3,7 @@
   "rules": {
     "react/prop-types": 0,
     "react/jsx-no-bind": 0,
+    "react/prefer-stateless-function":0,    
     "camelcase": 0,
     "default-case": 0,
     "comma-dangle": 0,
@@ -26,6 +27,7 @@
     "no-underscore-dangle": "off",
     "global-require": "off",
     "no-console": "off",
+    "no-undef":"off",
     "flowtype/boolean-style": [
       2,
       "boolean"
@@ -47,7 +49,7 @@
     ],
     "flowtype/require-parameter-type": 2,
     "flowtype/require-return-type": [
-      2,
+      0,
       "always",
       {
         "annotateUndefined": "never"

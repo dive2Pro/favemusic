@@ -2,7 +2,7 @@
 
   transition: height .5s;
   transition-timing-function: ease;
-  i {
+  i.fa-chevron-up,i.fa-chevron-down {
     opacity: 0;
     transition: opacity 0.2s;
     transition-timing-function: ease;

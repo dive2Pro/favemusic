@@ -40,6 +40,8 @@ function mapStateToProps(state) {
   const { player, environment } = state
   return {
     playlist: player.get('playlist'),
+    isPlaying: player.get('isPlaying'),
+    activeTrack: player.get('activeTrack'),
     isOpenPlaylist: environment.get('isOpenPlaylist'),
   }
 }

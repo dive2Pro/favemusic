@@ -27,8 +27,9 @@ class Header extends Component {
 }
 
 function mapStateToProps(state) {
+  console.info('state = ', state);
   return {
-    currentUser: state.user.get('user')
+    currentUser: state.auth.get('user')
   }
 }
 export default connect(mapStateToProps, actions)(Header)
