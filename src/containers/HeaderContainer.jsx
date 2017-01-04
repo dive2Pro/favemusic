@@ -69,7 +69,7 @@ Header.defaultProps = {
 function mapStateToProps(state: Object) {
   // console.info('state = ', state);
   return {
-    currentUser: state.auth.get('user')
+    currentUser: state.auth.user
   }
 }
 

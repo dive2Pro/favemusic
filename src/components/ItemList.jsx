@@ -10,9 +10,6 @@ class UserMosaic extends Component {
   props: MosaicpropsType;
   state: { isMoreToggled: boolean };
   toggleMore: ()=>void;
-
-  static defaultProps = { isMoreToggled: boolean }
-
   constructor(props: MosaicpropsType) {
     super(props);
     this.state = {
@@ -62,7 +59,7 @@ class UserMosaic extends Component {
     const { collections, kind, requestInProcess } = this.props
     if (!collections || requestInProcess) {
       return (
-        <div><LoadingSpinner isLoading="123123" /></div>
+        <div><LoadingSpinner isLoading="qqqqqq" /></div>
       )
     }
     const list = Array.isArray(collections) ? collections : collections.toJSON()

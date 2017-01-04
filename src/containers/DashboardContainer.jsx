@@ -80,7 +80,7 @@ function mapStateToProps(state: Object, routeState: Object) {
   const { auth, user, player } = state
   console.info(state)
   return {
-    currentUser: auth.get('user'),
+    currentUser: auth.user,
     followings: user.get('followings'),
     activities: user.get('activities'),
     favorites: user.get('favorites'),
