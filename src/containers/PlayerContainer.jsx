@@ -99,7 +99,7 @@ function mapStateToProps(state: Object) {
   return {
     isPlaying: player.get('isPlaying'),
     activeTrack: player.get('activeTrack'),
-    isOpenPlaylist: environment.get('isOpenPlaylist')
+    isOpenPlaylist: environment.isOpenPlaylist
   }
 }
 

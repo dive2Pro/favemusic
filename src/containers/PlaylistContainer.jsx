@@ -54,7 +54,7 @@ function mapStateToProps(state: Object) {
     playlist: player.get('playlist'),
     isPlaying: player.get('isPlaying'),
     activeTrack: player.get('activeTrack'),
-    isOpenPlaylist: environment.get('isOpenPlaylist'),
+    isOpenPlaylist: environment.isOpenPlaylist,
   }
 }
 

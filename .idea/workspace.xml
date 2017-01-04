@@ -2,12 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="dbdcb83b-7f30-4463-b9a7-2efbdc64d2fa" name="Default" comment="">
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/utils/immutableUtil.js" afterPath="" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/actions/browse.js" afterPath="$PROJECT_DIR$/src/actions/browse.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/components/Activities.jsx" afterPath="$PROJECT_DIR$/src/components/Activities.jsx" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/containers/BrowserContainer.jsx" afterPath="$PROJECT_DIR$/src/containers/BrowserContainer.jsx" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/reducers/browse.js" afterPath="$PROJECT_DIR$/src/reducers/browse.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/containers/PlayerContainer.jsx" afterPath="$PROJECT_DIR$/src/containers/PlayerContainer.jsx" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/containers/PlaylistContainer.jsx" afterPath="$PROJECT_DIR$/src/containers/PlaylistContainer.jsx" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/reducers/environment.js" afterPath="$PROJECT_DIR$/src/reducers/environment.js" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -32,41 +30,7 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="HeaderContainer.jsx" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/containers/HeaderContainer.jsx">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="308">
-              <caret line="71" column="32" lean-forward="false" selection-start-line="71" selection-start-column="32" selection-end-line="71" selection-end-column="32" />
-              <folding>
-                <element signature="e#9#50#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="auth.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/actions/auth.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="338">
-              <caret line="68" column="27" lean-forward="false" selection-start-line="68" selection-start-column="27" selection-end-line="68" selection-end-column="27" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="DashboardContainer.jsx" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/containers/DashboardContainer.jsx">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="182">
-              <caret line="82" column="27" lean-forward="false" selection-start-line="82" selection-start-column="27" selection-end-line="82" selection-end-column="27" />
-              <folding>
-                <element signature="e#9#49#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="BrowserContainer.jsx" pinned="false" current-in-tab="true">
+      <file leaf-file-name="BrowserContainer.jsx" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/containers/BrowserContainer.jsx">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="390">
@@ -74,6 +38,46 @@
               <folding>
                 <element signature="e#9#49#0" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="environment.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/reducers/environment.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="390">
+              <caret line="15" column="18" lean-forward="true" selection-start-line="15" selection-start-column="18" selection-end-line="15" selection-end-column="18" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="environment.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/actions/environment.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="26">
+              <caret line="1" column="0" lean-forward="true" selection-start-line="1" selection-start-column="0" selection-end-line="1" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="PlaylistContainer.jsx" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/containers/PlaylistContainer.jsx">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="432">
+              <caret line="49" column="0" lean-forward="true" selection-start-line="49" selection-start-column="0" selection-end-line="49" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="PlayerContainer.jsx" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/containers/PlayerContainer.jsx">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="614">
+              <caret line="101" column="18" lean-forward="false" selection-start-line="101" selection-start-column="18" selection-end-line="101" selection-end-column="18" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -145,6 +149,7 @@
       <find>_scrollTop</find>
       <find>waveform_url</find>
       <find>border</find>
+      <find>isOpenPlaylist</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -184,9 +189,7 @@
         <option value="$PROJECT_DIR$/styles/components/playlist.scss" />
         <option value="$PROJECT_DIR$/src/components/FetchOnScroll.jsx" />
         <option value="$PROJECT_DIR$/.flowconfig" />
-        <option value="$PROJECT_DIR$/src/containers/PlayerContainer.jsx" />
         <option value="$PROJECT_DIR$/decls/userType.js" />
-        <option value="$PROJECT_DIR$/src/containers/PlaylistContainer.jsx" />
         <option value="$PROJECT_DIR$/src/components/LoadingSpinner.jsx" />
         <option value="$PROJECT_DIR$/decls/authTypes.js" />
         <option value="$PROJECT_DIR$/decls/props.js" />
@@ -201,6 +204,9 @@
         <option value="$PROJECT_DIR$/src/actions/browse.js" />
         <option value="$PROJECT_DIR$/src/components/Activities.jsx" />
         <option value="$PROJECT_DIR$/src/containers/BrowserContainer.jsx" />
+        <option value="$PROJECT_DIR$/src/reducers/environment.js" />
+        <option value="$PROJECT_DIR$/src/containers/PlaylistContainer.jsx" />
+        <option value="$PROJECT_DIR$/src/containers/PlayerContainer.jsx" />
       </list>
     </option>
   </component>
@@ -459,7 +465,7 @@
       <workItem from="1483446285483" duration="1891000" />
       <workItem from="1483448199670" duration="6008000" />
       <workItem from="1483455672152" duration="3312000" />
-      <workItem from="1483496573254" duration="10812000" />
+      <workItem from="1483496573254" duration="11001000" />
     </task>
     <task id="LOCAL-00001" summary="followings to usermosaic &#10;fetch followers">
       <created>1483336890635</created>
@@ -538,11 +544,18 @@
       <option name="project" value="LOCAL" />
       <updated>1483511994165</updated>
     </task>
-    <option name="localTasksCounter" value="12" />
+    <task id="LOCAL-00012" summary="refractor * remove immutable from browse">
+      <created>1483512635556</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1483512635556</updated>
+    </task>
+    <option name="localTasksCounter" value="13" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="35796000" />
+    <option name="totallyTimeSpent" value="35985000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -615,21 +628,14 @@
     <MESSAGE value="add flow props" />
     <MESSAGE value="add flow constructor" />
     <MESSAGE value="refractor * remove immutable from auth" />
-    <option name="LAST_COMMIT_MESSAGE" value="refractor * remove immutable from auth" />
+    <MESSAGE value="refractor * remove immutable from browse" />
+    <option name="LAST_COMMIT_MESSAGE" value="refractor * remove immutable from browse" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/reducers/index.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="260">
-          <caret line="18" column="9" lean-forward="false" selection-start-line="18" selection-start-column="9" selection-end-line="18" selection-end-column="9" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/reducers/player.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="286">
@@ -841,16 +847,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/reducers/environment.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <element signature="e#0#31#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/actions/actionCreator.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
@@ -901,26 +897,6 @@
           <caret line="14" column="13" lean-forward="true" selection-start-line="14" selection-start-column="13" selection-end-line="14" selection-end-column="13" />
           <folding>
             <element signature="n#!!doc;n#mutateTest#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/containers/PlayerContainer.jsx">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="39" column="0" lean-forward="false" selection-start-line="39" selection-start-column="0" selection-end-line="39" selection-end-column="0" />
-          <folding>
-            <element signature="e#9#49#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/containers/PlaylistContainer.jsx">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="520">
-          <caret line="20" column="5" lean-forward="false" selection-start-line="20" selection-start-column="5" selection-end-line="20" selection-end-column="5" />
-          <folding>
-            <element signature="e#9#49#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -1050,6 +1026,38 @@
           <folding>
             <element signature="e#9#49#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/reducers/environment.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="390">
+          <caret line="15" column="18" lean-forward="true" selection-start-line="15" selection-start-column="18" selection-end-line="15" selection-end-column="18" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/actions/environment.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="26">
+          <caret line="1" column="0" lean-forward="true" selection-start-line="1" selection-start-column="0" selection-end-line="1" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/containers/PlayerContainer.jsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="614">
+          <caret line="101" column="18" lean-forward="false" selection-start-line="101" selection-start-column="18" selection-end-line="101" selection-end-column="18" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/containers/PlaylistContainer.jsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="432">
+          <caret line="49" column="0" lean-forward="true" selection-start-line="49" selection-start-column="0" selection-end-line="49" selection-end-column="0" />
+          <folding />
         </state>
       </provider>
     </entry>
