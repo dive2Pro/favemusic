@@ -97,8 +97,8 @@ class Player extends Component {
 function mapStateToProps(state: Object) {
   const { player, environment } = state
   return {
-    isPlaying: player.get('isPlaying'),
-    activeTrack: player.get('activeTrack'),
+    isPlaying: player.isPlaying,
+    activeTrack: player.activeTrack,
     isOpenPlaylist: environment.isOpenPlaylist
   }
 }

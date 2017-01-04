@@ -90,8 +90,8 @@ function mapStateToProps(state: Object, routeState: Object) {
     followersRequestInProcess: user.get('followersRequestInProcess'),
     favoritesRequestInProcess: user.get('favoritesRequestInProcess'),
     followers: user.get('followers'),
-    isPlaying: player.get('isPlaying'),
-    activeTrack: player.get('activeTrack'),
+    isPlaying: player.isPlaying,
+    activeTrack: player.activeTrack,
     pathname: routeState.location.pathname
   }
 }

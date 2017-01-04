@@ -1,36 +1,40 @@
 /**
  * Created by hyc on 17-1-1.
  */
-import { Map, List } from 'immutable'
 import * as actionTypes from '../constants/actionTypes'
 import { isSameTrack } from '../utils/player'
-const initialState = Map({
+
+const initialState = {
   activeTrack: null,
   isPlaying: false,
-  playlist: List()
-})
+  playlist: []
+}
 
 function setTrackInPlaylist(state, track) {
-  const item = state.get('playlist').find(isSameTrack(track))
+  const item = state.playlist.some(isSameTrack(track))
+  // const item = state.get('playlist').find(isSameTrack(track))
+
   if (item) return state
-  return state.updateIn(['playlist'], list => list.push(track))
+  const playlist = [...state.playlist, track]
+  return Object.assign({}, state, { playlist })
 }
 
 function removeTrackFromPlaylist(state, track) {
-  return state.updateIn(['playlist'], list => list.remove(list.indexOf(track)))
+  // return state.updateIn(['playlist'], list => list.remove(list.indexOf(track)))
+  const index = state.playlist.findIndex(isSameTrack(track))
+  const playlist = [...state.playlist.slice(0, index), ...state.playlist.slice(index + 1)]
+  return Object.assign({}, state, { playlist })
 }
 function deactivateTrack(state) {
-  return state.set('activeTrack', null)
+  return Object.assign({}, state, { activeTrack: null })
 }
 
 export default function playerReducer(state = initialState, action) {
   switch (action.type) {
     case actionTypes.SET_IS_PLAYING:
-      return state.set('isPlaying', action.isPlaying)
-
+      return Object.assign({}, state, { isPlaying: action.isPlaying })
     case actionTypes.SET_ACTIVE_TRACK:
-      return state.set('activeTrack', action.activeTrack)
-
+      return Object.assign({}, state, { activeTrack: action.activeTrack })
     case actionTypes.SET_TRACK_IN_PLAYLIST:
       return setTrackInPlaylist(state, action.track)
 

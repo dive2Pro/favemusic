@@ -25,7 +25,7 @@ class Playlist extends Component {
   renderPlaylist() {
     const { playlist } = this.props
     return (
-      <ul>{playlist.toJSON().map((activity: Object, idx: number) => {
+      <ul>{playlist.map((activity: Object, idx: number) => {
         return (
           <li key={idx}>
             <MiniTrack {...this.props} track={activity} />
@@ -51,9 +51,9 @@ class Playlist extends Component {
 function mapStateToProps(state: Object) {
   const { player, environment } = state
   return {
-    playlist: player.get('playlist'),
-    isPlaying: player.get('isPlaying'),
-    activeTrack: player.get('activeTrack'),
+    playlist: player.playlist,
+    isPlaying: player.isPlaying,
+    activeTrack: player.activeTrack,
     isOpenPlaylist: environment.isOpenPlaylist,
   }
 }

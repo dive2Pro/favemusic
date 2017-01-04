@@ -39,7 +39,7 @@ function deactivateTrack() {
 
 function getIterateTrack(playlist, activeTrack, iterate) {
   const index = playlist.findIndex(isSameTrack(activeTrack))
-  const iterateTrack = playlist.get(index + iterate)
+  const iterateTrack = playlist[(index + iterate)]
   return iterateTrack
 }
 
@@ -52,8 +52,8 @@ export function togglePlayTrack(isPlaying) {
 export function activateTrack(track) {
   return (dispatch, getState) => {
     const player = getState().player,
-      preActiveTrack = player.get('activeTrack'),
-      isPlaying = player.get('isPlaying')
+      preActiveTrack = player.activeTrack,
+      isPlaying = player.isPlayin
     const isAPT = isSameTrackAndPlaying(preActiveTrack, track, isPlaying)
     console.info('isAPT = ', isAPT)
     dispatch(togglePlayTrack(!isAPT))
@@ -62,10 +62,9 @@ export function activateTrack(track) {
   }
 }
 
-
 export function addTrackToPlaylist(track) {
   return (dispath, getState) => {
-    const size = getState().player.get('playlist').size
+    const size = getState().player.playlist.length
     if (!size) {
       dispath(setActiveTrack(track))
     }
@@ -77,7 +76,7 @@ export function activeIterateTrack(activeTrack, iterate = 1) {
   return (dispatch, getState) => {
     const player = getState().player
 
-    const playlist = player.get('playlist')
+    const playlist = player.playlist
     const iterateTrack = getIterateTrack(playlist, activeTrack, iterate)
 
     if (iterateTrack) {
@@ -92,15 +91,15 @@ export function activeIterateTrack(activeTrack, iterate = 1) {
 export function removeTrackFromPlaylist(track) {
   return (dispatch, getState) => {
     const player = getState().player
-    const preActiveTrack = player.get('activeTrack')
+    const preActiveTrack = player.activeTrack
     const isAPT = isSameTrack(preActiveTrack)(track)
 
     if (isAPT) {
       dispatch(activeIterateTrack(preActiveTrack))
     }
     // if only one track deactivateTrack
-    const playlist = player.get('playlist')
-    const playlistSize = playlist.size
+    const playlist = player.playlist
+    const playlistSize = playlist.length
     if (playlistSize < 2) {
       dispatch(deactivateTrack())
       dispatch(togglePlaylist(true))
