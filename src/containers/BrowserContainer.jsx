@@ -7,14 +7,13 @@ import PlayerContainer from './PlayerContainer'
 import PlaylistContainer from './PlaylistContainer'
 import Activities from '../components/Activities'
 import { DEFAULT_GENRE } from '../constants/genre'
-import { dehydrate } from '../utils/immutableUtil'
 
 class BrowserContainer extends Component {
   props: basePropsType;
 
   fetchActivitiesByGenreFunc() {
     const { fetchActivitiesByGenre, genre, activitiesByGenreNextHref } = this.props
-    const nextHref = activitiesByGenreNextHref.get(genre)
+    const nextHref = activitiesByGenreNextHref[genre]
     fetchActivitiesByGenre(nextHref, genre)
   }
 
@@ -37,7 +36,7 @@ class BrowserContainer extends Component {
    */
   shouldFetchMoreFiltedActivities() {
     const { activitiesByGenre, genre } = this.props
-    return dehydrate(activitiesByGenre).filter(this.byGenre(genre)).length <= 20
+    return (activitiesByGenre).filter(this.byGenre(genre)).length <= 20
   }
 
   renderInnerComopnent() {
@@ -46,7 +45,7 @@ class BrowserContainer extends Component {
       addTrackToPlaylist, genre, isPlaying
     } = this.props
     if (!activitiesByGenre) return
-    const activitiesByGenreD = dehydrate(activitiesByGenre)
+    const activitiesByGenreD = (activitiesByGenre)
     const filteredActivitiesByGenre = activitiesByGenreD.filter(this.byGenre(genre))
     return (
       <div>
@@ -79,10 +78,10 @@ function mapStateToProps(state: Object, routeState: Object) {
   // console.info('ownProps = ', ownProps)
   const { browse, player } = state
   return {
-    activitiesByGenreInProcess: browse.get('activitiesByGenreInProcess'),
-    activitiesByGenre: browse.get('activitiesByGenre'),
-    activitiesByGenreNextHref: browse.get('activitiesByGenreNextHref'),
-    activateTrack: player.get('activeTrack'),
+    activitiesByGenreInProcess: browse.activitiesByGenreInProcess,
+    activitiesByGenre: browse.activitiesByGenre,
+    activitiesByGenreNextHref: browse.activitiesByGenreNextHref,
+    activateTrack: player.activeTrack,
     genre: routeState.location.query.genre,
     pathname: routeState.location.pathname
   }
