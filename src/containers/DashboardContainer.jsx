@@ -8,26 +8,10 @@ import Activities from '../components/Activities'
 import HeaderContainer from './HeaderContainer'
 import PlayerContainer from './PlayerContainer'
 import PlaylistContainer from './PlaylistContainer'
-import ImmutablePropTypes from 'react-immutable-proptypes'
-type PropsType = {
-  pathname: React.PropTypes.string,
-  genre: React.PropTypes.string,
-  currentUser: React.PropTypes.object,
-  activeTrack: React.PropTypes.object,
-  isPlaying: React.PropTypes.bool,
-  followings: ImmutablePropTypes.list,
-  activities: ImmutablePropTypes.list,
-  activitiesNextHref: React.PropTypes.string,
-  activitiesRequestInProcess: React.PropTypes.bool,
-  followers: ImmutablePropTypes.list,
-  followersNextHref: React.PropTypes.string,
-  followersRequestInProcess: React.PropTypes.bool,
-  favorites: ImmutablePropTypes.list,
-  favoritesRequestInProcess: React.PropTypes.bool
-};
 
 class App extends Component {
-  props: PropsType;
+  props: basePropsType;
+  init: ()=>void
 
   componentDidMount() {
     const { init } = this.props

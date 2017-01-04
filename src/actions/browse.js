@@ -2,14 +2,14 @@
 import { unauthApiUrl } from '../utils/soundcloundApi'
 import * as actionTypes from '../constants/actionTypes'
 
-function setActivitiesByGenreRequestInProcess(inProcess: boolean): BrowseSetInProcessfActionType {
+function setActivitiesByGenreRequestInProcess(inProcess: boolean) {
   return {
     type: actionTypes.SET_ACTIVITIES_BY_GENRE_REQUEST_IN_PROCESS,
     inProcess
   }
 }
 
-function setActivitiesByGenreNextHref(next_href: string, genre: string): BrowseSetNextHrefActionType {
+function setActivitiesByGenreNextHref(next_href: string, genre: string) {
   return {
     type: actionTypes.SET_ACTIVITIES_BY_GENRE_NEXT_HREF,
     nextHref: next_href,
@@ -17,7 +17,7 @@ function setActivitiesByGenreNextHref(next_href: string, genre: string): BrowseS
   }
 }
 
-function mergeActivitiesByGenre(activities: Array): BrowseMergeActionType {
+function mergeActivitiesByGenre(activities: Array<*>) {
   return {
     type: actionTypes.MERGE_ACTIVITIES_BY_GENRE,
     activities

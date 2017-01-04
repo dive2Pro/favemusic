@@ -13,7 +13,11 @@ type PropsType = {
 };
 
 class Header extends Component {
-  props: Props;
+  props: PropsType;
+  renderMenuItem: ()=>void;
+  static defaultProps: {
+    genre: string
+  }
 
   constructor(props: PropsType) {
     super(props)
@@ -59,16 +63,14 @@ class Header extends Component {
     );
   }
 }
-
+Header.defaultProps = {
+  genre: DEFAULT_GENRE
+};
 function mapStateToProps(state: Object) {
   // console.info('state = ', state);
   return {
     currentUser: state.auth.get('user')
   }
 }
-
-Header.defaultProps = {
-  genre: DEFAULT_GENRE
-};
 
 export default connect(mapStateToProps, actions)(Header)

@@ -8,20 +8,20 @@ const initialState = Map({
   activitiesByGenreNextHref: Map(),
   activitiesCurrentGenre: null
 })
-function mergeActivitiesByGenre(state: Map, activities: Array) {
-  return state.updateIn(['activitiesByGenre'], (list: List) => list.concat(activities))
+function mergeActivitiesByGenre(state: Map<*, *>, activities: Array<*>) {
+  return state.updateIn(['activitiesByGenre'], (list: List<*>) => list.concat(activities))
 }
 
-function setActivitiesByGenreRequestInProcess(state: Map, inProcess: boolean) {
+function setActivitiesByGenreRequestInProcess(state: Map<string, *>, inProcess: boolean) {
   return state.set('activitiesByGenreInProcess', inProcess)
 }
 
-function setActivitiesByGenreNextHref(state: Map, action: BrowseSetNextHrefActionType) {
+function setActivitiesByGenreNextHref(state: Map<string, *>, action: BrowseSetNextHrefActionType) {
   const { genre, nextHref } = action
-  return state.updateIn(['activitiesByGenreNextHref'], (map: Map) => map.set(genre, nextHref))
+  return state.updateIn(['activitiesByGenreNextHref'], (map: Map<string, string>) => map.set(genre, nextHref))
 }
 
-export default function browse(state: Map = initialState, action: BrowseActionType) {
+export default function browse(state: Map<string, *> = initialState, action: BrowseActionType) {
   switch (action.type) {
     case actionTypes.MERGE_ACTIVITIES_BY_GENRE:
       return mergeActivitiesByGenre(state, action.activities)

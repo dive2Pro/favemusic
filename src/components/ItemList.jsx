@@ -2,27 +2,33 @@
 import React, { Component } from 'react'
 import LoadingSpinner from './LoadingSpinner'
 type MosaicpropsType = {
-  isMoreToggled: boolean,
-  requestInProcess: boolean
+  isMoreToggled: ?boolean,
+  requestInProcess: ?boolean
 };
 
 class UserMosaic extends Component {
+  props: MosaicpropsType;
+  state: { isMoreToggled: boolean };
+  toggleMore: ()=>void;
+
+  static defaultProps = { isMoreToggled: boolean }
+
   constructor(props: MosaicpropsType) {
     super(props);
     this.state = {
       isMoreToggled: props.isMoreToggled
     }
+    this.toggleMore = this.toggleMore.bind(this)
   }
 
   toggleMore() {
-    console.log(this.isMoreToggled)
-    this.isMoreToggled = !this.isMoreToggled
+    const changeToggled = !this.state.isMoreToggled
     this.setState({
-      isMoreToggled: this.isMoreToggled
+      isMoreToggled: changeToggled
     })
   }
 
-  renderUser(user: UserType, idx: number): ReactElement {
+  renderUser(user: UserType, idx: number) {
     const { username, avatar_url, permalink_url } = user
     return (
       <li key={idx}>
@@ -56,16 +62,20 @@ class UserMosaic extends Component {
     const { collections, kind, requestInProcess } = this.props
     if (!collections || requestInProcess) {
       return (
-        <div><LoadingSpinner /></div>
+        <div><LoadingSpinner isLoading="123123" /></div>
       )
     }
     const list = Array.isArray(collections) ? collections : collections.toJSON()
     if (kind === "user") {
-      return (<div className="user-mosaic-content"><ul>{list.map(this.renderUser)}</ul></div>)
+      return (<div className="user-mosaic-content">
+        <ul>{list.map(this.renderUser)}</ul>
+      </div>)
     }
 
     if (kind === "track") {
-      return (<div className="user-mosaic-content"><ul>{list.map(this.renderTrack)}</ul></div>)
+      return (<div className="user-mosaic-content">
+        <ul>{list.map(this.renderTrack)}</ul>
+      </div>)
     }
   }
 
@@ -86,12 +96,14 @@ class UserMosaic extends Component {
     }
   }
 
-
   render() {
     return (
       <div className="user-mosaic">
         <h2><a href="#" onClick={() => this.toggleMore()}>
-          {this.props.title} <i className={`fa ${this.isMoreToggled ? 'fa-chevron-up' : 'fa-chevron-down'}`} />
+          {this.props.title}
+          <i
+            className={`fa ${this.isMoreToggled ? 'fa-chevron-up' : 'fa-chevron-down'}`}
+          />
         </a></h2>
 
         <div className={this.isMoreToggled ? 'more' : ''}>
@@ -107,9 +119,6 @@ class UserMosaic extends Component {
   }
 }
 
-UserMosaic.propsType = {
-  isMoreToggled: React.PropTypes.bool
-}
 UserMosaic.defaultProps = {
   isMoreToggled: false
 }

@@ -5,10 +5,10 @@ import MiniTrack from '../components/MiniTrack'
 import { connect } from 'react-redux';
 import * as actions from '../actions/actionCreator.js'
 type PropsType = {
-  activeTrack: React.PropTypes.object,
-  isPlaying: React.PropTypes.bool,
+  activeTrack: Object,
+  isPlaying: boolean,
   playlist: ImmutablePropTypes.list,
-  isOpenPlaylist: React.PropTypes.bool
+  isOpenPlaylist: boolean
 };
 
 class Playlist extends Component {

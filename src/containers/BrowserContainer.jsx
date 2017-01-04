@@ -1,5 +1,5 @@
-import React, { Component } from 'react';
-import ImmutablePropTypes from 'react-immutable-proptypes'
+// @flow
+import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import * as actions from '../actions/actionCreator.js'
 import HeaderContainer from './HeaderContainer'
@@ -8,16 +8,9 @@ import PlaylistContainer from './PlaylistContainer'
 import Activities from '../components/Activities'
 import { DEFAULT_GENRE } from '../constants/genre'
 import { dehydrate } from '../utils/immutableUtil'
-type Props = {
-  fetchActivitiesByGenre: (nextHref, genre)=>void,
-  genre: string,
-  pathname: string,
-  activitiesByGenre:ImmutablePropTypes.list,
-  activitiesByGenreNextHref:ImmutablePropTypes.map
-}
 
-class BrowserContainer extends Component<Props> {
-  props: Props;
+class BrowserContainer extends Component {
+  props: basePropsType;
 
   fetchActivitiesByGenreFunc() {
     const { fetchActivitiesByGenre, genre, activitiesByGenreNextHref } = this.props
@@ -34,8 +27,8 @@ class BrowserContainer extends Component<Props> {
     // this.fetchActivitiesByGenre()
   }
 
-  byGenre(genre) {
-    return (activity) => activity.origin.tag_list.indexOf(genre) !== -1
+  byGenre(genre: string) {
+    return (activity: ActivityType) => activity.origin.tag_list.indexOf(genre) !== -1
   }
 
   /**
@@ -82,7 +75,7 @@ class BrowserContainer extends Component<Props> {
   }
 }
 
-function mapStateToProps(state, routeState) {
+function mapStateToProps(state: Object, routeState: Object) {
   // console.info('ownProps = ', ownProps)
   const { browse, player } = state
   return {

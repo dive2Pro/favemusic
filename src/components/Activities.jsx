@@ -43,7 +43,7 @@ class ActivitiesContainer extends Component {
   activitiesRequestDom(): HTMLElement {
     const { activitiesRequestInProcess } = this.props
     if (activitiesRequestInProcess) {
-      return (<div><LoadingSpinner /></div>)
+      return (<div><LoadingSpinner isLoading={activitiesRequestInProcess} /></div>)
     } else {
       return (<div>...</div>)
     }

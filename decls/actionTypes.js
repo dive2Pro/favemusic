@@ -1,6 +1,10 @@
 
+declare type Action<T> = {
+  type: T
+}
+
 declare type BrowseActionType = {
-  type: string,
+  type: Action,
   nextHref: string,
   genre: string,
   activities: Array,
@@ -8,16 +12,17 @@ declare type BrowseActionType = {
 }
 
 declare type BrowseSetNextHrefActionType = {
-  type: string,
+  type: Action,
+
   nextHref: string,
   genre: string
 };
 
 declare type BrowseMergeActionType = {
-  type: string,
+  type: Action,
   activities: Array
 };
 declare type BrowseSetInProcessfActionType = {
-  type: string,
+  type: Action,
   inProcess: boolean
 };

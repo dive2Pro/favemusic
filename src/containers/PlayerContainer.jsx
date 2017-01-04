@@ -7,13 +7,19 @@ import * as actions from '../actions/actionCreator.js'
 
 type PropsType = {
   isPlaying: boolean,
-  activeTrack: string,
+  activeTrack: Object,
   isOpenPlaylist: boolean,
-  togglePlayTrack: (isPlaying: boolean)=>void
+  togglePlayTrack: (isPlaying: boolean)=>void,
+  togglePlay: ()=>void,
+  origin: Object,
+  togglePlaylist: ()=>void,
+  activeIterateTrack: ()=>void
+
 };
 
 class Player extends Component {
   props: PropsType;
+  togglePlay: ()=>void;
 
   constructor(props: PropsType) {
     super(props)
