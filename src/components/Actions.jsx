@@ -18,7 +18,7 @@ const Actions = (props: { configuration: Array<ConfiguType>, isVisible: boolean 
   }
 
   return (
-    <div className={`item-actions ${isVisible ? "is-visible" : ""}`}>
+    <div className={`action item-actions ${isVisible ? "is-visible" : ""}`}>
       {configuration.map(renderActions)}
     </div>
   )

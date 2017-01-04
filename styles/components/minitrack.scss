@@ -1,43 +1,32 @@
-.mini-track{
-        display: flex; 
-        border-bottom:$darkBorder;
-        height: 40px;
-        overflow: hidden;
-        &:hover &-content-action{
-            opacity: 1;
-            margin: auto ($padding/2);
-            
-        }
-        &-img{
-            cursor:pointer;
-            
-        }
+.mini-track {
+  display: flex;
+  border-bottom: $darkBorder;
+  height: 40px;
+  overflow: hidden;
+  &:hover .action {
+    opacity: 1;
+    margin: auto ($padding/2);
 
-        &-content{
-            width: 100%;
-            padding: $padding/2;
-            background: $nav;
-            position: relative;
-            display: flex;
-            &-action{
-                transition:all 0.2s;
-                transition-timing-function: ease;
-                opacity: 0;
-                display: flex;
+  }
+  &-img {
+    cursor: pointer;
+  }
 
-                i{
-                    margin: 0;
-                    cursor:pointer;
-                    font-size: 15px;
-                    &:hover{
-                        color:$mainColor;
-                     }
-                }
-            }  
-         }
+  &-content {
+    padding: $padding/8;
+    background: $nav;
+    position: relative;
+    display: flex;
+    flex-grow: 2;
+    &-name {
+      display: flex;
+      align-items: center;
+      flex: 3;
+    }
+  }
 
-        .active-track &-content-action{
-            opacity: 1;
-            margin: auto ($padding/2)
-        }
+  .active-track .action {
+    opacity: 1;
+    margin: auto ($padding/2)
+  }
 }
