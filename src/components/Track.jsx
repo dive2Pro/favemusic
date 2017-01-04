@@ -20,6 +20,7 @@ export default class Track extends Component {
     if (isJsonWaveform(waveform_url)) {
       this.fetchJsonWaveform(waveform_url, waveform)
     }
+    // todo Waveform is png
   }
 
   fetchJsonWaveform(waveform_url, waveform) {
@@ -36,12 +37,20 @@ export default class Track extends Component {
         console.log(err);
       })
   }
+
   renderImage(artwork_url, title, avatar_url) {
     return (
       <div>
         <img src={artwork_url || avatar_url} alt={title} height="90" width="90" />
       </div>
     )
+  }
+
+  renderWaveform(id, idx, waveform_url) {
+    if (!waveform_url) return
+    if (isJsonWaveform(waveform_url)) {
+      return (<div id={`waveform-${id}-${idx}`} className="track-content-waveform-json"></div>)
+    }
   }
 
   renderActions(activity, activateTrack, isPlaying) {
@@ -70,27 +79,32 @@ export default class Track extends Component {
       </div>
     )
   }
+
   render() {
     const { activity, activateTrack, isPlaying, idx } = this.props
     const { origin, type } = activity
     if (!origin) return (<div></div>)
-    const { user, title, permalink_url, artwork_url, playback_count,
-      comment_count, download_count, likes_count, reposts_count, id } = origin
+    const {
+      user, title, permalink_url, artwork_url, playback_count,
+      comment_count, download_count, likes_count, reposts_count, id,
+      waveform_url
+    } = origin
     const { avatar_url, username } = user
 
     return (
       <div className="track">
-        <div
-          className="track-img"
-        >
-
+        <div className="track-img">
           {this.renderImage(artwork_url, title, avatar_url)}
         </div>
 
         <div className="track-content">
-          <a href={permalink_url}>
-            <i className={getTrackIcon(type)}> </i> &nbsp; {username} - {title}</a>
-          <div id={`waveform-${id}-${idx}`} className="track-content-waveform"></div>
+          <div className="track-content-name">
+            <a href={permalink_url}>
+              <i className={getTrackIcon(type)}> </i> &nbsp; {username} - {title}</a>
+          </div>
+          <div className="track-content-waveform">
+            {this.renderWaveform(id, idx, waveform_url, title)}
+          </div>
           <div className="track-content-info">
             <div className="track-content-info-item">
               <i className="fa fa-play"> {playback_count}</i>

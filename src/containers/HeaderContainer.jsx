@@ -31,7 +31,7 @@ class Header extends Component {
         <div>
           <h1>Hello <Link to="/dashboard">{name}</Link></h1>
         </div>
-        {currentUser || GENRES.map(this.renderMenuItem)}
+        {GENRES.map(this.renderMenuItem)}
         <div className="header-login">
           <a href="#" onClick={currentUser ? () => logout() : () => login()}>
             <i>{currentUser ? "logout" : "login"}</i>

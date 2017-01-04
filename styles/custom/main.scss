@@ -1,20 +1,23 @@
-ul, li {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-}
 
 body {
   background: $background;
   font: 400 12px 'CoreSans', Arial, sans-serif;
   -moz-osx-font-smoothing: grayscale;
   -webkit-font-smoothing: antialiased;
-  color: #ffffff;
+  color: $fontColor;
   letter-spacing: 0.02rem;
+  margin: ($padding*4) 2%;
+
+  ul, li {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
 }
 
 a {
-  color: #ffffff;
+  color: $fontColor;
   text-decoration: none;
 
   &:hover {
