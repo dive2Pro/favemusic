@@ -1,6 +1,9 @@
 // @flow
 import React, { Component } from 'react'
 import LoadingSpinner from './LoadingSpinner'
+import TrackItem from './TrackItem'
+import UserItem from './UserItem'
+
 type MosaicpropsType = {
   isMoreToggled: ?boolean,
   requestInProcess: ?boolean
@@ -27,31 +30,18 @@ class UserMosaic extends Component {
   }
 
   renderUser(user: UserType, idx: number) {
-    const { username, avatar_url, permalink_url } = user
     return (
       <li key={idx}>
-        <a href={permalink_url}>
-          <img
-            src={avatar_url}
-            alt={username} height="40" width="40"
-          />
-        </a>
+        <UserItem user={user} idx={idx} />
       </li>
     )
   }
 
   renderTrack(track: TrackType, idx: number) {
     if (!track) return ''
-    const { title, artwork_url, permalink_url } = track
-
     return (
       <li key={idx}>
-        <a href={permalink_url}>
-          <img
-            src={artwork_url}
-            alt={title} height="40" width="40"
-          />
-        </a>
+        <TrackItem idx={idx} track={track} />
       </li>
     )
   }
@@ -94,15 +84,24 @@ class UserMosaic extends Component {
     }
   }
 
+  renderChevron() {
+    const { isMoreToggled } = this.state
+    const { collections } = this.props
+    if (collections.length > 4) {
+      return (<i className={`fa ${isMoreToggled ? 'fa-chevron-up' : 'fa-chevron-down'}`} />)
+    } else {
+      return (<div></div>)
+    }
+  }
+
   render() {
     return (
       <div className="user-mosaic">
         <h2><a href="#" onClick={() => this.toggleMore()}>
-          {this.props.title}
-          <i
-            className={`fa ${this.state.isMoreToggled ? 'fa-chevron-up' : 'fa-chevron-down'}`}
-          />
-        </a></h2>
+          {this.props.title}&nbsp;
+          {this.renderChevron()}
+        </a>
+        </h2>
 
         <div className={this.state.isMoreToggled ? 'more' : ''}>
           {

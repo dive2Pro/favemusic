@@ -2,7 +2,7 @@
 
   transition: height .5s;
   transition-timing-function: ease;
-  i.fa-chevron-up,i.fa-chevron-down {
+  i.fa-chevron-up, i.fa-chevron-down {
     opacity: 0;
     transition: opacity 0.2s;
     transition-timing-function: ease;
@@ -12,11 +12,17 @@
     opacity: 1;
   }
   &-content {
-    height: $padding*5;
+    height: $padding*8;
     overflow: hidden;
-    ul, li, a {
+    background: $backgroundSecondary;
+
+    li {
+      border-bottom: $darkBorder;
       display: flex;
       flex-wrap: wrap;
+      &:last-child {
+        border-bottom: none;
+      }
     }
   }
   .more &-content {
