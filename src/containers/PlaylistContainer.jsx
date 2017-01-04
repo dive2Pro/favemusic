@@ -1,13 +1,12 @@
 // @flow
 import React, { Component } from 'react'
-import ImmutablePropTypes from 'react-immutable-proptypes'
 import MiniTrack from '../components/MiniTrack'
 import { connect } from 'react-redux';
 import * as actions from '../actions/actionCreator.js'
 type PropsType = {
   activeTrack: Object,
   isPlaying: boolean,
-  playlist: ImmutablePropTypes.list,
+  playlist: Array<TrackType>,
   isOpenPlaylist: boolean
 };
 

@@ -1,5 +1,4 @@
 /* /decl/data.js.flow */
-import ImmutablePropTypes from 'react-immutable-proptypes'
 
 declare type basePropsType = {
   pathname: string,
@@ -7,19 +6,19 @@ declare type basePropsType = {
   currentUser: Object,
   activeTrack: Object,
   isPlaying: boolean,
-  followings: ImmutablePropTypes.list,
-  activities: ImmutablePropTypes.list,
+  followings: Array<*>,
+  activities: Array<*>,
   activitiesNextHref: string,
   activitiesRequestInProcess: boolean,
-  followers: ImmutablePropTypes.list,
+  followers: Array<*>,
   followersNextHref: string,
   followersRequestInProcess: boolean,
-  favorites: ImmutablePropTypes.list,
+  favorites: Array<*>,
   favoritesRequestInProcess: boolean,
   fetchActivities:(nexfHref: string)=>void,
   nextHref: string,
   fetchActivitiesByGenre: (nextHref: string, genre: string)=>void,
-  activitiesByGenreNextHref:ImmutablePropTypes.map,
+  activitiesByGenreNextHref:{},
   activitiesByGenre: string,
   activitiesByGenreInProcess: boolean,
   init: ()=>void,

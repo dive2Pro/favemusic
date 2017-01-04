@@ -2,73 +2,76 @@
  * Created by hyc on 16-12-31.
  */
 import * as actionTypes from '../constants/actionTypes'
-import {
-  List,
-  Map,
-  fromJS
-} from 'immutable'
 
-function mergeFollowings(state, followings) {
-  console.info('followings = ', followings)
-  return state.updateIn(['followings'], list => list.concat(followings))
+function mergeFollowings(state, receivefollowings) {
+  const followings = [...state.followings, ...receivefollowings]
+  return Object.assign({}, state, { followings })
 }
 
-function mergeActivities(state, activities) {
-  console.info('activities = ', activities)
-  return state.updateIn(['activities'], list => list.concat(activities))
+function mergeActivities(state, receiveactivities) {
+  const activities = [...state.activities, ...receiveactivities]
+  return Object.assign({}, state, { activities })
 }
 
 function setActivitiesRequestNextHref(state, nextHref) {
-  return state.set('activitiesNextHref', nextHref)
+  return Object.assign({}, state, { activitiesNextHref: nextHref })
 }
 
 function setActivitiesRequestInProcess(state, inProcess) {
-  return state.set('activitiesRequestInProcess', inProcess)
+  return Object.assign({}, state, { activitiesRequestInProcess: inProcess })
 }
 
-function mergeFollowers(state, followers) {
-  return state.updateIn(['followers'], list => list.concat(followers))
+function mergeFollowers(state, receivefollowers) {
+  const followers = [...state.followers, ...receivefollowers]
+  return Object.assign({}, state, { followers })
 }
 
-function mergeFavorites(state, favorites) {
-  return state.updateIn(['favorites'], list => list.concat(favorites))
+function mergeFavorites(state, receivefavorites) {
+  const favorites = [...state.favorites, ...receivefavorites]
+
+  return Object.assign({}, state, { favorites })
 }
 
 function setFollowersRequestNextHref(state, nextHref) {
-  return state.set('followersNextHref', nextHref)
+  return Object.assign({}, state, { followersNextHref: nextHref })
 }
 
 function setFollowersRequestInProcess(state, inProcess) {
-  return state.set('followersRequestInProcess', inProcess)
+  return Object.assign({}, state, { followersRequestInProcess: inProcess })
 }
 
 function setFavoritesRequestInProcess(state, inProcess) {
-  return state.set('favoritesRequestInProcess', inProcess)
+  return Object.assign({}, state, { favoritesRequestInProcess: inProcess })
 }
 
 function setFollowers(state, followers) {
-  return state.updateIn(['followers'], () => followers)
+  return Object.assign({}, state, { followers })
 }
 
 function setActivities(state, activities) {
-  return state.updateIn(['activities'], () => activities)
+  return Object.assign({}, state, { activities })
 }
 
 function setFollowings(state, followings) {
-  return state.updateIn(['followings'], () => followings)
+  return Object.assign({}, state, { followings })
 }
 
-const initialState = Map({
-  followings: List(),
-  activities: List(),
-  followers: List(),
-  favorites: List(),
+const initialState = {
+  followings: [],
+  activities: [],
+  followers: [],
+  favorites: [],
   activitiesNextHref: null,
   activitiesRequestInProcess: false,
   followersNextHref: null,
   followersRequestInProcess: false,
   favoritesRequestInProcess: false,
-})
+}
+
+
+function fromJS(json) {
+  return json
+}
 
 export default function (state = initialState, action) {
   switch (action.type) {

@@ -68,7 +68,7 @@ export function fetchFollowers(user, nextHref) {
 
   return (dispatch, getState) => {
     const userState = getState().user
-    const isrequestFollowersInProcess = userState.get('requestFollowersInProcess')
+    const isrequestFollowersInProcess = userState.requestFollowersInProcess
     if (isrequestFollowersInProcess) return
 
     dispatch(setFollowersRequestInProcess(true))
@@ -131,7 +131,7 @@ export function fetchActivities(nextHref) {
   }
 
   return (dispatch, getState) => {
-    const activitiesRequestInProcess = getState().user.get('activitiesRequestInProcess')
+    const activitiesRequestInProcess = getState().user.activitiesRequestInProcess
     if (activitiesRequestInProcess) {
       return;
     }
@@ -174,7 +174,7 @@ function setFavoritesRequestInProcess(inProcess) {
 
 export function fetchFavorites(user, nextHref) {
   return (dispatch, getState) => {
-    const favoritesRequestInProcess = getState().user.get('favoritesRequestInProcess')
+    const favoritesRequestInProcess = getState().user.favoritesRequestInProcess
     if (favoritesRequestInProcess) {
       return;
     }

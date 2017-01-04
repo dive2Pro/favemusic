@@ -1,13 +1,12 @@
 // @flow
 import React, { Component } from 'react';
-import ImmutablePropTypes from 'react-immutable-proptypes'
 import { connect } from 'react-redux';
 import * as actions from '../actions/actionCreator.js'
 import { DEFAULT_GENRE, GENRES } from '../constants/genre'
 import { Link } from 'react-router'
 import { browse } from '../constants/pathname'
 type PropsType = {
-  currentUser: ImmutablePropTypes.map,
+  currentUser: Object,
   login: ()=>void,
   logout: ()=>void
 };

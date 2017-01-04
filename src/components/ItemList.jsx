@@ -10,6 +10,7 @@ class UserMosaic extends Component {
   props: MosaicpropsType;
   state: { isMoreToggled: boolean };
   toggleMore: ()=>void;
+
   constructor(props: MosaicpropsType) {
     super(props);
     this.state = {
@@ -59,7 +60,7 @@ class UserMosaic extends Component {
     const { collections, kind, requestInProcess } = this.props
     if (!collections || requestInProcess) {
       return (
-        <div><LoadingSpinner isLoading="qqqqqq" /></div>
+        <div><LoadingSpinner isLoading={requestInProcess} /></div>
       )
     }
     const list = Array.isArray(collections) ? collections : collections.toJSON()
@@ -99,11 +100,11 @@ class UserMosaic extends Component {
         <h2><a href="#" onClick={() => this.toggleMore()}>
           {this.props.title}
           <i
-            className={`fa ${this.isMoreToggled ? 'fa-chevron-up' : 'fa-chevron-down'}`}
+            className={`fa ${this.state.isMoreToggled ? 'fa-chevron-up' : 'fa-chevron-down'}`}
           />
         </a></h2>
 
-        <div className={this.isMoreToggled ? 'more' : ''}>
+        <div className={this.state.isMoreToggled ? 'more' : ''}>
           {
             this.renderMosaic()
           }

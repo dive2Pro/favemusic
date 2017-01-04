@@ -53,7 +53,8 @@ export function activateTrack(track) {
   return (dispatch, getState) => {
     const player = getState().player,
       preActiveTrack = player.activeTrack,
-      isPlaying = player.isPlayin
+      isPlaying = player.isPlaying
+    console.info(player, '---', isPlaying)
     const isAPT = isSameTrackAndPlaying(preActiveTrack, track, isPlaying)
     console.info('isAPT = ', isAPT)
     dispatch(togglePlayTrack(!isAPT))
