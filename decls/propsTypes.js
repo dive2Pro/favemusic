@@ -4,7 +4,7 @@ declare type basePropsType = {
   pathname: string,
   genre: string,
   currentUser: Object,
-  activeTrack: Object,
+  activeTrack: TrackType,
   isPlaying: boolean,
   followings: Array<*>,
   activities: Array<*>,

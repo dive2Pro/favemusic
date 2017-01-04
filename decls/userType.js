@@ -1,5 +1,6 @@
 declare type originType = {
-  tag_list: string
+  tag_list: string,
+  user: UserType
 }
 declare type ActivityType = {
   origin: originType
@@ -11,5 +12,7 @@ declare type ResponseAfterToJSONType = {
 };
 
 declare type UserType = {
-  username: string, avatar_url:string, permalink_url:string
+  username: string,
+  avatar_url:string,
+  permalink_url:string
 };

@@ -5,20 +5,8 @@ import { addAccessToken } from '../utils/soundcloundApi'
 import { connect } from 'react-redux';
 import * as actions from '../actions/actionCreator.js'
 
-type PropsType = {
-  isPlaying: boolean,
-  activeTrack: Object,
-  isOpenPlaylist: boolean,
-  togglePlayTrack: (isPlaying: boolean)=>void,
-  togglePlay: ()=>void,
-  origin: Object,
-  togglePlaylist: ()=>void,
-  activeIterateTrack: ()=>void
-
-};
-
 class Player extends Component {
-  props: PropsType;
+  props: basePropsType;
   togglePlay: ()=>void;
 
   constructor(props: PropsType) {
@@ -45,7 +33,7 @@ class Player extends Component {
     } = this.props
     if (!activeTrack) return
     const { origin } = activeTrack
-    const { stream_url } = origin
+    const { stream_url, username, title } = origin
     return (
       <div className="player-content">
         <div>
@@ -67,6 +55,9 @@ class Player extends Component {
             className="fa fa-step-forward"
             onClick={() => activeIterateTrack(activeTrack, 1)}
           >&nbsp;</i>
+        </div>
+        <div className="player-content-name">
+          {username} - {title}
         </div>
         <div>
           <i

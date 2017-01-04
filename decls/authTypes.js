@@ -14,5 +14,6 @@ declare type TrackType = {
   artwork_url:string,
   playback_count: number,
   favoritings_count: number,
-  comment_count: number
+  comment_count: number,
+  origin: originType
 };

@@ -30,27 +30,7 @@
     }
   }
 
-  &-actions {
-    flex: 1;
-    display: flex;
-    align-items: center;
-    justify-content: space-around;
-    opacity: 0;
-    transition: opacity 0.2s;
-    transition-timing-function: ease;
-
-    &-item {
-      flex: 1;
-      &:hover {
-        color: $mainColor;
-      }
-    }
-    &:hover {
-      opacity: 1;
-    }
-    .is-visible &-item {
-      opacity: 1;
-    }
-
+  &:hover .action {
+    opacity: 1;
   }
 }

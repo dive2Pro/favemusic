@@ -20,7 +20,9 @@
     justify-content: flex-start;
     height: 100%;
     margin-left: 25%;
-
+    &-name {
+      flex: 1;
+    }
     div {
       margin: auto $padding;
       i {

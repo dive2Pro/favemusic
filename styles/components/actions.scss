@@ -1,0 +1,20 @@
+.action {
+  display: flex;
+  opacity: 0;
+  transition: all 0.2s;
+  transition-timing-function: ease;
+  flex: 1;
+  align-items: center;
+  i {
+    margin: 0 ($padding/4);
+    cursor: pointer;
+    font-size: 16px;
+    &:hover {
+      color: $mainColor;
+    }
+  }
+
+  &-actionvisible {
+    opacity: 1;
+  }
+}

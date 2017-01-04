@@ -10,7 +10,7 @@ const Actions = (props: { configuration: Array<ConfiguType>, isVisible: boolean 
   function renderActions(cfg: ConfiguType, idx: number) {
     const { fn, className } = cfg
     return (
-      <div className="item-actions-item" key={idx}>
+      <div className="actions-item" key={idx}>
         <i onClick={() => fn()} className={className}>
         </i>
       </div>
@@ -18,7 +18,7 @@ const Actions = (props: { configuration: Array<ConfiguType>, isVisible: boolean 
   }
 
   return (
-    <div className={`action item-actions ${isVisible ? "is-visible" : ""}`}>
+    <div className={`action ${isVisible ? "action-visible" : ""}`}>
       {configuration.map(renderActions)}
     </div>
   )
