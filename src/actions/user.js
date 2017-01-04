@@ -185,7 +185,8 @@ export function fetchFavorites(user, nextHref) {
     return fetch(favoritesUrl)
       .then(response => response.json())
       .then(data => {
-        dispatch(mergeFavorites(data.collection))
+        console.info('data = ', data)
+        dispatch(mergeFavorites(data))
         dispatch(setFavoritesRequestInProcess(false))
       })
       .catch(() => {

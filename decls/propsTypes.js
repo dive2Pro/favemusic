@@ -18,9 +18,11 @@ declare type basePropsType = {
   fetchActivities:(nexfHref: string)=>void,
   nextHref: string,
   fetchActivitiesByGenre: (nextHref: string, genre: string)=>void,
+  addTrackToPlaylist:(track: TrackType)=>void,
   activitiesByGenreNextHref:{},
   activitiesByGenre: string,
   activitiesByGenreInProcess: boolean,
   init: ()=>void,
-  fetchFollowers: ()=>void
+  fetchFollowers: ()=>void,
+  activateTrack: (track:TrackType)=>void
 };

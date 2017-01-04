@@ -2,17 +2,22 @@
   height: 40px;
   display: flex;
   flex-direction: row;
-  flex:1;
+  flex: 1;
   &-content {
-    width: 100%;
     padding: $padding/4;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    flex: 2;
+
     &-name {
       overflow: hidden;
       font-size: 14px;
+      max-width: 130px;
+      text-overflow: ellipsis;
+      white-space: nowrap;
     }
+
     &-info {
       width: 100%;
       display: flex;
@@ -23,5 +28,29 @@
         flex: 1;
       }
     }
+  }
+
+  &-actions {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    opacity: 0;
+    transition: opacity 0.2s;
+    transition-timing-function: ease;
+
+    &-item {
+      flex: 1;
+      &:hover {
+        color: $mainColor;
+      }
+    }
+    &:hover {
+      opacity: 1;
+    }
+    .is-visible &-item {
+      opacity: 1;
+    }
+
   }
 }

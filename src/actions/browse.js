@@ -1,6 +1,7 @@
 // @flow
 import { unauthApiUrl } from '../utils/soundcloundApi'
 import * as actionTypes from '../constants/actionTypes'
+import { wrapInOrigin } from '../utils/track'
 
 function setActivitiesByGenreRequestInProcess(inProcess: boolean) {
   return {
@@ -21,13 +22,6 @@ function mergeActivitiesByGenre(activities: Array<*>) {
   return {
     type: actionTypes.MERGE_ACTIVITIES_BY_GENRE,
     activities
-  }
-}
-
-function wrapInOrigin(activity: ActivityType) {
-  return {
-    origin: activity,
-    type: 'track'
   }
 }
 

@@ -41,7 +41,7 @@ class UserMosaic extends Component {
     if (!track) return ''
     return (
       <li key={idx}>
-        <TrackItem idx={idx} track={track} />
+        <TrackItem idx={idx} track={track} {...this.props} />
       </li>
     )
   }
@@ -56,13 +56,13 @@ class UserMosaic extends Component {
     const list = Array.isArray(collections) ? collections : collections.toJSON()
     if (kind === "user") {
       return (<div className="user-mosaic-content">
-        <ul>{list.map(this.renderUser)}</ul>
+        <ul>{list.map(this.renderUser.bind(this))}</ul>
       </div>)
     }
 
     if (kind === "track") {
       return (<div className="user-mosaic-content">
-        <ul>{list.map(this.renderTrack)}</ul>
+        <ul>{list.map(this.renderTrack.bind(this))}</ul>
       </div>)
     }
   }

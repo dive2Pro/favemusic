@@ -32,7 +32,6 @@ class App extends Component {
             {...this.props}
             scrollFunc={() => fetchActivities(nextHref)}
           />
-
         </div>
         <div className="dashboard-content-side">
           <ItemList
@@ -54,6 +53,7 @@ class App extends Component {
             kind="track"
             collections={favorites}
             requestInProcess={favoritesRequestInProcess}
+            {...this.props}
           />
         </div>
       </div>
