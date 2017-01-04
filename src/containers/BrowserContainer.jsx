@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import ImmutablePropTypes from 'react-immutable-proptypes'
 import { connect } from 'react-redux'
 import * as actions from '../actions/actionCreator.js'
 import HeaderContainer from './HeaderContainer'
@@ -9,10 +10,13 @@ import { DEFAULT_GENRE } from '../constants/genre'
 import { dehydrate } from '../utils/immutableUtil'
 type Props = {
   fetchActivitiesByGenre: (nextHref, genre)=>void,
-  genre: DEFAULT_GENRE
+  genre: string,
+  pathname: string,
+  activitiesByGenre:ImmutablePropTypes.list,
+  activitiesByGenreNextHref:ImmutablePropTypes.map
 }
 
-class BrowserContainer extends Component {
+class BrowserContainer extends Component<Props> {
   props: Props;
 
   fetchActivitiesByGenreFunc() {
@@ -91,4 +95,7 @@ function mapStateToProps(state, routeState) {
   }
 }
 
+BrowserContainer.defaultProps = {
+  genre: DEFAULT_GENRE
+}
 export default connect(mapStateToProps, actions)(BrowserContainer);

@@ -1,16 +1,26 @@
+// @flow
 import React, { Component } from 'react';
+import ImmutablePropTypes from 'react-immutable-proptypes'
 import { connect } from 'react-redux';
 import * as actions from '../actions/actionCreator.js'
 import { DEFAULT_GENRE, GENRES } from '../constants/genre'
 import { Link } from 'react-router'
 import { browse } from '../constants/pathname'
+type PropsType = {
+  currentUser: ImmutablePropTypes.map,
+  login: ()=>void,
+  logout: ()=>void
+};
+
 class Header extends Component {
-  constructor(props) {
+  props: Props;
+
+  constructor(props: PropsType) {
     super(props)
     this.renderMenuItem = this.renderMenuItem.bind(this)
   }
 
-  renderMenuItem(genreItem, idx) {
+  renderMenuItem(genreItem: string, idx: number) {
     // const { genre } = this.props
     // const itemClassName = genre === genreItem ? "menu-item menuitem" : "menu-item"
     return (
@@ -50,8 +60,8 @@ class Header extends Component {
   }
 }
 
-function mapStateToProps(state) {
-  console.info('state = ', state);
+function mapStateToProps(state: Object) {
+  // console.info('state = ', state);
   return {
     currentUser: state.auth.get('user')
   }

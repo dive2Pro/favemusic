@@ -1,12 +1,21 @@
+// @flow
 import React, { Component } from 'react'
 import ReactDOM from 'react-dom'
 import { addAccessToken } from '../utils/soundcloundApi'
 import { connect } from 'react-redux';
 import * as actions from '../actions/actionCreator.js'
 
+type PropsType = {
+  isPlaying: boolean,
+  activeTrack: string,
+  isOpenPlaylist: boolean,
+  togglePlayTrack: (isPlaying: boolean)=>void
+};
 
 class Player extends Component {
-  constructor(props) {
+  props: PropsType;
+
+  constructor(props: PropsType) {
     super(props)
     this.togglePlay = this.togglePlay.bind(this)
   }
@@ -24,8 +33,10 @@ class Player extends Component {
   }
 
   renderNav() {
-    const { isPlaying, activeTrack, isOpenPlaylist,
-      activeIterateTrack, togglePlaylist } = this.props
+    const {
+      isPlaying, activeTrack, isOpenPlaylist,
+      activeIterateTrack, togglePlaylist
+    } = this.props
     if (!activeTrack) return
     const { origin } = activeTrack
     const { stream_url } = origin
@@ -77,7 +88,7 @@ class Player extends Component {
   }
 }
 
-function mapStateToProps(state) {
+function mapStateToProps(state: Object) {
   const { player, environment } = state
   return {
     isPlaying: player.get('isPlaying'),

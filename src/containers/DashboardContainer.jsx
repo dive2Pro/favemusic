@@ -1,3 +1,4 @@
+// @flow
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import * as actions from '../actions/actionCreator'
@@ -7,8 +8,27 @@ import Activities from '../components/Activities'
 import HeaderContainer from './HeaderContainer'
 import PlayerContainer from './PlayerContainer'
 import PlaylistContainer from './PlaylistContainer'
+import ImmutablePropTypes from 'react-immutable-proptypes'
+type PropsType = {
+  pathname: React.PropTypes.string,
+  genre: React.PropTypes.string,
+  currentUser: React.PropTypes.object,
+  activeTrack: React.PropTypes.object,
+  isPlaying: React.PropTypes.bool,
+  followings: ImmutablePropTypes.list,
+  activities: ImmutablePropTypes.list,
+  activitiesNextHref: React.PropTypes.string,
+  activitiesRequestInProcess: React.PropTypes.bool,
+  followers: ImmutablePropTypes.list,
+  followersNextHref: React.PropTypes.string,
+  followersRequestInProcess: React.PropTypes.bool,
+  favorites: ImmutablePropTypes.list,
+  favoritesRequestInProcess: React.PropTypes.bool
+};
 
 class App extends Component {
+  props: PropsType;
+
   componentDidMount() {
     const { init } = this.props
     init()
@@ -72,7 +92,7 @@ class App extends Component {
     )
   }
 }
-function mapStateToProps(state, routeState) {
+function mapStateToProps(state: Object, routeState: Object) {
   const { auth, user, player } = state
   console.info(state)
   return {
@@ -92,7 +112,7 @@ function mapStateToProps(state, routeState) {
   }
 }
 
-function mapDispathToProps(dispatch) {
+function mapDispathToProps(dispatch: Function) {
   const actionCreators = bindActionCreators(actions, dispatch)
   console.info(' ')
   return actionCreators

@@ -4,8 +4,15 @@ import FetchOnScroll from './FetchOnScroll'
 import Track from '../components/Track'
 import LoadingSpinner from '../components/LoadingSpinner'
 import { dehydrate } from '../utils/immutableUtil'
-type ActivityType = {};
+type ActivityType = {
+  activities: Array,
+  isPlaying: boolean,
+  activateTrack: Function,
+  addTrackToPlaylist: Function
+};
 class ActivitiesContainer extends Component {
+  props: ActivityType;
+
   activitiesDom(): HTMLElement {
     const { activities, activateTrack, isPlaying, addTrackToPlaylist } = this.props
     const list = Array.isArray(activities) ? activities : dehydrate(activities)

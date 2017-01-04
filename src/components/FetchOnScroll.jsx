@@ -5,7 +5,7 @@ type FetchPropsType = {
   scrollFunc: () => void
 };
 
-export default function (InnerComponent: HTMLElement): Class<FetchOnScrollComponent> {
+export default function (InnerComponent: ReactClass): ReactClass<{}> {
   class FetchOnScrollComponent extends Component {
     constructor(props: FetchPropsType) {
       super(props)
@@ -32,7 +32,6 @@ export default function (InnerComponent: HTMLElement): Class<FetchOnScrollCompon
       )
     }
   }
-
 
   return FetchOnScrollComponent
 }
