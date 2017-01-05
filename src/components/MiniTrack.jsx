@@ -15,12 +15,12 @@ export default class MiniTrack extends Component {
     const isVisible = isSameTrackAndPlaying(activeTrack, track, isPlaying)
     const configuration = [
       {
-        fn: () => activateTrack(track),
-        className: `fa ${isVisible ? 'fa-pause' : 'fa-play'}`
-      },
-      {
-        fn: () => removeTrackFromPlaylist(track),
-        className: "fa fa-times"
+        fn: () => activateTrack(track)
+        , className: `fa ${isVisible ? 'fa-pause' : 'fa-play'}`
+      }
+      , {
+        fn: () => removeTrackFromPlaylist(track)
+        , className: "fa fa-times"
       }
     ]
     return (

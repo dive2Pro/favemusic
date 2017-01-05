@@ -6,14 +6,14 @@ import * as actionTypes from '../constants/actionTypes'
 import apiUrl from '../utils/soundcloundApi'
 function addToFavorites(track: TrackType) {
   return {
-    type: actionTypes.ADD_TO_FAVORITES,
-    track
+    type: actionTypes.ADD_TO_FAVORITES
+    , track
   }
 }
 function removeFromFavorites(track: TrackType) {
   return {
-    type: actionTypes.REMOVE_FROM_FAVORITES,
-    track
+    type: actionTypes.REMOVE_FROM_FAVORITES
+    , track
   }
 }
 

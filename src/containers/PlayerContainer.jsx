@@ -7,7 +7,7 @@ import * as actions from '../actions/actionCreator.js'
 
 class Player extends Component {
   props: basePropsType;
-  togglePlay: ()=>void;
+  togglePlay: () => void;
 
   constructor(props: PropsType) {
     super(props)
@@ -40,21 +40,21 @@ class Player extends Component {
           <i
             className="fa fa-step-backward"
             onClick={() => activeIterateTrack(activeTrack, -1)}
-          >&nbsp;</i>
+            >&nbsp;</i>
         </div>
 
         <div >
           <i
             onClick={() => this.togglePlay()}
             className={`fa ${isPlaying ? 'fa-pause' : 'fa-play'}`}
-          >&nbsp;</i>
+            >&nbsp;</i>
         </div>
 
         <div>
           <i
             className="fa fa-step-forward"
             onClick={() => activeIterateTrack(activeTrack, 1)}
-          >&nbsp;</i>
+            >&nbsp;</i>
         </div>
         <div className="player-content-name">
           {username} - {title}
@@ -63,12 +63,12 @@ class Player extends Component {
           <i
             className="fa fa-list"
             onClick={() => togglePlaylist(!isOpenPlaylist)}
-          >&nbsp;</i>
+            >&nbsp;</i>
         </div>
         <audio
           ref="audio" id="audio"
           src={addAccessToken(stream_url, '?')}
-        >
+          >
         </audio>
       </div>
     )
@@ -88,9 +88,8 @@ class Player extends Component {
 function mapStateToProps(state: Object) {
   const { player, environment } = state
   return {
-    isPlaying: player.isPlaying,
-    activeTrack: player.activeTrack,
-    isOpenPlaylist: environment.isOpenPlaylist
+    isPlaying: player.isPlaying, activeTrack: player.activeTrack
+    , isOpenPlaylist: environment.isOpenPlaylist
   }
 }
 

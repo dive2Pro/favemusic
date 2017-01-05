@@ -1,6 +1,4 @@
-/* /decl/data.js.flow */
-
-declare type basePropsType = {
+ declare type basePropsType = {
   pathname: string
   , genre: string
   , currentUser: Object

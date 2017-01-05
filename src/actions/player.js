@@ -6,28 +6,28 @@ import { isSameTrackAndPlaying, isSameTrack } from '../utils/player'
 import { togglePlaylist } from './environment'
 function setIsPlaying(isPlaying) {
   return {
-    type: actionTypes.SET_IS_PLAYING,
-    isPlaying
+    type: actionTypes.SET_IS_PLAYING
+    , isPlaying
   }
 }
 
 function setActiveTrack(activeTrack) {
   return {
-    type: actionTypes.SET_ACTIVE_TRACK,
-    activeTrack
+    type: actionTypes.SET_ACTIVE_TRACK
+    , activeTrack
   }
 }
 function setTrackInPlaylist(track) {
   return {
-    type: actionTypes.SET_TRACK_IN_PLAYLIST,
-    track
+    type: actionTypes.SET_TRACK_IN_PLAYLIST
+    , track
   }
 }
 
 function removeFromPlaylist(track) {
   return {
-    type: actionTypes.REMOVE_TRACK_FROM_PLAYLIST,
-    track
+    type: actionTypes.REMOVE_TRACK_FROM_PLAYLIST
+    , track
   }
 }
 
@@ -51,9 +51,9 @@ export function togglePlayTrack(isPlaying) {
 
 export function activateTrack(track) {
   return (dispatch, getState) => {
-    const player = getState().player,
-      preActiveTrack = player.activeTrack,
-      isPlaying = player.isPlaying
+    const player = getState().player
+      , preActiveTrack = player.activeTrack
+      , isPlaying = player.isPlaying
     console.info(player, '---', isPlaying)
     const isAPT = isSameTrackAndPlaying(preActiveTrack, track, isPlaying)
     console.info('isAPT = ', isAPT)

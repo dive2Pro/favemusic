@@ -154,7 +154,7 @@ export function fetchFavoritesF(user, nextHref) {
       .then(data => {
         console.info('data = ', data)
         dispatch(mergeFavorites(data.map(wrapInOrigin)))
-        dispatch(setFollowersRequestNexthref(data.next_href, paginateLinkTypes.FAVORITES))
+        dispatch(setPaginateLink(data.next_href, paginateLinkTypes.FAVORITES))
         dispatch(setRequestTypeInProcess(false, requestTypes.FAVORITES))
       })
       .catch(() => {

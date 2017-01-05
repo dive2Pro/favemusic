@@ -14,8 +14,8 @@ function setUser(state, user) {
 }
 
 const initialState = {
-  session: null,
-  user: null
+  session: null
+  , user: null
 }
 
 export default function (state = initialState, action) {

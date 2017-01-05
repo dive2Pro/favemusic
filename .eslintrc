@@ -5,10 +5,11 @@
     "react/jsx-no-bind": 0,
     "react/prefer-stateless-function": 0,
     "react/sort-comp": 0,
+    "react/jsx-closing-bracket-location": 0,
     "camelcase": 0,
     "default-case": 0,
     "comma-dangle": 0,
-    "comma-style":[1,"first"],
+    "comma-style": [2, "first"],
     "consistent-return": 0,
     "no-new": 0,
     "prefer-template": 0,
@@ -16,20 +17,18 @@
     "new-cap": 0,
     "no-else-return": 0,
     "semi": 0,
-    "import/no-unresolved":0,
+    "import/no-unresolved": 0,
     "max-len": [
       1,
       120,
-      2,
-      {
+      2, {
         "ignoreComments": true
       }
     ],
     "no-unused-expressions": "off",
     "arrow-body-style": "off",
     "prefer-const": [
-      "error",
-      {
+      "error", {
         "destructuring": "any",
         "ignoreReadBeforeAssign": false
       }
@@ -38,7 +37,7 @@
     "no-underscore-dangle": "off",
     "global-require": "off",
     "no-console": "off",
-    "no-undef": "off",
+    "no-undef": 2,
     "flowtype/boolean-style": [
       2,
       "boolean"
@@ -61,8 +60,7 @@
     "flowtype/require-parameter-type": 2,
     "flowtype/require-return-type": [
       0,
-      "always",
-      {
+      "always", {
         "annotateUndefined": "never"
       }
     ],
@@ -100,13 +98,28 @@
     }
   },
   "react/display-name": [
-    0,
-    {
+    0, {
       "ignoreTranspilerName": true
     }
   ],
   "parser": "babel-eslint",
   "plugins": [
     "flowtype"
-  ]
+  ],
+  "globals": {
+    "ActivityType": true,
+    "originType": true,
+    "ResponseType": true,
+    "ResponseAfterToJSONType": true,
+    "UserType": true,
+    "basePropsType": true,
+    "TrackType": true,
+    "Action": true,
+    "BrowseActionType": true,
+    "BrowseMergeActionType": true,
+    "BrowseSetInProcessfActionType": true,
+    "BrowseSetNextHrefActionType": true,
+    "RequestType": true,
+    "PaginateActionType": true
+  }
 }

@@ -5,9 +5,9 @@ import * as actionTypes from '../constants/actionTypes'
 import { isSameTrack } from '../utils/player'
 
 const initialState = {
-  activeTrack: null,
-  isPlaying: false,
-  playlist: []
+  activeTrack: null
+  , isPlaying: false
+  , playlist: []
 }
 
 function setTrackInPlaylist(state, track) {

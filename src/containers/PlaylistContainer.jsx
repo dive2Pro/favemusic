@@ -50,10 +50,10 @@ class Playlist extends Component {
 function mapStateToProps(state: Object) {
   const { player, environment } = state
   return {
-    playlist: player.playlist,
-    isPlaying: player.isPlaying,
-    activeTrack: player.activeTrack,
-    isOpenPlaylist: environment.isOpenPlaylist,
+    playlist: player.playlist
+    , isPlaying: player.isPlaying
+    , activeTrack: player.activeTrack
+    , isOpenPlaylist: environment.isOpenPlaylist,
   }
 }
 

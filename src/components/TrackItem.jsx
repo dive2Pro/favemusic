@@ -15,11 +15,11 @@ class TrackItem extends React.Component {
     const isVisible = isSameTrackAndPlaying(activeTrack, track, isPlaying)
     const configuration = [
       {
-        fn: () => activateTrack(activity)
+        fn: () => activateTrack(track)
         , className: `fa ${isVisible ? "fa fa-pause" : "fa fa-play"}`
       }
       , {
-        fn: () => addTrackToPlaylist(activity)
+        fn: () => addTrackToPlaylist(track)
         , className: "fa fa-list"
       }
     ]
@@ -43,7 +43,7 @@ class TrackItem extends React.Component {
             <div className="item-content-info-item">
               <i
                 className="fa fa-heart"
-                onClick={() => likeF(activity)}
+                onClick={() => likeF(track)}
               > &nbsp;{favoritings_count}</i>
             </div>
             <div className="item-content-info-item">

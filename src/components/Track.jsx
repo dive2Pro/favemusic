@@ -36,9 +36,9 @@ export default class Track extends Component {
       .then(response => response.json())
       .then(data => {
         new Waveform({
-          container: waveform,
-          innerColor: '#61B25A',
-          data: normalizeSamples(data.samples)
+          container: waveform
+          , innerColor: '#61B25A'
+          , data: normalizeSamples(data.samples)
         })
       })
       .catch(err => {
@@ -72,14 +72,14 @@ export default class Track extends Component {
           <i
             className={`fa ${currentTrackIsPlaying ? 'fa-pause' : 'fa-play'}`}
             onClick={() => activateTrack(activity)}
-          />
+            />
         </div>
 
         <div className="track-actions-item">
           <i
             className="fa fa-list"
             onClick={() => addTrackToPlaylist(activity)}
-          > </i>
+            > </i>
         </div>
       </div>
     )
@@ -138,7 +138,7 @@ export default class Track extends Component {
         </div>
         {this.renderActions(activity, activateTrack, isPlaying)}
       </
-        div >
+      div >
     )
   }
 }

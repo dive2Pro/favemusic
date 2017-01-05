@@ -1,5 +1,5 @@
-declare type Action<T> = {
-  type: T
+declare type Action = {
+  type: string
 }
 
 declare type BrowseActionType = {
@@ -26,13 +26,13 @@ declare type BrowseSetInProcessfActionType = {
   inProcess: boolean
 };
 
-declare type RequestType<T> = {
+declare type RequestType = {
   type:Action
   , requestType:string
   , inProcess: boolean
 }
 
-declare type PaginateActionType<T> = {
+declare type PaginateActionType = {
   type:Action
   , paginateLink:string
   , nextHref:string

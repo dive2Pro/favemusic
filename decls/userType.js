@@ -1,9 +1,10 @@
+
 declare type originType = {
   tag_list: string
   , user: UserType
-  , user_favorite:boolean
+  , user_favorite: boolean
   , id: number
-  , duration:number
+  , duration: number
   , create_at: string
 }
 declare type ActivityType = {
@@ -12,11 +13,11 @@ declare type ActivityType = {
 
 declare type ResponseType = {};
 declare type ResponseAfterToJSONType = {
-  collection:Array<*>
+  collection: Array<*>
 };
 
 declare type UserType = {
   username: string,
-  avatar_url:string,
-  permalink_url:string
+  avatar_url: string,
+  permalink_url: string
 };

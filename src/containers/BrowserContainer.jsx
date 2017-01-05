@@ -56,7 +56,7 @@ class BrowserContainer extends Component {
           isPlaying={isPlaying}
           addTrackToPlaylist={addTrackToPlaylist}
           scrollFunc={() => this.fetchActivitiesByGenreFunc()}
-        />
+          />
       </div>
     )
   }
