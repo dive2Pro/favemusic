@@ -13,27 +13,28 @@ import Cookies from 'js-cookie'
 import { routerActions } from 'react-router-redux'
 
 import {
-  fetchFollowings,
-  fetchActivities,
-  fetchFollowers,
-  fetchFavoritesF,
-  setFollowings,
-  setFollowers,
-  setActivities
+  fetchFollowingsF
+  , fetchActivities
+  , fetchFollowersF
+  , fetchFavoritesF
+  , setFollowings
+  , setFollowers
+  , setActivities
+  , setFavorites
 } from './user'
 import { changeLocation } from './location'
 
 function setSession(session) {
   return {
-    type: actionTypes.SET_SESSION,
-    session
+    type: actionTypes.SET_SESSION
+    , session
   }
 }
 
 function setUser(user) {
   return {
-    type: actionTypes.SET_USER,
-    user
+    type: actionTypes.SET_USER
+    , user
   }
 }
 
@@ -43,8 +44,8 @@ function fetchUser() {
       .then(response => response.json())
       .then(me => {
         dispatch(setUser(me))
-        dispatch(fetchFollowings(me))
-        dispatch(fetchFollowers(me))
+        dispatch(fetchFollowingsF(me))
+        dispatch(fetchFollowersF(me))
         dispatch(fetchActivities())
         dispatch(fetchFavoritesF(me))
       })
@@ -66,8 +67,8 @@ export function init() {
 export function login() {
   return dispatch => {
     SC.initialize({
-      client_id: CLIENT_ID,
-      redirect_uri: REDIRECT_URI
+      client_id: CLIENT_ID
+      , redirect_uri: REDIRECT_URI
     })
     SC.connect().then(session => {
       Cookies.set(OAUTH_TOKEN, session.oauth_token)
@@ -87,5 +88,6 @@ export function logout() {
     dispatch(setActivities([]))
     dispatch(setFollowers([]))
     dispatch(setFollowings([]))
+    dispatch(setFavorites([]))
   }
 }

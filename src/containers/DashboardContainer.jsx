@@ -20,9 +20,10 @@ class App extends Component {
 
   renderContent() {
     const {
-      currentUser, fetchActivities, nextHref, followers,
-      followings, followersNextHref, followersRequestInProcess, fetchFollowers,
-      favorites, favoritesRequestInProcess, fetchFavoritesF
+      currentUser, fetchActivities, nextHref, followers
+      , followings, followingsNextHref, fetchFollowingsF
+      , followersNextHref, followersRequestInProcess, fetchFollowersF,
+      favorites, favoritesRequestInProcess, fetchFavoritesF, followingsRequestInProcess
     } = this.props
 
     return (
@@ -38,13 +39,16 @@ class App extends Component {
             title="Followings"
             collections={followings}
             kind="user"
+            fetchMoreF={fetchFollowingsF}
+            nextHref={followingsNextHref}
+            requestInProcess={followingsRequestInProcess}
           />
           <ItemList
             title="Followers"
             collections={followers}
             requestInProcess={followersRequestInProcess}
-            followersNextHref={followersNextHref}
-            fetchMoreF={fetchFollowers}
+            nextHref={followersNextHref}
+            fetchMoreF={fetchFollowersF}
             user={currentUser}
             kind="user"
           />

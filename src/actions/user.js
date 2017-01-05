@@ -19,6 +19,12 @@ export function setActivities(activities) {
     , activities
   }
 }
+export function setFavorites(favorites) {
+  return {
+    type: actionTypes.SET_FAVORITES
+    , favorites
+  }
+}
 
 export function setFollowings(followings) {
   return {
@@ -47,10 +53,22 @@ function mergeFollowers(followers) {
     , followers
   }
 }
+function mergeFavorites(favorites) {
+  return {
+    type: actionTypes.MERGE_FAVORITES
+    , favorites
+  }
+}
 
 function setFollowersRequestInProcess(inProcess) {
   return {
     type: actionTypes.SET_FOLLOWERS_REQUEST_IN_PROCESS
+    , inProcess
+  }
+}
+function setFollowingsRequestInProcess(inProcess) {
+  return {
+    type: actionTypes.SET_FOLLOWINGS_REQUEST_IN_PROCESS
     , inProcess
   }
 }
@@ -61,7 +79,15 @@ function setFollowersRequestNexthref(nextHref) {
     , nextHref
   }
 }
-export function fetchFollowers(user, nextHref) {
+
+function setFollowingsRequestNexthref(nextHref) {
+  return {
+    type: actionTypes.SET_FOLLOWINGS_REQUEST_NEXT_HREF
+    , nextHref
+  }
+}
+
+export function fetchFollowersF(user, nextHref) {
   const accessToken = Cookies.get(OAUTH_TOKEN)
   const initHref = `followers?limit=20&offset=0&oauth_token=${accessToken}`
   const followersUrl = getLazyLoadingUrl(user, nextHref, initHref)
@@ -104,20 +130,20 @@ function setActivitiesRequestInProcess(inProcess) {
   }
 }
 
-export function fetchFollowings(user, nextHref) {
-  const accessToken = Cookies.get(OAUTH_TOKEN)
-  const initHref = `followings?limit=200&offset=0&oauth_token=${accessToken}`
-  const followingsUrl = getLazyLoadingUrl(user, nextHref, initHref)
-  return dispatch => {
+export function fetchFollowingsF(user, nextHref) {
+  return (dispatch, getState) => {
+    const accessToken = Cookies.get(OAUTH_TOKEN)
+    const initHref = `followings?limit=20&offset=0&oauth_token=${accessToken}`
+    const followingsUrl = getLazyLoadingUrl(user, nextHref, initHref)
+    const requestInProcess = getState().user.favoritesRequestInProcess
+    if (requestInProcess) return ""
+    dispatch(setFollowingsRequestInProcess(true))
     return fetch(followingsUrl)
       .then(response => response.json())
       .then(data => {
         dispatch(mergeFollowings(data.collection))
-
-        if (data.nextHref) {
-          console.info(data.nextHref)
-          dispatch(setActivitiesNextHref(data.nextHref))
-        }
+        dispatch(setFollowingsRequestInProcess(false))
+        dispatch(setFollowingsRequestNexthref(data.nextHref))
       })
   }
 }
@@ -148,12 +174,6 @@ export function fetchActivities(nextHref) {
       .catch(() => {
         dispatch(setActivitiesRequestInProcess(false))
       })
-  }
-}
-function mergeFavorites(favorites) {
-  return {
-    type: actionTypes.MERGE_FAVORITES
-    , favorites
   }
 }
 

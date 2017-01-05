@@ -3,7 +3,7 @@
  */
 import { init, login, logout } from './auth'
 import { togglePlaylist } from './environment'
-import { fetchActivities, fetchFollowers } from './user'
+import { fetchActivities, fetchFollowersF, fetchFavoritesF, fetchFollowingsF } from './user'
 import { fetchActivitiesByGenre } from './browse'
 import { likeF } from './track'
 import {
@@ -12,17 +12,19 @@ import {
 } from './player'
 
 export {
-  init,
-  login,
-  logout,
-  fetchActivities,
-  fetchFollowers,
-  togglePlayTrack,
-  activateTrack,
-  togglePlaylist,
-  addTrackToPlaylist,
-  activeIterateTrack,
-  removeTrackFromPlaylist,
-  fetchActivitiesByGenre,
-  likeF
+  init
+  , login
+  , logout
+  , fetchActivities
+  , fetchFollowersF
+  , fetchFavoritesF
+  , fetchFollowingsF
+  , togglePlayTrack
+  , activateTrack
+  , togglePlaylist
+  , addTrackToPlaylist
+  , activeIterateTrack
+  , removeTrackFromPlaylist
+  , fetchActivitiesByGenre
+  , likeF
 }

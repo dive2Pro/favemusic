@@ -16,6 +16,9 @@ function mergeActivities(state, receiveactivities) {
 function setActivitiesRequestNextHref(state, nextHref) {
   return Object.assign({}, state, { activitiesNextHref: nextHref })
 }
+function setFollowingsRequestNextHref(state, nextHref) {
+  return Object.assign({}, state, { followingsNextHref: nextHref })
+}
 
 function setActivitiesRequestInProcess(state, inProcess) {
   return Object.assign({}, state, { activitiesRequestInProcess: inProcess })
@@ -36,6 +39,10 @@ function setFollowersRequestNextHref(state, nextHref) {
   return Object.assign({}, state, { followersNextHref: nextHref })
 }
 
+function setFavoritesRequestNextHref(state, nextHref) {
+  return Object.assign({}, state, { favoritesNextHref: nextHref })
+}
+
 function setFollowersRequestInProcess(state, inProcess) {
   return Object.assign({}, state, { followersRequestInProcess: inProcess })
 }
@@ -43,9 +50,15 @@ function setFollowersRequestInProcess(state, inProcess) {
 function setFavoritesRequestInProcess(state, inProcess) {
   return Object.assign({}, state, { favoritesRequestInProcess: inProcess })
 }
+function setFollowingsRequestInProcess(state, inProcess) {
+  return Object.assign({}, state, { followingsRequestInProcess: inProcess })
+}
 
 function setFollowers(state, followers) {
   return Object.assign({}, state, { followers })
+}
+function setFavorites(state, favorites) {
+  return Object.assign({}, state, { favorites })
 }
 
 function setActivities(state, activities) {
@@ -57,15 +70,18 @@ function setFollowings(state, followings) {
 }
 
 const initialState = {
-  followings: [],
-  activities: [],
-  followers: [],
-  favorites: [],
-  activitiesNextHref: null,
-  activitiesRequestInProcess: false,
-  followersNextHref: null,
-  followersRequestInProcess: false,
-  favoritesRequestInProcess: false,
+  activities: []
+  , followings: []
+  , followers: []
+  , favorites: []
+  , followingsNextHref: null
+  , activitiesNextHref: null
+  , followersNextHref: null
+  , favoritesNextHref: null
+  , activitiesRequestInProcess: false
+  , followersRequestInProcess: false
+  , favoritesRequestInProcess: false
+  , followingsRequestInProcess: false
 }
 
 function fromJS(json) {
@@ -89,6 +105,21 @@ export default function (state = initialState, action) {
   switch (action.type) {
     case actionTypes.MERGE_FOLLOWINGS:
       return mergeFollowings(state, fromJS(action.followings))
+    case actionTypes.MERGE_FAVORITES:
+      return mergeFavorites(state, action.favorites)
+    case actionTypes.MERGE_ACTIVITIES:
+      return mergeActivities(state, fromJS(action.activities))
+    case actionTypes.MERGE_FOLLOWERS:
+      return mergeFollowers(state, fromJS(action.followers))
+
+    case actionTypes.SET_FOLLOWINGS_REQUEST_NEXT_HREF:
+      return setFollowingsRequestNextHref(state, action.nextHref)
+    case actionTypes.SET_ACTIVITIES_REQUEST_NEXT_HREF:
+      return setActivitiesRequestNextHref(state, action.nextHref)
+    case actionTypes.SET_FOLLOWERS_REQUEST_NEXT_HREF:
+      return setFollowersRequestNextHref(state, action.nextHref)
+    case actionTypes.SET_FAVORITES_REQUEST_NEXT_HREF:
+      return setFavoritesRequestNextHref(state, action.nextHref)
 
     case actionTypes.SET_ACTIVITIES:
       return setActivities(state, fromJS(action.activities))
@@ -96,29 +127,17 @@ export default function (state = initialState, action) {
       return setFollowings(state, fromJS(action.followings))
     case actionTypes.SET_FOLLOWERS:
       return setFollowers(state, fromJS(action.followers))
+    case actionTypes.SET_FAVORITES:
+      return setFavorites(state, fromJS(action.favorites))
 
-    case actionTypes.MERGE_ACTIVITIES:
-      return mergeActivities(state, fromJS(action.activities))
-
-    case actionTypes.MERGE_FOLLOWERS:
-      return mergeFollowers(state, fromJS(action.followers))
     case actionTypes.SET_FOLLOWERS_REQUEST_IN_PROCESS:
       return setFollowersRequestInProcess(state, action.inProcess)
-
-    case actionTypes.SET_FOLLOWERS_REQUEST_NEXT_HREF:
-      return setFollowersRequestNextHref(state, action.nextHref)
-
     case actionTypes.SET_ACTIVITIES_REQUEST_IN_PROCESS:
       return setActivitiesRequestInProcess(state, action.inProcess)
-
-    case actionTypes.SET_ACTIVITIES_REQUEST_NEXT_HREF:
-      return setActivitiesRequestNextHref(state, action.nextHref)
-
     case actionTypes.SET_FAVORITES_REQUEST_IN_PROCESS:
       return setFavoritesRequestInProcess(state, action.inProcess)
-
-    case actionTypes.MERGE_FAVORITES:
-      return mergeFavorites(state, action.favorites)
+    case actionTypes.SET_FOLLOWINGS_REQUEST_IN_PROCESS:
+      return setFollowingsRequestInProcess(state, action.inProcess)
 
     case actionTypes.ADD_TO_FAVORITES:
       return addToFavorites(state, action.track)
