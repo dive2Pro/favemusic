@@ -30,4 +30,5 @@ declare type basePropsType = {
   , likeF: (track: TrackType)=>void
   , fetchFavoritesF:(user: UserType, nextHref: String)=>void
   , fetchFollowingsF:(user: UserType, nextHref: String)=>void
+  , favoritesNextHref: string
 };

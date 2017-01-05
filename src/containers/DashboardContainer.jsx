@@ -22,8 +22,9 @@ class App extends Component {
     const {
       currentUser, fetchActivities, nextHref, followers
       , followings, followingsNextHref, fetchFollowingsF
-      , followersNextHref, followersRequestInProcess, fetchFollowersF,
-      favorites, favoritesRequestInProcess, fetchFavoritesF, followingsRequestInProcess
+      , followersNextHref, followersRequestInProcess, fetchFollowersF
+      , favorites, favoritesRequestInProcess, fetchFavoritesF, followingsRequestInProcess
+      , favoritesNextHref
     } = this.props
 
     return (
@@ -58,7 +59,7 @@ class App extends Component {
             collections={favorites}
             requestInProcess={favoritesRequestInProcess}
             fetchMoreF={fetchFavoritesF}
-            {...this.props}
+            nextHref={favoritesNextHref}
           />
         </div>
       </div>

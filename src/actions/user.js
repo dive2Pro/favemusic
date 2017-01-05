@@ -5,6 +5,7 @@ import apiUrl, { addAccessToken, getLazyLoadingUrl } from '../utils/soundcloundA
 import Cookies from 'js-cookie'
 import * as actionTypes from '../constants/actionTypes'
 import { OAUTH_TOKEN } from '../constants/authentification'
+import { wrapInOrigin } from '../utils/track'
 
 export function setFollowers(followers) {
   return {
@@ -205,7 +206,7 @@ export function fetchFavoritesF(user, nextHref) {
       .then(response => response.json())
       .then(data => {
         console.info('data = ', data)
-        dispatch(mergeFavorites(data))
+        dispatch(mergeFavorites(data.map(wrapInOrigin)))
         dispatch(setFavoritesRequestInProcess(false))
         dispatch(setFavoritesNextHref(data.next_href))
       })

@@ -2,7 +2,6 @@
 import React from 'react'
 import Actions from './Actions'
 import { isSameTrackAndPlaying } from '../utils/player'
-import { wrapInOrigin } from '../utils/track'
 
 class TrackItem extends React.Component {
   props: basePropsType;
@@ -12,9 +11,8 @@ class TrackItem extends React.Component {
     const {
       permalink_url, artwork_url, title,
       comment_count, favoritings_count, playback_count
-    } = track
-    const activity = wrapInOrigin(track)
-    const isVisible = isSameTrackAndPlaying(activeTrack, activity, isPlaying)
+    } = track.origin
+    const isVisible = isSameTrackAndPlaying(activeTrack, track, isPlaying)
     const configuration = [
       {
         fn: () => activateTrack(activity),
@@ -43,7 +41,10 @@ class TrackItem extends React.Component {
             </div>
 
             <div className="item-content-info-item">
-              <i className="fa fa-heart" onClick={() => likeF(activity)}>&nbsp;{favoritings_count}</i>
+              <i
+                className="fa fa-heart"
+                onClick={() => likeF(activity)}
+              > &nbsp;{favoritings_count}</i>
             </div>
             <div className="item-content-info-item">
               <i className="fa fa-comment">&nbsp;{comment_count}</i>

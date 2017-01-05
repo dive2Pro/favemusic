@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="dbdcb83b-7f30-4463-b9a7-2efbdc64d2fa" name="Default" comment="feat()">
+    <list default="true" id="dbdcb83b-7f30-4463-b9a7-2efbdc64d2fa" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/decls/propsTypes.js" afterPath="$PROJECT_DIR$/decls/propsTypes.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/actions/auth.js" afterPath="$PROJECT_DIR$/src/actions/auth.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/actions/user.js" afterPath="$PROJECT_DIR$/src/actions/user.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/components/ItemList.jsx" afterPath="$PROJECT_DIR$/src/components/ItemList.jsx" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/components/TrackItem.jsx" afterPath="$PROJECT_DIR$/src/components/TrackItem.jsx" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/containers/DashboardContainer.jsx" afterPath="$PROJECT_DIR$/src/containers/DashboardContainer.jsx" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
@@ -32,26 +31,24 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="Track.jsx" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/components/Track.jsx">
+      <file leaf-file-name="DashboardContainer.jsx" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/containers/DashboardContainer.jsx">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="404">
-              <caret line="48" column="36" lean-forward="false" selection-start-line="48" selection-start-column="36" selection-end-line="48" selection-end-column="36" />
+            <state relative-caret-position="676">
+              <caret line="62" column="12" lean-forward="true" selection-start-line="62" selection-start-column="12" selection-end-line="62" selection-end-column="12" />
               <folding>
-                <element signature="e#0#40#0" expanded="true" />
+                <element signature="e#9#49#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="DashboardContainer.jsx" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/containers/DashboardContainer.jsx">
+      <file leaf-file-name="user.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/actions/user.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="666">
-              <caret line="56" column="27" lean-forward="true" selection-start-line="56" selection-start-column="27" selection-end-line="56" selection-end-column="27" />
-              <folding>
-                <element signature="e#9#49#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="104">
+              <caret line="6" column="59" lean-forward="false" selection-start-line="6" selection-start-column="59" selection-end-line="6" selection-end-column="59" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -69,32 +66,45 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="user.js" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/actions/user.js">
+      <file leaf-file-name="browse.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/actions/browse.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="352">
-              <caret line="61" column="3" lean-forward="true" selection-start-line="61" selection-start-column="3" selection-end-line="61" selection-end-column="3" />
+            <state relative-caret-position="295">
+              <caret line="41" column="59" lean-forward="false" selection-start-line="41" selection-start-column="47" selection-end-line="41" selection-end-column="59" />
+              <folding>
+                <element signature="e#9#63#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="track.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/utils/track.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="300">
+              <caret line="46" column="16" lean-forward="false" selection-start-line="46" selection-start-column="16" selection-end-line="46" selection-end-column="16" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="auth.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/actions/auth.js">
+      <file leaf-file-name="TrackItem.jsx" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/components/TrackItem.jsx">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="520">
-              <caret line="22" column="14" lean-forward="true" selection-start-line="22" selection-start-column="14" selection-end-line="22" selection-end-column="14" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="actionCreator.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/actions/actionCreator.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="182">
-              <caret line="9" column="38" lean-forward="true" selection-start-line="9" selection-start-column="38" selection-end-line="9" selection-end-column="38" />
-              <folding />
+            <state relative-caret-position="546">
+              <caret line="21" column="47" lean-forward="true" selection-start-line="21" selection-start-column="47" selection-end-line="21" selection-end-column="47" />
+              <folding>
+                <element signature="e#9#34#0" expanded="true" />
+                <marker date="1483607314603" expanded="true" signature="805:1758" ph="..." />
+                <marker date="1483607314603" expanded="true" signature="819:939" ph="..." />
+                <marker date="1483607314603" expanded="true" signature="835:924" ph="..." />
+                <marker date="1483607314603" expanded="true" signature="978:1672" ph="..." />
+                <marker date="1483607314603" expanded="true" signature="1024:1090" ph="..." />
+                <marker date="1483607314603" expanded="true" signature="1136:1657" ph="..." />
+                <marker date="1483607314603" expanded="true" signature="1189:1275" ph="..." />
+                <marker date="1483607314603" expanded="true" signature="1329:1499" ph="..." />
+                <marker date="1483607314603" expanded="true" signature="1552:1640" ph="..." />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -102,8 +112,8 @@
       <file leaf-file-name="ItemList.jsx" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/components/ItemList.jsx">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="520">
-              <caret line="62" column="27" lean-forward="true" selection-start-line="62" selection-start-column="27" selection-end-line="62" selection-end-column="27" />
+            <state relative-caret-position="286">
+              <caret line="11" column="6" lean-forward="false" selection-start-line="11" selection-start-column="6" selection-end-line="11" selection-end-column="6" />
               <folding>
                 <element signature="e#9#49#0" expanded="true" />
               </folding>
@@ -111,22 +121,14 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="track.scss" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/styles/components/track.scss">
+      <file leaf-file-name="Activities.jsx" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/components/Activities.jsx">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="364">
-              <caret line="14" column="17" lean-forward="false" selection-start-line="14" selection-start-column="17" selection-end-line="14" selection-end-column="17" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="userType.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/decls/userType.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="78">
-              <caret line="3" column="25" lean-forward="false" selection-start-line="3" selection-start-column="25" selection-end-line="3" selection-end-column="25" />
-              <folding />
+            <state relative-caret-position="-168">
+              <caret line="25" column="23" lean-forward="false" selection-start-line="25" selection-start-column="23" selection-end-line="25" selection-end-column="23" />
+              <folding>
+                <element signature="e#9#49#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -134,9 +136,21 @@
       <file leaf-file-name="propsTypes.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/decls/propsTypes.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="780">
-              <caret line="30" column="0" lean-forward="true" selection-start-line="30" selection-start-column="0" selection-end-line="30" selection-end-column="0" />
+            <state relative-caret-position="744">
+              <caret line="34" column="0" lean-forward="true" selection-start-line="34" selection-start-column="0" selection-end-line="34" selection-end-column="0" />
               <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="user.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/reducers/user.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="398">
+              <caret line="55" column="0" lean-forward="true" selection-start-line="55" selection-start-column="0" selection-end-line="55" selection-end-column="0" />
+              <folding>
+                <element signature="e#39#94#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -165,6 +179,16 @@
       <find>username</find>
       <find>favorites</find>
       <find>fetchActivitiesByGenre</find>
+      <find>Set_followings</find>
+      <find>InProcess</find>
+      <find>setFollowingsRequestInProcess</find>
+      <find>merge</find>
+      <find>RequestNextHref</find>
+      <find>followingsNextHref</find>
+      <find>fetchFollowingsF</find>
+      <find>fetch</find>
+      <find>followingsRequestInProcess</find>
+      <find>favoritesNextHref</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -204,11 +228,7 @@
         <option value="$PROJECT_DIR$/styles/index.scss" />
         <option value="$PROJECT_DIR$/styles/components/minitrack.scss" />
         <option value="$PROJECT_DIR$/styles/components/actions.scss" />
-        <option value="$PROJECT_DIR$/src/constants/actionTypes.js" />
-        <option value="$PROJECT_DIR$/src/reducers/user.js" />
         <option value="$PROJECT_DIR$/src/actions/track.js" />
-        <option value="$PROJECT_DIR$/src/actions/actionCreator.js" />
-        <option value="$PROJECT_DIR$/src/components/TrackItem.jsx" />
         <option value="$PROJECT_DIR$/config/webpack.config.dev.js" />
         <option value="$PROJECT_DIR$/public/index.html" />
         <option value="$PROJECT_DIR$/scripts/start.js" />
@@ -219,11 +239,15 @@
         <option value="$PROJECT_DIR$/src/utils/track.js" />
         <option value="$PROJECT_DIR$/styles/components/track.scss" />
         <option value="$PROJECT_DIR$/src/components/Track.jsx" />
-        <option value="$PROJECT_DIR$/src/components/ItemList.jsx" />
+        <option value="$PROJECT_DIR$/src/reducers/user.js" />
+        <option value="$PROJECT_DIR$/src/constants/actionTypes.js" />
         <option value="$PROJECT_DIR$/src/actions/auth.js" />
+        <option value="$PROJECT_DIR$/src/actions/actionCreator.js" />
+        <option value="$PROJECT_DIR$/src/components/ItemList.jsx" />
+        <option value="$PROJECT_DIR$/src/actions/user.js" />
+        <option value="$PROJECT_DIR$/src/components/TrackItem.jsx" />
         <option value="$PROJECT_DIR$/decls/propsTypes.js" />
         <option value="$PROJECT_DIR$/src/containers/DashboardContainer.jsx" />
-        <option value="$PROJECT_DIR$/src/actions/user.js" />
       </list>
     </option>
   </component>
@@ -607,7 +631,7 @@
       <workItem from="1483455672152" duration="3312000" />
       <workItem from="1483496573254" duration="13768000" />
       <workItem from="1483515760555" duration="13441000" />
-      <workItem from="1483588554337" duration="12214000" />
+      <workItem from="1483588554337" duration="14965000" />
     </task>
     <task id="LOCAL-00001" summary="followings to usermosaic &#10;fetch followers">
       <created>1483336890635</created>
@@ -756,11 +780,25 @@
       <option name="project" value="LOCAL" />
       <updated>1483603299772</updated>
     </task>
-    <option name="localTasksCounter" value="22" />
+    <task id="LOCAL-00022" summary="feat(favorities) pign">
+      <created>1483604854521</created>
+      <option name="number" value="00022" />
+      <option name="presentableId" value="LOCAL-00022" />
+      <option name="project" value="LOCAL" />
+      <updated>1483604854521</updated>
+    </task>
+    <task id="LOCAL-00023" summary="feat(followings) pign">
+      <created>1483606865292</created>
+      <option name="number" value="00023" />
+      <option name="presentableId" value="LOCAL-00023" />
+      <option name="project" value="LOCAL" />
+      <updated>1483606865292</updated>
+    </task>
+    <option name="localTasksCounter" value="24" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="64407000" />
+    <option name="totallyTimeSpent" value="67158000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -773,12 +811,12 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="52" width="1223" height="1028" extended-state="4" />
-    <editor active="true" />
+    <editor active="false" />
     <layout>
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32903227" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.28709677" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.28709677" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="npm" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32903227" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -844,23 +882,15 @@
     <MESSAGE value="visible state" />
     <MESSAGE value="like unlike" />
     <MESSAGE value="add duration and created_at" />
-    <option name="LAST_COMMIT_MESSAGE" value="add duration and created_at" />
+    <MESSAGE value="feat(favorities) pign" />
+    <MESSAGE value="feat(followings) pign" />
+    <option name="LAST_COMMIT_MESSAGE" value="feat(followings) pign" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/reducers/index.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <element signature="n#!!doc" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/reducers/environment.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="390">
@@ -992,30 +1022,11 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/constants/actionTypes.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="730">
-          <caret line="39" column="0" lean-forward="true" selection-start-line="39" selection-start-column="0" selection-end-line="39" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/utils/player.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="338">
           <caret line="13" column="0" lean-forward="true" selection-start-line="13" selection-start-column="0" selection-end-line="13" selection-end-column="0" />
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/reducers/user.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="562">
-          <caret line="62" column="8" lean-forward="false" selection-start-line="62" selection-start-column="8" selection-end-line="62" selection-end-column="8" />
-          <folding>
-            <element signature="e#39#94#0" expanded="true" />
-            <element signature="e#2531#4083#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1032,16 +1043,6 @@
         <state relative-caret-position="494">
           <caret line="19" column="0" lean-forward="true" selection-start-line="19" selection-start-column="0" selection-end-line="19" selection-end-column="0" />
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/Activities.jsx">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="300">
-          <caret line="25" column="23" lean-forward="false" selection-start-line="25" selection-start-column="23" selection-end-line="25" selection-end-column="23" />
-          <folding>
-            <element signature="e#9#49#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1082,45 +1083,6 @@
         <state relative-caret-position="26">
           <caret line="1" column="0" lean-forward="false" selection-start-line="1" selection-start-column="0" selection-end-line="1" selection-end-column="0" />
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/utils/soundcloundApi.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="352">
-          <caret line="16" column="1" lean-forward="true" selection-start-line="16" selection-start-column="1" selection-end-line="16" selection-end-column="1" />
-          <folding>
-            <element signature="e#39#70#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/actions/browse.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="476">
-          <caret line="33" column="27" lean-forward="true" selection-start-line="33" selection-start-column="27" selection-end-line="33" selection-end-column="27" />
-          <folding>
-            <element signature="e#9#63#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/TrackItem.jsx">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="572">
-          <caret line="43" column="0" lean-forward="false" selection-start-line="43" selection-start-column="0" selection-end-line="43" selection-end-column="0" />
-          <folding>
-            <element signature="e#9#34#0" expanded="true" />
-            <marker date="1483592571954" expanded="true" signature="888:1793" ph="..." />
-            <marker date="1483592571954" expanded="true" signature="902:1022" ph="..." />
-            <marker date="1483592571954" expanded="true" signature="918:1007" ph="..." />
-            <marker date="1483592571954" expanded="true" signature="1061:1707" ph="..." />
-            <marker date="1483592571954" expanded="true" signature="1107:1173" ph="..." />
-            <marker date="1483592571954" expanded="true" signature="1219:1692" ph="..." />
-            <marker date="1483592571954" expanded="true" signature="1272:1358" ph="..." />
-            <marker date="1483592571954" expanded="true" signature="1412:1534" ph="..." />
-            <marker date="1483592571954" expanded="true" signature="1587:1675" ph="..." />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1204,14 +1166,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/utils/track.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="676">
-          <caret line="62" column="20" lean-forward="true" selection-start-line="62" selection-start-column="20" selection-end-line="62" selection-end-column="20" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/styles/components/track.scss">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="364">
@@ -1238,6 +1192,70 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/utils/soundcloundApi.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="380">
+          <caret line="23" column="16" lean-forward="false" selection-start-line="23" selection-start-column="16" selection-end-line="23" selection-end-column="16" />
+          <folding>
+            <element signature="e#39#70#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/build/static/js/main.8a0c9dc4.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="300">
+          <caret line="1220" column="202" lean-forward="false" selection-start-line="1220" selection-start-column="202" selection-end-line="1220" selection-end-column="202" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/constants/actionTypes.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="182">
+          <caret line="7" column="37" lean-forward="false" selection-start-line="7" selection-start-column="37" selection-end-line="7" selection-end-column="37" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/actions/auth.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1420">
+          <caret line="65" column="0" lean-forward="false" selection-start-line="65" selection-start-column="0" selection-end-line="65" selection-end-column="0" />
+          <folding>
+            <element signature="e#39#94#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/actions/actionCreator.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="78">
+          <caret line="5" column="70" lean-forward="true" selection-start-line="5" selection-start-column="70" selection-end-line="5" selection-end-column="70" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/reducers/user.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="398">
+          <caret line="55" column="0" lean-forward="true" selection-start-line="55" selection-start-column="0" selection-end-line="55" selection-end-column="0" />
+          <folding>
+            <element signature="e#39#94#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/actions/browse.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="295">
+          <caret line="41" column="59" lean-forward="false" selection-start-line="41" selection-start-column="47" selection-end-line="41" selection-end-column="59" />
+          <folding>
+            <element signature="e#9#63#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/actions/track.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="234">
@@ -1249,55 +1267,76 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/actions/actionCreator.js">
+    <entry file="file://$PROJECT_DIR$/src/utils/track.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="182">
-          <caret line="9" column="38" lean-forward="true" selection-start-line="9" selection-start-column="38" selection-end-line="9" selection-end-column="38" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/decls/propsTypes.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="780">
-          <caret line="30" column="0" lean-forward="true" selection-start-line="30" selection-start-column="0" selection-end-line="30" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/ItemList.jsx">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="520">
-          <caret line="62" column="27" lean-forward="true" selection-start-line="62" selection-start-column="27" selection-end-line="62" selection-end-column="27" />
-          <folding>
-            <element signature="e#9#49#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/containers/DashboardContainer.jsx">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="666">
-          <caret line="56" column="27" lean-forward="true" selection-start-line="56" selection-start-column="27" selection-end-line="56" selection-end-column="27" />
-          <folding>
-            <element signature="e#9#49#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/actions/auth.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="520">
-          <caret line="22" column="14" lean-forward="true" selection-start-line="22" selection-start-column="14" selection-end-line="22" selection-end-column="14" />
+        <state relative-caret-position="300">
+          <caret line="46" column="16" lean-forward="false" selection-start-line="46" selection-start-column="16" selection-end-line="46" selection-end-column="16" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/actions/user.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="352">
-          <caret line="61" column="3" lean-forward="true" selection-start-line="61" selection-start-column="3" selection-end-line="61" selection-end-column="3" />
+        <state relative-caret-position="104">
+          <caret line="6" column="59" lean-forward="false" selection-start-line="6" selection-start-column="59" selection-end-line="6" selection-end-column="59" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/TrackItem.jsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="546">
+          <caret line="21" column="47" lean-forward="true" selection-start-line="21" selection-start-column="47" selection-end-line="21" selection-end-column="47" />
+          <folding>
+            <element signature="e#9#34#0" expanded="true" />
+            <marker date="1483607314603" expanded="true" signature="805:1758" ph="..." />
+            <marker date="1483607314603" expanded="true" signature="819:939" ph="..." />
+            <marker date="1483607314603" expanded="true" signature="835:924" ph="..." />
+            <marker date="1483607314603" expanded="true" signature="978:1672" ph="..." />
+            <marker date="1483607314603" expanded="true" signature="1024:1090" ph="..." />
+            <marker date="1483607314603" expanded="true" signature="1136:1657" ph="..." />
+            <marker date="1483607314603" expanded="true" signature="1189:1275" ph="..." />
+            <marker date="1483607314603" expanded="true" signature="1329:1499" ph="..." />
+            <marker date="1483607314603" expanded="true" signature="1552:1640" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/Activities.jsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-168">
+          <caret line="25" column="23" lean-forward="false" selection-start-line="25" selection-start-column="23" selection-end-line="25" selection-end-column="23" />
+          <folding>
+            <element signature="e#9#49#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/ItemList.jsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="286">
+          <caret line="11" column="6" lean-forward="false" selection-start-line="11" selection-start-column="6" selection-end-line="11" selection-end-column="6" />
+          <folding>
+            <element signature="e#9#49#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/decls/propsTypes.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="744">
+          <caret line="34" column="0" lean-forward="true" selection-start-line="34" selection-start-column="0" selection-end-line="34" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/containers/DashboardContainer.jsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="676">
+          <caret line="62" column="12" lean-forward="true" selection-start-line="62" selection-start-column="12" selection-end-line="62" selection-end-column="12" />
+          <folding>
+            <element signature="e#9#49#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
