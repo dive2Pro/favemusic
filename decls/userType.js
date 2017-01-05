@@ -1,6 +1,8 @@
 declare type originType = {
   tag_list: string,
-  user: UserType
+  user: UserType,
+  user_favorite,
+  id: number
 }
 declare type ActivityType = {
   origin: originType

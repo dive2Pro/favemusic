@@ -5,6 +5,7 @@ import { init, login, logout } from './auth'
 import { togglePlaylist } from './environment'
 import { fetchActivities, fetchFollowers } from './user'
 import { fetchActivitiesByGenre } from './browse'
+import { likeF } from './track'
 import {
   togglePlayTrack, activeIterateTrack,
   activateTrack, removeTrackFromPlaylist, addTrackToPlaylist
@@ -22,5 +23,6 @@ export {
   addTrackToPlaylist,
   activeIterateTrack,
   removeTrackFromPlaylist,
-  fetchActivitiesByGenre
+  fetchActivitiesByGenre,
+  likeF
 }

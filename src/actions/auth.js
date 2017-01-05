@@ -54,7 +54,7 @@ export function init() {
   return dispatch => {
     const oauth_token = Cookies.get(OAUTH_TOKEN)
     console.info('oauth_token = ', oauth_token)
-    if (oauth_token !== null && oauth_token !== 'null') {
+    if (oauth_token !== undefined && oauth_token !== null && oauth_token !== 'null') {
       dispatch(fetchUser(oauth_token))
     } else {
       console.info('dispatch - --', routerActions)

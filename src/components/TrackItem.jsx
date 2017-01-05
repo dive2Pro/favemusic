@@ -8,7 +8,7 @@ class TrackItem extends React.Component {
   props: basePropsType;
 
   render() {
-    const { track, activateTrack, activeTrack, isPlaying, addTrackToPlaylist } = this.props
+    const { track, activateTrack, activeTrack, isPlaying, addTrackToPlaylist, likeF } = this.props
     const {
       permalink_url, artwork_url, title,
       comment_count, favoritings_count, playback_count
@@ -43,7 +43,7 @@ class TrackItem extends React.Component {
             </div>
 
             <div className="item-content-info-item">
-              <i className="fa fa-heart">&nbsp;{favoritings_count}</i>
+              <i className="fa fa-heart" onClick={() => likeF(activity)}>&nbsp;{favoritings_count}</i>
             </div>
             <div className="item-content-info-item">
               <i className="fa fa-comment">&nbsp;{comment_count}</i>

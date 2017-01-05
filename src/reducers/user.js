@@ -2,7 +2,7 @@
  * Created by hyc on 16-12-31.
  */
 import * as actionTypes from '../constants/actionTypes'
-
+import { isSameTrack } from '../utils/player'
 function mergeFollowings(state, receivefollowings) {
   const followings = [...state.followings, ...receivefollowings]
   return Object.assign({}, state, { followings })
@@ -68,9 +68,21 @@ const initialState = {
   favoritesRequestInProcess: false,
 }
 
-
 function fromJS(json) {
   return json
+}
+function addToFavorites(state, track) {
+  const favorites = { ...state.favorites, track }
+  return Object.assign({}, state, { favorites })
+}
+
+function removeFromFavorites(state, track) {
+  const index = state.favorites.findIndex(isSameTrack(track))
+  const favorites = [
+    ...state.favorites.slice(0, index),
+    ...state.favorites.slice(index + 1)
+  ]
+  return Object.assign({}, state, { favorites })
 }
 
 export default function (state = initialState, action) {
@@ -108,6 +120,10 @@ export default function (state = initialState, action) {
     case actionTypes.MERGE_FAVORITES:
       return mergeFavorites(state, action.favorites)
 
+    case actionTypes.ADD_TO_FAVORITES:
+      return addToFavorites(state, action.track)
+    case actionTypes.REMOVE_FROM_FAVORITES:
+      return removeFromFavorites(state, action.track)
     default:
       return state
   }

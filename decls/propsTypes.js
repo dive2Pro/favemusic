@@ -24,5 +24,6 @@ declare type basePropsType = {
   activitiesByGenreInProcess: boolean,
   init: ()=>void,
   fetchFollowers: ()=>void,
-  activateTrack: (track:TrackType)=>void
+  activateTrack: (track: TrackType)=>void,
+  likeF: (track: TrackType)=>void
 };

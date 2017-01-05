@@ -9,7 +9,7 @@ type MosaicpropsType = {
   requestInProcess: ?boolean
 };
 
-class UserMosaic extends Component {
+class ItemList extends Component {
   props: MosaicpropsType;
   state: { isMoreToggled: boolean };
   toggleMore: ()=>void;
@@ -116,8 +116,8 @@ class UserMosaic extends Component {
   }
 }
 
-UserMosaic.defaultProps = {
+ItemList.defaultProps = {
   isMoreToggled: false
 }
 
-export default UserMosaic
+export default ItemList

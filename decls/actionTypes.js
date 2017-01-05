@@ -27,4 +27,3 @@ declare type BrowseSetInProcessfActionType = {
   inProcess: boolean
 };
 
-
