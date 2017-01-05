@@ -13,14 +13,6 @@ function mergeActivities(state, receiveactivities) {
   return Object.assign({}, state, { activities })
 }
 
-function setActivitiesRequestNextHref(state, nextHref) {
-  return Object.assign({}, state, { activitiesNextHref: nextHref })
-}
-function setFollowingsRequestNextHref(state, nextHref) {
-  return Object.assign({}, state, { followingsNextHref: nextHref })
-}
-
-
 function mergeFollowers(state, receivefollowers) {
   const followers = [...state.followers, ...receivefollowers]
   return Object.assign({}, state, { followers })
@@ -31,15 +23,6 @@ function mergeFavorites(state, receivefavorites) {
 
   return Object.assign({}, state, { favorites })
 }
-
-function setFollowersRequestNextHref(state, nextHref) {
-  return Object.assign({}, state, { followersNextHref: nextHref })
-}
-
-function setFavoritesRequestNextHref(state, nextHref) {
-  return Object.assign({}, state, { favoritesNextHref: nextHref })
-}
-
 
 function setFollowers(state, followers) {
   return Object.assign({}, state, { followers })
@@ -61,10 +44,6 @@ const initialState = {
   , followings: []
   , followers: []
   , favorites: []
-  , followingsNextHref: null
-  , activitiesNextHref: null
-  , followersNextHref: null
-  , favoritesNextHref: null
 }
 
 function fromJS(json) {
@@ -94,16 +73,6 @@ export default function (state = initialState, action) {
       return mergeActivities(state, fromJS(action.activities))
     case actionTypes.MERGE_FOLLOWERS:
       return mergeFollowers(state, fromJS(action.followers))
-
-    case actionTypes.SET_FOLLOWINGS_REQUEST_NEXT_HREF:
-      return setFollowingsRequestNextHref(state, action.nextHref)
-    case actionTypes.SET_ACTIVITIES_REQUEST_NEXT_HREF:
-      return setActivitiesRequestNextHref(state, action.nextHref)
-    case actionTypes.SET_FOLLOWERS_REQUEST_NEXT_HREF:
-      return setFollowersRequestNextHref(state, action.nextHref)
-    case actionTypes.SET_FAVORITES_REQUEST_NEXT_HREF:
-      return setFavoritesRequestNextHref(state, action.nextHref)
-
     case actionTypes.SET_ACTIVITIES:
       return setActivities(state, fromJS(action.activities))
     case actionTypes.SET_FOLLOWINGS:
@@ -112,7 +81,6 @@ export default function (state = initialState, action) {
       return setFollowers(state, fromJS(action.followers))
     case actionTypes.SET_FAVORITES:
       return setFavorites(state, fromJS(action.favorites))
-
 
     case actionTypes.ADD_TO_FAVORITES:
       return addToFavorites(state, action.track)

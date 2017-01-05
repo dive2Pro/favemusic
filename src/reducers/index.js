@@ -6,6 +6,7 @@ import auth from './auth'
 import user from './user'
 import browse from './browse'
 import request from './request'
+import paginate from './paginate'
 import environment from './environment'
 import { routerReducer } from 'react-router-redux'
 import player from './player'
@@ -19,6 +20,7 @@ export default combineReducers({
   , environment
   , request
   , browse
+  , paginate
   , routing: routerReducer
 
 })

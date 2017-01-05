@@ -31,3 +31,9 @@ declare type RequestType<T> = {
   , requestType:string
   , inProcess: boolean
 }
+
+declare type PaginateActionType<T> = {
+  type:Action
+  , paginateLink:string
+  , nextHref:string
+}

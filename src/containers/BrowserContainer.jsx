@@ -12,8 +12,8 @@ class BrowserContainer extends Component {
   props: basePropsType;
 
   fetchActivitiesByGenreFunc() {
-    const { fetchActivitiesByGenre, genre, activitiesByGenreNextHref } = this.props
-    const nextHref = activitiesByGenreNextHref[genre]
+    const { fetchActivitiesByGenre, genre, paginateObject } = this.props
+    const nextHref = paginateObject[genre]
     fetchActivitiesByGenre(nextHref, genre)
   }
 
@@ -76,12 +76,12 @@ class BrowserContainer extends Component {
 
 function mapStateToProps(state: Object, routeState: Object) {
   // console.info('ownProps = ', ownProps)
-  const { browse, player, request } = state
+  const { browse, player, request, paginate } = state
   return {
     activitiesByGenre: browse.activitiesByGenre
-    , activitiesByGenreNextHref: browse.activitiesByGenreNextHref
-    , activateTrack: player.activeTrack
     , genre: routeState.location.query.genre
+    , paginateObject: paginate.paginateObject
+    , activateTrack: player.activeTrack
     , pathname: routeState.location.pathname
     , requestInProcess: request.requestObject[ACTIVITIES_BYGENRE]
   }

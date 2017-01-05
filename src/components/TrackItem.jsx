@@ -9,18 +9,18 @@ class TrackItem extends React.Component {
   render() {
     const { track, activateTrack, activeTrack, isPlaying, addTrackToPlaylist, likeF } = this.props
     const {
-      permalink_url, artwork_url, title,
-      comment_count, favoritings_count, playback_count
+      permalink_url, artwork_url, title
+      , comment_count, favoritings_count, playback_count
     } = track.origin
     const isVisible = isSameTrackAndPlaying(activeTrack, track, isPlaying)
     const configuration = [
       {
-        fn: () => activateTrack(activity),
-        className: `fa ${isVisible ? "fa fa-pause" : "fa fa-play"}`
-      },
-      {
-        fn: () => addTrackToPlaylist(activity),
-        className: "fa fa-list"
+        fn: () => activateTrack(activity)
+        , className: `fa ${isVisible ? "fa fa-pause" : "fa fa-play"}`
+      }
+      , {
+        fn: () => addTrackToPlaylist(activity)
+        , className: "fa fa-list"
       }
     ]
     return (

@@ -3,15 +3,8 @@ import { unauthApiUrl } from '../utils/soundcloundApi'
 import * as actionTypes from '../constants/actionTypes'
 import { wrapInOrigin } from '../utils/track'
 import { setRequestTypeInProcess } from './request'
+import { setPaginateLink } from './paginate'
 import * as requestTypes from '../constants/requestTypes'
-
-function setActivitiesByGenreNextHref(next_href: string, genre: string) {
-  return {
-    type: actionTypes.SET_ACTIVITIES_BY_GENRE_NEXT_HREF
-    , nextHref: next_href
-    , genre
-  }
-}
 
 function mergeActivitiesByGenre(activities: Array<*>) {
   return {
@@ -25,7 +18,7 @@ export function fetchActivitiesByGenre(nextHref: string, genre: string) {
     const initHref = unauthApiUrl(
       `tracks?linked_partitioning=1&limit=50&offset=0&tags=${genre}`, '&')
     const url = nextHref || initHref
-    const requestInprocess = getState().request[requestTypes.ACTIVITIES_BYGENRE]
+    const requestInprocess = getState().request.requestObject[requestTypes.ACTIVITIES_BYGENRE]
     if (requestInprocess) {
       return;
     }
@@ -35,7 +28,7 @@ export function fetchActivitiesByGenre(nextHref: string, genre: string) {
       .then((data: ResponseAfterToJSONType) => {
         const activities = data.collection.map(wrapInOrigin)
         dispatch(mergeActivitiesByGenre(activities))
-        dispatch(setActivitiesByGenreNextHref(data.next_href, genre))
+        dispatch(setPaginateLink(data.next_href, genre))
         dispatch(setRequestTypeInProcess(false, requestTypes.ACTIVITIES_BYGENRE))
       })
   }

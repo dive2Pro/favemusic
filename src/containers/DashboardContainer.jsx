@@ -9,6 +9,7 @@ import HeaderContainer from './HeaderContainer'
 import PlayerContainer from './PlayerContainer'
 import PlaylistContainer from './PlaylistContainer'
 import * as requestTypes from '../constants/requestTypes'
+import * as paginateLinkTypes from '../constants/paginateLinkTypes'
 
 class App extends Component {
   props: basePropsType;
@@ -23,7 +24,7 @@ class App extends Component {
     const {
       currentUser
       , followers, followings, favorites
-      , nextHref, followingsNextHref, followersNextHref, favoritesNextHref
+      , paginateObject
       , fetchActivities, fetchFollowingsF, fetchFollowersF, fetchFavoritesF
       , requestObject
     } = this.props
@@ -34,7 +35,7 @@ class App extends Component {
           <Activities
             {...this.props}
             requestInProcess={requestObject[requestTypes.ACTIVITIES]}
-            scrollFunc={() => fetchActivities(nextHref)}
+            scrollFunc={() => fetchActivities(requestObject[requestTypes.ACTIVITIES])}
           />
         </div>
         <div className="dashboard-content-side">
@@ -43,14 +44,14 @@ class App extends Component {
             collections={followings}
             kind="user"
             fetchMoreF={fetchFollowingsF}
-            nextHref={followingsNextHref}
+            nextHref={paginateObject[paginateLinkTypes.FOLLOWINGS]}
             requestInProcess={requestObject[requestTypes.FOLLOWINGS]}
           />
           <ItemList
             title="Followers"
             collections={followers}
             requestInProcess={requestObject[requestTypes.FOLLOWERS]}
-            nextHref={followersNextHref}
+            nextHref={paginateObject[paginateLinkTypes.FOLLOWERS]}
             fetchMoreF={fetchFollowersF}
             user={currentUser}
             kind="user"
@@ -61,7 +62,7 @@ class App extends Component {
             collections={favorites}
             requestInProcess={requestObject[requestTypes.FAVORITES]}
             fetchMoreF={fetchFavoritesF}
-            nextHref={favoritesNextHref}
+            nextHref={paginateObject[paginateLinkTypes.FAVORITES]}
           />
         </div>
       </div>
@@ -85,19 +86,18 @@ class App extends Component {
   }
 }
 function mapStateToProps(state: Object, routeState: Object) {
-  const { auth, user, player, request } = state
+  const { auth, user, player, request, paginate } = state
   console.info(state)
   return {
     currentUser: auth.user
     , followings: user.followings
     , activities: user.activities
     , favorites: user.favorites
-    , nextHref: user.activitiesNextHref
-    , followersNextHref: user.followersNextHref
     , requestObject: request.requestObject
     , followers: user.followers
     , isPlaying: player.isPlaying
     , activeTrack: player.activeTrack
+    , paginateObject: paginate.paginateObject
     , pathname: routeState.location.pathname
   }
 }

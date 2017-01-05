@@ -8,6 +8,9 @@ import { OAUTH_TOKEN } from '../constants/authentification'
 import { wrapInOrigin } from '../utils/track'
 import { setRequestTypeInProcess } from './request'
 import * as requestTypes from '../constants/requestTypes'
+import * as paginateLinkTypes from '../constants/paginateLinkTypes'
+import { setPaginateLink } from './paginate'
+
 export function setFollowers(followers) {
   return {
     type: actionTypes.SET_FOLLOWERS
@@ -62,20 +65,6 @@ function mergeFavorites(favorites) {
   }
 }
 
-function setFollowersRequestNexthref(nextHref) {
-  return {
-    type: actionTypes.SET_FOLLOWERS_REQUEST_NEXT_HREF
-    , nextHref
-  }
-}
-
-function setFollowingsRequestNexthref(nextHref) {
-  return {
-    type: actionTypes.SET_FOLLOWINGS_REQUEST_NEXT_HREF
-    , nextHref
-  }
-}
-
 export function fetchFollowersF(user, nextHref) {
   const accessToken = Cookies.get(OAUTH_TOKEN)
   const initHref = `followers?limit=20&offset=0&oauth_token=${accessToken}`
@@ -96,19 +85,12 @@ export function fetchFollowersF(user, nextHref) {
 
         if (data.nextHref) {
           console.log(data.nextHref);
-          dispatch(setFollowersRequestNexthref(data.nextHref))
+          dispatch(setPaginateLink(data.nextHref, paginateLinkTypes.FOLLOWERS))
         }
       })
       .catch(() => {
         dispatch(setRequestTypeInProcess(false, requestTypes.FOLLOWERS))
       })
-  }
-}
-
-function setActivitiesNextHref(nextHref) {
-  return {
-    type: actionTypes.SET_ACTIVITIES_REQUEST_NEXT_HREF
-    , nextHref
   }
 }
 
@@ -125,7 +107,7 @@ export function fetchFollowingsF(user, nextHref) {
       .then(data => {
         dispatch(mergeFollowings(data.collection))
         dispatch(setRequestTypeInProcess(false, requestTypes.FOLLOWINGS))
-        dispatch(setFollowingsRequestNexthref(data.nextHref))
+        dispatch(setPaginateLink(data.nextHref, paginateLinkTypes.FOLLOWINGS))
       })
   }
 }
@@ -139,7 +121,7 @@ export function fetchActivities(nextHref) {
   }
 
   return (dispatch, getState) => {
-    const activitiesRequestInProcess = getState().request[requestTypes.ACTIVITIES]
+    const activitiesRequestInProcess = getState().request.requestObject[requestTypes.ACTIVITIES]
     if (activitiesRequestInProcess) {
       return;
     }
@@ -150,19 +132,12 @@ export function fetchActivities(nextHref) {
       .then(response => response.json())
       .then(data => {
         dispatch(mergeActivities(data.collection))
-        dispatch(setActivitiesNextHref(data.next_href))
+        dispatch(setPaginateLink(data.next_href, paginateLinkTypes.ACTIVITIES))
         dispatch(setRequestTypeInProcess(false, requestTypes.ACTIVITIES))
       })
       .catch(() => {
         dispatch(setRequestTypeInProcess(false, requestTypes.ACTIVITIES))
       })
-  }
-}
-
-function setFavoritesNextHref(nextHref) {
-  return {
-    type: actionTypes.SET_FAVORITES_REQUEST_NEXT_HREF
-    , nextHref
   }
 }
 
@@ -179,7 +154,7 @@ export function fetchFavoritesF(user, nextHref) {
       .then(data => {
         console.info('data = ', data)
         dispatch(mergeFavorites(data.map(wrapInOrigin)))
-        dispatch(setFavoritesNextHref(data.next_href))
+        dispatch(setFollowersRequestNexthref(data.next_href, paginateLinkTypes.FAVORITES))
         dispatch(setRequestTypeInProcess(false, requestTypes.FAVORITES))
       })
       .catch(() => {
