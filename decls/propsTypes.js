@@ -20,10 +20,11 @@ declare type basePropsType = {
   fetchActivitiesByGenre: (nextHref: string, genre: string)=>void,
   addTrackToPlaylist:(track: TrackType)=>void,
   activitiesByGenreNextHref:{},
-  activitiesByGenre: string,
-  activitiesByGenreInProcess: boolean,
-  init: ()=>void,
-  fetchFollowers: ()=>void,
-  activateTrack: (track: TrackType)=>void,
-  likeF: (track: TrackType)=>void
+  activitiesByGenre: string
+  , activitiesByGenreInProcess: boolean
+  , init: ()=>void
+  , fetchFollowers: ()=>void
+  , activateTrack: (track: TrackType)=>void
+  , likeF: (track: TrackType)=>void
+  , fetchFavoritesF:(user: UserType, nextHref: String)=>void
 };

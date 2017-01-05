@@ -68,13 +68,13 @@ class ItemList extends Component {
   }
 
   renderNextButton() {
-    const { followersNextHref, fetchFollowers, user } = this.props
+    const { followersNextHref, fetchMoreF, user } = this.props
     if (!followersNextHref || this.isMoreToggled) {
       return (
         <div>
           <button
             className="ghost"
-            onClick={() => fetchFollowers(user, followersNextHref)}
+            onClick={() => fetchMoreF(user, followersNextHref)}
           >LoadMore
           </button>
         </div>

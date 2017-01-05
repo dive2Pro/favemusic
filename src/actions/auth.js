@@ -16,7 +16,7 @@ import {
   fetchFollowings,
   fetchActivities,
   fetchFollowers,
-  fetchFavorites,
+  fetchFavoritesF,
   setFollowings,
   setFollowers,
   setActivities
@@ -46,7 +46,7 @@ function fetchUser() {
         dispatch(fetchFollowings(me))
         dispatch(fetchFollowers(me))
         dispatch(fetchActivities())
-        dispatch(fetchFavorites(me))
+        dispatch(fetchFavoritesF(me))
       })
   }
 }

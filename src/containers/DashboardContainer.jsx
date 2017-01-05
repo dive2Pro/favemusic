@@ -22,7 +22,7 @@ class App extends Component {
     const {
       currentUser, fetchActivities, nextHref, followers,
       followings, followersNextHref, followersRequestInProcess, fetchFollowers,
-      favorites, favoritesRequestInProcess
+      favorites, favoritesRequestInProcess, fetchFavoritesF
     } = this.props
 
     return (
@@ -44,7 +44,7 @@ class App extends Component {
             collections={followers}
             requestInProcess={followersRequestInProcess}
             followersNextHref={followersNextHref}
-            fetchFollowers={fetchFollowers}
+            fetchMoreF={fetchFollowers}
             user={currentUser}
             kind="user"
           />
@@ -53,6 +53,7 @@ class App extends Component {
             kind="track"
             collections={favorites}
             requestInProcess={favoritesRequestInProcess}
+            fetchMoreF={fetchFavoritesF}
             {...this.props}
           />
         </div>
@@ -80,19 +81,19 @@ function mapStateToProps(state: Object, routeState: Object) {
   const { auth, user, player } = state
   console.info(state)
   return {
-    currentUser: auth.user,
-    followings: user.followings,
-    activities: user.activities,
-    favorites: user.favorites,
-    nextHref: user.activitiesNextHref,
-    activitiesRequestInProcess: user.activitiesRequestInProcess,
-    followersNextHref: user.followersNextHref,
-    followersRequestInProcess: user.followersRequestInProcess,
-    favoritesRequestInProcess: user.favoritesRequestInProcess,
-    followers: user.followers,
-    isPlaying: player.isPlaying,
-    activeTrack: player.activeTrack,
-    pathname: routeState.location.pathname
+    currentUser: auth.user
+    , followings: user.followings
+    , activities: user.activities
+    , favorites: user.favorites
+    , nextHref: user.activitiesNextHref
+    , activitiesRequestInProcess: user.activitiesRequestInProcess
+    , followersNextHref: user.followersNextHref
+    , followersRequestInProcess: user.followersRequestInProcess
+    , favoritesRequestInProcess: user.favoritesRequestInProcess
+    , followers: user.followers
+    , isPlaying: player.isPlaying
+    , activeTrack: player.activeTrack
+    , pathname: routeState.location.pathname
   }
 }
 
