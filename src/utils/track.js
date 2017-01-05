@@ -1,8 +1,10 @@
+import moment from 'moment'
+
 const ACTIVITY_TYPES = {
-  trackRepost: 'track-repost',
-  playlistRepost: 'playlist-repost',
-  playlist: 'playlist',
-  track: 'track'
+  trackRepost: 'track-repost'
+  , playlistRepost: 'playlist-repost'
+  , playlist: 'playlist'
+  , track: 'track'
 }
 
 export function getTrackIcon(type) {
@@ -38,14 +40,26 @@ export function normalizeSamples(samples) {
   return newSamples
 }
 
-
 export function isJsonWaveform(waveform_url) {
   return waveform_url.indexOf('.json') !== -1
 }
 
 export function wrapInOrigin(activity: ActivityType) {
   return {
-    origin: activity,
-    type: 'track'
+    origin: activity
+    , type: 'track'
   }
+}
+
+export function durationFormat(ms) {
+  const duration = moment.duration(ms)
+  if (duration.asHours() > 1) {
+    return Math.floor(duration.asHours()) + moment.utc(duration.asMilliseconds()).format(":mm:ss")
+  } else {
+    return moment.utc(duration.asMilliseconds()).format('mm:ss')
+  }
+}
+
+export function fromNow(createAt) {
+  return moment(createAt).fromNow(true)
 }

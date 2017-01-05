@@ -8,7 +8,6 @@ const url = require('url');
 const paths = require('./paths');
 const getClientEnvironment = require('./env');
 
-
 function ensureSlash(path, needsSlash) {
   const hasSlash = path.endsWith('/');
   if (hasSlash && !needsSlash) {

@@ -8,6 +8,7 @@
     "camelcase": 0,
     "default-case": 0,
     "comma-dangle": 0,
+    "comma-style":[1,"first"],
     "consistent-return": 0,
     "no-new": 0,
     "prefer-template": 0,
@@ -15,6 +16,7 @@
     "new-cap": 0,
     "no-else-return": 0,
     "semi": 0,
+    "import/no-unresolved":0,
     "max-len": [
       1,
       120,

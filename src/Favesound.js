@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component } from 'react'
 import store, { reduxHistory } from './store'
 import { Router, Route, IndexRoute, applyRouterMiddleware } from 'react-router'
 import { Provider } from 'react-redux'

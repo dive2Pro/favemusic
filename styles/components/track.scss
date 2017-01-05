@@ -3,23 +3,33 @@
   display: flex;
   margin: ($padding/2) 0;
   background: $backgroundSecondary;
-  border:$border;
+  border: $border;
+  height: 80px;
   &-content {
-    width: 100%;
-    height: 80px;
-    padding: ($padding/2);
+    width: 90%;
+    padding: ($padding/8);
     display: flex;
     flex-direction: column;
     position: relative;
     justify-content: space-between;
+    height: 80px;
+    &-img {
+      overflow: hidden;
+    }
+    &-name,
+    &-meta {
+      display: flex;
+      justify-content: space-between;
+      width: 90%;
+    }
     &-waveform {
       opacity: 0.2;
       pointer-events: none;
-      margin: ($padding/8) 0;
-
+      padding: ($padding/8) 0;
+      display: flex;
       &-json {
         width: 90%;
-        height: 40px;
+        height: 20px;
       }
 
     }

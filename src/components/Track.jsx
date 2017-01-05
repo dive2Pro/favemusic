@@ -1,7 +1,15 @@
 import React, { Component } from 'react'
-import { getTrackIcon, normalizeSamples, isNotTrack, isJsonWaveform } from '../utils/track'
+import {
+  getTrackIcon,
+  normalizeSamples,
+  isNotTrack,
+  isJsonWaveform,
+  fromNow,
+  durationFormat
+} from '../utils/track'
 import { isSameTrackAndPlaying } from '../utils/player.js'
-import Waveform from 'waveform.js';
+import Waveform from 'waveform.js'
+
 export default class Track extends Component {
 
   constructor(props) {
@@ -41,16 +49,13 @@ export default class Track extends Component {
   renderImage(artwork_url, title, avatar_url) {
     return (
       <div>
-        <img src={artwork_url || avatar_url} alt={title} height="90" width="90" />
+        <img src={artwork_url || avatar_url} alt={title} height="80" width="80" />
       </div>
     )
   }
 
-  renderWaveform(id, idx, waveform_url) {
-    if (!waveform_url) return
-    if (isJsonWaveform(waveform_url)) {
-      return (<div id={`waveform-${id}-${idx}`} className="track-content-waveform-json"></div>)
-    }
+  renderWaveform(id, idx) {
+    return (<div id={`waveform-${id}-${idx}`} className="track-content-waveform-json"></div>)
   }
 
   renderActions(activity, activateTrack, isPlaying) {
@@ -86,8 +91,8 @@ export default class Track extends Component {
     if (!origin) return (<div></div>)
     const {
       user, title, permalink_url, artwork_url, playback_count,
-      comment_count, download_count, likes_count, reposts_count, id,
-      waveform_url
+      comment_count, download_count, likes_count, reposts_count, id
+      , duration, created_at
     } = origin
     const { avatar_url, username } = user
 
@@ -99,11 +104,19 @@ export default class Track extends Component {
 
         <div className="track-content">
           <div className="track-content-name">
-            <a href={permalink_url}>
-              <i className={getTrackIcon(type)}> </i> &nbsp; {username} - {title}</a>
+            <div><a href={user.permalink_url}>{username}></a></div>
+            <div>{fromNow(created_at)}</div>
+          </div>
+          <div className="track-content-meta">
+            <div>
+              <a href={permalink_url}>
+                <i className={getTrackIcon(type)}>&nbsp;{title} </i>
+              </a>
+            </div>
+            <div>{durationFormat(duration)}</div>
           </div>
           <div className="track-content-waveform">
-            {this.renderWaveform(id, idx, waveform_url, title)}
+            {this.renderWaveform(id, idx)}
           </div>
           <div className="track-content-info">
             <div className="track-content-info-item">
@@ -124,7 +137,8 @@ export default class Track extends Component {
           </div>
         </div>
         {this.renderActions(activity, activateTrack, isPlaying)}
-      </div>
+      </
+        div >
     )
   }
 }

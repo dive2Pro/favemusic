@@ -1,8 +1,10 @@
 declare type originType = {
-  tag_list: string,
-  user: UserType,
-  user_favorite,
-  id: number
+  tag_list: string
+  , user: UserType
+  , user_favorite:boolean
+  , id: number
+  , duration:number
+  , create_at: string
 }
 declare type ActivityType = {
   origin: originType
