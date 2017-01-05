@@ -1,4 +1,3 @@
-
 declare type Action<T> = {
   type: T
 }
@@ -27,3 +26,8 @@ declare type BrowseSetInProcessfActionType = {
   inProcess: boolean
 };
 
+declare type RequestType<T> = {
+  type:Action
+  , requestType:string
+  , inProcess: boolean
+}

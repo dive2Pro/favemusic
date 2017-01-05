@@ -78,12 +78,12 @@ function mapStateToProps(state: Object, routeState: Object) {
   // console.info('ownProps = ', ownProps)
   const { browse, player } = state
   return {
-    activitiesByGenreInProcess: browse.activitiesByGenreInProcess,
-    activitiesByGenre: browse.activitiesByGenre,
-    activitiesByGenreNextHref: browse.activitiesByGenreNextHref,
-    activateTrack: player.activeTrack,
-    genre: routeState.location.query.genre,
-    pathname: routeState.location.pathname
+    activitiesByGenreInProcess: browse.activitiesByGenreInProcess
+    , activitiesByGenre: browse.activitiesByGenre
+    , activitiesByGenreNextHref: browse.activitiesByGenreNextHref
+    , activateTrack: player.activeTrack
+    , genre: routeState.location.query.genre
+    , pathname: routeState.location.pathname
   }
 }
 

@@ -6,7 +6,8 @@ import Cookies from 'js-cookie'
 import * as actionTypes from '../constants/actionTypes'
 import { OAUTH_TOKEN } from '../constants/authentification'
 import { wrapInOrigin } from '../utils/track'
-
+import { setRequestTypeInProcess } from './request'
+import * as requestTypes from '../constants/requestTypes'
 export function setFollowers(followers) {
   return {
     type: actionTypes.SET_FOLLOWERS
@@ -61,19 +62,6 @@ function mergeFavorites(favorites) {
   }
 }
 
-function setFollowersRequestInProcess(inProcess) {
-  return {
-    type: actionTypes.SET_FOLLOWERS_REQUEST_IN_PROCESS
-    , inProcess
-  }
-}
-function setFollowingsRequestInProcess(inProcess) {
-  return {
-    type: actionTypes.SET_FOLLOWINGS_REQUEST_IN_PROCESS
-    , inProcess
-  }
-}
-
 function setFollowersRequestNexthref(nextHref) {
   return {
     type: actionTypes.SET_FOLLOWERS_REQUEST_NEXT_HREF
@@ -94,17 +82,17 @@ export function fetchFollowersF(user, nextHref) {
   const followersUrl = getLazyLoadingUrl(user, nextHref, initHref)
 
   return (dispatch, getState) => {
-    const userState = getState().user
-    const isrequestFollowersInProcess = userState.requestFollowersInProcess
+    const request = getState().request
+    const isrequestFollowersInProcess = request.requestObject[requestTypes.FOLLOWERS]
     if (isrequestFollowersInProcess) return
 
-    dispatch(setFollowersRequestInProcess(true))
+    dispatch(setRequestTypeInProcess(true, requestTypes.FOLLOWERS))
 
     return fetch(followersUrl)
       .then(response => response.json())
       .then(data => {
         dispatch(mergeFollowers(data.collection))
-        dispatch(setFollowersRequestInProcess(false))
+        dispatch(setRequestTypeInProcess(false, requestTypes.FOLLOWERS))
 
         if (data.nextHref) {
           console.log(data.nextHref);
@@ -112,7 +100,7 @@ export function fetchFollowersF(user, nextHref) {
         }
       })
       .catch(() => {
-        dispatch(setFollowersRequestInProcess(false))
+        dispatch(setRequestTypeInProcess(false, requestTypes.FOLLOWERS))
       })
   }
 }
@@ -124,26 +112,19 @@ function setActivitiesNextHref(nextHref) {
   }
 }
 
-function setActivitiesRequestInProcess(inProcess) {
-  return {
-    type: actionTypes.SET_ACTIVITIES_REQUEST_IN_PROCESS
-    , inProcess
-  }
-}
-
 export function fetchFollowingsF(user, nextHref) {
   return (dispatch, getState) => {
     const accessToken = Cookies.get(OAUTH_TOKEN)
     const initHref = `followings?limit=20&offset=0&oauth_token=${accessToken}`
     const followingsUrl = getLazyLoadingUrl(user, nextHref, initHref)
-    const requestInProcess = getState().user.favoritesRequestInProcess
+    const requestInProcess = getState().request[requestTypes.FOLLOWINGS]
     if (requestInProcess) return ""
-    dispatch(setFollowingsRequestInProcess(true))
+    dispatch(setRequestTypeInProcess(true, requestTypes.FOLLOWINGS))
     return fetch(followingsUrl)
       .then(response => response.json())
       .then(data => {
         dispatch(mergeFollowings(data.collection))
-        dispatch(setFollowingsRequestInProcess(false))
+        dispatch(setRequestTypeInProcess(false, requestTypes.FOLLOWINGS))
         dispatch(setFollowingsRequestNexthref(data.nextHref))
       })
   }
@@ -158,22 +139,22 @@ export function fetchActivities(nextHref) {
   }
 
   return (dispatch, getState) => {
-    const activitiesRequestInProcess = getState().user.activitiesRequestInProcess
+    const activitiesRequestInProcess = getState().request[requestTypes.ACTIVITIES]
     if (activitiesRequestInProcess) {
       return;
     }
     console.info('activitiesUrl = ', activitiesUrl)
-    dispatch(setActivitiesRequestInProcess(true))
+    dispatch(setRequestTypeInProcess(true, requestTypes.ACTIVITIES))
 
     return fetch(activitiesUrl)
       .then(response => response.json())
       .then(data => {
         dispatch(mergeActivities(data.collection))
         dispatch(setActivitiesNextHref(data.next_href))
-        dispatch(setActivitiesRequestInProcess(false))
+        dispatch(setRequestTypeInProcess(false, requestTypes.ACTIVITIES))
       })
       .catch(() => {
-        dispatch(setActivitiesRequestInProcess(false))
+        dispatch(setRequestTypeInProcess(false, requestTypes.ACTIVITIES))
       })
   }
 }
@@ -185,33 +166,24 @@ function setFavoritesNextHref(nextHref) {
   }
 }
 
-function setFavoritesRequestInProcess(inProcess) {
-  return {
-    type: actionTypes.SET_FAVORITES_REQUEST_IN_PROCESS
-    , inProcess
-  }
-}
-
 export function fetchFavoritesF(user, nextHref) {
   return (dispatch, getState) => {
-    const favoritesRequestInProcess = getState().user.favoritesRequestInProcess
+    const favoritesRequestInProcess = getState().request[requestTypes.FAVORITES]
     if (favoritesRequestInProcess) {
       return;
     }
     const favoritesUrl = getLazyLoadingUrl(user, nextHref, 'favorites?limit=20&offset=0')
-    console.info('FavoritesUrl = ', favoritesUrl)
-    dispatch(setFavoritesRequestInProcess(true))
-
+    dispatch(setRequestTypeInProcess(true, requestTypes.FAVORITES))
     return fetch(favoritesUrl)
       .then(response => response.json())
       .then(data => {
         console.info('data = ', data)
         dispatch(mergeFavorites(data.map(wrapInOrigin)))
-        dispatch(setFavoritesRequestInProcess(false))
         dispatch(setFavoritesNextHref(data.next_href))
+        dispatch(setRequestTypeInProcess(false, requestTypes.FAVORITES))
       })
       .catch(() => {
-        dispatch(setFavoritesRequestInProcess(false))
+        dispatch(setRequestTypeInProcess(false, requestTypes.FAVORITES))
       })
   }
 }

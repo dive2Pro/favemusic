@@ -8,6 +8,7 @@ import Activities from '../components/Activities'
 import HeaderContainer from './HeaderContainer'
 import PlayerContainer from './PlayerContainer'
 import PlaylistContainer from './PlaylistContainer'
+import * as requestTypes from '../constants/requestTypes'
 
 class App extends Component {
   props: basePropsType;
@@ -20,11 +21,11 @@ class App extends Component {
 
   renderContent() {
     const {
-      currentUser, fetchActivities, nextHref, followers
-      , followings, followingsNextHref, fetchFollowingsF
-      , followersNextHref, followersRequestInProcess, fetchFollowersF
-      , favorites, favoritesRequestInProcess, fetchFavoritesF, followingsRequestInProcess
-      , favoritesNextHref
+      currentUser
+      , followers, followings, favorites
+      , nextHref, followingsNextHref, followersNextHref, favoritesNextHref
+      , fetchActivities, fetchFollowingsF, fetchFollowersF, fetchFavoritesF
+      , requestObject
     } = this.props
 
     return (
@@ -32,6 +33,7 @@ class App extends Component {
         <div className="dashboard-content-main">
           <Activities
             {...this.props}
+            requestInProcess={requestObject[requestTypes.ACTIVITIES]}
             scrollFunc={() => fetchActivities(nextHref)}
           />
         </div>
@@ -42,12 +44,12 @@ class App extends Component {
             kind="user"
             fetchMoreF={fetchFollowingsF}
             nextHref={followingsNextHref}
-            requestInProcess={followingsRequestInProcess}
+            requestInProcess={requestObject[requestTypes.FOLLOWINGS]}
           />
           <ItemList
             title="Followers"
             collections={followers}
-            requestInProcess={followersRequestInProcess}
+            requestInProcess={requestObject[requestTypes.FOLLOWERS]}
             nextHref={followersNextHref}
             fetchMoreF={fetchFollowersF}
             user={currentUser}
@@ -57,7 +59,7 @@ class App extends Component {
             title="Favorites"
             kind="track"
             collections={favorites}
-            requestInProcess={favoritesRequestInProcess}
+            requestInProcess={requestObject[requestTypes.FAVORITES]}
             fetchMoreF={fetchFavoritesF}
             nextHref={favoritesNextHref}
           />
@@ -83,7 +85,7 @@ class App extends Component {
   }
 }
 function mapStateToProps(state: Object, routeState: Object) {
-  const { auth, user, player } = state
+  const { auth, user, player, request } = state
   console.info(state)
   return {
     currentUser: auth.user
@@ -91,10 +93,8 @@ function mapStateToProps(state: Object, routeState: Object) {
     , activities: user.activities
     , favorites: user.favorites
     , nextHref: user.activitiesNextHref
-    , activitiesRequestInProcess: user.activitiesRequestInProcess
     , followersNextHref: user.followersNextHref
-    , followersRequestInProcess: user.followersRequestInProcess
-    , favoritesRequestInProcess: user.favoritesRequestInProcess
+    , requestObject: request.requestObject
     , followers: user.followers
     , isPlaying: player.isPlaying
     , activeTrack: player.activeTrack
