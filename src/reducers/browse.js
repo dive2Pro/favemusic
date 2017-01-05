@@ -2,21 +2,15 @@
 import * as actionTypes from '../constants/actionTypes'
 
 const initialState = {
-  activitiesByGenreInProcess: false,
-  activitiesByGenre: [],
-  activitiesByGenreNextHref: {},
-  activitiesCurrentGenre: null
+  activitiesByGenre: []
+  , activitiesByGenreNextHref: {}
+  , activitiesCurrentGenre: null
 }
 
 function mergeActivitiesByGenre(state: Map<*, *>, activities: Array<*>) {
   // return state.updateIn(['activitiesByGenre'], (list: List<*>) => list.concat(activities))
   const activitiesByGenre = [...state.activitiesByGenre, ...activities]
   return Object.assign({}, state, { activitiesByGenre })
-}
-
-function setActivitiesByGenreRequestInProcess(state: Map<string, *>, inProcess: boolean) {
-  // return state.set('activitiesByGenreInProcess', inProcess)
-  return Object.assign({}, state, { activitiesByGenreInProcess: inProcess })
 }
 
 function setActivitiesByGenreNextHref(state: Map<string, *>, action: BrowseSetNextHrefActionType) {
@@ -30,8 +24,6 @@ export default function browse(state: Map<string, *> = initialState, action: Bro
   switch (action.type) {
     case actionTypes.MERGE_ACTIVITIES_BY_GENRE:
       return mergeActivitiesByGenre(state, action.activities)
-    case actionTypes.SET_ACTIVITIES_BY_GENRE_REQUEST_IN_PROCESS:
-      return setActivitiesByGenreRequestInProcess(state, action.inProcess)
     case actionTypes.SET_ACTIVITIES_BY_GENRE_NEXT_HREF:
       return setActivitiesByGenreNextHref(state, action)
     default:

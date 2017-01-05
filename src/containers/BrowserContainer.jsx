@@ -7,7 +7,7 @@ import PlayerContainer from './PlayerContainer'
 import PlaylistContainer from './PlaylistContainer'
 import Activities from '../components/Activities'
 import { DEFAULT_GENRE } from '../constants/genre'
-
+import { ACTIVITIES_BYGENRE } from '../constants/requestTypes'
 class BrowserContainer extends Component {
   props: basePropsType;
 
@@ -41,7 +41,7 @@ class BrowserContainer extends Component {
 
   renderInnerComopnent() {
     const {
-      activitiesByGenreInProcess, activitiesByGenre, activateTrack,
+      requestInProcess, activitiesByGenre, activateTrack,
       addTrackToPlaylist, genre, isPlaying
     } = this.props
     if (!activitiesByGenre) return
@@ -51,7 +51,7 @@ class BrowserContainer extends Component {
       <div>
         <Activities
           activities={filteredActivitiesByGenre}
-          activitiesRequestInProcess={activitiesByGenreInProcess}
+          requestInProcess={requestInProcess}
           activateTrack={activateTrack}
           isPlaying={isPlaying}
           addTrackToPlaylist={addTrackToPlaylist}
@@ -76,14 +76,14 @@ class BrowserContainer extends Component {
 
 function mapStateToProps(state: Object, routeState: Object) {
   // console.info('ownProps = ', ownProps)
-  const { browse, player } = state
+  const { browse, player, request } = state
   return {
-    activitiesByGenreInProcess: browse.activitiesByGenreInProcess
-    , activitiesByGenre: browse.activitiesByGenre
+    activitiesByGenre: browse.activitiesByGenre
     , activitiesByGenreNextHref: browse.activitiesByGenreNextHref
     , activateTrack: player.activeTrack
     , genre: routeState.location.query.genre
     , pathname: routeState.location.pathname
+    , requestInProcess: request.requestObject[ACTIVITIES_BYGENRE]
   }
 }
 

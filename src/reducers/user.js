@@ -20,9 +20,6 @@ function setFollowingsRequestNextHref(state, nextHref) {
   return Object.assign({}, state, { followingsNextHref: nextHref })
 }
 
-function setActivitiesRequestInProcess(state, inProcess) {
-  return Object.assign({}, state, { activitiesRequestInProcess: inProcess })
-}
 
 function mergeFollowers(state, receivefollowers) {
   const followers = [...state.followers, ...receivefollowers]
@@ -43,16 +40,6 @@ function setFavoritesRequestNextHref(state, nextHref) {
   return Object.assign({}, state, { favoritesNextHref: nextHref })
 }
 
-function setFollowersRequestInProcess(state, inProcess) {
-  return Object.assign({}, state, { followersRequestInProcess: inProcess })
-}
-
-function setFavoritesRequestInProcess(state, inProcess) {
-  return Object.assign({}, state, { favoritesRequestInProcess: inProcess })
-}
-function setFollowingsRequestInProcess(state, inProcess) {
-  return Object.assign({}, state, { followingsRequestInProcess: inProcess })
-}
 
 function setFollowers(state, followers) {
   return Object.assign({}, state, { followers })
@@ -78,10 +65,6 @@ const initialState = {
   , activitiesNextHref: null
   , followersNextHref: null
   , favoritesNextHref: null
-  , activitiesRequestInProcess: false
-  , followersRequestInProcess: false
-  , favoritesRequestInProcess: false
-  , followingsRequestInProcess: false
 }
 
 function fromJS(json) {
@@ -130,14 +113,6 @@ export default function (state = initialState, action) {
     case actionTypes.SET_FAVORITES:
       return setFavorites(state, fromJS(action.favorites))
 
-    case actionTypes.SET_FOLLOWERS_REQUEST_IN_PROCESS:
-      return setFollowersRequestInProcess(state, action.inProcess)
-    case actionTypes.SET_ACTIVITIES_REQUEST_IN_PROCESS:
-      return setActivitiesRequestInProcess(state, action.inProcess)
-    case actionTypes.SET_FAVORITES_REQUEST_IN_PROCESS:
-      return setFavoritesRequestInProcess(state, action.inProcess)
-    case actionTypes.SET_FOLLOWINGS_REQUEST_IN_PROCESS:
-      return setFollowingsRequestInProcess(state, action.inProcess)
 
     case actionTypes.ADD_TO_FAVORITES:
       return addToFavorites(state, action.track)
