@@ -73,7 +73,7 @@
   "scripts": {
     "start": "node scripts/start.js",
     "build": "node scripts/build.js",
-    "test": "mocha --compilers  js:babel-core/register --require babel-polyfill ./tests/setup.js 'tests/**/*.test.@(js|jsx)'"
+    "test": "NODE_ENV=test mocha --compilers  js:babel-core/register --require babel-polyfill ./tests/setup.js 'tests/**/*.test.@(js|jsx)'"
   },
   "jest": {
     "collectCoverageFrom": [
