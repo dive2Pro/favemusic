@@ -9,8 +9,8 @@ function mergeFollowings(state, receivefollowings) {
 }
 
 function mergeActivities(state, receiveactivities) {
-  const activities = [...state.activities, ...receiveactivities]
-  return Object.assign({}, state, { activities })
+  const activitiesIds = [...state.activitiesIds, ...receiveactivities]
+  return Object.assign({}, state, { activitiesIds })
 }
 
 function mergeFollowers(state, receivefollowers) {
@@ -40,7 +40,7 @@ function setFollowings(state, followings) {
 }
 
 const initialState = {
-  activities: []
+  activitiesIds: []
   , followersIds: []
   , followingsIds: []
   , favoritesIds: []

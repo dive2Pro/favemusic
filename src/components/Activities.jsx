@@ -3,33 +3,33 @@ import React, { Component } from 'react'
 import FetchOnScroll from './FetchOnScroll'
 import Track from '../components/Track'
 import LoadingSpinner from '../components/LoadingSpinner'
-type ActivityType = {
-  activities: Array,
-  isPlaying: boolean,
-  activateTrack: Function,
-  addTrackToPlaylist: Function
-};
+
 class ActivitiesContainer extends Component {
-  props: ActivityType;
+  props: basePropsType;
 
   activitiesDom(): HTMLElement {
-    const { activities, activateTrack, isPlaying, addTrackToPlaylist } = this.props
-    const list = Array.isArray(activities) ? activities : (activities)
+    const { activitiesIds, users, activateTrackF, isPlaying, addTrackToPlaylistF, tracks, songs } = this.props
+
     return (
       <div>
         <h2>activities</h2>
         <ul>
-          {list.map(
-            (act: ActivityType, idx: number): number => {
+          {activitiesIds.map(
+            (id: number, idx: number): number => {
+              const song = songs[id]
+              const track = tracks[song.id]
+              const user = users[track.user]
               return (
                 <li key={idx}>
                   <Track
-                    activity={act}
+                    song={song}
                     idx={idx}
-                    activateTrack={activateTrack}
+                    user={user}
+                    track={track}
+                    activateTrackF={activateTrackF}
                     isPlaying={isPlaying}
-                    addTrackToPlaylist={addTrackToPlaylist}
-                  />
+                    addTrackToPlaylistF={addTrackToPlaylistF}
+                    />
                 </li>)
             }
           )

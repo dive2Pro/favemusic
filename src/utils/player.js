@@ -2,12 +2,12 @@
  * Created by hyc on 17-1-1.
  */
 
-export function isSameTrackAndPlaying(activeTrack, track, isPlaying) {
-  return isPlaying && activeTrack && activeTrack.origin.id === track.origin.id
+export function isSameTrackAndPlaying(activeTrackId, trackId, isPlaying) {
+  return isPlaying && activeTrackId && activeTrackId === trackId
 }
 
-export function isSameTrack(track) {
+export function isSameTrack(trackId) {
   return function f(obj) {
-    return obj.origin.id === track.origin.id
+    return obj.origin.id === trackId
   }
 }

@@ -2,18 +2,23 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="dbdcb83b-7f30-4463-b9a7-2efbdc64d2fa" name="Default" comment="">
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/actions/userEntities.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/reducers/userEntities.js" afterPath="" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/decls/propsTypes.js" afterPath="$PROJECT_DIR$/decls/propsTypes.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/actions/auth.js" afterPath="$PROJECT_DIR$/src/actions/auth.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/actions/entities.js" afterPath="$PROJECT_DIR$/src/actions/entities.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/actions/player.js" afterPath="$PROJECT_DIR$/src/actions/player.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/actions/user.js" afterPath="$PROJECT_DIR$/src/actions/user.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/components/ItemList.jsx" afterPath="$PROJECT_DIR$/src/components/ItemList.jsx" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/components/TrackItem.jsx" afterPath="$PROJECT_DIR$/src/components/TrackItem.jsx" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/components/Activities.jsx" afterPath="$PROJECT_DIR$/src/components/Activities.jsx" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/components/Track.jsx" afterPath="$PROJECT_DIR$/src/components/Track.jsx" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/constants/actionTypes.js" afterPath="$PROJECT_DIR$/src/constants/actionTypes.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/constants/schema.js" afterPath="$PROJECT_DIR$/src/constants/schema.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/containers/DashboardContainer.jsx" afterPath="$PROJECT_DIR$/src/containers/DashboardContainer.jsx" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/reducers/index.js" afterPath="$PROJECT_DIR$/src/reducers/index.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/reducers/entities.js" afterPath="$PROJECT_DIR$/src/reducers/entities.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/reducers/player.js" afterPath="$PROJECT_DIR$/src/reducers/player.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/reducers/user.js" afterPath="$PROJECT_DIR$/src/reducers/user.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/utils/player.js" afterPath="$PROJECT_DIR$/src/utils/player.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/utils/track.js" afterPath="$PROJECT_DIR$/src/utils/track.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/tests/normalizr/track.test.js" afterPath="$PROJECT_DIR$/tests/normalizr/track.test.js" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -63,11 +68,10 @@
       <file leaf-file-name="user.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/actions/user.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-260">
-              <caret line="136" column="5" lean-forward="false" selection-start-line="136" selection-start-column="5" selection-end-line="136" selection-end-column="5" />
+            <state relative-caret-position="-234">
+              <caret line="137" column="5" lean-forward="false" selection-start-line="137" selection-start-column="5" selection-end-line="137" selection-end-column="5" />
               <folding>
                 <element signature="e#39#122#0" expanded="true" />
-                <element signature="e#320#371#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -1270,11 +1274,10 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/actions/user.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-260">
-          <caret line="136" column="5" lean-forward="false" selection-start-line="136" selection-start-column="5" selection-end-line="136" selection-end-column="5" />
+        <state relative-caret-position="-234">
+          <caret line="137" column="5" lean-forward="false" selection-start-line="137" selection-start-column="5" selection-end-line="137" selection-end-column="5" />
           <folding>
             <element signature="e#39#122#0" expanded="true" />
-            <element signature="e#320#371#0" expanded="true" />
           </folding>
         </state>
       </provider>

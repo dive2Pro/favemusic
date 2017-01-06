@@ -5,14 +5,14 @@ import apiUrl, { addAccessToken, getLazyLoadingUrl } from '../utils/soundcloundA
 import Cookies from 'js-cookie'
 import * as actionTypes from '../constants/actionTypes'
 import { OAUTH_TOKEN } from '../constants/authentification'
-// import { wrapInOrigin } from '../utils/track'
+import { wrapInOrigin, addIdFromOrigin } from '../utils/track'
 import { setRequestTypeInProcess } from './request'
 import * as requestTypes from '../constants/requestTypes'
 import * as paginateLinkTypes from '../constants/paginateLinkTypes'
 import { setPaginateLink } from './paginate'
 import { userSchema, songSchema } from '../constants/schema'
 import { normalize, schema } from 'normalizr'
-import { mergeUserEntities, mergeTrackEntities } from './entities'
+import { mergeUserEntities, mergeTrackEntities, mergeSongEntities } from './entities'
 export function setFollowers(followers) {
   return {
     type: actionTypes.SET_FOLLOWERS
@@ -108,6 +108,7 @@ export function fetchFollowingsF(user, nextHref) {
     const initHref = `followings?limit=20&offset=0&oauth_token=${accessToken}`
     const followingsUrl = getLazyLoadingUrl(user, nextHref, initHref)
     const requestInProcess = getState().request[requestTypes.FOLLOWINGS]
+
     if (requestInProcess) return ""
     dispatch(setRequestTypeInProcess(true, requestTypes.FOLLOWINGS))
     return fetch(followingsUrl)
@@ -142,7 +143,17 @@ export function fetchActivities(nextHref) {
     return fetch(activitiesUrl)
       .then(response => response.json())
       .then(data => {
-        dispatch(mergeActivities(data.collection))
+        const normalizedObj = normalize(data.collection.map(addIdFromOrigin), new schema.Array(songSchema))
+        // console.groupCollapsed('activities')
+        console.group('activities----------------------------------------------------')
+        console.info(data)
+        console.info(normalizedObj);
+        console.groupEnd()
+        dispatch(mergeSongEntities(normalizedObj.entities.songs))
+        dispatch(mergeTrackEntities(normalizedObj.entities.origins))
+        dispatch(mergeUserEntities(normalizedObj.entities.users))
+        dispatch(mergeActivities(normalizedObj.result))
+
         dispatch(setPaginateLink(data.next_href, paginateLinkTypes.ACTIVITIES))
         dispatch(setRequestTypeInProcess(false, requestTypes.ACTIVITIES))
       })
@@ -167,8 +178,8 @@ export function fetchFavoritesF(user, nextHref) {
       })
       .then(data => {
         console.info('data = ', data);
-        const normalizedObj = normalize(data, new schema.Array(songSchema))
-        dispatch(mergeTrackEntities(normalizedObj.entities.songs))
+        const normalizedObj = normalize(data.map(wrapInOrigin), new schema.Array(songSchema))
+        dispatch(mergeTrackEntities(normalizedObj.entities.origins))
         dispatch(mergeFavorites(normalizedObj.result))
         dispatch(setPaginateLink(data.next_href, paginateLinkTypes.FAVORITES))
         dispatch(setRequestTypeInProcess(false, requestTypes.FAVORITES))

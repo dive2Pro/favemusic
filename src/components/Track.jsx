@@ -18,10 +18,9 @@ export default class Track extends Component {
   }
 
   componentDidMount() {
-    const { activity, idx } = this.props
-    const { origin } = activity
-    if (isNotTrack(activity)) return (<div></div>)
-    const { waveform_url, id } = origin
+    const { track, song, idx } = this.props
+    if (isNotTrack(song)) return (<div></div>)
+    const { waveform_url, id } = track
     if (!waveform_url) return
 
     const waveform = document.getElementById('waveform-' + id + "-" + idx)
@@ -58,27 +57,27 @@ export default class Track extends Component {
     return (<div id={`waveform-${id}-${idx}`} className="track-content-waveform-json"></div>)
   }
 
-  renderActions(activity, activateTrack, isPlaying) {
-    const { activeTrack, addTrackToPlaylist } = this.props
-    const { origin } = activity
-    const { stream_url } = origin
+  renderActions(track, activateTrackF, isPlaying) {
+    const { activeTrackId, addTrackToPlaylistF } = this.props
+    const { id } = track
+    const { stream_url } = track
     if (!stream_url) return
 
-    const currentTrackIsPlaying = isSameTrackAndPlaying(activeTrack, activity, isPlaying)
+    const currentTrackIsPlaying = isSameTrackAndPlaying(activeTrackId, id, isPlaying)
 
     return (
       <div className="track-actions">
         <div className="track-actions-item">
           <i
             className={`fa ${currentTrackIsPlaying ? 'fa-pause' : 'fa-play'}`}
-            onClick={() => activateTrack(activity)}
+            onClick={() => activateTrackF(id)}
             />
         </div>
 
         <div className="track-actions-item">
           <i
             className="fa fa-list"
-            onClick={() => addTrackToPlaylist(activity)}
+            onClick={() => addTrackToPlaylistF(id)}
             > </i>
         </div>
       </div>
@@ -86,14 +85,15 @@ export default class Track extends Component {
   }
 
   render() {
-    const { activity, activateTrack, isPlaying, idx } = this.props
-    const { origin, type } = activity
+    const { activateTrackF, isPlaying, idx, track, song, user } = this.props
+    const { origin, type } = song
+
     if (!origin) return (<div></div>)
     const {
-      user, title, permalink_url, artwork_url, playback_count,
+      title, permalink_url, artwork_url, playback_count,
       comment_count, download_count, likes_count, reposts_count, id
       , duration, created_at
-    } = origin
+    } = track
     const { avatar_url, username } = user
 
     return (
@@ -104,7 +104,11 @@ export default class Track extends Component {
 
         <div className="track-content">
           <div className="track-content-name">
-            <div><a href={user.permalink_url}>{username}></a></div>
+            <div>
+              <a href={user.permalink_url}>
+                {username}
+              </a>
+            </div>
             <div>{fromNow(created_at)}</div>
           </div>
           <div className="track-content-meta">
@@ -136,7 +140,7 @@ export default class Track extends Component {
             </div>
           </div>
         </div>
-        {this.renderActions(activity, activateTrack, isPlaying)}
+        {this.renderActions(track, activateTrackF, isPlaying)}
       </
       div >
     )

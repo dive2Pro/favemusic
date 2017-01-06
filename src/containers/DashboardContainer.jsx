@@ -97,14 +97,15 @@ function mapStateToProps(state: Object, routeState: Object) {
     , followingsIds: user.followingsIds
     , favoritesIds: user.favoritesIds
     , followersIds: user.followersIds
-    , activities: user.activities
+    , activitiesIds: user.activitiesIds
     , requestObject: request.requestObject
     , isPlaying: player.isPlaying
-    , activeTrack: player.activeTrack
+    , activeTrackId: player.activeTrackId
     , paginateObject: paginate.paginateObject
     , pathname: routeState.location.pathname
     , users: entities.users
     , tracks: entities.tracks
+    , songs: entities.songs
   }
 }
 

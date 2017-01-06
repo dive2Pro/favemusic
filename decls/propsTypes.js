@@ -18,13 +18,13 @@
   , fetchActivities:(nexfHref: string)=>void
   , nextHref: string
   , fetchActivitiesByGenre: (nextHref: string, genre: string)=>void
-  , addTrackToPlaylist:(track: TrackType)=>void
+  , addTrackToPlaylistF:(track: TrackType)=>void
   , activitiesByGenreNextHref:{}
   , activitiesByGenre: string
   , activitiesByGenreInProcess: boolean
   , init: ()=>void
   , fetchFollowersF: ()=>void
-  , activateTrack: (track: TrackType)=>void
+  , activateTrackF: (track: TrackType)=>void
   , likeF: (track: TrackType)=>void
   , fetchFavoritesF:(user: UserType, nextHref: String)=>void
   , fetchFollowingsF:(user: UserType, nextHref: String)=>void

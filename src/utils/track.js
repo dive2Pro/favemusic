@@ -51,6 +51,12 @@ export function wrapInOrigin(activity: ActivityType) {
     , id: activity.id
   }
 }
+export function addIdFromOrigin(activity: ActivityType) {
+  return {
+    ...activity
+    , id: activity.origin.id
+  }
+}
 
 export function durationFormat(ms) {
   const duration = moment.duration(ms)

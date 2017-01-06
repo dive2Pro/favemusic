@@ -44,10 +44,10 @@ function fetchUser() {
       .then(response => response.json())
       .then(me => {
         dispatch(setUser(me))
-        dispatch(fetchFollowingsF(me))
-        dispatch(fetchFollowersF(me))
         dispatch(fetchActivities())
         dispatch(fetchFavoritesF(me))
+        dispatch(fetchFollowingsF(me))
+        dispatch(fetchFollowersF(me))
       })
   }
 }

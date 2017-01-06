@@ -6,11 +6,19 @@ const DATA = [
 
 const trackSchema = new schema.Entity('songs');
 const user = new schema.Entity('users');
-trackSchema.define({
-  origin: [user],
-  user:userSchema
+const origin = new schema.Entity('origins')
+origin.define({
+  user
 })
-
+trackSchema.define({
+  origin,
+  user: userSchema
+})
+const showData = [
+  { origin: {}, type: 'track', id: 332211 },
+  { origin: {}, type: 'track', id: 332222 },
+  { origin: {}, type: 'track', id: 332233 },  
+]
 
 function wrapInOrigin(activity: ActivityType) {
   return {
@@ -20,10 +28,12 @@ function wrapInOrigin(activity: ActivityType) {
   }
 }
 describe("track test", () => {
-  const normalizedresult = normalize(DATA, new schema.Array(trackSchema))
+  const normalizedresult = normalize(DATA.map(wrapInOrigin), new schema.Array(trackSchema))
   it('', (done) => {
     console.log(normalizedresult)
-    console.log(normalizedresult.entities.songs[300969290]);
+    const origins = normalizedresult.entities.origins
+    const id = (normalizedresult.entities.songs[300969290].origin);
+    console.log(origins[id]);
     // assert.sameDeepMembers(normalizedresult.result, [300969290,
     //   294341921,
     //   283206441,
