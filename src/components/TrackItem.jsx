@@ -12,6 +12,7 @@ class TrackItem extends React.Component {
       permalink_url, artwork_url, title
       , comment_count, favoritings_count, playback_count
     } = track.origin
+
     const isVisible = isSameTrackAndPlaying(activeTrack, track, isPlaying)
     const configuration = [
       {
@@ -27,9 +28,10 @@ class TrackItem extends React.Component {
       <div className="item">
         <div>
           <img
+            className={this.props.isPlaying}
             src={artwork_url}
             alt={title} height="40" width="40"
-          />
+            />
         </div>
         <div className="item-content">
           <div className="item-content-name">
@@ -44,7 +46,7 @@ class TrackItem extends React.Component {
               <i
                 className="fa fa-heart"
                 onClick={() => likeF(track)}
-              > &nbsp;{favoritings_count}</i>
+                > &nbsp;{favoritings_count}</i>
             </div>
             <div className="item-content-info-item">
               <i className="fa fa-comment">&nbsp;{comment_count}</i>

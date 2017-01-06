@@ -12,7 +12,7 @@ type MosaicpropsType = {
 class ItemList extends Component {
   props: MosaicpropsType;
   state: { isMoreToggled: boolean };
-  toggleMore: ()=>void;
+  toggleMore: () => void;
 
   constructor(props: MosaicpropsType) {
     super(props);
@@ -29,10 +29,11 @@ class ItemList extends Component {
     })
   }
 
-  renderUser(user: UserType, idx: number) {
+  renderUser(id: number, idx: number) {
+    const { entities } = this.props
     return (
       <li key={idx}>
-        <UserItem user={user} idx={idx} />
+        <UserItem user={entities[id]} idx={idx} />
       </li>
     )
   }
@@ -47,13 +48,13 @@ class ItemList extends Component {
   }
 
   renderMosaic() {
-    const { collections, kind, requestInProcess } = this.props
-    if (!collections || requestInProcess) {
+    const { ids, kind, requestInProcess } = this.props
+    if (!ids || requestInProcess) {
       return (
         <div><LoadingSpinner isLoading={requestInProcess} /></div>
       )
     }
-    const list = Array.isArray(collections) ? collections : collections.toJSON()
+    const list = Array.isArray(ids) ? ids : ids.toJSON()
     if (kind === "user") {
       return (<div className="user-mosaic-content">
         <ul>{list.map(this.renderUser.bind(this))}</ul>
@@ -75,7 +76,7 @@ class ItemList extends Component {
           <button
             className="ghost"
             onClick={() => fetchMoreF(user, nextHref)}
-          >LoadMore
+            >LoadMore
           </button>
         </div>
       )
@@ -86,8 +87,8 @@ class ItemList extends Component {
 
   renderChevron() {
     const { isMoreToggled } = this.state
-    const { collections } = this.props
-    if (collections.length > 4) {
+    const { ids } = this.props
+    if (ids.length > 4) {
       return (<i className={`fa ${isMoreToggled ? 'fa-chevron-up' : 'fa-chevron-down'}`} />)
     } else {
       return (<div></div>)

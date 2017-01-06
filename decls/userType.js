@@ -19,5 +19,6 @@ declare type ResponseAfterToJSONType = {
 declare type UserType = {
   username: string,
   avatar_url: string,
-  permalink_url: string
+  permalink_url: string,
+  id: number
 };

@@ -16,26 +16,51 @@ const action2 = {
 
 }
 describe('just test', () => {
-  const initialState = { requestObject: {} }
+  const initialState = {
+    requestObject: {}
+  }
   it('state shoud equal ', () => {
     const state = requestTest(initialState, action)
-    console.log(state)
-    const expected = { requestObject: { [action.requestType]: action.inProcess } }
+    const expected = {
+      requestObject: {
+        [action.requestType]: action.inProcess
+      }
+    }
     expect(state).to.deep.eq(expected)
   })
 
   it('change state', () => {
-    const action3 = Object.assign({}, action, { inProcess: false })
-    const state = { requestObject: { [action.requestType]: action.inProcess } }
+    const action3 = Object.assign({}, action, {
+      inProcess: false
+    })
+    const state = {
+      requestObject: {
+        [action.requestType]: action.inProcess
+      }
+    }
     const state3 = requestTest(state, action3)
-    const expected3 = { requestObject: { [action.requestType]: action3.inProcess } }
+    const expected3 = {
+      requestObject: {
+        [action.requestType]: action3.inProcess
+      }
+    }
     expect(state3).to.deep.eq(expected3)
   })
   it('change state　failured', () => {
-    const action3 = Object.assign({}, action, { inProcess: false })
-    const state = { requestObject: { [action.requestType]: action.inProcess } }
+    const action3 = Object.assign({}, action, {
+      inProcess: false
+    })
+    const state = {
+      requestObject: {
+        [action.requestType]: action.inProcess
+      }
+    }
     const state3 = requestTest(state, action3)
-    const expected3 = { requestObject: { [action.requestType]: true } }
+    const expected3 = {
+      requestObject: {
+        [action.requestType]: true
+      }
+    }
     assert.notDeepEqual(state3, expected3)
   })
 

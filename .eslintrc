@@ -120,6 +120,13 @@
     "BrowseSetInProcessfActionType": true,
     "BrowseSetNextHrefActionType": true,
     "RequestType": true,
-    "PaginateActionType": true
+    "PaginateActionType": true,
+    "describe": true,
+    "it": true,
+    "expect": true,
+    "fetch": true,
+    "assert": true,
+    "beforeEach": true,
+    "UserEntitiesType": true
   }
 }

@@ -4,8 +4,8 @@
 import * as actionTypes from '../constants/actionTypes'
 import { isSameTrack } from '../utils/player'
 function mergeFollowings(state, receivefollowings) {
-  const followings = [...state.followings, ...receivefollowings]
-  return Object.assign({}, state, { followings })
+  const followingsIds = [...state.followingsIds, ...receivefollowings]
+  return Object.assign({}, state, { followingsIds })
 }
 
 function mergeActivities(state, receiveactivities) {
@@ -14,8 +14,8 @@ function mergeActivities(state, receiveactivities) {
 }
 
 function mergeFollowers(state, receivefollowers) {
-  const followers = [...state.followers, ...receivefollowers]
-  return Object.assign({}, state, { followers })
+  const followersIds = [...state.followersIds, ...receivefollowers]
+  return Object.assign({}, state, { followersIds })
 }
 
 function mergeFavorites(state, receivefavorites) {
@@ -41,8 +41,8 @@ function setFollowings(state, followings) {
 
 const initialState = {
   activities: []
-  , followings: []
-  , followers: []
+  , followersIds: []
+  , followingsIds: []
   , favorites: []
 }
 

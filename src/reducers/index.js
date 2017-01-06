@@ -8,6 +8,7 @@ import browse from './browse'
 import request from './request'
 import paginate from './paginate'
 import environment from './environment'
+import userEntities from './userEntities'
 import { routerReducer } from 'react-router-redux'
 import player from './player'
 /**
@@ -21,6 +22,7 @@ export default combineReducers({
   , request
   , browse
   , paginate
+  , userEntities
   , routing: routerReducer
 
 })

@@ -10,7 +10,9 @@ import { setRequestTypeInProcess } from './request'
 import * as requestTypes from '../constants/requestTypes'
 import * as paginateLinkTypes from '../constants/paginateLinkTypes'
 import { setPaginateLink } from './paginate'
-
+import { userSchema } from '../constants/schema'
+import { normalize, schema } from 'normalizr'
+import { mergeUserEntities } from './userEntities'
 export function setFollowers(followers) {
   return {
     type: actionTypes.SET_FOLLOWERS
@@ -80,7 +82,13 @@ export function fetchFollowersF(user, nextHref) {
     return fetch(followersUrl)
       .then(response => response.json())
       .then(data => {
-        dispatch(mergeFollowers(data.collection))
+        // tree shaker
+        const normaObj = normalize(data.collection, new schema.Array(userSchema))
+        console.info(normaObj);
+        dispatch(mergeUserEntities(normaObj.entities.users))
+        // only ids
+        dispatch(mergeFollowers(normaObj.result))
+
         dispatch(setRequestTypeInProcess(false, requestTypes.FOLLOWERS))
 
         if (data.nextHref) {
@@ -105,7 +113,10 @@ export function fetchFollowingsF(user, nextHref) {
     return fetch(followingsUrl)
       .then(response => response.json())
       .then(data => {
-        dispatch(mergeFollowings(data.collection))
+        const normaObj = normalize(data.collection, new schema.Array(userSchema))
+        dispatch(mergeFollowings(normaObj.result))
+        dispatch(mergeUserEntities(normaObj.entities.users))
+
         dispatch(setRequestTypeInProcess(false, requestTypes.FOLLOWINGS))
         dispatch(setPaginateLink(data.nextHref, paginateLinkTypes.FOLLOWINGS))
       })
@@ -150,9 +161,11 @@ export function fetchFavoritesF(user, nextHref) {
     const favoritesUrl = getLazyLoadingUrl(user, nextHref, 'favorites?limit=20&offset=0')
     dispatch(setRequestTypeInProcess(true, requestTypes.FAVORITES))
     return fetch(favoritesUrl)
-      .then(response => response.json())
+      .then(response => {
+        console.info(response);
+        return response.json()
+      })
       .then(data => {
-        console.info('data = ', data)
         dispatch(mergeFavorites(data.map(wrapInOrigin)))
         dispatch(setPaginateLink(data.next_href, paginateLinkTypes.FAVORITES))
         dispatch(setRequestTypeInProcess(false, requestTypes.FAVORITES))
