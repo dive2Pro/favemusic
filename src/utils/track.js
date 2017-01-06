@@ -48,6 +48,7 @@ export function wrapInOrigin(activity: ActivityType) {
   return {
     origin: activity
     , type: 'track'
+    , id: activity.id
   }
 }
 

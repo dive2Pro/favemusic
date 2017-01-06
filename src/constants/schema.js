@@ -2,8 +2,9 @@ import { schema } from "normalizr"
 
 const user = new schema.Entity('users')
 const song = new schema.Entity('songs')
+
 song.define({
-  user
+  origin: new schema.Array(user)
 })
 
 export const userSchema = user

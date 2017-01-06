@@ -38,11 +38,11 @@ class ItemList extends Component {
     )
   }
 
-  renderTrack(track: TrackType, idx: number) {
-    if (!track) return ''
+  renderTrack(id: number, idx: number) {
+    const { entities } = this.props
     return (
       <li key={idx}>
-        <TrackItem idx={idx} track={track} {...this.props} />
+        <TrackItem idx={idx} track={entities[id]} {...this.props} />
       </li>
     )
   }

@@ -5,14 +5,14 @@ import apiUrl, { addAccessToken, getLazyLoadingUrl } from '../utils/soundcloundA
 import Cookies from 'js-cookie'
 import * as actionTypes from '../constants/actionTypes'
 import { OAUTH_TOKEN } from '../constants/authentification'
-import { wrapInOrigin } from '../utils/track'
+// import { wrapInOrigin } from '../utils/track'
 import { setRequestTypeInProcess } from './request'
 import * as requestTypes from '../constants/requestTypes'
 import * as paginateLinkTypes from '../constants/paginateLinkTypes'
 import { setPaginateLink } from './paginate'
-import { userSchema } from '../constants/schema'
+import { userSchema, songSchema } from '../constants/schema'
 import { normalize, schema } from 'normalizr'
-import { mergeUserEntities } from './userEntities'
+import { mergeUserEntities, mergeTrackEntities } from './entities'
 export function setFollowers(followers) {
   return {
     type: actionTypes.SET_FOLLOWERS
@@ -114,8 +114,8 @@ export function fetchFollowingsF(user, nextHref) {
       .then(response => response.json())
       .then(data => {
         const normaObj = normalize(data.collection, new schema.Array(userSchema))
-        dispatch(mergeFollowings(normaObj.result))
         dispatch(mergeUserEntities(normaObj.entities.users))
+        dispatch(mergeFollowings(normaObj.result))
 
         dispatch(setRequestTypeInProcess(false, requestTypes.FOLLOWINGS))
         dispatch(setPaginateLink(data.nextHref, paginateLinkTypes.FOLLOWINGS))
@@ -166,7 +166,10 @@ export function fetchFavoritesF(user, nextHref) {
         return response.json()
       })
       .then(data => {
-        dispatch(mergeFavorites(data.map(wrapInOrigin)))
+        console.info('data = ', data);
+        const normalizedObj = normalize(data, new schema.Array(songSchema))
+        dispatch(mergeTrackEntities(normalizedObj.entities.songs))
+        dispatch(mergeFavorites(normalizedObj.result))
         dispatch(setPaginateLink(data.next_href, paginateLinkTypes.FAVORITES))
         dispatch(setRequestTypeInProcess(false, requestTypes.FAVORITES))
       })

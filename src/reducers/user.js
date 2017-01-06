@@ -19,9 +19,9 @@ function mergeFollowers(state, receivefollowers) {
 }
 
 function mergeFavorites(state, receivefavorites) {
-  const favorites = [...state.favorites, ...receivefavorites]
+  const favoritesIds = [...state.favoritesIds, ...receivefavorites]
 
-  return Object.assign({}, state, { favorites })
+  return Object.assign({}, state, { favoritesIds })
 }
 
 function setFollowers(state, followers) {
@@ -43,7 +43,7 @@ const initialState = {
   activities: []
   , followersIds: []
   , followingsIds: []
-  , favorites: []
+  , favoritesIds: []
 }
 
 function fromJS(json) {

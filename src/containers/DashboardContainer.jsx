@@ -23,13 +23,13 @@ class App extends Component {
   renderContent() {
     const {
       currentUser
-      , followersIds, followingsIds, favorites
+      , followersIds, followingsIds, favoritesIds
       , paginateObject
       , fetchActivities, fetchFollowingsF, fetchFollowersF, fetchFavoritesF
       , requestObject
-      , userEntities
+      , users, tracks
     } = this.props
-
+    console.info(requestObject[requestTypes.FAVORITES]);
     return (
       <div className="dashboard-content">
         <div className="dashboard-content-main">
@@ -44,7 +44,7 @@ class App extends Component {
             title="Followings"
             ids={followingsIds}
             kind="user"
-            entities={userEntities}
+            entities={users}
             fetchMoreF={fetchFollowingsF}
             nextHref={paginateObject[paginateLinkTypes.FOLLOWINGS]}
             requestInProcess={requestObject[requestTypes.FOLLOWINGS]}
@@ -57,12 +57,13 @@ class App extends Component {
             fetchMoreF={fetchFollowersF}
             user={currentUser}
             kind="user"
-            entities={userEntities}
+            entities={users}
             />
           <ItemList
             title="Favorites"
             kind="track"
-            collections={favorites}
+            entities={tracks}
+            ids={favoritesIds}
             requestInProcess={requestObject[requestTypes.FAVORITES]}
             fetchMoreF={fetchFavoritesF}
             nextHref={paginateObject[paginateLinkTypes.FAVORITES]}
@@ -89,20 +90,21 @@ class App extends Component {
   }
 }
 function mapStateToProps(state: Object, routeState: Object) {
-  const { auth, user, player, request, paginate, userEntities } = state
+  const { auth, user, player, request, paginate, entities } = state
   console.info(state)
   return {
     currentUser: auth.user
     , followingsIds: user.followingsIds
-    , activities: user.activities
-    , favorites: user.favorites
-    , requestObject: request.requestObject
+    , favoritesIds: user.favoritesIds
     , followersIds: user.followersIds
+    , activities: user.activities
+    , requestObject: request.requestObject
     , isPlaying: player.isPlaying
     , activeTrack: player.activeTrack
     , paginateObject: paginate.paginateObject
     , pathname: routeState.location.pathname
-    , userEntities
+    , users: entities.users
+    , tracks: entities.tracks
   }
 }
 

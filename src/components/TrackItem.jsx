@@ -11,7 +11,7 @@ class TrackItem extends React.Component {
     const {
       permalink_url, artwork_url, title
       , comment_count, favoritings_count, playback_count
-    } = track.origin
+    } = track
 
     const isVisible = isSameTrackAndPlaying(activeTrack, track, isPlaying)
     const configuration = [
