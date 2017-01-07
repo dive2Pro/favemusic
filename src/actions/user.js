@@ -13,61 +13,53 @@ import { setPaginateLink } from './paginate'
 import { userSchema, songSchema } from '../constants/schema'
 import { normalize, schema } from 'normalizr'
 import { mergeUserEntities, mergeTrackEntities, mergeSongEntities } from './entities'
-export function setFollowers(followers) {
-  return {
-    type: actionTypes.SET_FOLLOWERS
-    , followers
-  }
-}
+export const setFollowers = (followers) => ({
+  type: actionTypes.SET_FOLLOWERS
+  , followers
+})
 
-export function setActivities(activities) {
-  return {
-    type: actionTypes.SET_ACTIVITIES
-    , activities
-  }
-}
-export function setFavorites(favorites) {
-  return {
-    type: actionTypes.SET_FAVORITES
-    , favorites
-  }
-}
 
-export function setFollowings(followings) {
-  return {
-    type: actionTypes.SET_FOLLOWINGS
-    , followings
-  }
-}
+export const setActivities = (activities) => ({
+  type: actionTypes.SET_ACTIVITIES
+  , activities
+})
 
-export function mergeFollowings(followings) {
-  return {
-    type: actionTypes.MERGE_FOLLOWINGS
-    , followings
-  }
-}
+export const setFavorites = (favorites) => ({
+  type: actionTypes.SET_FAVORITES
+  , favorites
+})
 
-function mergeActivities(activities) {
-  return {
-    type: actionTypes.MERGE_ACTIVITIES
-    , activities
-  }
-}
 
-export function mergeFollowers(followers) {
-  return {
-    type: actionTypes.MERGE_FOLLOWERS
-    , followers
-  }
-}
-function mergeFavorites(favorites) {
-  return {
-    type: actionTypes.MERGE_FAVORITES
-    , favorites
-  }
-}
+export const setFollowings = (followings) => ({
+  type: actionTypes.SET_FOLLOWINGS
+  , followings
+})
 
-export function fetchFollowersF(user, nextHref) {
+
+export const mergeFollowings = (followings) => ({
+  type: actionTypes.MERGE_FOLLOWINGS
+  , followings
+})
+
+
+const mergeActivities = (activities) => ({
+  type: actionTypes.MERGE_ACTIVITIES
+  , activities
+})
+
+
+export const mergeFollowers = (followers) => ({
+  type: actionTypes.MERGE_FOLLOWERS
+  , followers
+})
+
+const mergeFavorites = (favorites) => ({
+  type: actionTypes.MERGE_FAVORITES
+  , favorites
+})
+
+
+export const fetchFollowersF = (user, nextHref) => {
   const accessToken = Cookies.get(OAUTH_TOKEN)
   const initHref = `followers?limit=20&offset=0&oauth_token=${accessToken}`
   const followersUrl = getLazyLoadingUrl(user, nextHref, initHref)
@@ -102,8 +94,8 @@ export function fetchFollowersF(user, nextHref) {
   }
 }
 
-export function fetchFollowingsF(user, nextHref) {
-  return (dispatch, getState) => {
+export const fetchFollowingsF = (user, nextHref) =>
+  (dispatch, getState) => {
     const accessToken = Cookies.get(OAUTH_TOKEN)
     const initHref = `followings?limit=20&offset=0&oauth_token=${accessToken}`
     const followingsUrl = getLazyLoadingUrl(user, nextHref, initHref)
@@ -122,9 +114,9 @@ export function fetchFollowingsF(user, nextHref) {
         dispatch(setPaginateLink(data.nextHref, paginateLinkTypes.FOLLOWINGS))
       })
   }
-}
 
-export function fetchActivities(nextHref) {
+
+export const fetchActivities = (nextHref) => {
   let activitiesUrl
   if (nextHref) {
     activitiesUrl = addAccessToken(nextHref, '&')
@@ -160,8 +152,8 @@ export function fetchActivities(nextHref) {
   }
 }
 
-export function fetchFavoritesF(user, nextHref) {
-  return (dispatch, getState) => {
+export const fetchFavoritesF = (user, nextHref) =>
+  (dispatch, getState) => {
     const favoritesRequestInProcess = getState().request[requestTypes.FAVORITES]
     if (favoritesRequestInProcess) {
       return;
@@ -185,4 +177,3 @@ export function fetchFavoritesF(user, nextHref) {
         dispatch(setRequestTypeInProcess(false, requestTypes.FAVORITES))
       })
   }
-}

@@ -1,29 +1,25 @@
 // @flow
 import { SYNC_ENTITEIS, MERGE_USER_ENTITIES, MERGE_TRACK_ENTITIES, MERGE_SONGS_ENTITIES } from '../constants/actionTypes'
-export function mergeUserEntities(users: []) {
-  return {
+export const mergeUserEntities = (users: []) =>
+  ({
     type: MERGE_USER_ENTITIES
     , users
-  }
-}
+  })
 
-export function mergeTrackEntities(tracks: []) {
-  return {
-    type: MERGE_TRACK_ENTITIES
-    , tracks
-  }
-}
-export function mergeSongEntities(songs: []) {
-  return {
-    type: MERGE_SONGS_ENTITIES
-    , songs
-  }
-}
 
-export function syncEntities(activeTrack: {}, key: 'foo') {
-  return {
-    type: SYNC_ENTITEIS
-    , activeTrack
-    , key
-  }
-}
+export const mergeTrackEntities = (tracks: []) => ({
+  type: MERGE_TRACK_ENTITIES
+  , tracks
+})
+
+export const mergeSongEntities = (songs: []) => ({
+  type: MERGE_SONGS_ENTITIES
+  , songs
+})
+
+export const syncEntities = (activeTrack: {}, key: 'foo') => ({
+  type: SYNC_ENTITEIS
+  , activeTrack
+  , key
+})
+
