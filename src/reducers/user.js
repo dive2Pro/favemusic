@@ -58,6 +58,9 @@ function addToFavorites(state, trackId) {
 
 function removeFromFavorites(state, trackId) {
   const index = state.favoritesIds.findIndex(isSameTrack(trackId))
+  if (index < 0) {
+    return state
+  }
   const favoritesIds = [
     ...state.favoritesIds.slice(0, index)
     , ...state.favoritesIds.slice(index + 1)
