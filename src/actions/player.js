@@ -4,6 +4,7 @@
 import * as actionTypes from '../constants/actionTypes'
 import { isSameTrackAndPlaying, isSameTrack } from '../utils/player'
 import { togglePlaylist } from './environment'
+import { syncEntities } from './entities'
 function setIsPlaying(isPlaying) {
   return {
     type: actionTypes.SET_IS_PLAYING
@@ -78,16 +79,18 @@ export function addTrackToPlaylistF(trackId) {
 export function activeIterateTrack(activeTrackId, iterate = 1) {
   return (dispatch, getState) => {
     const player = getState().player
-
+      , tracks = getState().entities.tracks
     const playlist = player.playlist
     const iterateTrackId = getIterateTrackId(playlist, activeTrackId, iterate)
-
+      , activeTrack = tracks[activeTrackId]
     if (iterateTrackId) {
       dispatch(setActiveTrack(iterateTrackId))
       togglePlayTrack(true)
     } else {
       dispatch(togglePlayTrack(false))
     }
+
+    dispatch(syncEntities(activeTrack, 'tracks'))
   }
 }
 

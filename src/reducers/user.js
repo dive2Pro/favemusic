@@ -49,18 +49,20 @@ const initialState = {
 function fromJS(json) {
   return json
 }
-function addToFavorites(state, track) {
-  const favorites = { ...state.favorites, track }
-  return Object.assign({}, state, { favorites })
+function addToFavorites(state, trackId) {
+  const favoritesIds = [...state.favoritesIds, trackId]
+  const newState = Object.assign({}, state, { favoritesIds })
+  console.info('newState = ', newState);
+  return newState
 }
 
-function removeFromFavorites(state, track) {
-  const index = state.favorites.findIndex(isSameTrack(track))
-  const favorites = [
-    ...state.favorites.slice(0, index)
-    , ...state.favorites.slice(index + 1)
+function removeFromFavorites(state, trackId) {
+  const index = state.favoritesIds.findIndex(isSameTrack(trackId))
+  const favoritesIds = [
+    ...state.favoritesIds.slice(0, index)
+    , ...state.favoritesIds.slice(index + 1)
   ]
-  return Object.assign({}, state, { favorites })
+  return Object.assign({}, state, { favoritesIds })
 }
 
 export default function (state = initialState, action) {
@@ -83,9 +85,9 @@ export default function (state = initialState, action) {
       return setFavorites(state, fromJS(action.favorites))
 
     case actionTypes.ADD_TO_FAVORITES:
-      return addToFavorites(state, action.track)
+      return addToFavorites(state, action.trackId)
     case actionTypes.REMOVE_FROM_FAVORITES:
-      return removeFromFavorites(state, action.track)
+      return removeFromFavorites(state, action.trackId)
     default:
       return state
   }

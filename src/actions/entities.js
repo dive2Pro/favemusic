@@ -1,5 +1,5 @@
 // @flow
-import { MERGE_USER_ENTITIES, MERGE_TRACK_ENTITIES, MERGE_SONGS_ENTITIES } from '../constants/actionTypes'
+import { SYNC_ENTITEIS, MERGE_USER_ENTITIES, MERGE_TRACK_ENTITIES, MERGE_SONGS_ENTITIES } from '../constants/actionTypes'
 export function mergeUserEntities(users: []) {
   return {
     type: MERGE_USER_ENTITIES
@@ -20,3 +20,10 @@ export function mergeSongEntities(songs: []) {
   }
 }
 
+export function syncEntities(activeTrack: {}, key: 'foo') {
+  return {
+    type: SYNC_ENTITEIS
+    , activeTrack
+    , key
+  }
+}

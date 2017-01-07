@@ -4,40 +4,40 @@
  */
 import * as actionTypes from '../constants/actionTypes'
 import apiUrl from '../utils/soundcloundApi'
-function addToFavorites(track: TrackType) {
+import { syncEntities } from './entities'
+function addToFavorites(trackId: number) {
   return {
     type: actionTypes.ADD_TO_FAVORITES
-    , track
+    , trackId
   }
 }
-function removeFromFavorites(track: TrackType) {
+function removeFromFavorites(trackId: number) {
   return {
     type: actionTypes.REMOVE_FROM_FAVORITES
-    , track
+    , trackId
   }
 }
 
 export function likeF(track: TrackType) {
   return (dispatch: Function) => {
-    const { origin } = track
-    const { user_favorite } = origin
-    const url = apiUrl(`me/favorites/${track.origin.id}`, "?")
+    const { user_favorite } = track
+    const url = apiUrl(`me/favorites/${track.id}`, "?")
     const fetchCall = fetch(url, { method: user_favorite ? "delete" : "put" })
     fetchCall.then((response: Object) => response.json())
       .then(
-        () => {
-          const newOrigin = Object.assign({}, track.origin, { user_favorite: !user_favorite })
-          const newTrack = Object.assign({}, track, { origin: newOrigin })
-          if (newOrigin.user_favorite) {
-            dispatch(addToFavorites(newTrack))
-          } else {
-            dispatch(removeFromFavorites(newTrack))
-          }
+      () => {
+        const newTrack = Object.assign({}, track, { user_favorite: !user_favorite })
+        if (newTrack.user_favorite) {
+          dispatch(addToFavorites(newTrack.id))
+        } else {
+          dispatch(removeFromFavorites(newTrack.id))
         }
+        dispatch(syncEntities(newTrack, 'tracks'))
+      }
       ).catch(
       (err: Object) => {
         console.info(err)
       }
-    )
+      )
   }
 }

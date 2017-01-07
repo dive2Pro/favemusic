@@ -24,6 +24,7 @@ class Player extends Component {
     const {
       isPlaying, activeTrackId, isOpenPlaylist,
       activeIterateTrack, togglePlaylist, tracks
+      , likeF
     } = this.props
     if (!activeTrackId) return
     const track = tracks[activeTrackId]
@@ -59,12 +60,20 @@ class Player extends Component {
             onClick={() => togglePlaylist(!isOpenPlaylist)}
             >&nbsp;</i>
         </div>
+        <div>
+          <i
+            className={"fa fa-heart " + (track.user_favorite ? "active" : "")}
+            onClick={() => likeF(track)}
+            >
+
+          </i>
+        </div>
         <audio
           ref="audio" id="audio"
           src={addAccessToken(stream_url, '?')}
           >
         </audio>
-      </div>
+      </div >
     )
   }
 

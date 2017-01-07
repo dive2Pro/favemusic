@@ -6,13 +6,10 @@
   width: 100%;
   border-top: $darkBorder;
   height: 0;
-
   transition: height 0.2s;
   transition-timing-function: ease;
-
   &-visible {
     height: $padding*3;
-
   }
   &-content {
     position: relative;
@@ -30,6 +27,9 @@
         font-size: 20px;
         width: 20px;
         &:hover {
+          color: $mainColor;
+        }
+        &.active {
           color: $mainColor;
         }
       }

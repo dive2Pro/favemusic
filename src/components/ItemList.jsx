@@ -50,16 +50,16 @@ class ItemList extends Component {
         <div><LoadingSpinner isLoading={requestInProcess} /></div>
       )
     }
-    const list = Array.isArray(ids) ? ids : ids.toJSON()
     if (kind === "user") {
       return (<div className="user-mosaic-content">
-        <ul>{list.map(this.renderUser.bind(this))}</ul>
+        <ul>{ids.map(this.renderUser.bind(this))}</ul>
       </div>)
     }
 
     if (kind === "track") {
+      console.info('ids  = ', ids.map);
       return (<div className="user-mosaic-content">
-        <ul>{list.map(this.renderTrack.bind(this))}</ul>
+        <ul>{ids.map(this.renderTrack.bind(this))}</ul>
       </div>)
     }
   }
