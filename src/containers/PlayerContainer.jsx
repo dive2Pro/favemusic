@@ -62,7 +62,7 @@ class Player extends Component {
         </div>
         <div>
           <i
-            className={"fa fa-heart " + (track.user_favorite ? "active" : "")}
+            className={"fa fa-heart " + (track.user_favorite ? "is-favorite" : "")}
             onClick={() => likeF(track)}
             >
 
