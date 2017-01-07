@@ -20,11 +20,22 @@ class Playlist extends Component {
     }
     return ''
   }
+  renderMenu = () => {
+    const { clearPlayListF } = this.props
+    return (
+      <div className="playlist-menu">
+        <div>Player Queue</div>
+        <div>
+          <button onClick={() => clearPlayListF()} className="inline">Clear Queue</button>
+        </div>
+      </div>
+    )
+  }
 
   renderPlaylist() {
     const { playlist, tracks, users } = this.props
     return (
-      <ul>{playlist.map((id: number, idx: number) => {
+      <ul className="playlist-content">{playlist.map((id: number, idx: number) => {
         const activity = tracks[id]
         const user = users[activity.user]
         return (
@@ -39,11 +50,8 @@ class Playlist extends Component {
   render() {
     return (
       <div className={`playlist ${this.couldShowPlaylist()}`}>
-        <div className="playlist-content">
-
-          {this.renderPlaylist()}
-
-        </div>
+        {this.renderMenu()}
+        {this.renderPlaylist()}
       </div>
     )
   }

@@ -8,29 +8,27 @@
   border: $darkBorder;
   overflow: scroll;
   opacity: 0;
+  display: flex;
   transition: height 0.2s;
   transition-timing-function: ease;
   pointer-events: none;
+  flex-direction: column;
   &-visible {
     opacity: 1;
     pointer-events: all;
+  }
+  &-menu {
+    display: flex; 
+    font-size: $menuSize;
+    border-bottom: $darkBorder;
+    padding:$padding/2;
+    justify-content: space-between;
   }
   &-content {
     position: relative;
     display: flex;
     justify-content: flex-start;
-    height: 100%;
+    flex: 1;
     // margin-left: 25%;
-    div {
-      margin: 0 ($padding/4) ($padding/4) ($padding/4);
-      i {
-        cursor: pointer;
-        font-size: 20px;
-        width: 20px;
-        &:hover {
-          color: $mainColor;
-        }
-      }
-    }
   }
 }

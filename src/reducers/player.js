@@ -28,7 +28,9 @@ function removeTrackFromPlaylist(state, trackId) {
 function deactivateTrack(state) {
   return Object.assign({}, state, { activeTrackId: null })
 }
-
+function setPlaylist(state, playlist: []) {
+  return Object.assign({}, state, { playlist })
+}
 export default function playerReducer(state = initialState, action) {
   switch (action.type) {
     case actionTypes.SET_IS_PLAYING:
@@ -43,6 +45,9 @@ export default function playerReducer(state = initialState, action) {
 
     case actionTypes.DEACTIVE_TRACK:
       return deactivateTrack(state)
+
+    case actionTypes.SET_PLAY_LIST:
+      return setPlaylist(state, action.playlist)
     default:
       return state
   }

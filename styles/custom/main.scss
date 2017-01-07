@@ -35,7 +35,21 @@ a {
 *, *:before, *:after {
   box-sizing: border-box;
 }
-
+button.inline{
+  border-width: 0;
+  background: transparent;
+  color: inherit;
+  text-align: inherit;
+  padding: 0;
+  font-size: inherit;
+  cursor:pointer;
+  &:focus{
+    background: transparent;
+  }
+  &:hover{
+    color:$mainColor;
+  }
+}
 button.ghost {
   display: inline-block;
   border: 1px solid $mainColor;

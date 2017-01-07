@@ -114,3 +114,18 @@ export function removeTrackFromPlaylistF(trackId) {
   }
 }
 
+function setPlaylist(playlist: []) {
+  return {
+    type: actionTypes.SET_PLAY_LIST
+    , playlist
+  }
+}
+
+export function clearPlayListF() {
+  return dispatch => {
+    dispatch(togglePlayTrack(false))
+    dispatch(deactivateTrack())
+    dispatch(setPlaylist([]))
+    dispatch(togglePlaylist(false))
+  }
+}

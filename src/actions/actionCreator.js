@@ -9,6 +9,7 @@ import { likeF } from './track'
 import {
   togglePlayTrack, activeIterateTrack,
   activateTrackF, removeTrackFromPlaylistF, addTrackToPlaylistF
+  , clearPlayListF
 } from './player'
 
 export {
@@ -27,4 +28,5 @@ export {
   , removeTrackFromPlaylistF
   , fetchActivitiesByGenre
   , likeF
+  , clearPlayListF
 }
