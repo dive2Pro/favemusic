@@ -26,16 +26,16 @@ class App extends Component {
       , followersIds, followingsIds, favoritesIds
       , paginateObject
       , fetchActivities, fetchFollowingsF, fetchFollowersF, fetchFavoritesF
-      , requestObject
-      , users, tracks
-      , toggleFollowingF
+      , requestObject, users, tracks, toggleFollowingF
+      , activitiesIds, activeTrackId
     } = this.props
     console.info(requestObject[requestTypes.FAVORITES]);
     return (
       <div className="dashboard-content">
         <div className="dashboard-content-main">
           <Activities
-            {...this.props}
+            activitiesIds={activitiesIds}
+            activeTrackId={activeTrackId}
             requestInProcess={requestObject[requestTypes.ACTIVITIES]}
             scrollFunc={() => fetchActivities(requestObject[requestTypes.ACTIVITIES])}
             />

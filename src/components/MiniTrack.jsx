@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { isSameTrackAndPlaying, isSameTrack } from '../utils/player'
+import { isSameTrackAndPlaying, isSameById } from '../utils/player'
 import Actions from './Actions'
 
 export default class MiniTrack extends Component {
@@ -15,7 +15,7 @@ export default class MiniTrack extends Component {
       , removeTrackFromPlaylistF } = this.props
     const { id } = track
     const isVisibleAndPlay = isSameTrackAndPlaying(activeTrackId, id, isPlaying)
-    const isVisible = isSameTrack(activeTrackId)(id)
+    const isVisible = isSameById(activeTrackId)(id)
     const configuration = [
       {
         fn: () => activateTrackF(id)
@@ -36,7 +36,7 @@ export default class MiniTrack extends Component {
     if (!track) return
     const { artwork_url, title } = track
     const { avatar_url, permalink_url, username } = user
-    const isSame = isSameTrack(activeTrackId)(track.id)
+    const isSame = isSameById(activeTrackId)(track.id)
     return (
       <div className={`mini-track ${isSame ? 'active-track' : ''}`}>
         <div className="mini-track-img">

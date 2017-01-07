@@ -38,7 +38,7 @@ class BrowserContainer extends Component {
 
   renderInnerComopnent() {
     const {
-      requestInProcess, activitiesByGenre, genre
+      requestInProcess, activitiesByGenre, genre, activeTrackId
     } = this.props
     if (!activitiesByGenre) return
     const filteredActivitiesByGenre = activitiesByGenre[genre]
@@ -46,7 +46,7 @@ class BrowserContainer extends Component {
       <div>
         <Activities
           activitiesIds={filteredActivitiesByGenre}
-          {...this.props}
+          activeTrackId={activeTrackId}
           requestInProcess={requestInProcess}
           scrollFunc={() => this.fetchActivitiesByGenreFunc()}
           />

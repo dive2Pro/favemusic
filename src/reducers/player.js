@@ -2,7 +2,7 @@
  * Created by hyc on 17-1-1.
  */
 import * as actionTypes from '../constants/actionTypes'
-import { isSameTrack } from '../utils/player'
+import { isSameById } from '../utils/player'
 
 const initialState = {
   activeTrackId: null
@@ -11,8 +11,8 @@ const initialState = {
 }
 
 function setTrackInPlaylist(state, trackId) {
-  const item = state.playlist.some(isSameTrack(trackId))
-  // const item = state.get('playlist').find(isSameTrack(track))
+  const item = state.playlist.some(isSameById(trackId))
+  // const item = state.get('playlist').find(isSameById(track))
 
   if (item) return state
   const playlist = [...state.playlist, trackId]
@@ -21,7 +21,7 @@ function setTrackInPlaylist(state, trackId) {
 
 function removeTrackFromPlaylist(state, trackId) {
   // return state.updateIn(['playlist'], list => list.remove(list.indexOf(track)))
-  const index = state.playlist.findIndex(isSameTrack(trackId))
+  const index = state.playlist.findIndex(isSameById(trackId))
   const playlist = [...state.playlist.slice(0, index), ...state.playlist.slice(index + 1)]
   return Object.assign({}, state, { playlist })
 }
