@@ -7,7 +7,7 @@ export function isSameTrackAndPlaying(activeTrackId, trackId, isPlaying) {
 }
 
 export function isSameTrack(trackId) {
-  return function f(obj) {
-    return obj.origin.id === trackId
+  return function f(id) {
+    return id === trackId
   }
 }

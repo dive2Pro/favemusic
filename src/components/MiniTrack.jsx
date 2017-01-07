@@ -11,15 +11,18 @@ export default class MiniTrack extends Component {
   }
 
   renderActions() {
-    const { isPlaying, activateTrack, activeTrack, track, removeTrackFromPlaylist } = this.props
-    const isVisible = isSameTrackAndPlaying(activeTrack, track, isPlaying)
+    const { isPlaying, activateTrackF, activeTrackId, track
+      , removeTrackFromPlaylistF } = this.props
+    const { id } = track
+    const isVisibleAndPlay = isSameTrackAndPlaying(activeTrackId, id, isPlaying)
+    const isVisible = isSameTrack(activeTrackId)(id)
     const configuration = [
       {
-        fn: () => activateTrack(track)
-        , className: `fa ${isVisible ? 'fa-pause' : 'fa-play'}`
+        fn: () => activateTrackF(id)
+        , className: `fa ${isVisibleAndPlay ? 'fa-pause' : 'fa-play'}`
       }
       , {
-        fn: () => removeTrackFromPlaylist(track)
+        fn: () => removeTrackFromPlaylistF(id)
         , className: "fa fa-times"
       }
     ]
@@ -29,12 +32,11 @@ export default class MiniTrack extends Component {
   }
 
   render() {
-    const { track, activeTrack } = this.props
+    const { track, activeTrackId, user } = this.props
     if (!track) return
-    const { origin } = track
-    const { artwork_url, title, user } = origin
+    const { artwork_url, title } = track
     const { avatar_url, permalink_url, username } = user
-    const isSame = isSameTrack(activeTrack)(track)
+    const isSame = isSameTrack(activeTrackId)(track.id)
     return (
       <div className={`mini-track ${isSame ? 'active-track' : ''}`}>
         <div className="mini-track-img">

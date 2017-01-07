@@ -6,7 +6,7 @@ declare type BrowseActionType = {
   type: Action,
   nextHref: string,
   genre: string,
-  activities: Array,
+  activitiesIds: [],
   inProcess: boolean
 }
 

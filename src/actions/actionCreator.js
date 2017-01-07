@@ -8,7 +8,7 @@ import { fetchActivitiesByGenre } from './browse'
 import { likeF } from './track'
 import {
   togglePlayTrack, activeIterateTrack,
-  activateTrack, removeTrackFromPlaylist, addTrackToPlaylist
+  activateTrackF, removeTrackFromPlaylistF, addTrackToPlaylistF
 } from './player'
 
 export {
@@ -20,11 +20,11 @@ export {
   , fetchFavoritesF
   , fetchFollowingsF
   , togglePlayTrack
-  , activateTrack
+  , activateTrackF
   , togglePlaylist
-  , addTrackToPlaylist
+  , addTrackToPlaylistF
   , activeIterateTrack
-  , removeTrackFromPlaylist
+  , removeTrackFromPlaylistF
   , fetchActivitiesByGenre
   , likeF
 }

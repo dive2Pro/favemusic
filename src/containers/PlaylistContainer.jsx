@@ -22,12 +22,14 @@ class Playlist extends Component {
   }
 
   renderPlaylist() {
-    const { playlist } = this.props
+    const { playlist, tracks, users } = this.props
     return (
-      <ul>{playlist.map((activity: Object, idx: number) => {
+      <ul>{playlist.map((id: number, idx: number) => {
+        const activity = tracks[id]
+        const user = users[activity.user]
         return (
           <li key={idx}>
-            <MiniTrack {...this.props} track={activity} />
+            <MiniTrack {...this.props} track={activity} user={user} />
           </li>
         )
       })}</ul>
@@ -48,12 +50,14 @@ class Playlist extends Component {
 }
 
 function mapStateToProps(state: Object) {
-  const { player, environment } = state
+  const { player, environment, entities } = state
   return {
     playlist: player.playlist
     , isPlaying: player.isPlaying
-    , activeTrack: player.activeTrack
-    , isOpenPlaylist: environment.isOpenPlaylist,
+    , activeTrackId: player.activeTrackId
+    , isOpenPlaylist: environment.isOpenPlaylist
+    , tracks: entities.tracks
+    , users: entities.users
   }
 }
 

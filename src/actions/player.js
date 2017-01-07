@@ -31,14 +31,16 @@ function removeFromPlaylist(trackId) {
   }
 }
 
+/** TODO neba  */
+
 function deactivateTrack() {
   return {
     type: actionTypes.DEACTIVE_TRACK
   }
 }
 
-function getIterateTrackId(playlist, activeTrack, iterate) {
-  const index = playlist.findIndex(isSameTrack(activeTrack))
+function getIterateTrackId(playlist, activeTrackId, iterate) {
+  const index = playlist.findIndex(isSameTrack(activeTrackId))
   const iterateTrackId = playlist[(index + iterate)]
   return iterateTrackId
 }
@@ -49,7 +51,7 @@ export function togglePlayTrack(isPlaying) {
   }
 }
 
-export function activateTrack(trackId) {
+export function activateTrackF(trackId) {
   return (dispatch, getState) => {
     const player = getState().player
       , preActiveTrackId = player.activeTrackId
@@ -63,7 +65,7 @@ export function activateTrack(trackId) {
   }
 }
 
-export function addTrackToPlaylist(trackId) {
+export function addTrackToPlaylistF(trackId) {
   return (dispath, getState) => {
     const size = getState().player.playlist.length
     if (!size) {
@@ -89,7 +91,7 @@ export function activeIterateTrack(activeTrackId, iterate = 1) {
   }
 }
 
-export function removeTrackFromPlaylist(trackId) {
+export function removeTrackFromPlaylistF(trackId) {
   return (dispatch, getState) => {
     const player = getState().player
     const preActiveTrackId = player.activeTrackId

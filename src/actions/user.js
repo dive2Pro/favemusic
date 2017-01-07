@@ -143,12 +143,9 @@ export function fetchActivities(nextHref) {
     return fetch(activitiesUrl)
       .then(response => response.json())
       .then(data => {
-        const normalizedObj = normalize(data.collection.map(addIdFromOrigin), new schema.Array(songSchema))
-        // console.groupCollapsed('activities')
-        console.group('activities----------------------------------------------------')
-        console.info(data)
-        console.info(normalizedObj);
-        console.groupEnd()
+        const normalizedObj = normalize(data.collection.map(addIdFromOrigin)
+          , new schema.Array(songSchema))
+
         dispatch(mergeSongEntities(normalizedObj.entities.songs))
         dispatch(mergeTrackEntities(normalizedObj.entities.origins))
         dispatch(mergeUserEntities(normalizedObj.entities.users))

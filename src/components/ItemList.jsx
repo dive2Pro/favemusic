@@ -14,15 +14,11 @@ class ItemList extends Component {
   state: { isMoreToggled: boolean };
   toggleMore: () => void;
 
-  constructor(props: MosaicpropsType) {
-    super(props);
-    this.state = {
-      isMoreToggled: props.isMoreToggled
-    }
-    this.toggleMore = this.toggleMore.bind(this)
+  state = {
+    isMoreToggled: this.props.isMoreToggled
   }
 
-  toggleMore() {
+  toggleMore = () => {
     const changeToggled = !this.state.isMoreToggled
     this.setState({
       isMoreToggled: changeToggled

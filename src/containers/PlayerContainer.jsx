@@ -7,12 +7,6 @@ import * as actions from '../actions/actionCreator.js'
 
 class Player extends Component {
   props: basePropsType;
-  togglePlay: () => void;
-
-  constructor(props: PropsType) {
-    super(props)
-    this.togglePlay = this.togglePlay.bind(this)
-  }
 
   componentDidUpdate() {
     const audioElement = ReactDOM.findDOMNode(this.refs.audio)
@@ -21,25 +15,25 @@ class Player extends Component {
     isPlaying ? audioElement.play() : audioElement.pause()
   }
 
-  togglePlay() {
+  togglePlay = () => {
     const { togglePlayTrack, isPlaying } = this.props
     togglePlayTrack(!isPlaying)
   }
 
   renderNav() {
     const {
-      isPlaying, activeTrack, isOpenPlaylist,
-      activeIterateTrack, togglePlaylist
+      isPlaying, activeTrackId, isOpenPlaylist,
+      activeIterateTrack, togglePlaylist, tracks
     } = this.props
-    if (!activeTrack) return
-    const { origin } = activeTrack
-    const { stream_url, username, title } = origin
+    if (!activeTrackId) return
+    const track = tracks[activeTrackId]
+    const { stream_url, username, title } = track
     return (
       <div className="player-content">
         <div>
           <i
             className="fa fa-step-backward"
-            onClick={() => activeIterateTrack(activeTrack, -1)}
+            onClick={() => activeIterateTrack(activeTrackId, -1)}
             >&nbsp;</i>
         </div>
 
@@ -53,7 +47,7 @@ class Player extends Component {
         <div>
           <i
             className="fa fa-step-forward"
-            onClick={() => activeIterateTrack(activeTrack, 1)}
+            onClick={() => activeIterateTrack(activeTrackId, 1)}
             >&nbsp;</i>
         </div>
         <div className="player-content-name">
@@ -75,9 +69,9 @@ class Player extends Component {
   }
 
   render() {
-    const { activeTrack } = this.props
+    const { activeTrackId } = this.props
     return (
-      <div className={`player ${activeTrack && 'player-visible'}`}>
+      <div className={`player ${activeTrackId && 'player-visible'}`}>
         {this.renderNav()}
       </div>
 
@@ -86,10 +80,12 @@ class Player extends Component {
 }
 
 function mapStateToProps(state: Object) {
-  const { player, environment } = state
+  const { player, environment, entities } = state
   return {
-    isPlaying: player.isPlaying, activeTrack: player.activeTrack
+    isPlaying: player.isPlaying
+    , activeTrackId: player.activeTrackId
     , isOpenPlaylist: environment.isOpenPlaylist
+    , tracks: entities.tracks
   }
 }
 

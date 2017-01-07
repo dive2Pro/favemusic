@@ -7,10 +7,8 @@ type FetchPropsType = {
 
 export default function (InnerComponent: ReactClass): ReactClass<{}> {
   class FetchOnScrollComponent extends Component {
-    constructor(props: FetchPropsType) {
-      super(props)
-      this.onScroll = this.onScroll.bind(this)
-    }
+    props: FetchPropsType;
+
 
     componentDidMount() {
       window.addEventListener('scroll', this.onScroll)
@@ -20,7 +18,7 @@ export default function (InnerComponent: ReactClass): ReactClass<{}> {
       window.removeEventListener('scroll', this.onScroll)
     }
 
-    onScroll() {
+    onScroll = () => {
       if (window.innerHeight + window.scrollY >= document.body.offsetHeight - 500) {
         this.props.scrollFunc()
       }

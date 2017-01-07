@@ -34,7 +34,7 @@ export default function playerReducer(state = initialState, action) {
     case actionTypes.SET_IS_PLAYING:
       return Object.assign({}, state, { isPlaying: action.isPlaying })
     case actionTypes.SET_ACTIVE_TRACK:
-      return Object.assign({}, state, { activeTrack: action.activeTrackId })
+      return Object.assign({}, state, { activeTrackId: action.activeTrackId })
     case actionTypes.SET_TRACK_IN_PLAYLIST:
       return setTrackInPlaylist(state, action.trackId)
 

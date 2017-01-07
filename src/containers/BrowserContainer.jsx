@@ -26,9 +26,6 @@ class BrowserContainer extends Component {
     // this.fetchActivitiesByGenre()
   }
 
-  byGenre(genre: string) {
-    return (activity: ActivityType) => activity.origin.tag_list.indexOf(genre) !== -1
-  }
 
   /**
    * need
@@ -36,25 +33,21 @@ class BrowserContainer extends Component {
    */
   shouldFetchMoreFiltedActivities() {
     const { activitiesByGenre, genre } = this.props
-    return (activitiesByGenre).filter(this.byGenre(genre)).length <= 20
+    return !activitiesByGenre[genre] || activitiesByGenre[genre].length <= 20
   }
 
   renderInnerComopnent() {
     const {
-      requestInProcess, activitiesByGenre, activateTrack,
-      addTrackToPlaylist, genre, isPlaying
+      requestInProcess, activitiesByGenre, genre
     } = this.props
     if (!activitiesByGenre) return
-    const activitiesByGenreD = (activitiesByGenre)
-    const filteredActivitiesByGenre = activitiesByGenreD.filter(this.byGenre(genre))
+    const filteredActivitiesByGenre = activitiesByGenre[genre]
     return (
       <div>
         <Activities
-          activities={filteredActivitiesByGenre}
+          activitiesIds={filteredActivitiesByGenre}
+          {...this.props}
           requestInProcess={requestInProcess}
-          activateTrack={activateTrack}
-          isPlaying={isPlaying}
-          addTrackToPlaylist={addTrackToPlaylist}
           scrollFunc={() => this.fetchActivitiesByGenreFunc()}
           />
       </div>
@@ -75,15 +68,17 @@ class BrowserContainer extends Component {
 }
 
 function mapStateToProps(state: Object, routeState: Object) {
-  // console.info('ownProps = ', ownProps)
-  const { browse, player, request, paginate } = state
+  const { browse, entities, player, request, paginate } = state
   return {
     activitiesByGenre: browse.activitiesByGenre
     , genre: routeState.location.query.genre
     , paginateObject: paginate.paginateObject
-    , activateTrack: player.activeTrack
+    , activeTrackId: player.activeTrackId
     , pathname: routeState.location.pathname
     , requestInProcess: request.requestObject[ACTIVITIES_BYGENRE]
+    , tracks: entities.tracks
+    , songs: entities.songs
+    , users: entities.users
   }
 }
 

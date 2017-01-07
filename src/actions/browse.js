@@ -5,16 +5,19 @@ import { wrapInOrigin } from '../utils/track'
 import { setRequestTypeInProcess } from './request'
 import { setPaginateLink } from './paginate'
 import * as requestTypes from '../constants/requestTypes'
-
-function mergeActivitiesByGenre(activities: Array<*>) {
+import { mergeTrackEntities, mergeSongEntities, mergeUserEntities } from './entities'
+import { normalize, schema } from 'normalizr'
+import { songSchema } from '../constants/schema'
+function mergeActivitiesByGenre(activitiesIds: Array<Number>, genre: 'foo') {
   return {
     type: actionTypes.MERGE_ACTIVITIES_BY_GENRE
-    , activities
+    , activitiesIds
+    , genre
   }
 }
 
-export function fetchActivitiesByGenre(nextHref: string, genre: string) {
-  return (dispatch: ()=>void, getState: ()=>Object) => {
+export function fetchActivitiesByGenre(nextHref: string, genre: string = 'house') {
+  return (dispatch: () => void, getState: () => Object) => {
     const initHref = unauthApiUrl(
       `tracks?linked_partitioning=1&limit=50&offset=0&tags=${genre}`, '&')
     const url = nextHref || initHref
@@ -26,8 +29,13 @@ export function fetchActivitiesByGenre(nextHref: string, genre: string) {
     return fetch(url)
       .then((response: ResponseType) => response.json())
       .then((data: ResponseAfterToJSONType) => {
-        const activities = data.collection.map(wrapInOrigin)
-        dispatch(mergeActivitiesByGenre(activities))
+        console.info(data);
+        const normalizedObj = normalize(data.collection.map(wrapInOrigin)
+          , new schema.Array(songSchema))
+        dispatch(mergeTrackEntities(normalizedObj.entities.origins))
+        dispatch(mergeSongEntities(normalizedObj.entities.songs))
+        dispatch(mergeUserEntities(normalizedObj.entities.users))
+        dispatch(mergeActivitiesByGenre(normalizedObj.result, genre))
         dispatch(setPaginateLink(data.next_href, genre))
         dispatch(setRequestTypeInProcess(false, requestTypes.ACTIVITIES_BYGENRE))
       })
