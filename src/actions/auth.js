@@ -24,22 +24,21 @@ import {
 } from './user'
 import { changeLocation } from './location'
 
-function setSession(session) {
-  return {
+const setSession = (session) =>
+  ({
     type: actionTypes.SET_SESSION
     , session
-  }
-}
+  })
 
-function setUser(user) {
-  return {
+
+const setUser = (user) =>
+  ({
     type: actionTypes.SET_USER
     , user
-  }
-}
+  })
 
-function fetchUser() {
-  return dispatch => {
+const fetchUser = () =>
+  dispatch => {
     fetch(apiUrl('me', '?'))
       .then(response => response.json())
       .then(me => {
@@ -50,9 +49,9 @@ function fetchUser() {
         dispatch(fetchFollowersF(me))
       })
   }
-}
-export function init() {
-  return dispatch => {
+
+export const init = () =>
+  dispatch => {
     const oauth_token = Cookies.get(OAUTH_TOKEN)
     console.info('oauth_token = ', oauth_token)
     if (oauth_token !== undefined && oauth_token !== null && oauth_token !== 'null') {
@@ -62,10 +61,10 @@ export function init() {
       dispatch(changeLocation('/browse'))
     }
   }
-}
 
-export function login() {
-  return dispatch => {
+
+export const login = () =>
+  dispatch => {
     SC.initialize({
       client_id: CLIENT_ID
       , redirect_uri: REDIRECT_URI
@@ -77,10 +76,9 @@ export function login() {
       dispatch(fetchUser(session.oauth_token))
     })
   }
-}
 
-export function logout() {
-  return (dispatch) => {
+export const logout = () =>
+  (dispatch) => {
     Cookies.set(OAUTH_TOKEN, null)
     dispatch(changeLocation('/browse'))
     dispatch(setSession(null))
@@ -90,4 +88,3 @@ export function logout() {
     dispatch(setFollowings([]))
     dispatch(setFavorites([]))
   }
-}

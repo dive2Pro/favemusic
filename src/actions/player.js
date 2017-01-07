@@ -5,55 +5,48 @@ import * as actionTypes from '../constants/actionTypes'
 import { isSameTrackAndPlaying, isSameTrack } from '../utils/player'
 import { togglePlaylist } from './environment'
 import { syncEntities } from './entities'
-function setIsPlaying(isPlaying) {
-  return {
-    type: actionTypes.SET_IS_PLAYING
-    , isPlaying
-  }
-}
+const setIsPlaying = (isPlaying) => ({
+  type: actionTypes.SET_IS_PLAYING
+  , isPlaying
+})
 
-function setActiveTrack(activeTrackId) {
-  return {
-    type: actionTypes.SET_ACTIVE_TRACK
-    , activeTrackId
-  }
-}
-function setTrackInPlaylist(trackId) {
-  return {
-    type: actionTypes.SET_TRACK_IN_PLAYLIST
-    , trackId
-  }
-}
+const setActiveTrack = (activeTrackId) => ({
+  type: actionTypes.SET_ACTIVE_TRACK
+  , activeTrackId
+})
 
-function removeFromPlaylist(trackId) {
-  return {
-    type: actionTypes.REMOVE_TRACK_FROM_PLAYLIST
-    , trackId
-  }
-}
+const setTrackInPlaylist = (trackId) => ({
+  type: actionTypes.SET_TRACK_IN_PLAYLIST
+  , trackId
+})
+
+
+const removeFromPlaylist = (trackId) => ({
+  type: actionTypes.REMOVE_TRACK_FROM_PLAYLIST
+  , trackId
+})
 
 /** TODO neba  */
 
-function deactivateTrack() {
-  return {
-    type: actionTypes.DEACTIVE_TRACK
-  }
-}
+const deactivateTrack = () => ({
+  type: actionTypes.DEACTIVE_TRACK
+})
 
-function getIterateTrackId(playlist, activeTrackId, iterate) {
+
+const getIterateTrackId = (playlist, activeTrackId, iterate) => {
   const index = playlist.findIndex(isSameTrack(activeTrackId))
   const iterateTrackId = playlist[(index + iterate)]
   return iterateTrackId
 }
 
-export function togglePlayTrack(isPlaying) {
-  return dispatch => {
+export const togglePlayTrack = (isPlaying) =>
+  dispatch => {
     dispatch(setIsPlaying(isPlaying))
   }
-}
 
-export function activateTrackF(trackId) {
-  return (dispatch, getState) => {
+
+export const activateTrackF = (trackId) =>
+  (dispatch, getState) => {
     const player = getState().player
       , preActiveTrackId = player.activeTrackId
       , isPlaying = player.isPlaying
@@ -64,20 +57,20 @@ export function activateTrackF(trackId) {
     dispatch(setActiveTrack(trackId))
     dispatch(setTrackInPlaylist(trackId))
   }
-}
 
-export function addTrackToPlaylistF(trackId) {
-  return (dispath, getState) => {
+
+export const addTrackToPlaylistF = (trackId) =>
+  (dispath, getState) => {
     const size = getState().player.playlist.length
     if (!size) {
       dispath(setActiveTrack(trackId))
     }
     dispath(setTrackInPlaylist(trackId))
   }
-}
 
-export function activeIterateTrack(activeTrackId, iterate = 1) {
-  return (dispatch, getState) => {
+
+export const activeIterateTrack = (activeTrackId, iterate = 1) =>
+  (dispatch, getState) => {
     const player = getState().player
       , tracks = getState().entities.tracks
     const playlist = player.playlist
@@ -92,10 +85,9 @@ export function activeIterateTrack(activeTrackId, iterate = 1) {
 
     dispatch(syncEntities(activeTrack, 'tracks'))
   }
-}
 
-export function removeTrackFromPlaylistF(trackId) {
-  return (dispatch, getState) => {
+export const removeTrackFromPlaylistF = (trackId) =>
+  (dispatch, getState) => {
     const player = getState().player
     const preActiveTrackId = player.activeTrackId
     const isAPT = isSameTrack(preActiveTrackId)(trackId)
@@ -112,20 +104,19 @@ export function removeTrackFromPlaylistF(trackId) {
     }
     dispatch(removeFromPlaylist(trackId))
   }
-}
 
-function setPlaylist(playlist: []) {
-  return {
-    type: actionTypes.SET_PLAY_LIST
-    , playlist
-  }
-}
 
-export function clearPlayListF() {
-  return dispatch => {
+const setPlaylist = (playlist: []) => ({
+  type: actionTypes.SET_PLAY_LIST
+  , playlist
+})
+
+
+export const clearPlayListF = () =>
+  dispatch => {
     dispatch(togglePlayTrack(false))
     dispatch(deactivateTrack())
     dispatch(setPlaylist([]))
     dispatch(togglePlaylist(false))
   }
-}
+

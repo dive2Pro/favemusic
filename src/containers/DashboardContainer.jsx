@@ -58,10 +58,10 @@ class App extends Component {
             followingsIds={followingsIds}
             requestInProcess={requestObject[requestTypes.FOLLOWERS]}
             nextHref={paginateObject[paginateLinkTypes.FOLLOWERS]}
-            fetchMoreF={fetchFollowersF}
             user={currentUser}
             kind="user"
             entities={users}
+            fetchMoreF={fetchFollowersF}
             toggleFollowingF={toggleFollowingF}
             />
           <ItemList

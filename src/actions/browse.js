@@ -8,15 +8,16 @@ import * as requestTypes from '../constants/requestTypes'
 import { mergeTrackEntities, mergeSongEntities, mergeUserEntities } from './entities'
 import { normalize, schema } from 'normalizr'
 import { songSchema } from '../constants/schema'
-function mergeActivitiesByGenre(activitiesIds: Array<Number>, genre: 'foo') {
-  return {
+
+const mergeActivitiesByGenre = (activitiesIds: Array<Number>, genre: 'foo') =>
+  ({
     type: actionTypes.MERGE_ACTIVITIES_BY_GENRE
     , activitiesIds
     , genre
-  }
-}
+  })
 
-export function fetchActivitiesByGenre(nextHref: string, genre: string = 'house') {
+
+export const fetchActivitiesByGenre = (nextHref: string, genre: string = 'house') => {
   return (dispatch: () => void, getState: () => Object) => {
     const initHref = unauthApiUrl(
       `tracks?linked_partitioning=1&limit=50&offset=0&tags=${genre}`, '&')

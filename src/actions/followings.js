@@ -3,14 +3,12 @@ import apiUrl from '../utils/soundcloundApi'
 import { mergeFollowings } from './user'
 import { REMOVE_FROM_FOLLOWINGS } from '../constants/actionTypes'
 
-function removeFromFollowings(userId: number) {
-  return {
-    type: REMOVE_FROM_FOLLOWINGS
-    , userId
-  }
-}
+const removeFromFollowings = (userId: number) => ({
+  type: REMOVE_FROM_FOLLOWINGS
+  , userId
+})
 
-export function toggleFollowingF(userId: number) {
+export const toggleFollowingF = (userId: number) => {
   return (dispatch: Function, getState: Function) => {
     const isFollowing = getState().user.followingsIds
       .some((followingId: number) => followingId === userId)
