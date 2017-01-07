@@ -40,7 +40,7 @@ export function setFollowings(followings) {
   }
 }
 
-function mergeFollowings(followings) {
+export function mergeFollowings(followings) {
   return {
     type: actionTypes.MERGE_FOLLOWINGS
     , followings
@@ -54,7 +54,7 @@ function mergeActivities(activities) {
   }
 }
 
-function mergeFollowers(followers) {
+export function mergeFollowers(followers) {
   return {
     type: actionTypes.MERGE_FOLLOWERS
     , followers

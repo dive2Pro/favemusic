@@ -28,6 +28,7 @@ class App extends Component {
       , fetchActivities, fetchFollowingsF, fetchFollowersF, fetchFavoritesF
       , requestObject
       , users, tracks
+      , toggleFollowingF
     } = this.props
     console.info(requestObject[requestTypes.FAVORITES]);
     return (
@@ -43,6 +44,8 @@ class App extends Component {
           <ItemList
             title="Followings"
             ids={followingsIds}
+            toggleFollowingF={toggleFollowingF}
+            followingsIds={followingsIds}
             kind="user"
             entities={users}
             fetchMoreF={fetchFollowingsF}
@@ -52,12 +55,14 @@ class App extends Component {
           <ItemList
             title="Followers"
             ids={followersIds}
+            followingsIds={followingsIds}
             requestInProcess={requestObject[requestTypes.FOLLOWERS]}
             nextHref={paginateObject[paginateLinkTypes.FOLLOWERS]}
             fetchMoreF={fetchFollowersF}
             user={currentUser}
             kind="user"
             entities={users}
+            toggleFollowingF={toggleFollowingF}
             />
           <ItemList
             title="Favorites"

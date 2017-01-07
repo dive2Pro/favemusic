@@ -1,12 +1,13 @@
 /**
  * Created by hyc on 16-12-31.
  */
+// @flow
 import Cookies from 'js-cookie'
 import {
   OAUTH_TOKEN, CLIENT_ID
 } from '../constants/authentification'
 
-export default function apiUrl(url, symbol) {
+export default function apiUrl(url: string, symbol: string) {
   const accessToken = Cookies.get(OAUTH_TOKEN)
   console.log('accessToken = ' + accessToken);
   return `//api.soundcloud.com/${url}${symbol}oauth_token=${accessToken}`

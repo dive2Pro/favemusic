@@ -2,7 +2,7 @@
  * Created by hyc on 16-12-31.
  */
 import * as actionTypes from '../constants/actionTypes'
-import { isSameTrack } from '../utils/player'
+import { isSameById } from '../utils/player'
 function mergeFollowings(state, receivefollowings) {
   const followingsIds = [...state.followingsIds, ...receivefollowings]
   return Object.assign({}, state, { followingsIds })
@@ -57,7 +57,7 @@ function addToFavorites(state, trackId) {
 }
 
 function removeFromFavorites(state, trackId) {
-  const index = state.favoritesIds.findIndex(isSameTrack(trackId))
+  const index = state.favoritesIds.findIndex(isSameById(trackId))
   if (index < 0) {
     return state
   }
@@ -67,7 +67,17 @@ function removeFromFavorites(state, trackId) {
   ]
   return Object.assign({}, state, { favoritesIds })
 }
-
+function removeFromFollowings(state: {}, userId: number) {
+  const index = state.followingsIds.findIndex(isSameById(userId))
+  if (index < 0) {
+    return state
+  }
+  const followingsIds = [
+    ...state.followingsIds.slice(0, index)
+    , ...state.followingsIds.slice(index + 1)
+  ]
+  return { ...state, followingsIds }
+}
 export default function (state = initialState, action) {
   switch (action.type) {
     case actionTypes.MERGE_FOLLOWINGS:
@@ -91,6 +101,8 @@ export default function (state = initialState, action) {
       return addToFavorites(state, action.trackId)
     case actionTypes.REMOVE_FROM_FAVORITES:
       return removeFromFavorites(state, action.trackId)
+    case actionTypes.REMOVE_FROM_FOLLOWINGS:
+      return removeFromFollowings(state, action.userId)
     default:
       return state
   }

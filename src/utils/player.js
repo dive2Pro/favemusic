@@ -6,7 +6,7 @@ export function isSameTrackAndPlaying(activeTrackId, trackId, isPlaying) {
   return isPlaying && activeTrackId && activeTrackId === trackId
 }
 
-export function isSameTrack(trackId) {
+export function isSameById(trackId) {
   return function f(id) {
     return id === trackId
   }

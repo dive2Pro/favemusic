@@ -12,8 +12,10 @@
     &:hover {
       color: $mainColor;
     }
+    &.is-active {
+      color: $mainColor;
+    }
   }
-
   &-visible {
     opacity: 1;
   }

@@ -7,7 +7,7 @@ import {
   fromNow,
   durationFormat
 } from '../utils/track'
-import { isSameTrackAndPlaying, isSameTrack } from '../utils/player.js'
+import { isSameTrackAndPlaying, isSameById } from '../utils/player.js'
 import Waveform from 'waveform.js'
 
 export default class Track extends Component {
@@ -94,7 +94,7 @@ export default class Track extends Component {
       , duration, created_at
     } = track
     const { avatar_url, username } = user
-    const isVisible = isSameTrack(activeTrackId)(id)
+    const isVisible = isSameById(activeTrackId)(id)
     return (
       <div className={"track " + (isVisible ? "active" : "")}>
         <div className="track-img">

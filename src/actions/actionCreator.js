@@ -1,6 +1,7 @@
 /**
  * Created by hyc on 16-12-31.
  */
+import { toggleFollowingF } from './followings'
 import { init, login, logout } from './auth'
 import { togglePlaylist } from './environment'
 import { fetchActivities, fetchFollowersF, fetchFavoritesF, fetchFollowingsF } from './user'
@@ -29,4 +30,5 @@ export {
   , fetchActivitiesByGenre
   , likeF
   , clearPlayListF
+  , toggleFollowingF
 }

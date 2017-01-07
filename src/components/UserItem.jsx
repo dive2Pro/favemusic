@@ -1,18 +1,29 @@
 // @flow
 import React from 'react'
-
-const UserItem = (props: { user: UserType, idx: number }) => {
+import Actions from './Actions'
+const UserItem = (props: {
+  isFollowing: boolean
+  , user: UserType
+  , idx: number
+  , toggleFollowingF: Function
+}) => {
   const {
     permalink_url, avatar_url, username,
     followers_count, followings_count, track_count
+    , id
   } = props.user
+
+  const configuration = [{
+    fn: () => props.toggleFollowingF(id)
+    , className: props.isFollowing ? "fa fa-group is-active" : "fa fa-group"
+  }]
   return (
     <div className="item">
       <div>
         <img
           src={avatar_url}
           alt={username} height="40" width="40"
-        />
+          />
       </div>
       <div className="item-content">
         <div className="item-content-name">
@@ -29,6 +40,7 @@ const UserItem = (props: { user: UserType, idx: number }) => {
           <div className="item-content-info-item">
             <i className="fa fa-music">&nbsp;{track_count}</i>
           </div>
+          <Actions isVisible={props.isFollowing} configuration={configuration} />
         </div>
       </div>
     </div>

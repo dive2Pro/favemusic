@@ -26,10 +26,14 @@ class ItemList extends Component {
   }
 
   renderUser(id: number, idx: number) {
-    const { entities } = this.props
+    const { toggleFollowingF, entities, followingsIds } = this.props
+    const isFollowing = followingsIds ? followingsIds
+      .some((followingId: number) => followingId === id) : false
     return (
       <li key={idx}>
-        <UserItem user={entities[id]} idx={idx} />
+        <UserItem
+          user={entities[id]} idx={idx}
+          isFollowing={isFollowing} toggleFollowingF={toggleFollowingF} />
       </li>
     )
   }
