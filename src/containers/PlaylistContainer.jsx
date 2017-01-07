@@ -1,6 +1,6 @@
 // @flow
 import React, { Component } from 'react'
-import MiniTrack from '../components/MiniTrack'
+import MiniTrackContainer from '../components/MiniTrack'
 import { connect } from 'react-redux';
 import * as actions from '../actions/actionCreator.js'
 type PropsType = {
@@ -33,17 +33,16 @@ class Playlist extends Component {
   }
 
   renderPlaylist() {
-    const { playlist, tracks, users } = this.props
+    const { playlist } = this.props
     return (
-      <ul className="playlist-content">{playlist.map((id: number, idx: number) => {
-        const activity = tracks[id]
-        const user = users[activity.user]
-        return (
-          <li key={idx}>
-            <MiniTrack {...this.props} track={activity} user={user} />
-          </li>
-        )
-      })}</ul>
+      <ul className="playlist-content">
+        {playlist.map((id: number, idx: number) => {
+          return (
+            <li key={idx}>
+              <MiniTrackContainer id={id} />
+            </li>
+          )
+        })}</ul>
     )
   }
 
@@ -58,14 +57,12 @@ class Playlist extends Component {
 }
 
 function mapStateToProps(state: Object) {
-  const { player, environment, entities } = state
+  const { player, environment } = state
   return {
     playlist: player.playlist
     , isPlaying: player.isPlaying
     , activeTrackId: player.activeTrackId
     , isOpenPlaylist: environment.isOpenPlaylist
-    , tracks: entities.tracks
-    , users: entities.users
   }
 }
 

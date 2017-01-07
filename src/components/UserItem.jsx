@@ -1,6 +1,7 @@
 // @flow
 import React from 'react'
 import Actions from './Actions'
+
 const UserItem = (props: {
   isFollowing: boolean
   , user: UserType
