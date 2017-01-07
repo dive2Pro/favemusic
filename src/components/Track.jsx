@@ -7,7 +7,7 @@ import {
   fromNow,
   durationFormat
 } from '../utils/track'
-import { isSameTrackAndPlaying } from '../utils/player.js'
+import { isSameTrackAndPlaying, isSameTrack } from '../utils/player.js'
 import Waveform from 'waveform.js'
 
 export default class Track extends Component {
@@ -64,7 +64,6 @@ export default class Track extends Component {
     if (!stream_url) return
 
     const currentTrackIsPlaying = isSameTrackAndPlaying(activeTrackId, id, isPlaying)
-
     return (
       <div className="track-actions">
         <div className="track-actions-item">
@@ -85,7 +84,7 @@ export default class Track extends Component {
   }
 
   render() {
-    const { activateTrackF, isPlaying, idx, track, song, user } = this.props
+    const { activateTrackF, activeTrackId, isPlaying, idx, track, song, user } = this.props
     const { origin, type } = song
 
     if (!origin) return (<div></div>)
@@ -95,9 +94,9 @@ export default class Track extends Component {
       , duration, created_at
     } = track
     const { avatar_url, username } = user
-
+    const isVisible = isSameTrack(activeTrackId)(id)
     return (
-      <div className="track">
+      <div className={"track " + (isVisible ? "active" : "")}>
         <div className="track-img">
           {this.renderImage(artwork_url, title, avatar_url)}
         </div>

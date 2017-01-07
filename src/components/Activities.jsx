@@ -8,8 +8,8 @@ class ActivitiesContainer extends Component {
   props: basePropsType;
 
   activitiesDom(): HTMLElement {
-    const { activitiesIds, users, activateTrackF,
-      isPlaying, addTrackToPlaylistF, tracks, songs } = this.props
+    const { activitiesIds, users, activateTrackF, activeTrackId
+      , isPlaying, addTrackToPlaylistF, tracks, songs } = this.props
     return (activitiesIds &&
       <div>
         <h2>activities</h2>
@@ -26,6 +26,7 @@ class ActivitiesContainer extends Component {
                     idx={idx}
                     user={user}
                     track={track}
+                    activeTrackId={activeTrackId}
                     activateTrackF={activateTrackF}
                     isPlaying={isPlaying}
                     addTrackToPlaylistF={addTrackToPlaylistF}
