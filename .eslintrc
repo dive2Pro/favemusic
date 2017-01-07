@@ -127,6 +127,7 @@
     "fetch": true,
     "assert": true,
     "beforeEach": true,
-    "UserEntitiesType": true
+    "UserEntitiesType": true,
+    "baseStateType": true
   }
 }
