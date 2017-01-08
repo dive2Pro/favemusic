@@ -5,6 +5,8 @@ import { addAccessToken } from '../utils/soundcloundApi'
 import { connect } from 'react-redux';
 import * as actions from '../actions/actionCreator.js'
 import { PLAYLISTTYPE } from '../constants/toggleTypes'
+import { bindActionCreators } from 'redux'
+
 class Player extends Component {
   props: basePropsType;
 
@@ -96,5 +98,12 @@ function mapStateToProps(state: Object) {
     , tracks: entities.tracks
   }
 }
-
-export default connect(mapStateToProps, actions)(Player)
+function mapDispatchToProps(dispatch: Function) {
+  return {
+    likeF: bindActionCreators(actions.likeF, dispatch)
+    , activeIterateTrack: bindActionCreators(actions.activeIterateTrack, dispatch)
+    , setToggledF: bindActionCreators(actions.setToggledF, dispatch)
+    , togglePlayTrack: bindActionCreators(actions.togglePlayTrack, dispatch)
+  }
+}
+export default connect(mapStateToProps, mapDispatchToProps)(Player)

@@ -84,7 +84,6 @@ export const activeIterateTrack = (activeTrackId, iterate = 1) =>
     } else {
       dispatch(togglePlayTrack(false))
     }
-
     dispatch(syncEntities(activeTrack, 'tracks'))
   }
 
