@@ -10,30 +10,10 @@ import { setRequestTypeInProcess } from './request'
 import * as requestTypes from '../constants/requestTypes'
 import * as paginateLinkTypes from '../constants/paginateLinkTypes'
 import { setPaginateLink } from './paginate'
-import { userSchema, songSchema } from '../constants/schema'
+import userSchema from '../schemas/user'
+import songSchema from '../schemas/song'
 import { normalize, schema } from 'normalizr'
 import { mergeUserEntities, mergeTrackEntities, mergeSongEntities } from './entities'
-export const setFollowers = (followers) => ({
-  type: actionTypes.SET_FOLLOWERS
-  , followers
-})
-
-const setActivities = (activities) => ({
-  type: actionTypes.SET_ACTIVITIES
-  , activities
-})
-
-const setFavorites = (favorites) => ({
-  type: actionTypes.SET_FAVORITES
-  , favorites
-})
-
-
-export const setFollowings = (followings) => ({
-  type: actionTypes.SET_FOLLOWINGS
-  , followings
-})
-
 
 export const mergeFollowings = (followings) => ({
   type: actionTypes.MERGE_FOLLOWINGS

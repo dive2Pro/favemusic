@@ -2,7 +2,7 @@
  * Created by hyc on 17-1-1.
  */
 import * as actionTypes from '../constants/actionTypes'
-import { isSameTrackAndPlaying, isSameTrack } from '../utils/player'
+import { isSameTrackAndPlaying, isSameById } from '../utils/player'
 import { togglePlaylist } from './environment'
 import { syncEntities } from './entities'
 const setIsPlaying = (isPlaying) => ({
@@ -34,7 +34,7 @@ const deactivateTrack = () => ({
 
 
 const getIterateTrackId = (playlist, activeTrackId, iterate) => {
-  const index = playlist.findIndex(isSameTrack(activeTrackId))
+  const index = playlist.findIndex(isSameById(activeTrackId))
   const iterateTrackId = playlist[(index + iterate)]
   return iterateTrackId
 }
@@ -90,7 +90,7 @@ export const removeTrackFromPlaylistF = (trackId) =>
   (dispatch, getState) => {
     const player = getState().player
     const preActiveTrackId = player.activeTrackId
-    const isAPT = isSameTrack(preActiveTrackId)(trackId)
+    const isAPT = isSameById(preActiveTrackId)(trackId)
 
     if (isAPT) {
       dispatch(activeIterateTrack(preActiveTrackId))
@@ -100,7 +100,7 @@ export const removeTrackFromPlaylistF = (trackId) =>
     const playlistSize = playlist.length
     if (playlistSize < 2) {
       dispatch(deactivateTrack())
-      dispatch(togglePlaylist(true))
+      dispatch(togglePlaylist(false))
     }
     dispatch(removeFromPlaylist(trackId))
   }
