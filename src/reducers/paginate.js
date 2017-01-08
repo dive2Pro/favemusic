@@ -6,9 +6,9 @@ const initialState = {
 }
 
 function setPaginateLink(state: {}, nextHref: string, paginateLink: string) {
-  const paginateObject = state.paginateObject
+  const paginateObject = {}
   paginateObject[paginateLink] = nextHref
-  return { ...state, paginateObject }
+  return { ...state, ...paginateObject }
 }
 
 export default function paginate(state: {} = initialState, action: PaginateActionType) {

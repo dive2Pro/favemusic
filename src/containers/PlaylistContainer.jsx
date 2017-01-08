@@ -61,7 +61,7 @@ function mapStateToProps(state: Object) {
 }
 function mapDisaptchToProps(dispatch: Function) {
   return {
-    clearPlayListF: bindActionCreators(actions.bindActionCreators, dispatch)
+    clearPlayListF: bindActionCreators(actions.clearPlayListF, dispatch)
   }
 }
 

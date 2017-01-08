@@ -46,7 +46,7 @@ export const fetchFollowersF = (user, nextHref) => {
 
   return (dispatch, getState) => {
     const request = getState().request
-    const isrequestFollowersInProcess = request.requestObject[requestTypes.FOLLOWERS]
+    const isrequestFollowersInProcess = request[requestTypes.FOLLOWERS]
     if (isrequestFollowersInProcess) return
 
     dispatch(setRequestTypeInProcess(true, requestTypes.FOLLOWERS))
@@ -105,7 +105,7 @@ export const fetchActivities = (nextHref) => {
   }
 
   return (dispatch, getState) => {
-    const activitiesRequestInProcess = getState().request.requestObject[requestTypes.ACTIVITIES]
+    const activitiesRequestInProcess = getState().request[requestTypes.ACTIVITIES]
     if (activitiesRequestInProcess) {
       return;
     }

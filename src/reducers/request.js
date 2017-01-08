@@ -1,13 +1,12 @@
 // @flow
 import * as actionTypes from '../constants/actionTypes'
 const initialState = {
-  requestObject: {}
 }
 const setRequestTypeInProcess = (state: {}, inProcess: boolean, requestType: string) => {
-  const requestObject = state.requestObject
+  const requestObject = {}
   requestObject[requestType] = inProcess
   // Object.assign({}, state.requestObject, { [requestType]: inProcess })
-  return { ...state, requestObject }
+  return { ...state, ...requestObject }
 }
 
 export default function (state: {} = initialState, action: RequestType) {

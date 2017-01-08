@@ -1,25 +1,25 @@
 // @flow
 import React from 'react'
 import Actions from './Actions'
-import { isSameTrackAndPlaying } from '../utils/player'
+import { isSameById } from '../utils/player'
 import { connect } from 'react-redux'
 import * as actions from '../actions/actionCreator'
 
-const TrackItem = ({ track, activateTrack, activeTrack
-  , isPlaying, addTrackToPlaylist, likeF }: {}) => {
+const TrackItem = ({ track, activateTrackF, activeTrackId
+  , isPlaying, addTrackToPlaylistF, likeF }: {}) => {
   const {
     permalink_url, artwork_url, title
     , comment_count, favoritings_count, playback_count
   } = track
 
-  const isVisible = isSameTrackAndPlaying(activeTrack, track, isPlaying)
+  const isVisible = isSameById(activeTrackId)(track.id)
   const configuration = [
     {
-      fn: () => activateTrack(track)
+      fn: () => activateTrackF(track.id)
       , className: `fa ${isVisible ? "fa fa-pause" : "fa fa-play"}`
     }
     , {
-      fn: () => addTrackToPlaylist(track)
+      fn: () => addTrackToPlaylistF(track.id)
       , className: "fa fa-list"
     }
   ]
@@ -64,7 +64,7 @@ function matpStateToProps(state: baseStateType, ownState: {}) {
     track: ownState.track
     , idx: ownState.idx
     , isPlaying: state.player.isPlaying
-    , activeTrack: state.player.activeTrack
+    , activeTrackId: state.player.activeTrackId
   }
 }
 

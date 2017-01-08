@@ -22,7 +22,7 @@ export const fetchActivitiesByGenre = (nextHref: string, genre: string = 'house'
     const initHref = unauthApiUrl(
       `tracks?linked_partitioning=1&limit=50&offset=0&tags=${genre}`, '&')
     const url = nextHref || initHref
-    const requestInprocess = getState().request.requestObject[requestTypes.ACTIVITIES_BYGENRE]
+    const requestInprocess = getState().request[requestTypes.ACTIVITIES_BYGENRE]
     if (requestInprocess) {
       return;
     }

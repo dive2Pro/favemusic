@@ -9,12 +9,12 @@ import Activities from '../components/Activities'
 import { DEFAULT_GENRE } from '../constants/genre'
 import { ACTIVITIES_BYGENRE } from '../constants/requestTypes'
 import { bindActionCreators } from 'redux'
+
 class BrowserContainer extends Component {
   props: basePropsType;
 
-  fetchActivitiesByGenreFunc() {
-    const { fetchActivitiesByGenre, genre, paginateObject } = this.props
-    const nextHref = paginateObject[genre]
+  fetchActivitiesByGenreFunc = () => {
+    const { fetchActivitiesByGenre, genre, nextHref } = this.props
     fetchActivitiesByGenre(nextHref, genre)
   }
 
@@ -71,10 +71,10 @@ function mapStateToProps(state: Object, routeState: Object) {
   return {
     activitiesByGenre: browse.activitiesByGenre
     , genre: routeState.location.query.genre
-    , paginateObject: paginate.paginateObject
+    , nextHref: paginate.paginateObject
     , activeTrackId: player.activeTrackId
     , pathname: routeState.location.pathname
-    , requestInProcess: request.requestObject[ACTIVITIES_BYGENRE]
+    , requestInProcess: request[ACTIVITIES_BYGENRE]
     , tracks: entities.tracks
     , songs: entities.songs
     , users: entities.users
