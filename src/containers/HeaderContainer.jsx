@@ -7,13 +7,13 @@ import { Link } from 'react-router'
 import { browse } from '../constants/pathname'
 type PropsType = {
   currentUser: Object,
-  login: ()=>void,
-  logout: ()=>void
+  login: () => void,
+  logout: () => void
 };
 
 class Header extends Component {
   props: PropsType;
-  renderMenuItem: ()=>void;
+  renderMenuItem: () => void;
   static defaultProps: {
     genre: string
   }
@@ -30,7 +30,7 @@ class Header extends Component {
       <Link
         key={idx} to={`/${browse}?genre=${genreItem}`} activeClassName="menu-item-selected"
         className="menu-item"
-      >
+        >
         {genreItem}
       </Link>
     )
@@ -65,6 +65,7 @@ class Header extends Component {
 Header.defaultProps = {
   genre: DEFAULT_GENRE
 };
+
 function mapStateToProps(state: Object) {
   // console.info('state = ', state);
   return {

@@ -15,6 +15,7 @@ import { songSchema } from '../schemas/song'
 import { normalize, schema } from 'normalizr'
 import { mergeUserEntities, mergeTrackEntities, mergeSongEntities } from './entities'
 
+
 export const mergeFollowings = (followings) => ({
   type: actionTypes.MERGE_FOLLOWINGS
   , followings

@@ -4,8 +4,11 @@
 import * as actionTypes from '../constants/actionTypes'
 import { isSameTrackAndPlaying, isSameById } from '../utils/player'
 import { syncEntities } from './entities'
+<<<<<<< HEAD
 import { resetToggledF } from './toggle'
 import { PLAYLISTTYPE } from '../constants/toggleTypes'
+=======
+>>>>>>> c459912811d112ade1e4e729ab7782b6c7137b1e
 const setIsPlaying = (isPlaying) => ({
   type: actionTypes.SET_IS_PLAYING
   , isPlaying
@@ -35,7 +38,11 @@ const deactivateTrack = () => ({
 
 
 const getIterateTrackId = (playlist, activeTrackId, iterate) => {
+<<<<<<< HEAD
   const index = playlist.findIndex(isSameById(activeTrackId))
+=======
+  const index = playlist.findIndex(isSameTrack(activeTrackId))
+>>>>>>> c459912811d112ade1e4e729ab7782b6c7137b1e
   const iterateTrackId = playlist[(index + iterate)]
   return iterateTrackId
 }
@@ -114,6 +121,14 @@ export const removeTrackFromPlaylistF = (trackId) =>
 const resetPlaylist = () => ({
   type: actionTypes.RESET_PLAYLIST
 })
+
+
+const setPlaylist = (playlist: []) => ({
+  type: actionTypes.SET_PLAY_LIST
+  , playlist
+})
+
+
 export const clearPlayListF = () =>
   dispatch => {
     dispatch(togglePlayTrack(false))
