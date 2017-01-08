@@ -8,6 +8,7 @@ import PlaylistContainer from './PlaylistContainer'
 import Activities from '../components/Activities'
 import { DEFAULT_GENRE } from '../constants/genre'
 import { ACTIVITIES_BYGENRE } from '../constants/requestTypes'
+import { bindActionCreators } from 'redux'
 class BrowserContainer extends Component {
   props: basePropsType;
 
@@ -25,8 +26,6 @@ class BrowserContainer extends Component {
   componentDidUpdate() {
     // this.fetchActivitiesByGenre()
   }
-
-
   /**
    * need
    * @returns {boolean}
@@ -81,8 +80,13 @@ function mapStateToProps(state: Object, routeState: Object) {
     , users: entities.users
   }
 }
+function mapDispatchToProps(dispatch: Function) {
+  return {
+    fetchActivitiesByGenre: bindActionCreators(actions.fetchActivitiesByGenre, dispatch)
+  }
+}
 
 BrowserContainer.defaultProps = {
   genre: DEFAULT_GENRE
 }
-export default connect(mapStateToProps, actions)(BrowserContainer);
+export default connect(mapStateToProps, mapDispatchToProps)(BrowserContainer);

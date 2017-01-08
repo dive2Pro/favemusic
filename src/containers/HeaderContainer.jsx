@@ -5,7 +5,7 @@ import * as actions from '../actions/actionCreator.js'
 import { DEFAULT_GENRE, GENRES } from '../constants/genre'
 import { Link } from 'react-router'
 import { browse } from '../constants/pathname'
-
+import { bindActionCreators } from 'redux'
 type PropsType = {
   currentUser: Object,
   login: () => void,
@@ -55,4 +55,11 @@ function mapStateToProps(state: Object, ownState: {}) {
   }
 }
 
-export default connect(mapStateToProps, actions)(Header)
+function mapDispatchToProps(dispatch: Function) {
+  return {
+    login: bindActionCreators(actions.login, dispatch)
+    , logout: bindActionCreators(actions.logout, dispatch)
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Header)
