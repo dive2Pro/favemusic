@@ -5,12 +5,12 @@ import * as actionTypes from '../constants/actionTypes'
 
 function setSession(state, action) {
   const session = action.session
-  return Object.assign({}, state, { session })
+  return { ...state, session }
 }
 
 function setUser(state, user) {
   console.info('user = ', user)
-  return Object.assign({}, state, { user })
+  return { ...state, user }
 }
 
 const initialState = {
@@ -24,6 +24,8 @@ export default function (state = initialState, action) {
       return setSession(state, action)
     case actionTypes.SET_USER:
       return setUser(state, action.user)
+    case actionTypes.RESET_SESSION:
+      return initialState
     default:
       return state
   }

@@ -4,8 +4,8 @@ const initialState = {
   isOpenPlaylist: false
 }
 
-function setIsOpenPlaylist(state: Object, isOpen: boolean) {
-  return Object.assign({}, state, { isOpenPlaylist: isOpen })
+function setIsOpenPlaylist(state: Object, isOpenPlaylist: boolean) {
+  return { ...state, isOpenPlaylist }
 }
 
 export default function (state: Object = initialState, action: boolean) {

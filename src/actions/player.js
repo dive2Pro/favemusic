@@ -104,19 +104,20 @@ export const removeTrackFromPlaylistF = (trackId) =>
     }
     dispatch(removeFromPlaylist(trackId))
   }
+/**
+ *  const setPlaylist = (playlist: []) => ({
+ * type: actionTypes.SET_PLAY_LIST
+ * , playlist})
+ */
 
-
-const setPlaylist = (playlist: []) => ({
-  type: actionTypes.SET_PLAY_LIST
-  , playlist
+const resetPlaylist = () => ({
+  type: actionTypes.RESET_PLAYLIST
 })
-
-
 export const clearPlayListF = () =>
   dispatch => {
     dispatch(togglePlayTrack(false))
     dispatch(deactivateTrack())
-    dispatch(setPlaylist([]))
+    dispatch(resetPlaylist())
     dispatch(togglePlaylist(false))
   }
 

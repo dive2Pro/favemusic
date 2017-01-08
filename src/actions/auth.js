@@ -17,10 +17,6 @@ import {
   , fetchActivities
   , fetchFollowersF
   , fetchFavoritesF
-  , setFollowings
-  , setFollowers
-  , setActivities
-  , setFavorites
 } from './user'
 import { changeLocation } from './location'
 
@@ -77,14 +73,14 @@ export const login = () =>
     })
   }
 
+const resetSession = () => (
+  {
+    type: actionTypes.RESET_SESSION
+  }
+)
 export const logout = () =>
   (dispatch) => {
     Cookies.set(OAUTH_TOKEN, null)
     dispatch(changeLocation('/browse'))
-    dispatch(setSession(null))
-    dispatch(setUser(null))
-    dispatch(setActivities([]))
-    dispatch(setFollowers([]))
-    dispatch(setFollowings([]))
-    dispatch(setFavorites([]))
+    dispatch(resetSession())
   }

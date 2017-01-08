@@ -35,7 +35,7 @@ function mergeSongsEntities(state: {}, mergeSongs: {}) {
 function syncEntiteis(state: {}, activeTrack: {}, key: "foo") {
   const objs = state[key]
   const newObjs = Object.assign({}, objs, { [activeTrack.id]: activeTrack })
-  return Object.assign({}, state, { [key]: newObjs })
+  return { ...state, [key]: newObjs }
 }
 
 export default function (state: {} = initialState, action: Action) {

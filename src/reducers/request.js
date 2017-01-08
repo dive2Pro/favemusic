@@ -3,11 +3,11 @@ import * as actionTypes from '../constants/actionTypes'
 const initialState = {
   requestObject: {}
 }
-function setRequestTypeInProcess(state: {}, inProcess: boolean, requestType: string) {
+const setRequestTypeInProcess = (state: {}, inProcess: boolean, requestType: string) => {
   const requestObject = state.requestObject
   requestObject[requestType] = inProcess
   // Object.assign({}, state.requestObject, { [requestType]: inProcess })
-  return Object.assign({}, state, { requestObject })
+  return { ...state, requestObject }
 }
 
 export default function (state: {} = initialState, action: RequestType) {

@@ -18,13 +18,12 @@ export const setFollowers = (followers) => ({
   , followers
 })
 
-
-export const setActivities = (activities) => ({
+const setActivities = (activities) => ({
   type: actionTypes.SET_ACTIVITIES
   , activities
 })
 
-export const setFavorites = (favorites) => ({
+const setFavorites = (favorites) => ({
   type: actionTypes.SET_FAVORITES
   , favorites
 })

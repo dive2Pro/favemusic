@@ -10,33 +10,34 @@ const initialState = {
   , playlist: []
 }
 
-function setTrackInPlaylist(state, trackId) {
+const setTrackInPlaylist = (state, trackId) => {
   const item = state.playlist.some(isSameById(trackId))
   // const item = state.get('playlist').find(isSameById(track))
 
   if (item) return state
   const playlist = [...state.playlist, trackId]
-  return Object.assign({}, state, { playlist })
+  return { ...state, playlist }
 }
 
-function removeTrackFromPlaylist(state, trackId) {
+const removeTrackFromPlaylist = (state, trackId) => {
   // return state.updateIn(['playlist'], list => list.remove(list.indexOf(track)))
   const index = state.playlist.findIndex(isSameById(trackId))
   const playlist = [...state.playlist.slice(0, index), ...state.playlist.slice(index + 1)]
-  return Object.assign({}, state, { playlist })
+  return { ...state, playlist }
 }
-function deactivateTrack(state) {
-  return Object.assign({}, state, { activeTrackId: null })
+const deactivateTrack = (state) => {
+  return { ...state, activeTrackId: null }
 }
-function setPlaylist(state, playlist: []) {
-  return Object.assign({}, state, { playlist })
+
+const resetPlaylist = (state) => {
+  return { ...state, playlist: [] }
 }
 export default function playerReducer(state = initialState, action) {
   switch (action.type) {
     case actionTypes.SET_IS_PLAYING:
-      return Object.assign({}, state, { isPlaying: action.isPlaying })
+      return { ...state, isPlaying: action.isPlaying }
     case actionTypes.SET_ACTIVE_TRACK:
-      return Object.assign({}, state, { activeTrackId: action.activeTrackId })
+      return { ...state, activeTrackId: action.activeTrackId }
     case actionTypes.SET_TRACK_IN_PLAYLIST:
       return setTrackInPlaylist(state, action.trackId)
 
@@ -46,8 +47,8 @@ export default function playerReducer(state = initialState, action) {
     case actionTypes.DEACTIVE_TRACK:
       return deactivateTrack(state)
 
-    case actionTypes.SET_PLAY_LIST:
-      return setPlaylist(state, action.playlist)
+    case actionTypes.RESET_PLAYLIST:
+      return resetPlaylist(state)
     default:
       return state
   }
