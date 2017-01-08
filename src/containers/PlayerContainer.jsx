@@ -4,7 +4,7 @@ import ReactDOM from 'react-dom'
 import { addAccessToken } from '../utils/soundcloundApi'
 import { connect } from 'react-redux';
 import * as actions from '../actions/actionCreator.js'
-
+import { PLAYLISTTYPE } from '../constants/toggleTypes'
 class Player extends Component {
   props: basePropsType;
 
@@ -22,9 +22,9 @@ class Player extends Component {
 
   renderNav() {
     const {
-      isPlaying, activeTrackId, isOpenPlaylist,
-      activeIterateTrack, togglePlaylist, tracks
-      , likeF
+      isPlaying, activeTrackId,
+      activeIterateTrack, tracks
+      , likeF, setToggledF
     } = this.props
     if (!activeTrackId) return
     const track = tracks[activeTrackId]
@@ -57,7 +57,7 @@ class Player extends Component {
         <div>
           <i
             className="fa fa-list"
-            onClick={() => togglePlaylist(!isOpenPlaylist)}
+            onClick={() => setToggledF(PLAYLISTTYPE)}
             >&nbsp;</i>
         </div>
         <div>
@@ -89,11 +89,10 @@ class Player extends Component {
 }
 
 function mapStateToProps(state: Object) {
-  const { player, environment, entities } = state
+  const { player, entities } = state
   return {
     isPlaying: player.isPlaying
     , activeTrackId: player.activeTrackId
-    , isOpenPlaylist: environment.isOpenPlaylist
     , tracks: entities.tracks
   }
 }

@@ -3,8 +3,9 @@
  */
 import * as actionTypes from '../constants/actionTypes'
 import { isSameTrackAndPlaying, isSameById } from '../utils/player'
-import { togglePlaylist } from './environment'
 import { syncEntities } from './entities'
+import { resetToggledF } from './toggle'
+import { PLAYLISTTYPE } from '../constants/toggleTypes'
 const setIsPlaying = (isPlaying) => ({
   type: actionTypes.SET_IS_PLAYING
   , isPlaying
@@ -100,7 +101,7 @@ export const removeTrackFromPlaylistF = (trackId) =>
     const playlistSize = playlist.length
     if (playlistSize < 2) {
       dispatch(deactivateTrack())
-      dispatch(togglePlaylist(false))
+      dispatch(resetToggledF(PLAYLISTTYPE))
     }
     dispatch(removeFromPlaylist(trackId))
   }
@@ -118,6 +119,6 @@ export const clearPlayListF = () =>
     dispatch(togglePlayTrack(false))
     dispatch(deactivateTrack())
     dispatch(resetPlaylist())
-    dispatch(togglePlaylist(false))
+    dispatch(resetToggledF(PLAYLISTTYPE))
   }
 

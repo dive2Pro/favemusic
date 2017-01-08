@@ -7,10 +7,10 @@ import user from './user'
 import browse from './browse'
 import request from './request'
 import paginate from './paginate'
-import environment from './environment'
 import entities from './entities'
 import { routerReducer } from 'react-router-redux'
 import player from './player'
+import toggle from './toggle'
 /**
  * 最后，时刻谨记永远不要在克隆 state 前修改它。
  */
@@ -18,11 +18,11 @@ export default combineReducers({
   auth
   , user
   , player
-  , environment
   , request
   , browse
   , paginate
   , entities
+  , toggle
   , routing: routerReducer
 
 })

@@ -3,6 +3,8 @@ import React, { Component } from 'react'
 import MiniTrackContainer from '../components/MiniTrack'
 import { connect } from 'react-redux';
 import * as actions from '../actions/actionCreator.js'
+import { PLAYLISTTYPE } from '../constants/toggleTypes'
+
 type PropsType = {
   activeTrack: Object,
   isPlaying: boolean,
@@ -14,8 +16,8 @@ class Playlist extends Component {
   props: PropsType;
 
   couldShowPlaylist() {
-    const { isOpenPlaylist } = this.props
-    if (isOpenPlaylist) {
+    const { toggle } = this.props
+    if (toggle[PLAYLISTTYPE]) {
       return 'playlist-visible'
     }
     return ''
@@ -57,12 +59,12 @@ class Playlist extends Component {
 }
 
 function mapStateToProps(state: Object) {
-  const { player, environment } = state
+  const { player, toggle } = state
   return {
     playlist: player.playlist
     , isPlaying: player.isPlaying
     , activeTrackId: player.activeTrackId
-    , isOpenPlaylist: environment.isOpenPlaylist
+    , toggle
   }
 }
 

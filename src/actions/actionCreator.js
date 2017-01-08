@@ -3,7 +3,7 @@
  */
 import { toggleFollowingF } from './followings'
 import { init, login, logout } from './auth'
-import { togglePlaylist } from './environment'
+import { setToggledF } from './toggle'
 import { fetchActivities, fetchFollowersF, fetchFavoritesF, fetchFollowingsF } from './user'
 import { fetchActivitiesByGenre } from './browse'
 import { likeF } from './track'
@@ -23,7 +23,7 @@ export {
   , fetchFollowingsF
   , togglePlayTrack
   , activateTrackF
-  , togglePlaylist
+  , setToggledF
   , addTrackToPlaylistF
   , activeIterateTrack
   , removeTrackFromPlaylistF

@@ -57,3 +57,6 @@ export const SET_PLAY_LIST = 'SET_PLAY_LIST'
 export const REMOVE_FROM_FOLLOWINGS = 'REMOVE_FROM_FOLLOWINGS'
 // session
 export const RESET_SESSION = 'RESET_SESSION'
+// toggle
+export const SET_TOGGLED = 'SET_TOGGLED'
+export const RESET_TOGGLED = 'RESET_TOGGLED'
