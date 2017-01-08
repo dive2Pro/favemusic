@@ -1,71 +1,68 @@
 // @flow
-import React, { Component } from 'react'
+import React from 'react'
 import MiniTrackContainer from '../components/MiniTrack'
 import { connect } from 'react-redux';
 import * as actions from '../actions/actionCreator.js'
 import { PLAYLISTTYPE } from '../constants/toggleTypes'
-
+import { bindActionCreators } from 'redux'
 type PropsType = {
   activeTrack: Object,
   isPlaying: boolean,
   playlist: Array<TrackType>,
   isOpenPlaylist: boolean
 };
-
-class Playlist extends Component {
-  props: PropsType;
-
-  couldShowPlaylist() {
-    const { toggle } = this.props
-    if (toggle[PLAYLISTTYPE]) {
-      return 'playlist-visible'
-    }
-    return ''
+const couldShowPlaylist = (toggle: {}) => {
+  if (toggle[PLAYLISTTYPE]) {
+    return 'playlist-visible'
   }
-  renderMenu = () => {
-    const { clearPlayListF } = this.props
-    return (
-      <div className="playlist-menu">
-        <div>Player Queue</div>
-        <div>
-          <button onClick={() => clearPlayListF()} className="inline">Clear Queue</button>
-        </div>
+  return ''
+}
+
+const renderMenu = (clearPlayListF: Function) => {
+  return (
+    <div className="playlist-menu">
+      <div>Player Queue</div>
+      <div>
+        <button onClick={() => clearPlayListF()} className="inline">Clear Queue</button>
       </div>
-    )
-  }
+    </div>
+  )
+}
+const renderPlaylist = (playlist: []) => {
+  return (
+    <ul className="playlist-content">
+      {playlist.map((id: number, idx: number) => {
+        return (
+          <li key={idx}>
+            <MiniTrackContainer id={id} />
+          </li>
+        )
+      })}</ul>
+  )
+}
 
-  renderPlaylist() {
-    const { playlist } = this.props
-    return (
-      <ul className="playlist-content">
-        {playlist.map((id: number, idx: number) => {
-          return (
-            <li key={idx}>
-              <MiniTrackContainer id={id} />
-            </li>
-          )
-        })}</ul>
-    )
-  }
-
-  render() {
-    return (
-      <div className={`playlist ${this.couldShowPlaylist()}`}>
-        {this.renderMenu()}
-        {this.renderPlaylist()}
-      </div>
-    )
-  }
+const Playlist = ({ ...props }: PropsType) => {
+  const { clearPlayListF, toggle, playlist } = props
+  return (
+    <div className={`playlist ${couldShowPlaylist(toggle)}`}>
+      {renderMenu(clearPlayListF)}
+      {renderPlaylist(playlist)}
+    </div>
+  )
 }
 
 function mapStateToProps(state: Object) {
   const { player, toggle } = state
   return {
     playlist: player.playlist
-    , isPlaying: player.isPlaying
     , activeTrackId: player.activeTrackId
     , toggle
   }
 }
+function mapDisaptchToProps(dispatch: Function) {
+  return {
+    clearPlayListF: bindActionCreators(actions.bindActionCreators, dispatch)
+  }
+}
 
-export default connect(mapStateToProps, actions)(Playlist)
+export default connect(mapStateToProps, mapDisaptchToProps)(Playlist)

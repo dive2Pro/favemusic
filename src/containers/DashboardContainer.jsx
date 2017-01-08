@@ -101,6 +101,7 @@ class App extends Component {
     )
   }
 }
+
 function mapStateToProps(state: Object, routeState: Object) {
   const { auth, user, player, request, paginate, entities, toggle } = state
   console.info(state)
@@ -123,9 +124,15 @@ function mapStateToProps(state: Object, routeState: Object) {
 }
 
 function mapDispathToProps(dispatch: Function) {
-  const actionCreators = bindActionCreators(actions, dispatch)
-  console.info(' ')
-  return actionCreators
+  return {
+    fetchActivities: bindActionCreators(actions.fetchActivities, dispatch)
+    , fetchFollowingsF: bindActionCreators(actions.fetchFollowingsF, dispatch)
+    , fetchFollowersF: bindActionCreators(actions.bindActionCreators, dispatch)
+    , fetchFavoritesF: bindActionCreators(actions.fetchFavoritesF, dispatch)
+    , toggleFollowingF: bindActionCreators(actions.toggleFollowingF, dispatch)
+    , setToggledF: bindActionCreators(actions.setToggledF, dispatch)
+    , init: bindActionCreators(actions.init, dispatch)
+  }
 }
 
 const AppContainer = connect(mapStateToProps, mapDispathToProps)(App)
