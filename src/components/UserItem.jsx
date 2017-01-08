@@ -1,22 +1,21 @@
 // @flow
 import React from 'react'
 import Actions from './Actions'
-
-const UserItem = (props: {
-  isFollowing: boolean
-  , user: UserType
-  , idx: number
-  , toggleFollowingF: Function
-}) => {
+import { connect } from 'react-redux'
+import * as actions from '../actions/actionCreator'
+import { isSameById } from '../utils/player'
+const UserItem = ({ ...props }: {}) => {
+  const { user, followingsIds } = props
   const {
     permalink_url, avatar_url, username,
     followers_count, followings_count, track_count
     , id
-  } = props.user
+  } = user
+  const isFollowing = followingsIds.some(isSameById(id))
 
   const configuration = [{
     fn: () => props.toggleFollowingF(id)
-    , className: props.isFollowing ? "fa fa-group is-active" : "fa fa-group"
+    , className: isFollowing ? "fa fa-group is-active" : "fa fa-group"
   }]
   return (
     <div className="item">
@@ -41,11 +40,16 @@ const UserItem = (props: {
           <div className="item-content-info-item">
             <i className="fa fa-music">&nbsp;{track_count}</i>
           </div>
-          <Actions isVisible={props.isFollowing} configuration={configuration} />
+          <Actions isVisible={isFollowing} configuration={configuration} />
         </div>
       </div>
     </div>
   )
 }
-
-export default UserItem
+const mapStateToProps = (state: baseStateType, ownState: {}) => {
+  return {
+    user: ownState.user
+    , followingsIds: state.user.followingsIds
+  }
+}
+export default connect(mapStateToProps, actions)(UserItem)

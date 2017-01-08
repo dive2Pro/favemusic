@@ -1,122 +1,103 @@
 // @flow
-import React, { Component } from 'react'
+import React from 'react'
 import LoadingSpinner from './LoadingSpinner'
 import TrackItemContainer from './TrackItem'
-import UserItem from './UserItem'
+import UserItemContainer from './UserItem'
 
 type MosaicpropsType = {
   isMoreToggled: ?boolean,
   requestInProcess: ?boolean
 };
 
-class ItemList extends Component {
-  props: MosaicpropsType;
-  state: { isMoreToggled: boolean };
-  toggleMore: () => void;
+const renderUser = (entities: {}) => (id: number, idx: number) => {
+  // const isFollowing = followingsIds ? followingsIds
+  //   .some((followingId: number) => followingId === id) : false
+  const user = entities[id]
+  return (
+    <li key={idx}>
+      <UserItemContainer
+        user={user}
+        />
+    </li>
+  )
+}
 
-  state = {
-    isMoreToggled: this.props.isMoreToggled
-  }
+const renderTrack = (eneities: {}) => (id: number, idx: number) => {
+  const track = eneities[id]
+  return (
+    <li key={idx}>
+      <TrackItemContainer idx={idx} track={track} />
+    </li>
+  )
+}
 
-  toggleMore = () => {
-    const changeToggled = !this.state.isMoreToggled
-    this.setState({
-      isMoreToggled: changeToggled
-    })
-  }
-
-  renderUser(id: number, idx: number) {
-    const { toggleFollowingF, entities, followingsIds } = this.props
-    const isFollowing = followingsIds ? followingsIds
-      .some((followingId: number) => followingId === id) : false
+const renderMosaic = ({ ...props }: basePropsType) => {
+  const { ids, kind, requestInProcess, entities } = props
+  console.info('renderMosaic : ', ids);
+  if (!ids || requestInProcess) {
     return (
-      <li key={idx}>
-        <UserItem
-          user={entities[id]}
-          idx={idx}
-          isFollowing={isFollowing}
-          toggleFollowingF={toggleFollowingF} />
-      </li>
+      <div><LoadingSpinner isLoading={requestInProcess} /></div>
     )
   }
+  if (kind === "user") {
+    return (<div className="user-mosaic-content">
+      <ul>{ids.map(renderUser(entities))}</ul>
+    </div>)
+  }
 
-  renderTrack(id: number, idx: number) {
-    const { entities } = this.props
+  if (kind === "track") {
+    console.info('ids  = ', ids.map);
+    return (<div className="user-mosaic-content">
+      <ul>{ids.map(renderTrack(entities))}</ul>
+    </div>)
+  }
+}
+
+const renderNextButton = ({ ...props }: {}) => {
+  const { nextHref, fetchMoreF, user, isExpand } = props
+  if (!nextHref || isExpand) {
     return (
-      <li key={idx}>
-        <TrackItemContainer idx={idx} track={entities[id]} />
-      </li>
-    )
-  }
-
-  renderMosaic() {
-    const { ids, kind, requestInProcess } = this.props
-    if (!ids || requestInProcess) {
-      return (
-        <div><LoadingSpinner isLoading={requestInProcess} /></div>
-      )
-    }
-    if (kind === "user") {
-      return (<div className="user-mosaic-content">
-        <ul>{ids.map(this.renderUser.bind(this))}</ul>
-      </div>)
-    }
-
-    if (kind === "track") {
-      console.info('ids  = ', ids.map);
-      return (<div className="user-mosaic-content">
-        <ul>{ids.map(this.renderTrack.bind(this))}</ul>
-      </div>)
-    }
-  }
-
-  renderNextButton() {
-    const { nextHref, fetchMoreF, user } = this.props
-    if (!nextHref || this.isMoreToggled) {
-      return (
-        <div>
-          <button
-            className="ghost"
-            onClick={() => fetchMoreF(user, nextHref)}
-            >LoadMore
-          </button>
-        </div>
-      )
-    } else {
-      return ""
-    }
-  }
-
-  renderChevron() {
-    const { isMoreToggled } = this.state
-    const { ids } = this.props
-    if (ids.length > 4) {
-      return (<i className={`fa ${isMoreToggled ? 'fa-chevron-up' : 'fa-chevron-down'}`} />)
-    } else {
-      return (<div></div>)
-    }
-  }
-
-  render() {
-    return (
-      <div className="user-mosaic">
-        <h2><a href="#" onClick={() => this.toggleMore()}>
-          {this.props.title}&nbsp;
-          {this.renderChevron()}
-        </a>
-        </h2>
-
-        <div className={this.state.isMoreToggled ? 'more' : ''}>
-          {
-            this.renderMosaic()
-          }
-        </div>
-        <div className="user-mosaic-action">
-          {this.renderNextButton()}
-        </div>
+      <div>
+        <button
+          className="ghost"
+          onClick={() => fetchMoreF(user, nextHref)}
+          >LoadMore
+        </button>
       </div>
     )
+  } else {
+    return ""
   }
+}
+
+const renderChevron = ({ ids, isExpanded }: {}) => {
+  if (ids.length > 4) {
+    return (<i className={`fa ${isExpanded ? 'fa-chevron-up' : 'fa-chevron-down'}`} />)
+  } else {
+    return (<div></div>)
+  }
+}
+
+const ItemList = ({ ...props }: MosaicpropsType) => {
+  const { title, isExpanded, toggleExpandF } = props
+  return (
+    <div className="user-mosaic">
+      <h2>
+        <a href="#" onClick={toggleExpandF}>
+          {title}&nbsp;
+          {renderChevron({ ...props })}
+        </a>
+      </h2>
+      <div className={isExpanded ? 'more' : ''}>
+        {
+          renderMosaic({ ...props })
+        }
+      </div>
+      <div className="user-mosaic-action">
+        {renderNextButton({ ...props })}
+      </div>
+    </div>
+  )
 }
 
 ItemList.defaultProps = {

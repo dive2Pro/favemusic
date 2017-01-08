@@ -10,8 +10,8 @@ import { setRequestTypeInProcess } from './request'
 import * as requestTypes from '../constants/requestTypes'
 import * as paginateLinkTypes from '../constants/paginateLinkTypes'
 import { setPaginateLink } from './paginate'
-import userSchema from '../schemas/user'
-import songSchema from '../schemas/song'
+import { userSchema } from '../schemas/user'
+import { songSchema } from '../schemas/song'
 import { normalize, schema } from 'normalizr'
 import { mergeUserEntities, mergeTrackEntities, mergeSongEntities } from './entities'
 
@@ -114,9 +114,10 @@ export const fetchActivities = (nextHref) => {
     return fetch(activitiesUrl)
       .then(response => response.json())
       .then(data => {
-        const normalizedObj = normalize(data.collection.map(addIdFromOrigin)
-          , new schema.Array(songSchema))
-
+        const t_data = data.collection.map(addIdFromOrigin)
+        console.info('t_data= ', t_data);
+        const normalizedObj = normalize(t_data, new schema.Array(songSchema))
+        console.info('normalizedObj = ', normalizedObj)
         dispatch(mergeSongEntities(normalizedObj.entities.songs))
         dispatch(mergeTrackEntities(normalizedObj.entities.origins))
         dispatch(mergeUserEntities(normalizedObj.entities.users))

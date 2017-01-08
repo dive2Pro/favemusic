@@ -5,7 +5,7 @@ import { isSameById } from '../utils/player'
 const concatList = (currentList, targetList) => {
   return [
     ...currentList
-    , targetList
+    , ...targetList
   ]
 }
 

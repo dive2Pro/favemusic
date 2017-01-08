@@ -1,11 +1,12 @@
 import { schema } from "normalizr"
 import user from './user'
 import origin from './origin'
-const song = new schema.Entity('songs')
+const songSchema = new schema.Entity('songs')
 // const track
 
-song.define({
+songSchema.define({
   origin
   , user
 })
-export default song
+
+export { songSchema }

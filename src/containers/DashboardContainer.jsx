@@ -10,7 +10,7 @@ import PlayerContainer from './PlayerContainer'
 import PlaylistContainer from './PlaylistContainer'
 import * as requestTypes from '../constants/requestTypes'
 import * as paginateLinkTypes from '../constants/paginateLinkTypes'
-
+import * as toggleTypes from '../constants/toggleTypes'
 class App extends Component {
   props: basePropsType;
   init: () => void
@@ -28,6 +28,7 @@ class App extends Component {
       , fetchActivities, fetchFollowingsF, fetchFollowersF, fetchFavoritesF
       , requestObject, users, tracks, toggleFollowingF
       , activitiesIds, activeTrackId
+      , toggle, setToggledF
     } = this.props
     console.info(requestObject[requestTypes.FAVORITES]);
     return (
@@ -51,6 +52,8 @@ class App extends Component {
             fetchMoreF={fetchFollowingsF}
             nextHref={paginateObject[paginateLinkTypes.FOLLOWINGS]}
             requestInProcess={requestObject[requestTypes.FOLLOWINGS]}
+            isExpanded={toggle[toggleTypes.FOLLOWINGSTYPE]}
+            toggleExpandF={() => setToggledF(toggleTypes.FOLLOWINGSTYPE)}
             />
           <ItemList
             title="Followers"
@@ -63,6 +66,8 @@ class App extends Component {
             entities={users}
             fetchMoreF={fetchFollowersF}
             toggleFollowingF={toggleFollowingF}
+            isExpanded={toggle[toggleTypes.FOLLOWERSTYPE]}
+            toggleExpandF={() => setToggledF(toggleTypes.FOLLOWERSTYPE)}
             />
           <ItemList
             title="Favorites"
@@ -72,6 +77,8 @@ class App extends Component {
             requestInProcess={requestObject[requestTypes.FAVORITES]}
             fetchMoreF={fetchFavoritesF}
             nextHref={paginateObject[paginateLinkTypes.FAVORITES]}
+            toggleExpandF={() => setToggledF(toggleTypes.FAVORITESTYPE)}
+            isExpanded={toggle[toggleTypes.FAVORITESTYPE]}
             />
         </div>
       </div>
@@ -95,7 +102,7 @@ class App extends Component {
   }
 }
 function mapStateToProps(state: Object, routeState: Object) {
-  const { auth, user, player, request, paginate, entities } = state
+  const { auth, user, player, request, paginate, entities, toggle } = state
   console.info(state)
   return {
     currentUser: auth.user
@@ -111,6 +118,7 @@ function mapStateToProps(state: Object, routeState: Object) {
     , users: entities.users
     , tracks: entities.tracks
     , songs: entities.songs
+    , toggle
   }
 }
 
