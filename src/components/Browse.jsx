@@ -2,10 +2,10 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import * as actions from '../actions/actionCreator.js'
-import HeaderContainer from './HeaderContainer'
-import PlayerContainer from './PlayerContainer'
-import PlaylistContainer from './PlaylistContainer'
-import Activities from '../components/Activities'
+import HeaderContainer from './Header'
+import PlayerContainer from './Player'
+import PlaylistContainer from './Playlist'
+import Activities from './Activities'
 import { DEFAULT_GENRE } from '../constants/genre'
 import { ACTIVITIES_BYGENRE } from '../constants/requestTypes'
 import { bindActionCreators } from 'redux'
@@ -68,10 +68,11 @@ class BrowserContainer extends Component {
 
 function mapStateToProps(state: Object, routeState: Object) {
   const { browse, entities, player, request, paginate } = state
+  const genre = routeState.location.query.genre
   return {
     activitiesByGenre: browse.activitiesByGenre
-    , genre: routeState.location.query.genre
-    , nextHref: paginate.paginateObject
+    , genre
+    , nextHref: paginate.paginateObject[genre]
     , activeTrackId: player.activeTrackId
     , pathname: routeState.location.pathname
     , requestInProcess: request[ACTIVITIES_BYGENRE]

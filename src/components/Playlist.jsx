@@ -1,6 +1,6 @@
 // @flow
 import React from 'react'
-import MiniTrackContainer from '../components/MiniTrack'
+import MiniTrackContainer from './MiniTrack'
 import { connect } from 'react-redux';
 import * as actions from '../actions/actionCreator.js'
 import { PLAYLISTTYPE } from '../constants/toggleTypes'

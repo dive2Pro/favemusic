@@ -3,14 +3,14 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import * as actions from '../actions/actionCreator'
 import { bindActionCreators } from 'redux'
-import Activities from '../components/Activities'
-import HeaderContainer from './HeaderContainer'
-import PlayerContainer from './PlayerContainer'
-import PlaylistContainer from './PlaylistContainer'
+import Activities from './Activities'
+import HeaderContainer from './Header'
+import PlayerContainer from './Player'
+import PlaylistContainer from './Playlist'
 import * as requestTypes from '../constants/requestTypes'
-import FollowingsList from '../components/FollowingsList'
-import FollowersList from '../components/FollowersList'
-import FavoritesList from '../components/FavoritesList'
+import FollowingsList from './FollowingsList'
+import FollowersList from './FollowersList'
+import FavoritesList from './FavoritesList'
 class App extends Component {
   props: basePropsType;
   init: () => void
@@ -57,7 +57,6 @@ class App extends Component {
             <PlaylistContainer />
             <PlayerContainer />
           </div>
-
         }
       </div>
     )
