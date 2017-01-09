@@ -15,6 +15,9 @@
     height: 100%;
     margin: 0 ;
     align-items: center;
+    ul{
+      display: flex;
+    }
     .menu-item {
       font-size: 13px;
       text-transform: uppercase;

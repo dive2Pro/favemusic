@@ -44,6 +44,10 @@ export function isJsonWaveform(waveform_url) {
   return waveform_url.indexOf('.json') !== -1
 }
 
+export function isPngWaveform(waveform_url) {
+  return waveform_url.indexOf('.png') !== -1
+}
+
 export function wrapInOrigin(activity: ActivityType) {
   return {
     origin: activity
@@ -69,4 +73,8 @@ export function durationFormat(ms) {
 
 export function fromNow(createAt) {
   return moment(createAt).fromNow(true)
+}
+
+export function geneWaveFormElementId(id, idx) {
+  return `waveform-${id}-${idx}`
 }
