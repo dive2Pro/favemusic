@@ -5,6 +5,8 @@ import Artwork from './Artwork'
 import { connect } from 'react-redux'
 import * as actions from '../actions/actionCreator'
 import { isSameById } from '../utils/player'
+import InfoList from './InfoList'
+
 const UserItem = ({ ...props }: {}) => {
   const { user, followingsIds } = props
   const {
@@ -18,6 +20,11 @@ const UserItem = ({ ...props }: {}) => {
     fn: () => props.toggleFollowingF(id)
     , className: isFollowing ? "fa fa-group is-active" : "fa fa-group"
   }]
+  const infoConfigurations = [
+    { className: "fa fa-user-plus", count: followers_count }
+    , { className: "fa fa-group", count: followings_count }
+    , { className: "fa fa-music", count: track_count }
+  ]
   return (
     <div className="item">
       <div>
@@ -28,16 +35,7 @@ const UserItem = ({ ...props }: {}) => {
           <a href={permalink_url}>{username} </a>
         </div>
         <div className="item-content-info">
-          <div className="item-content-info-item">
-            <i className="fa fa-user-plus">&nbsp;{followers_count}</i>
-          </div>
-
-          <div className="item-content-info-item">
-            <i className="fa fa-group">&nbsp;{followings_count}</i>
-          </div>
-          <div className="item-content-info-item">
-            <i className="fa fa-music">&nbsp;{track_count}</i>
-          </div>
+          <InfoList infoConfigurations={infoConfigurations} />
           <Actions isVisible={isFollowing} configuration={configuration} />
         </div>
       </div>

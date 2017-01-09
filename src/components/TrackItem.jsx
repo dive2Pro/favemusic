@@ -5,9 +5,10 @@ import Artwork from './Artwork'
 import { isSameById } from '../utils/player'
 import { connect } from 'react-redux'
 import * as actions from '../actions/actionCreator'
+import InfoList from './InfoList'
 
 const TrackItem = ({ track, activateTrackF, activeTrackId
-  , addTrackToPlaylistF, likeF }: {}) => {
+  , addTrackToPlaylistF }: {}) => {
   const {
     permalink_url, artwork_url, title
     , comment_count, favoritings_count, playback_count
@@ -25,6 +26,11 @@ const TrackItem = ({ track, activateTrackF, activeTrackId
       , className: "fa fa-list"
     }
   ]
+  const infoConfigurations = [
+    { className: "fa fa-play", count: playback_count }
+    , { className: "fa fa-heart", count: favoritings_count }
+    , { className: "fa fa-comment", count: comment_count }
+  ]
   return (
     <div className="item">
       <div>
@@ -34,21 +40,7 @@ const TrackItem = ({ track, activateTrackF, activeTrackId
         <div className="item-content-name">
           <a href={permalink_url}>{title} </a>
         </div>
-        <div className="item-content-info">
-          <div className="item-content-info-item">
-            <i className="fa fa-play">&nbsp;{playback_count}</i>
-          </div>
-
-          <div className="item-content-info-item">
-            <i
-              className="fa fa-heart"
-              onClick={() => likeF(track)}
-              > &nbsp;{favoritings_count}</i>
-          </div>
-          <div className="item-content-info-item">
-            <i className="fa fa-comment">&nbsp;{comment_count}</i>
-          </div>
-        </div>
+        <InfoList infoConfigurations={infoConfigurations} />
       </div>
       <Actions isVisible={isVisible} configuration={configuration} />
 

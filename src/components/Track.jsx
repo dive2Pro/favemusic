@@ -7,6 +7,7 @@ import { connect } from 'react-redux'
 import * as actions from '../actions/actionCreator'
 import WaveFormSc from './WaveformSc'
 import Artwork from './Artwork'
+import InfoList from './InfoList'
 /* eslint-enable max-len */
 
 class Track extends Component {
@@ -70,6 +71,13 @@ class Track extends Component {
     } = track
     const { avatar_url, username } = user
     const isVisible = isSameById(activeTrackId)(id)
+    const infoConfigurations = [
+      { className: "fa fa-play", count: playback_count }
+      , { className: "fa fa-heart", count: likes_count }
+      , { className: "fa fa-retweet", count: reposts_count }
+      , { className: "fa fa-comment", count: comment_count }
+      , { className: "fa fa-download", count: download_count }
+    ]
     return (
       <div className={"track " + (isVisible ? "active" : "")}>
         <div className="track-img">
@@ -96,23 +104,7 @@ class Track extends Component {
           <div className="track-content-waveform">
             {this.renderWaveform(id, idx)}
           </div>
-          <div className="track-content-info">
-            <div className="track-content-info-item">
-              <i className="fa fa-play"> {playback_count}</i>
-            </div>
-            <div className="track-content-info-item">
-              <i className="fa fa-heart"> {likes_count}</i>
-            </div>
-            <div className="track-content-info-item">
-              <i className="fa fa-retweet"> {reposts_count}</i>
-            </div>
-            <div className="track-content-info-item">
-              <i className="fa fa-comment"> {comment_count}</i>
-            </div>
-            <div className="track-content-info-item">
-              <i className="fa fa-download"> {download_count}</i>
-            </div>
-          </div>
+          <InfoList infoConfigurations={infoConfigurations} />
         </div>
         {this.renderActions(track, activateTrackF, isPlaying)}
       </
