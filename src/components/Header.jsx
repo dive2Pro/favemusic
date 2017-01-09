@@ -11,13 +11,15 @@ type PropsType = {
   login: () => void,
   logout: () => void
 };
-const renderMenuItem = (genreItem: string, idx: number) => (
-  <Link
-    key={idx} to={`/${browse}?genre=${genreItem}`} activeClassName="menu-item-selected"
-    className="menu-item"
-    >
-    {genreItem}
-  </Link>
+const renderMenuItem = () => (genreItem: string, idx: number) => (
+  <li key={idx}>
+    <Link
+      to={`/${browse}?genre=${genreItem}`} activeClassName="menu-item-selected"
+      className="menu-item"
+      >
+      {genreItem}
+    </Link>
+  </li>
 )
 const renderHeader = ({ ...props }: PropsType) => {
   const { currentUser, login, logout } = props
@@ -27,7 +29,9 @@ const renderHeader = ({ ...props }: PropsType) => {
       <div>
         <h1>Hello <Link to="/dashboard">{name}</Link></h1>
       </div>
-      {GENRES.map(renderMenuItem)}
+      <ul>
+        {GENRES.map(renderMenuItem())}
+      </ul>
       <div className="header-login">
         <a href="#" onClick={currentUser ? () => logout() : () => login()}>
           <i>{currentUser ? "logout" : "login"}</i>
@@ -52,6 +56,7 @@ function mapStateToProps(state: Object, ownState: {}) {
   return {
     currentUser: state.auth.user
     , genre: ownState.genre
+    , pathname: ownState.pathname
   }
 }
 

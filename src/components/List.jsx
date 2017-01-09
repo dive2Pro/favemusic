@@ -40,14 +40,14 @@ const renderMosaic = ({ ...props }: basePropsType) => {
     )
   }
   if (kind === "user") {
-    return (<div className="user-mosaic-content">
+    return (<div className="list-content">
       <ul>{ids.map(renderUser(entities))}</ul>
     </div>)
   }
 
   if (kind === "track") {
     console.info('ids  = ', ids.map);
-    return (<div className="user-mosaic-content">
+    return (<div className="list-content">
       <ul>{ids.map(renderTrack(entities))}</ul>
     </div>)
   }
@@ -78,10 +78,10 @@ const renderChevron = ({ ids, isExpanded }: {}) => {
   }
 }
 
-const ItemList = ({ ...props }: MosaicpropsType) => {
+const List = ({ ...props }: MosaicpropsType) => {
   const { title, isExpanded, toggleExpandF } = props
   return (
-    <div className="user-mosaic">
+    <div className="list">
       <h2>
         <a href="#" onClick={toggleExpandF}>
           {title}&nbsp;
@@ -93,15 +93,15 @@ const ItemList = ({ ...props }: MosaicpropsType) => {
           renderMosaic({ ...props })
         }
       </div>
-      <div className="user-mosaic-action">
+      <div className="list-action">
         {renderNextButton({ ...props })}
       </div>
     </div>
   )
 }
 
-ItemList.defaultProps = {
+List.defaultProps = {
   isMoreToggled: false
 }
 
-export default ItemList
+export default List
