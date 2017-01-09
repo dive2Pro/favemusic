@@ -6,6 +6,7 @@ import { isSameById } from '../utils/player'
 import { connect } from 'react-redux'
 import * as actions from '../actions/actionCreator'
 import InfoList from './InfoList'
+import { bindActionCreators } from 'redux'
 
 const TrackItem = ({ track, activateTrackF, activeTrackId
   , addTrackToPlaylistF }: {}) => {
@@ -49,7 +50,7 @@ const TrackItem = ({ track, activateTrackF, activeTrackId
 }
 
 
-function matpStateToProps(state: baseStateType, ownState: {}) {
+function mapStateToProps(state: baseStateType, ownState: {}) {
   return {
     track: ownState.track
     , idx: ownState.idx
@@ -58,4 +59,10 @@ function matpStateToProps(state: baseStateType, ownState: {}) {
   }
 }
 
-export default connect(matpStateToProps, actions)(TrackItem)
+function mapDispatchToProps(dispatch: Function) {
+  return {
+    activateTrackF: bindActionCreators(actions.activateTrackF, dispatch)
+    , addTrackToPlaylistF: bindActionCreators(actions.addTrackToPlaylistF, dispatch)
+  }
+}
+export default connect(mapStateToProps, mapDispatchToProps)(TrackItem)

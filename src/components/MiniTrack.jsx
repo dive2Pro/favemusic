@@ -3,7 +3,7 @@ import { isSameTrackAndPlaying, isSameById } from '../utils/player'
 import Actions from './Actions'
 import { connect } from 'react-redux'
 import * as actions from '../actions/actionCreator'
-
+import { bindActionCreators } from 'redux'
 function renderImage(artwork_url, title, avatar_url) {
   return (
     <img src={artwork_url || avatar_url} alt="title" height="40" width="40" />
@@ -62,4 +62,10 @@ function mapStateToProps(state: baseStateType, ownState: {}) {
     , isPlaying: state.player.isPlaying
   }
 }
-export default connect(mapStateToProps, actions)(MiniTrack)
+function mapDispatchToProps(dispatch: Function) {
+  return {
+    activateTrackF: bindActionCreators(actions.activateTrackF, dispatch)
+    , removeTrackFromPlaylistF: bindActionCreators(actions.removeTrackFromPlaylistF, dispatch)
+  }
+}
+export default connect(mapStateToProps, mapDispatchToProps)(MiniTrack)

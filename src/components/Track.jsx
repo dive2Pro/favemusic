@@ -8,6 +8,8 @@ import * as actions from '../actions/actionCreator'
 import WaveFormSc from './WaveformSc'
 import Artwork from './Artwork'
 import InfoList from './InfoList'
+import { bindActionCreators } from 'redux'
+
 /* eslint-enable max-len */
 
 class Track extends Component {
@@ -124,5 +126,11 @@ function mapStateToProps(state, ownState) {
   }
 }
 
-export default connect(mapStateToProps, actions)(Track)
+function mapDispatchToProps(dispatch: Function) {
+  return {
+    activateTrackF: bindActionCreators(actions.activateTrackF, dispatch)
+    , addTrackToPlaylistF: bindActionCreators(actions.addTrackToPlaylistF, dispatch)
+  }
+}
+export default connect(mapStateToProps, mapDispatchToProps)(Track)
 

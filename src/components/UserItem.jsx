@@ -6,6 +6,7 @@ import { connect } from 'react-redux'
 import * as actions from '../actions/actionCreator'
 import { isSameById } from '../utils/player'
 import InfoList from './InfoList'
+import { bindActionCreators } from 'redux'
 
 const UserItem = ({ ...props }: {}) => {
   const { user, followingsIds } = props
@@ -48,4 +49,9 @@ const mapStateToProps = (state: baseStateType, ownState: {}) => {
     , followingsIds: state.user.followingsIds
   }
 }
-export default connect(mapStateToProps, actions)(UserItem)
+function mapDispatchToProps(dispatch: Function) {
+  return {
+    toggleFollowingF: bindActionCreators(actions.toggleFollowingF, dispatch)
+  }
+}
+export default connect(mapStateToProps, mapDispatchToProps)(UserItem)
