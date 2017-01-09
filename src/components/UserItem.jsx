@@ -1,6 +1,7 @@
 // @flow
 import React from 'react'
 import Actions from './Actions'
+import Artwork from './Artwork'
 import { connect } from 'react-redux'
 import * as actions from '../actions/actionCreator'
 import { isSameById } from '../utils/player'
@@ -20,10 +21,7 @@ const UserItem = ({ ...props }: {}) => {
   return (
     <div className="item">
       <div>
-        <img
-          src={avatar_url}
-          alt={username} height="40" width="40"
-          />
+        <Artwork size={40} image={avatar_url} alt={username} />
       </div>
       <div className="item-content">
         <div className="item-content-name">

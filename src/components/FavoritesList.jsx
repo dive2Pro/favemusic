@@ -27,7 +27,7 @@ const renderMosaic = ({ ...props }: basePropsType) => {
       <div><LoadingSpinner isLoading={requestInProcess} /></div>
     )
   }
-  return (<div className="user-mosaic-content">
+  return (<div className="list-content">
     <ul>{ids.map(renderTrack(entities))}</ul>
   </div>)
 }
@@ -60,7 +60,7 @@ const renderChevron = ({ ids, isExpanded }: {}) => {
 const FollowingsList = ({ ...props }: MosaicpropsType) => {
   const { title, toggleExpandF, isExpanded } = props
   return (
-    <div className="user-mosaic">
+    <div className="list">
       <h2>
         <a href="#" onClick={toggleExpandF}>
           {title}&nbsp;
@@ -72,7 +72,7 @@ const FollowingsList = ({ ...props }: MosaicpropsType) => {
           renderMosaic({ ...props })
         }
       </div>
-      <div className="user-mosaic-action">
+      <div className="list-action">
         {renderNextButton({ ...props })}
       </div>
     </div>

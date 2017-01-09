@@ -1,15 +1,17 @@
 // @flow
 import React from 'react'
 import Actions from './Actions'
+import Artwork from './Artwork'
 import { isSameById } from '../utils/player'
 import { connect } from 'react-redux'
 import * as actions from '../actions/actionCreator'
 
 const TrackItem = ({ track, activateTrackF, activeTrackId
-  , isPlaying, addTrackToPlaylistF, likeF }: {}) => {
+  , addTrackToPlaylistF, likeF }: {}) => {
   const {
     permalink_url, artwork_url, title
     , comment_count, favoritings_count, playback_count
+    , avatar_url
   } = track
 
   const isVisible = isSameById(activeTrackId)(track.id)
@@ -26,11 +28,7 @@ const TrackItem = ({ track, activateTrackF, activeTrackId
   return (
     <div className="item">
       <div>
-        <img
-          className={isPlaying}
-          src={artwork_url}
-          alt={title} height="40" width="40"
-          />
+        <Artwork size={40} image={artwork_url} optionalImg={avatar_url} alt={title} />
       </div>
       <div className="item-content">
         <div className="item-content-name">

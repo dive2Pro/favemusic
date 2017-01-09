@@ -6,6 +6,7 @@ import { isSameTrackAndPlaying, isSameById } from '../utils/player.js'
 import { connect } from 'react-redux'
 import * as actions from '../actions/actionCreator'
 import WaveFormSc from './WaveformSc'
+import Artwork from './Artwork'
 /* eslint-enable max-len */
 
 class Track extends Component {
@@ -23,12 +24,6 @@ class Track extends Component {
       }
     })
   }
-
-  renderImage = (artwork_url, title, avatar_url) => (
-    <div>
-      <img src={artwork_url || avatar_url} alt={title} height="80" width="80" />
-    </div>
-  )
 
   renderWaveform(id, idx) {
     const { track, song } = this.state
@@ -78,7 +73,7 @@ class Track extends Component {
     return (
       <div className={"track " + (isVisible ? "active" : "")}>
         <div className="track-img">
-          {this.renderImage(artwork_url, title, avatar_url)}
+          <Artwork size={80} image={artwork_url} optionalImg={avatar_url} alt={title} />
         </div>
 
         <div className="track-content">
