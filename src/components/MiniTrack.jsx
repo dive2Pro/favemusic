@@ -1,17 +1,20 @@
 import React from 'react'
-import { isSameTrackAndPlaying, isSameById } from '../utils/player'
+import { isSameTrackAndPlaying, isSameById } from '../services/player'
 import Actions from './Actions'
 import { connect } from 'react-redux'
 import * as actions from '../actions/actionCreator'
 import { bindActionCreators } from 'redux'
+import Permalink from './Permalink'
 function renderImage(artwork_url, title, avatar_url) {
   return (
     <img src={artwork_url || avatar_url} alt="title" height="40" width="40" />
   )
 }
 
-function renderActions({ isPlaying, activateTrackF, activeTrackId, track
-  , removeTrackFromPlaylistF }) {
+function renderActions({
+  isPlaying, activateTrackF, activeTrackId, track
+  , removeTrackFromPlaylistF
+}) {
   const { id } = track
   const isVisibleAndPlay = isSameTrackAndPlaying(activeTrackId, id, isPlaying)
   const isVisible = isSameById(activeTrackId)(id)
@@ -38,15 +41,14 @@ const MiniTrack = ({ ...props }) => {
   const { artwork_url, title } = track
   const { avatar_url, permalink_url, username } = user
   const isSame = isSameById(activeTrackId)(track.id)
+  const name = `${username} - ${title}`
   return (
     <div className={`mini-track ${isSame ? 'active-track' : ''}`}>
       <div className="mini-track-img">
         {renderImage(artwork_url, title, avatar_url)}
       </div>
       <div className="mini-track-content">
-        <div className="mini-track-content-name">
-          <a href={permalink_url}>{username} - {title}</a>
-        </div>
+        <Permalink href={permalink_url} text={name} />
         {renderActions({ ...props, track })}
       </div>
     </div>

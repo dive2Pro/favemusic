@@ -2,7 +2,7 @@
  * Created by hyc on 17-1-1.
  */
 import * as actionTypes from '../constants/actionTypes'
-import { isSameById } from '../utils/player'
+import { isSameById } from '../services/player'
 
 const initialState = {
   activeTrackId: null

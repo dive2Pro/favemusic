@@ -1,14 +1,14 @@
-
 /* eslint-disable max-len */
 import React, { Component } from 'react'
-import { getTrackIcon, isNotTrack, fromNow, durationFormat } from '../utils/track'
-import { isSameTrackAndPlaying, isSameById } from '../utils/player.js'
+import { isNotTrack, fromNow, durationFormat } from '../services/track'
+import { isSameTrackAndPlaying, isSameById } from '../services/player.js'
 import { connect } from 'react-redux'
 import * as actions from '../actions/actionCreator'
 import WaveFormSc from './WaveformSc'
 import Artwork from './Artwork'
 import InfoList from './InfoList'
 import { bindActionCreators } from 'redux'
+import Permalink from './Permalink'
 
 /* eslint-enable max-len */
 
@@ -47,24 +47,26 @@ class Track extends Component {
           <i
             className={`fa ${currentTrackIsPlaying ? 'fa-pause' : 'fa-play'}`}
             onClick={() => activateTrackF(track.id)}
-            />
+          />
         </div>
 
         <div className="track-actions-item">
           <i
             className="fa fa-list"
             onClick={() => addTrackToPlaylistF(track.id)}
-            > </i>
+          > </i>
         </div>
       </div>
     )
   }
 
   render() {
-    const { activateTrackF, activeTrackId
-      , isPlaying, idx } = this.props
+    const {
+      activateTrackF, activeTrackId
+      , isPlaying, idx
+    } = this.props
     const { track, song, user } = this.state
-    const { origin, type } = song
+    const { origin } = song
     if (!origin) return (<div></div>)
     const {
       title, permalink_url, artwork_url, playback_count,
@@ -88,19 +90,11 @@ class Track extends Component {
 
         <div className="track-content">
           <div className="track-content-name">
-            <div>
-              <a href={user.permalink_url}>
-                {username}
-              </a>
-            </div>
+            <Permalink href={user.permalink_url} text={username} />
             <div>{fromNow(created_at)}</div>
           </div>
           <div className="track-content-meta">
-            <div>
-              <a href={permalink_url}>
-                <i className={getTrackIcon(type)}>&nbsp;{title} </i>
-              </a>
-            </div>
+            <Permalink href={permalink_url} text={title} />
             <div>{durationFormat(duration)}</div>
           </div>
           <div className="track-content-waveform">
@@ -110,7 +104,7 @@ class Track extends Component {
         </div>
         {this.renderActions(track, activateTrackF, isPlaying)}
       </
-      div >
+        div >
     )
   }
 }

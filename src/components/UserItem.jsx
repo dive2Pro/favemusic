@@ -4,9 +4,10 @@ import Actions from './Actions'
 import Artwork from './Artwork'
 import { connect } from 'react-redux'
 import * as actions from '../actions/actionCreator'
-import { isSameById } from '../utils/player'
+import { isSameById } from '../services/player'
 import InfoList from './InfoList'
 import { bindActionCreators } from 'redux'
+import Permalink from './Permalink'
 
 const UserItem = ({ ...props }: {}) => {
   const { user, followingsIds } = props
@@ -32,9 +33,7 @@ const UserItem = ({ ...props }: {}) => {
         <Artwork size={40} image={avatar_url} alt={username} />
       </div>
       <div className="item-content">
-        <div className="item-content-name">
-          <a href={permalink_url}>{username} </a>
-        </div>
+        <Permalink href={permalink_url} text={username} />
         <div className="item-content-info">
           <InfoList infoConfigurations={infoConfigurations} />
           <Actions isVisible={isFollowing} configuration={configuration} />

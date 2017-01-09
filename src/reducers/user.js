@@ -1,6 +1,6 @@
 
 import * as actionTypes from '../constants/actionTypes'
-import { isSameById } from '../utils/player'
+import { isSameById } from '../services/player'
 
 const concatList = (currentList, targetList) => {
   return [

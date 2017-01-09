@@ -1,7 +1,7 @@
 // @flow
 import React, { Component } from 'react'
 import ReactDOM from 'react-dom'
-import { addAccessToken } from '../utils/soundcloundApi'
+import { addAccessToken } from '../services/soundcloundApi'
 import { connect } from 'react-redux';
 import * as actions from '../actions/actionCreator.js'
 import { PLAYLISTTYPE } from '../constants/toggleTypes'

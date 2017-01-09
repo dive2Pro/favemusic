@@ -8,7 +8,7 @@ import {
   REDIRECT_URI,
   OAUTH_TOKEN,
 } from '../constants/authentification'
-import apiUrl from '../utils/soundcloundApi'
+import apiUrl from '../services/soundcloundApi'
 import Cookies from 'js-cookie'
 import { routerActions } from 'react-router-redux'
 

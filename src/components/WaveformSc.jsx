@@ -1,6 +1,6 @@
 import React from 'react'
 import Waveform from 'waveform.js'
-import { normalizeSamples, isJsonWaveform, isPngWaveform, geneWaveFormElementId } from '../utils/track'
+import { normalizeSamples, isJsonWaveform, isPngWaveform, geneWaveFormElementId } from '../services/track'
 
 class WaveformContainer extends React.Component {
   componentDidMount() {

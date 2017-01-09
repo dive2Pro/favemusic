@@ -1,11 +1,11 @@
 /**
  * Created by hyc on 16-12-31.
  */
-import apiUrl, { addAccessToken, getLazyLoadingUrl } from '../utils/soundcloundApi'
+import apiUrl, { addAccessToken, getLazyLoadingUrl } from '../services/soundcloundApi'
 import Cookies from 'js-cookie'
 import * as actionTypes from '../constants/actionTypes'
 import { OAUTH_TOKEN } from '../constants/authentification'
-import { wrapInOrigin, addIdFromOrigin } from '../utils/track'
+import { wrapInOrigin, addIdFromOrigin } from '../services/track'
 import { setRequestTypeInProcess } from './request'
 import * as requestTypes from '../constants/requestTypes'
 import * as paginateLinkTypes from '../constants/paginateLinkTypes'

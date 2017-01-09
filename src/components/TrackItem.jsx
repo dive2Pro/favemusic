@@ -2,14 +2,17 @@
 import React from 'react'
 import Actions from './Actions'
 import Artwork from './Artwork'
-import { isSameById } from '../utils/player'
+import { isSameById } from '../services/player'
 import { connect } from 'react-redux'
 import * as actions from '../actions/actionCreator'
 import InfoList from './InfoList'
 import { bindActionCreators } from 'redux'
+import Permalink from './Permalink'
 
-const TrackItem = ({ track, activateTrackF, activeTrackId
-  , addTrackToPlaylistF }: {}) => {
+const TrackItem = ({
+  track, activateTrackF, activeTrackId
+  , addTrackToPlaylistF
+}: {}) => {
   const {
     permalink_url, artwork_url, title
     , comment_count, favoritings_count, playback_count
@@ -38,9 +41,7 @@ const TrackItem = ({ track, activateTrackF, activeTrackId
         <Artwork size={40} image={artwork_url} optionalImg={avatar_url} alt={title} />
       </div>
       <div className="item-content">
-        <div className="item-content-name">
-          <a href={permalink_url}>{title} </a>
-        </div>
+        <Permalink href={permalink_url} text={title} />
         <InfoList infoConfigurations={infoConfigurations} />
       </div>
       <Actions isVisible={isVisible} configuration={configuration} />
@@ -48,7 +49,6 @@ const TrackItem = ({ track, activateTrackF, activeTrackId
     </div>
   )
 }
-
 
 function mapStateToProps(state: baseStateType, ownState: {}) {
   return {

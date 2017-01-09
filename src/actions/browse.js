@@ -1,7 +1,7 @@
 // @flow
-import { unauthApiUrl } from '../utils/soundcloundApi'
+import { unauthApiUrl } from '../services/soundcloundApi'
 import * as actionTypes from '../constants/actionTypes'
-import { wrapInOrigin } from '../utils/track'
+import { wrapInOrigin } from '../services/track'
 import { setRequestTypeInProcess } from './request'
 import { setPaginateLink } from './paginate'
 import * as requestTypes from '../constants/requestTypes'

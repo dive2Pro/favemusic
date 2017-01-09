@@ -2,7 +2,7 @@
  * Created by hyc on 17-1-1.
  */
 import * as actionTypes from '../constants/actionTypes'
-import { isSameTrackAndPlaying, isSameById } from '../utils/player'
+import { isSameTrackAndPlaying, isSameById } from '../services/player'
 import { syncEntities } from './entities'
 import { resetToggledF } from './toggle'
 import { PLAYLISTTYPE } from '../constants/toggleTypes'

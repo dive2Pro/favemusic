@@ -3,7 +3,7 @@
  * Created by hyc on 17-1-5.
  */
 import * as actionTypes from '../constants/actionTypes'
-import apiUrl from '../utils/soundcloundApi'
+import apiUrl from '../services/soundcloundApi'
 import { syncEntities } from './entities'
 const addToFavorites = (trackId: number) => ({
   type: actionTypes.ADD_TO_FAVORITES
