@@ -1,6 +1,6 @@
 /**
  * Created by hyc on 17-1-5.
- */
+ *//*
 import requestTest from '../../src/reducers/request'
 import * as actionTypes from '../../src/constants/actionTypes'
 import * as requestTypes from '../../src/constants/requestTypes'
@@ -76,3 +76,4 @@ describe('just test', () => {
     expect(secondState).to.deep.eq(expected)
   })
 })
+*/

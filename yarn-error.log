@@ -1,5 +1,5 @@
 Arguments: 
-  /usr/bin/nodejs /usr/share/yarn/bin/yarn.js add webpack-dev-server -D
+  /usr/bin/nodejs /usr/share/yarn/bin/yarn.js add jsdom -D
 
 PATH: 
   /home/hyc/bin:/home/hyc/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/usr/lib/jvm/java-8-oracle/bin:/usr/lib/jvm/java-8-oracle/db/bin:/usr/lib/jvm/java-8-oracle/jre/bin
@@ -72,7 +72,7 @@ npm manifest:
       "style-loader": "0.13.1",
       "url-loader": "0.5.7",
       "webpack": "1.14.0",
-      "webpack-dev-server": "1.16.2",
+      "webpack-dev-server": "^1.16.2",
       "webpack-manifest-plugin": "1.1.0",
       "whatwg-fetch": "1.0.0"
     },
@@ -95,7 +95,8 @@ npm manifest:
     "scripts": {
       "start": "node scripts/start.js",
       "build": "node scripts/build.js",
-      "test": "NODE_ENV=test mocha --timeout 2000  --compilers  js:babel-core/register --require babel-polyfill ./tests/setup.js 'tests/**/*.test.@(js|jsx)'"
+      "test": "NODE_ENV=test mocha --timeout 2000  --compilers  js:babel-core/register --require babel-polyfill ./tests/setup.js 'tests/**/*.test.@(js|jsx)'",
+      "test-r": "NODE_ENV=test mocha --compilers js:babel-core/register --require babel-polyfill ./tests/setup.js 'src/**/*.spec.@(js|jsx)'"
     },
     "jest": {
       "collectCoverageFrom": [
@@ -5960,5 +5961,5 @@ Lockfile:
       window-size "0.1.0"
 
 Trace: 
-  Error: ENOENT: no such file or directory, open '/home/hyc/Desktop/favemusic/node_modules/acorn-globals/node_modules/acorn/package.json'
+  Error: EEXIST: file already exists, mkdir '/home/hyc/Desktop/favemusic/node_modules/are-we-there-yet'
       at Error (native)

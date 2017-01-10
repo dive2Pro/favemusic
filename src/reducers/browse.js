@@ -2,18 +2,15 @@
 import * as actionTypes from '../constants/actionTypes'
 
 const initialState = {
-  activitiesByGenre: {}
-  , activitiesCurrentGenre: null
 }
 
 const mergeActivitiesByGenre = (state: Map<*, *>, activitiesIds: [Number], genre: "foo") => {
-  const oldList = state.activitiesByGenre[genre] || []
+  const oldList = state[genre] || []
   const newList = [
     ...oldList
     , ...activitiesIds
   ]
-  const activitiesByGenre = Object.assign({}, state.activitiesByGenre, { [genre]: newList })
-  return { ...state, activitiesByGenre }
+  return Object.assign({}, state, { [genre]: newList })
 }
 
 const browse = (state: Map<string, *> = initialState, action: BrowseActionType) => {

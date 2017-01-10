@@ -22,7 +22,7 @@ export const mergeFollowings = (followings) => ({
 })
 
 
-const mergeActivities = (activities) => ({
+export const mergeActivities = (activities) => ({
   type: actionTypes.MERGE_ACTIVITIES
   , activities
 })

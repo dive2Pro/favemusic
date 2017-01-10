@@ -70,7 +70,7 @@ function mapStateToProps(state: Object, routeState: Object) {
   const { browse, entities, player, request, paginate } = state
   const genre = routeState.location.query.genre
   return {
-    activitiesByGenre: browse.activitiesByGenre
+    activitiesByGenre: browse
     , genre
     , nextHref: paginate.paginateObject[genre]
     , activeTrackId: player.activeTrackId

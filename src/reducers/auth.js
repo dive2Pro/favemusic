@@ -9,7 +9,6 @@ function setSession(state, action) {
 }
 
 function setUser(state, user) {
-  console.info('user = ', user)
   return { ...state, user }
 }
 
