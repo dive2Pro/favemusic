@@ -72,7 +72,7 @@ function mapStateToProps(state: Object, routeState: Object) {
   return {
     activitiesByGenre: browse
     , genre
-    , nextHref: paginate.paginateObject[genre]
+    , nextHref: paginate[genre]
     , activeTrackId: player.activeTrackId
     , pathname: routeState.location.pathname
     , requestInProcess: request[ACTIVITIES_BYGENRE]

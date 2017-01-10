@@ -27,7 +27,7 @@ describe('auth', () => {
     ,
     it('resetAuth', done => {
       const state = { user: 'hyc', session: 'session' }
-      const expectd = { session:null,user:null }
+      const expectd = { session: null, user: null }
       const action = {
         type: actionTypes.RESET_SESSION
         , user: 'expectdUser'

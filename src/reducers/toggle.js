@@ -9,6 +9,7 @@ const setToggled = (state, toggleType) => {
 const resetToggled = (state, toggleType) => {
   const toggleObject = {}
   toggleObject[toggleType] = false
+  console.log(toggleType, 'toggleObject = ', toggleObject);
   return { ...state, ...toggleObject }
 }
 

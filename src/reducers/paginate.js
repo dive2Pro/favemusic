@@ -2,7 +2,6 @@
 // @flow
 import { SET_PAGINATE_LINK } from '../constants/actionTypes'
 const initialState = {
-  paginateObject: {}
 }
 
 function setPaginateLink(state: {}, nextHref: string, paginateLink: string) {
