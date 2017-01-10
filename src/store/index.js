@@ -4,12 +4,13 @@ import { browserHistory } from 'react-router'
 import { syncHistoryWithStore, routerMiddleware } from 'react-router-redux'
 import thunk from 'redux-thunk'
 import createLogger from 'redux-logger'
+import mixpanel from './mixpanel'
 
 const logger = createLogger()
 const routers = routerMiddleware(browserHistory)
 
 const createStoreWithMiddleware =
-  applyMiddleware(thunk, routers, logger)(createStore)
+  applyMiddleware(thunk, routers, mixpanel, logger)(createStore)
 
 const store = createStoreWithMiddleware(reduxRooter,
   window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()

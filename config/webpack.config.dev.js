@@ -41,7 +41,9 @@ module.exports = {
     // the line below with these two lines if you prefer the stock client:
     // require.resolve('webpack-dev-server/client') + '?/',
     // require.resolve('webpack/hot/dev-server'),
-    require.resolve('react-dev-services/webpackHotDevClient'),
+    // require.resolve('react-dev-services/webpackHotDevClient'),
+    require.resolve('webpack-dev-server/client') + '?/http://localhost:8080',
+    require.resolve('webpack/hot/dev-server'),
     'webpack-dev-server/client?http://localhost:8080', // WebpackDevServer host and port
     'webpack/hot/only-dev-server', // "only" prevents reload on syntax errors
     // We ship a few polyfills by default:
