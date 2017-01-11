@@ -9,7 +9,7 @@ import InfoList from './InfoList'
 import { bindActionCreators } from 'redux'
 import Permalink from './Permalink'
 
-const UserItem = ({ ...props }: {}) => {
+const UserItem = ({ ...props }: { }) => {
   const { user, followingsIds } = props
   const {
     permalink_url, avatar_url, username,
@@ -53,4 +53,5 @@ function mapDispatchToProps(dispatch: Function) {
     toggleFollowingF: bindActionCreators(actions.toggleFollowingF, dispatch)
   }
 }
+
 export default connect(mapStateToProps, mapDispatchToProps)(UserItem)

@@ -1,5 +1,5 @@
 {
-  "extends": "airbnb",
+  "extends": ["airbnb", "plugin:flowtype/recommended"],
   "rules": {
     "react/prop-types": 0,
     "react/jsx-no-bind": 0,
@@ -127,7 +127,9 @@
     "fetch": true,
     "assert": true,
     "beforeEach": true,
-    "UserEntitiesType": true,
-    "baseStateType": true
+    "UserEntitiesType": true
+    , "baseStateType": true
+    , "ActivitiesPropsType": true
+    , "ArtworkPropsType": true
   }
 }

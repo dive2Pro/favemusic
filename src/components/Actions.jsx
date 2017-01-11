@@ -1,13 +1,13 @@
-// @flow
+/* @flow */
 import React from 'react'
 import { map } from 'lodash'
-import classnames from 'classnames'
+import classnames from "classnames"
 type ConfiguType = {
   fn: () => void,
   className: string
 };
 
-const Action = ({ cfg }: {}) => {
+const Action = ({ cfg }: { cfg: ConfiguType }) => {
   const { fn, className } = cfg
   return (
     <div className="actions-item">
@@ -27,6 +27,7 @@ const Actions = (props: {
       'action-visible': isVisible
     }
   )
+
   return (
     <div className={clazzName}>
       {map(configuration, (cfg: ConfiguType, idx: number) => (

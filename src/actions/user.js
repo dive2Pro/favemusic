@@ -1,6 +1,3 @@
-/**
- * Created by hyc on 16-12-31.
- */
 import apiUrl, { addAccessToken, getLazyLoadingUrl } from '../services/soundcloundApi'
 import Cookies from 'js-cookie'
 import * as actionTypes from '../constants/actionTypes'

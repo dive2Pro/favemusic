@@ -32,7 +32,7 @@ const renderMosaic = ({ ...props }: basePropsType) => {
   </div>)
 }
 
-const renderNextButton = ({ ...props }: {}) => {
+const renderNextButton = ({ ...props }: { }) => {
   const { nextHref, fetchMoreF, user, isExpanded } = props
   if (!nextHref || isExpanded) {
     return (
@@ -49,7 +49,7 @@ const renderNextButton = ({ ...props }: {}) => {
   }
 }
 
-const renderChevron = ({ ids, isExpanded }: {}) => {
+const renderChevron = ({ ids, isExpanded }: { }) => {
   if (ids.length > 4) {
     return (<i className={`fa ${isExpanded ? 'fa-chevron-up' : 'fa-chevron-down'}`} />)
   } else {

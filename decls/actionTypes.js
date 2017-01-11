@@ -19,7 +19,7 @@ declare type BrowseSetNextHrefActionType = {
 
 declare type BrowseMergeActionType = {
   type: Action,
-  activities: Array
+  activities: []
 };
 declare type BrowseSetInProcessfActionType = {
   type: Action,

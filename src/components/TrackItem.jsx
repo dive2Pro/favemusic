@@ -12,7 +12,7 @@ import Permalink from './Permalink'
 const TrackItem = ({
   track, activateTrackF, activeTrackId
   , addTrackToPlaylistF
-}: {}) => {
+}: { }) => {
   const {
     permalink_url, artwork_url, title
     , comment_count, favoritings_count, playback_count
