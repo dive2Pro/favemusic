@@ -1,6 +1,6 @@
 import React from 'react'
 
-const renderInfoItem = (info, idx) => (
+export const InfoItem = ({ info, idx }) => (
   <div key={idx} className="info-list-item">
     <i className={info.className}>
       &nbsp;{info.count}
@@ -11,7 +11,7 @@ const renderInfoItem = (info, idx) => (
 const InfoList = ({ infoConfigurations }) => {
   return (
     <div className="info-list">
-      {infoConfigurations.map(renderInfoItem)}
+      {infoConfigurations.map((info, idx) => (<InfoItem info={info} idx={idx} />))}
     </div>
   )
 }
