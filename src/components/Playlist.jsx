@@ -1,6 +1,6 @@
 // @flow
 import React from 'react'
-import MiniTrackContainer from './MiniTrack'
+import PlaylistTrackContainer from './PlaylistTrack'
 import { connect } from 'react-redux';
 import * as actions from '../actions/actionCreator.js'
 import { PLAYLISTTYPE } from '../constants/toggleTypes'
@@ -34,7 +34,7 @@ const renderPlaylist = (playlist: []) => {
       {playlist.map((id: number, idx: number) => {
         return (
           <li key={idx}>
-            <MiniTrackContainer id={id} />
+            <PlaylistTrackContainer id={id} />
           </li>
         )
       })}</ul>

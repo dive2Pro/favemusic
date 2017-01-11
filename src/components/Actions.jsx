@@ -1,26 +1,33 @@
 // @flow
 import React from 'react'
+import { map } from 'lodash'
+
 type ConfiguType = {
-  fn: ()=>void,
+  fn: () => void,
   className: string
 };
-const Actions = (props: { configuration: Array<ConfiguType>,
-   isVisible: boolean }) => {
-  const { configuration, isVisible } = props
 
-  function renderActions(cfg: ConfiguType, idx: number) {
-    const { fn, className } = cfg
-    return (
-      <div className="actions-item" key={idx}>
-        <i onClick={() => fn()} className={className}>
-        </i>
-      </div>
-    )
-  }
+const Action = ({ cfg }: {}) => {
+  const { fn, className } = cfg
+  return (
+    <div className="actions-item">
+      <i onClick={() => fn()} className={className}>
+      </i>
+    </div>
+  )
+}
+const Actions = (props: {
+  configuration: Array<ConfiguType>,
+  isVisible: boolean
+}) => {
+  const { configuration, isVisible } = props
 
   return (
     <div className={`action ${isVisible ? "action-visible" : ""}`}>
-      {configuration.map(renderActions)}
+      {map(configuration, (cfg: ConfiguType, idx: number) => (
+        <Action cfg={cfg} key={idx} />
+      )
+      )}
     </div>
   )
 }

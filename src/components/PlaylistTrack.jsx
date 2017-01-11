@@ -5,13 +5,14 @@ import { connect } from "react-redux";
 import * as actions from "../actions/actionCreator";
 import { bindActionCreators } from "redux";
 import Permalink from "./Permalink";
-function renderImage(artwork_url, title, avatar_url) {
+
+const renderImage = (artwork_url, title, avatar_url) => {
   return <img src={artwork_url || avatar_url} alt="title" height="40" width="40" />;
 }
 
-function renderActions(
+const renderActions = (
   { isPlaying, activateTrackF, activeTrackId, track, removeTrackFromPlaylistF }
-) {
+) => {
   const { id } = track;
   const isVisibleAndPlay = isSameTrackAndPlaying(activeTrackId, id, isPlaying);
   const isVisible = isSameById(activeTrackId)(id);
@@ -25,7 +26,7 @@ function renderActions(
   return <Actions isVisible={isVisible} configuration={configuration} />;
 }
 
-const MiniTrack = ({ ...props }) => {
+const PlaylistTrack = ({ ...props }) => {
   const { tracks, activeTrackId, users, id } = props;
   const track = tracks[id];
   const user = users[track.user];
@@ -67,4 +68,4 @@ function mapDispatchToProps(dispatch: Function) {
     )
   };
 }
-export default connect(mapStateToProps, mapDispatchToProps)(MiniTrack)
+export default connect(mapStateToProps, mapDispatchToProps)(PlaylistTrack)
