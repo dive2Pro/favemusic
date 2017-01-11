@@ -16,8 +16,7 @@ const SpecificUserItem = ({ user, idx }: {}) => {
   )
 }
 
-const SpecificTrackItem = ({ eneities, id, idx}: {}) => {
-  const track = eneities[id]
+const SpecificTrackItem = ({ track, idx}: {}) => {
   return (
     <li>
       <TrackItemContainer idx={idx} track={track} />
@@ -37,16 +36,19 @@ export const Mosaic = ({ ...props }: basePropsType) => {
       <ul>{ids.map((id: number, idx: number) => {
         const user = entities[id]
         return (
-          <SpecificUserItem user={user} idx={idx} />
+          <SpecificUserItem key={idx} user={user} idx={idx} />
         )
       })}</ul>
     </div>)
   } else if (kind === "track") {
     console.info('ids  = ', ids.map);
     return (<div className="list-content">
-      <ul>{ids.map((id: number, idx: number) => (
-        <SpecificTrackItem key={idx} id={id} {...props} />
-      ))}</ul>
+      <ul>{ids.map((id: number, idx: number) => {
+        const track = entities[id]
+        return (
+          <SpecificTrackItem key={idx} id={id} track={track} />
+        )
+      })}</ul>
     </div>)
   }
 }

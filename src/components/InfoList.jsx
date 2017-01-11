@@ -11,7 +11,7 @@ export const InfoItem = ({ info, idx }) => (
 const InfoList = ({ infoConfigurations }) => {
   return (
     <div className="info-list">
-      {infoConfigurations.map((info, idx) => (<InfoItem info={info} idx={idx} />))}
+      {infoConfigurations.map((info, idx) => (<InfoItem key={idx} info={info} idx={idx} />))}
     </div>
   )
 }

@@ -1,85 +1,31 @@
 // @flow
 import React from 'react'
-import LoadingSpinner from './LoadingSpinner'
+import List from './List'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import * as actions from '../actions/actionCreator'
 import { FAVORITESTYPE } from '../constants/toggleTypes'
 import { FAVORITES } from '../constants/paginateLinkTypes'
-import TrackItemContainer from './TrackItem'
-type MosaicpropsType = {
-  isMoreToggled: ?boolean,
-  requestInProcess: ?boolean
-};
 
-const renderTrack = (eneities: {}) => (id: number, idx: number) => {
-  const track = eneities[id]
+export const FavoritesContainer = ({ ...props }: MosaicpropsType) => {
+  const { title, toggleExpandF, isExpanded, nextHref
+    , user, requestInProcess, entities, ids, kind } = props;
   return (
-    <li key={idx}>
-      <TrackItemContainer idx={idx} track={track} />
-    </li>
-  )
-}
-const renderMosaic = ({ ...props }: basePropsType) => {
-  const { ids, requestInProcess, entities } = props
-  if (!ids || requestInProcess) {
-    return (
-      <div><LoadingSpinner isLoading={requestInProcess} /></div>
-    )
-  }
-  return (<div className="list-content">
-    <ul>{ids.map(renderTrack(entities))}</ul>
-  </div>)
+    <List
+      title={title}
+      ids={ids}
+      kind={kind}
+      toggleExpandF={toggleExpandF}
+      isExpanded={isExpanded}
+      nextHref={nextHref}
+      user={user}
+      requestInProcess={requestInProcess}
+      entities={entities}
+      />
+  );
 }
 
-const renderNextButton = ({ ...props }: { }) => {
-  const { nextHref, fetchMoreF, user, isExpanded } = props
-  if (!nextHref || isExpanded) {
-    return (
-      <div>
-        <button
-          className="ghost"
-          onClick={() => fetchMoreF(user, nextHref)}
-          >LoadMore
-        </button>
-      </div>
-    )
-  } else {
-    return ""
-  }
-}
-
-const renderChevron = ({ ids, isExpanded }: { }) => {
-  if (ids.length > 4) {
-    return (<i className={`fa ${isExpanded ? 'fa-chevron-up' : 'fa-chevron-down'}`} />)
-  } else {
-    return (<div></div>)
-  }
-}
-
-const FollowingsList = ({ ...props }: MosaicpropsType) => {
-  const { title, toggleExpandF, isExpanded } = props
-  return (
-    <div className="list">
-      <h2>
-        <a href="#" onClick={toggleExpandF}>
-          {title}&nbsp;
-          {renderChevron({ ...props })}
-        </a>
-      </h2>
-      <div className={isExpanded ? 'more' : ''}>
-        {
-          renderMosaic({ ...props })
-        }
-      </div>
-      <div className="list-action">
-        {renderNextButton({ ...props })}
-      </div>
-    </div>
-  )
-}
-
-FollowingsList.defaultProps = {
+FavoritesContainer.defaultProps = {
   isMoreToggled: false
 }
 const mapStateToProps = (state: {}) => {
@@ -93,6 +39,8 @@ const mapStateToProps = (state: {}) => {
     , user: auth.user
     , requestInProcess: request[FAVORITES]
     , entities: entities.tracks
+    , kind: 'track'
+
   }
 }
 
@@ -106,4 +54,4 @@ const mapDispatchToProps = (dispatch: Function) => {
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(FollowingsList)
+export default connect(mapStateToProps, mapDispatchToProps)(FavoritesContainer)

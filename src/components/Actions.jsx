@@ -7,7 +7,7 @@ type ConfiguType = {
   className: string
 };
 
-const Action = ({ cfg }: { cfg: ConfiguType }) => {
+export const Action = ({ cfg }: { cfg: ConfiguType }) => {
   const { fn, className } = cfg
   return (
     <div className="actions-item">

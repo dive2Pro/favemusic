@@ -10,7 +10,6 @@ import {
 import apiUrl from '../services/soundcloundApi'
 import Cookies from 'js-cookie'
 import { routerActions } from 'react-router-redux'
-
 import {
   fetchFollowingsF
   , fetchActivities
@@ -60,6 +59,7 @@ export const init = () =>
 
 export const login = () =>
   dispatch => {
+    const SC = require('soundcloud')
     SC.initialize({
       client_id: CLIENT_ID
       , redirect_uri: REDIRECT_URI

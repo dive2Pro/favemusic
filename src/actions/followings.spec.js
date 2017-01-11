@@ -1,6 +1,4 @@
-// @flow
-import apiUrl from '../services/soundcloundApi'
-import { mergeFollowings } from './user'
+
 import { removeFromFollowings } from './followings'
 import { REMOVE_FROM_FOLLOWINGS } from '../constants/actionTypes'
 
