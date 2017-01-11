@@ -72,7 +72,7 @@ export function durationFormat(ms) {
 }
 
 export function fromNow(createAt) {
-  return moment(createAt).fromNow(true)
+  return moment(new Date(createAt)).fromNow(true)
 }
 
 export function geneWaveFormElementId(id, idx) {
