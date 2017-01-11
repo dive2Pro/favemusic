@@ -4,8 +4,8 @@ import FetchOnScroll from './FetchOnScroll'
 import TrackContainer from '../components/Track'
 import LoadingSpinner from '../components/LoadingSpinner'
 
-function activitiesDom(activitiesIds: [], activeTrackId: number) {
-  return (activitiesIds &&
+const ActivitiesDom = ({ activitiesIds, activeTrackId }: {}) =>
+  (activitiesIds &&
     <div>
       <h2>activities</h2>
       <ul>
@@ -25,11 +25,10 @@ function activitiesDom(activitiesIds: [], activeTrackId: number) {
       </ul>
     </div>
   )
-}
 
-function activitiesRequestDom(requestInProcess: boolean) {
+const ActivitiesRequestDom = (requestInProcess: boolean) => {
   if (requestInProcess) {
-    return (<div><LoadingSpinner isLoading={requestInProcess} /></div>)
+    return (<LoadingSpinner isLoading={requestInProcess} />)
   } else {
     return (<div>...</div>)
   }
@@ -42,9 +41,9 @@ const ActivitiesContainer = ({
 }: Object) => {
   return (
     <div>
-      <div>{activitiesDom(activitiesIds, activeTrackId)}</div>
-      <div>{activitiesRequestDom(requestInProcess)}</div>
-    </div>
+      <ActivitiesDom activitiesIds={activitiesIds} activeTrackId={activeTrackId} />
+      <ActivitiesRequestDom requestInProcess={requestInProcess} />
+    </div >
   )
 }
 
