@@ -1,8 +1,25 @@
 import React from 'react'
-const Main = ({ children }) => {
+import { connect } from 'react-redux'
+import HeaderContainer from './Header'
+import PlayerContainer from './Player'
+import PlaylistContainer from './Playlist'
+
+const Main = ({ children, genre }) => {
   return (
-    <div>{children}</div>
+    <div>
+      <HeaderContainer genre={genre} />
+      {children}
+      <PlaylistContainer />
+      <PlayerContainer />
+    </div>
   )
 }
-export default Main
-
+function mapStateToProps(state, ownState) {
+  console.info('state', state);
+  console.info('ownState', ownState);
+  return {
+    genre: ownState.location.query.genre
+    , children: ownState.children
+  }
+}
+export default connect(mapStateToProps)(Main)

@@ -4,9 +4,6 @@ import { connect } from 'react-redux'
 import * as actions from '../actions/actionCreator'
 import { bindActionCreators } from 'redux'
 import Activities from './Activities'
-import HeaderContainer from './Header'
-import PlayerContainer from './Player'
-import PlaylistContainer from './Playlist'
 import * as requestTypes from '../constants/requestTypes'
 import FollowingsList from './FollowingsList'
 import FollowersList from './FollowersList'
@@ -20,17 +17,20 @@ class App extends Component {
     init()
   }
 
-  renderContent() {
+  renderContent = () => {
+
+  }
+
+  render() {
     const {
       fetchActivities
       , requestObject
       , activitiesIds
       , activeTrackId
     } = this.props
-    console.info(requestObject[requestTypes.FAVORITES]);
     return (
-      <div className="dashboard-content">
-        <div className="dashboard-content-main">
+      <div className="dashboard">
+        <div className="dashboard-main">
           <Activities
             activitiesIds={activitiesIds}
             activeTrackId={activeTrackId}
@@ -38,26 +38,11 @@ class App extends Component {
             scrollFunc={() => fetchActivities(requestObject[requestTypes.ACTIVITIES])}
             />
         </div>
-        <div className="dashboard-content-side">
+        <div className="dashboard-side">
           <FollowingsList />
           <FollowersList />
           <FavoritesList />
         </div>
-      </div>
-    )
-  }
-
-  render() {
-    return (
-      <div>
-        {
-          <div className="dashboard">
-            <HeaderContainer genre={this.props.genre} />
-            {this.renderContent()}
-            <PlaylistContainer />
-            <PlayerContainer />
-          </div>
-        }
       </div>
     )
   }

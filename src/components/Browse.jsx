@@ -1,9 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import * as actions from '../actions/actionCreator.js'
-import HeaderContainer from './Header'
-import PlayerContainer from './Player'
-import PlaylistContainer from './Playlist'
 import Activities from './Activities'
 import { DEFAULT_GENRE } from '../constants/genre'
 import { ACTIVITIES_BYGENRE } from '../constants/requestTypes'
@@ -41,25 +38,19 @@ class BrowserContainer extends Component {
     if (!activitiesByGenre) return
     const filteredActivitiesByGenre = activitiesByGenre[genre]
     return (
-      <div>
-        <Activities
-          activitiesIds={filteredActivitiesByGenre}
-          activeTrackId={activeTrackId}
-          requestInProcess={requestInProcess}
-          scrollFunc={() => this.fetchActivitiesByGenreFunc()}
-          />
-      </div>
+      <Activities
+        activitiesIds={filteredActivitiesByGenre}
+        activeTrackId={activeTrackId}
+        requestInProcess={requestInProcess}
+        scrollFunc={() => this.fetchActivitiesByGenreFunc()}
+        />
     )
   }
 
   render() {
-    const { genre } = this.props
     return (
       <div>
-        <HeaderContainer genre={genre} />
         {this.renderInnerComopnent()}
-        <PlayerContainer />
-        <PlaylistContainer />
       </div>
     );
   }
@@ -70,10 +61,8 @@ function mapStateToProps(state: Object, routeState: Object) {
   const genre = routeState.location.query.genre
   return {
     activitiesByGenre: browse
-    , genre
     , nextHref: paginate[genre]
     , activeTrackId: player.activeTrackId
-    , pathname: routeState.location.pathname
     , requestInProcess: request[ACTIVITIES_BYGENRE]
     , tracks: entities.tracks
     , songs: entities.songs
