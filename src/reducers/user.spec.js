@@ -1,88 +1,133 @@
 
 import * as actionTypes from '../constants/actionTypes'
 import { isSameById } from '../services/player'
+import user from './user'
 
-const concatList = (currentList, targetList) => {
-  return [
-    ...currentList
-    , ...targetList
-  ]
-}
+describe('User Reducer Test', () => {
 
-const mergeFollowings = (state, receivefollowings) => {
-  const followingsIds = concatList(state.followingsIds, receivefollowings)
-  return { ...state, followingsIds }
-}
-
-const mergeActivities = (state, receiveactivities) => {
-  const activitiesIds = concatList(state.activitiesIds, receiveactivities)
-  return { ...state, activitiesIds }
-}
-
-const mergeFollowers = (state, receivefollowers) => {
-  const followersIds = concatList(state.followersIds, receivefollowers)
-  return { ...state, followersIds }
-}
-
-const mergeFavorites = (state, receivefavorites) => {
-  const favoritesIds = concatList(state.favoritesIds, receivefavorites)
-  return { ...state, favoritesIds }
-}
-
-const initialState = {
-  activitiesIds: []
-  , followersIds: []
-  , followingsIds: []
-  , favoritesIds: []
-}
-
-const addToFavorites = (state, trackId) => {
-  const favoritesIds = [...state.favoritesIds, trackId]
-  return { ...state, favoritesIds }
-}
-
-const removeFromFavorites = (state, trackId) => {
-  const index = state.favoritesIds.findIndex(isSameById(trackId))
-  if (index < 0) {
-    return state
+  it('mergeFollowings, when there are no ids ', done => {
+    const initState = {
+      activitiesIds: []
+      , followersIds: []
+      , followingsIds: []
+      , favoritesIds: []
+    }
+    const followings = [{ id: 'a1' }, { id: 'a2' }, { id: 'a3' }]
+    const action = {
+      type: actionTypes.MERGE_FOLLOWINGS
+      , followings
+    }
+    const result = user(initState, action)
+    const expected = {
+      activitiesIds: []
+      , followersIds: []
+      , followingsIds: followings
+      , favoritesIds: []
+    }
+    expect(result).to.deep.eq(expected)
+    done()
   }
-  const favoritesIds = [
-    ...state.favoritesIds.slice(0, index)
-    , ...state.favoritesIds.slice(index + 1)
-  ]
-  return { ...state, favoritesIds }
-}
-
-const removeFromFollowings = (state: {}, userId: number) => {
-  const index = state.followingsIds.findIndex(isSameById(userId))
-  if (index < 0) {
-    return state
+  )
+  it('MERGE_FAVORITES, when there are already have  ids ', done => {
+    const followings = [{ id: 'a1' }, { id: 'a2' }, { id: 'a3' }]
+    const favorites = [{ id: 'f1' }, { id: 'f2' }, { id: 'f3' }]
+    const initState = {
+      activitiesIds: []
+      , followersIds: []
+      , followingsIds: followings
+      , favoritesIds: []
+    }
+    const action = {
+      type: actionTypes.MERGE_FAVORITES
+      , favorites
+    }
+    const result = user(initState, action)
+    const expected = {
+      activitiesIds: []
+      , followersIds: []
+      , followingsIds: followings
+      , favoritesIds: favorites
+    }
+    expect(result).to.deep.eq(expected)
+    done()
   }
-  const followingsIds = [
-    ...state.followingsIds.slice(0, index)
-    , ...state.followingsIds.slice(index + 1)
-  ]
-  return { ...state, followingsIds }
-}
+  )
 
-export default function (state = initialState, action) {
-  switch (action.type) {
-    case actionTypes.MERGE_FOLLOWINGS:
-      return mergeFollowings(state, action.followings)
-    case actionTypes.MERGE_FAVORITES:
-      return mergeFavorites(state, action.favorites)
-    case actionTypes.MERGE_ACTIVITIES:
-      return mergeActivities(state, action.activities)
-    case actionTypes.MERGE_FOLLOWERS:
-      return mergeFollowers(state, action.followers)
-
-    case actionTypes.ADD_TO_FAVORITES:
-      return addToFavorites(state, action.trackId)
-    case actionTypes.REMOVE_FROM_FAVORITES:
-      return removeFromFavorites(state, action.trackId)
-    case actionTypes.REMOVE_FROM_FOLLOWINGS:
-      return removeFromFollowings(state, action.userId)
-    default:
-      return state
+  it('ADD_TO_FAVORITES, when there are already have  ids ', done => {
+    const followings = [{ id: 'a1' }, { id: 'a2' }, { id: 'a3' }]
+    const favorites = [{ id: 'f1' }, { id: 'f2' }, { id: 'f3' }]
+    const initState = {
+      activitiesIds: []
+      , followersIds: []
+      , followingsIds: followings
+      , favoritesIds: favorites
+    }
+    const addFavoritesTrack = { id: 'z1' }
+    const action = {
+      type: actionTypes.ADD_TO_FAVORITES
+      , trackId: addFavoritesTrack
+    }
+    const result = user(initState, action)
+    const expected = {
+      activitiesIds: []
+      , followersIds: []
+      , followingsIds: followings
+      , favoritesIds: [...favorites, addFavoritesTrack]
+    }
+    expect(result).to.deep.eq(expected)
+    done()
   }
+  )
+  it('REMOVE_FROM_FAVORITES, when there are already have  ids ', done => {
+    const followings = ['a1', 'a2', 'a3']
+    const favorites = ['f1', 'f2', 'f3']
+    const initState = {
+      activitiesIds: []
+      , followersIds: []
+      , followingsIds: followings
+      , favoritesIds: favorites
+    }
+    const removeFavoritesTrack = 'f1'
+    const action = {
+      type: actionTypes.REMOVE_FROM_FAVORITES
+      , trackId: removeFavoritesTrack
+    }
+    const result = user(initState, action)
+    const expected = {
+      activitiesIds: []
+      , followersIds: []
+      , followingsIds: followings
+      , favoritesIds: favorites.slice(1)
+    }
+    expect(result).to.deep.eq(expected)
+    done()
+  }
+  )
+  it('REMOVE_FROM_FOLLOWINGS, when there are already have  ids ', done => {
+    const followings = ['a1', 'a2', 'a3']
+    const favorites = ['f1', 'f2', 'f3']
+    const initState = {
+      activitiesIds: []
+      , followersIds: []
+      , followingsIds: followings
+      , favoritesIds: favorites
+    }
+    const removeFollowingsTrack = 'a2'
+    const action = {
+      type: actionTypes.REMOVE_FROM_FOLLOWINGS
+      , userId: removeFollowingsTrack
+    }
+    const result = user(initState, action)
+    console.log(result);
+    const expected = {
+      activitiesIds: []
+      , followersIds: []
+      , followingsIds: ['a1', 'a3']
+      , favoritesIds: favorites
+    }
+    expect(result).to.deep.eq(expected)
+    done()
+  }
+  )
 }
+)

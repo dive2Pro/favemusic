@@ -4,7 +4,8 @@ type ConfiguType = {
   fn: ()=>void,
   className: string
 };
-const Actions = (props: { configuration: Array<ConfiguType>, isVisible: boolean }) => {
+const Actions = (props: { configuration: Array<ConfiguType>,
+   isVisible: boolean }) => {
   const { configuration, isVisible } = props
 
   function renderActions(cfg: ConfiguType, idx: number) {

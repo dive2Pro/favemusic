@@ -46,6 +46,7 @@ const removeFromFavorites = (state, trackId) => {
   if (index < 0) {
     return state
   }
+  console.log('removeFromFavorites ', index);
   const favoritesIds = [
     ...state.favoritesIds.slice(0, index)
     , ...state.favoritesIds.slice(index + 1)
