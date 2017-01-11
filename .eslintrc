@@ -38,6 +38,7 @@
     "global-require": "off",
     "no-console": "off",
     "no-undef": 2,
+    "object-curly-spacing": 0,
     "flowtype/boolean-style": [
       2,
       "boolean"
@@ -132,9 +133,9 @@
     "fetch": true,
     "assert": true,
     "beforeEach": true,
-    "UserEntitiesType": true
-    , "baseStateType": true
-    , "ActivitiesPropsType": true
-    , "ArtworkPropsType": true
+    "UserEntitiesType": true,
+    "baseStateType": true,
+    "ActivitiesPropsType": true,
+    "ArtworkPropsType": true
   }
 }

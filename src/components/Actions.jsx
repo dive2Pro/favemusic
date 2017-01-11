@@ -1,13 +1,13 @@
 /* @flow */
 import React from 'react'
-import { map } from 'lodash'
+import map from 'lodash/map'
 import classnames from "classnames"
 type ConfiguType = {
   fn: () => void,
   className: string
 };
 
-export const Action = ({ cfg }: { cfg: ConfiguType }) => {
+export const Action = ({ cfg }: {}) => {
   const { fn, className } = cfg
   return (
     <div className="actions-item">

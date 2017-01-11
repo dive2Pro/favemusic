@@ -19,7 +19,10 @@ export function unauthApiUrl(url, symbol) {
 
 export function addAccessToken(url, symbol) {
   const accessToken = Cookies.get(OAUTH_TOKEN)
-  return `${url}${symbol}oauth_token=${accessToken}`
+  if (accessToken) {
+    return `${url}${symbol}oauth_token=${accessToken}`
+  }
+  return `${url}${symbol}client_id=${CLIENT_ID}`
 }
 
 export function getLazyLoadingUrl(user, nextHref, initHref) {

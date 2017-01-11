@@ -4,6 +4,7 @@ import LoadingSpinner from './LoadingSpinner'
 import TrackItemContainer from './TrackItem'
 import UserItemContainer from './UserItem'
 import classnames from 'classnames'
+import map from 'lodash/map'
 const SpecificUserItem = ({ user, idx }: {}) => {
   // const isFollowing = followingsIds ? followingsIds
   //   .some((followingId: number) => followingId === id) : false
@@ -33,7 +34,7 @@ export const Mosaic = ({ ...props }: basePropsType) => {
   }
   if (kind === "user") {
     return (<div className="list-content">
-      <ul>{ids.map((id: number, idx: number) => {
+      <ul>{map(ids, (id: number, idx: number) => {
         const user = entities[id]
         return (
           <SpecificUserItem key={idx} user={user} idx={idx} />
@@ -43,7 +44,7 @@ export const Mosaic = ({ ...props }: basePropsType) => {
   } else if (kind === "track") {
     console.info('ids  = ', ids.map);
     return (<div className="list-content">
-      <ul>{ids.map((id: number, idx: number) => {
+      <ul>{map(ids, (id: number, idx: number) => {
         const track = entities[id]
         return (
           <SpecificTrackItem key={idx} id={id} track={track} />

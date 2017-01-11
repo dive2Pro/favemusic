@@ -2,12 +2,12 @@ import React from 'react'
 import FetchOnScroll from './FetchOnScroll'
 import TrackContainer from '../components/Track'
 import LoadingSpinner from '../components/LoadingSpinner'
-
+import map from 'lodash/map'
 const ActivitiesDom = ({ activitiesIds, activeTrackId }: { activitiesIds: [], activeTrackId: number }) =>
   (<div>
     <h2>activities</h2>
     <ul>
-      {activitiesIds && activitiesIds.map(
+      {activitiesIds && map(activitiesIds,
         (id: number, idx: number): number => {
           return (
             <li key={idx}>

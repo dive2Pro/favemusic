@@ -6,13 +6,14 @@ import { DEFAULT_GENRE, GENRES } from '../constants/genre'
 import { Link } from 'react-router'
 import { browse } from '../constants/pathname'
 import { bindActionCreators } from 'redux'
+import map from 'lodash/map'
 type PropsType = {
   currentUser: Object,
   login: () => void,
   logout: () => void
 };
-const renderMenuItem = () => (genreItem: string, idx: number) => (
-  <li key={idx}>
+const MenuItem = ({ genreItem }: { }) => (
+  <li>
     <Link
       to={`/${browse}?genre=${genreItem}`} activeClassName="menu-item-selected"
       className="menu-item"
@@ -30,7 +31,9 @@ const renderHeader = ({ ...props }: PropsType) => {
         <h1>Hello <Link to="/dashboard">{name}</Link></h1>
       </div>
       <ul>
-        {GENRES.map(renderMenuItem())}
+        {map(GENRES, (gereItem: string, idx: number) => (
+          <MenuItem key={idx} genreItem={gereItem} />
+        ))}
       </ul>
       <div className="header-login">
         <a href="#" onClick={currentUser ? () => logout() : () => login()}>

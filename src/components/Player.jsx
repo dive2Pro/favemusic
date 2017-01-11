@@ -27,6 +27,7 @@ class Player extends Component {
       isPlaying, activeTrackId,
       activeIterateTrack, tracks
       , likeF, setToggledF
+      , isLogined
     } = this.props
     if (!activeTrackId) return
     const track = tracks[activeTrackId]
@@ -62,14 +63,13 @@ class Player extends Component {
             onClick={() => setToggledF(PLAYLISTTYPE)}
             >&nbsp;</i>
         </div>
-        <div>
+        {isLogined && (<div>
           <i
             className={"fa fa-heart " + (track.user_favorite ? "is-favorite" : "")}
             onClick={() => likeF(track)}
             >
-
           </i>
-        </div>
+        </div>)}
         <audio
           ref="audio" id="audio"
           src={addAccessToken(stream_url, '?')}
@@ -91,11 +91,12 @@ class Player extends Component {
 }
 
 function mapStateToProps(state: Object) {
-  const { player, entities } = state
+  const { player, auth, entities } = state
   return {
     isPlaying: player.isPlaying
     , activeTrackId: player.activeTrackId
     , tracks: entities.tracks
+    , isLogined: auth.user !== null
   }
 }
 function mapDispatchToProps(dispatch: Function) {
