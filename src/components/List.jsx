@@ -3,11 +3,10 @@ import React from 'react'
 import LoadingSpinner from './LoadingSpinner'
 import TrackItemContainer from './TrackItem'
 import UserItemContainer from './UserItem'
-
-export const renderUser = (entities: { }) => (id: number, idx: number) => {
+import classnames from 'classnames'
+const SpecificUserItem = ({ user, idx }: {}) => {
   // const isFollowing = followingsIds ? followingsIds
   //   .some((followingId: number) => followingId === id) : false
-  const user = entities[id]
   return (
     <li key={idx}>
       <UserItemContainer
@@ -17,18 +16,17 @@ export const renderUser = (entities: { }) => (id: number, idx: number) => {
   )
 }
 
-export const renderTrack = (eneities: {}) => (id: number, idx: number) => {
+const SpecificTrackItem = ({ eneities, id, idx}: {}) => {
   const track = eneities[id]
   return (
-    <li key={idx}>
+    <li>
       <TrackItemContainer idx={idx} track={track} />
     </li>
   )
 }
 
-export const renderMosaic = ({ ...props }: basePropsType) => {
+export const Mosaic = ({ ...props }: basePropsType) => {
   const { ids, kind, requestInProcess, entities } = props
-  console.info('renderMosaic : ', ids);
   if (!ids || requestInProcess) {
     return (
       <div><LoadingSpinner isLoading={requestInProcess} /></div>
@@ -36,38 +34,54 @@ export const renderMosaic = ({ ...props }: basePropsType) => {
   }
   if (kind === "user") {
     return (<div className="list-content">
-      <ul>{ids.map(renderUser(entities))}</ul>
+      <ul>{ids.map((id: number, idx: number) => {
+        const user = entities[id]
+        return (
+          <SpecificUserItem user={user} idx={idx} />
+        )
+      })}</ul>
     </div>)
-  }
-
-  if (kind === "track") {
+  } else if (kind === "track") {
     console.info('ids  = ', ids.map);
     return (<div className="list-content">
-      <ul>{ids.map(renderTrack(entities))}</ul>
+      <ul>{ids.map((id: number, idx: number) => (
+        <SpecificTrackItem key={idx} id={id} {...props} />
+      ))}</ul>
     </div>)
   }
 }
 
-export const renderNextButton = ({ ...props }: {}) => {
-  const { nextHref, fetchMoreF, user, isExpand } = props
-  if (!nextHref || isExpand) {
+export const NextButton = ({ ...props }: {}) => {
+  const { nextHref, fetchMoreF, user, isExpanded, requestInProcess } = props
+  if (!nextHref || !isExpanded) {
+    return (<span></span>)
+  } else if (requestInProcess) {
     return (
-      <div>
-        <button
-          className="ghost"
-          onClick={() => fetchMoreF(user, nextHref)}
-          >LoadMore
-        </button>
-      </div>
+      <LoadingSpinner isLoading={requestInProcess} />
     )
-  } else {
-    return ""
   }
+  return (
+    <div>
+      <button
+        className="ghost"
+        onClick={() => fetchMoreF(user, nextHref)}
+        >LoadMore
+      </button>
+    </div>
+  )
 }
 
-export const renderChevron = ({ ids, isExpanded }: {}) => {
+export const Chevron = ({ ids, isExpanded }: {}) => {
   if (ids.length > 4) {
-    return (<i className={`fa ${isExpanded ? 'fa-chevron-up' : 'fa-chevron-down'}`} />)
+    const ChevronClassName = classnames(
+      "fa", {
+        "fa-chevron-up": isExpanded
+      }
+      , {
+        "fa-chevron-down": !isExpanded
+      }
+    )
+    return (<i className={ChevronClassName} />)
   } else {
     return (<div></div>)
   }
@@ -80,16 +94,14 @@ const List = ({ ...props }: basePropsType) => {
       <h2>
         <a href="#" onClick={toggleExpandF}>
           {title}&nbsp;
-          {renderChevron({ ...props })}
+          <Chevron { ...props } />
         </a>
       </h2>
       <div className={isExpanded ? 'more-visible' : ''}>
-        {
-          renderMosaic({ ...props })
-        }
+        <Mosaic { ...props } />
       </div>
       <div className="list-action">
-        {renderNextButton({ ...props })}
+        <NextButton { ...props } />
       </div>
     </div>
   )
