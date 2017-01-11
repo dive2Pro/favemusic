@@ -3,7 +3,7 @@ import apiUrl from '../services/soundcloundApi'
 import { mergeFollowings } from './user'
 import { REMOVE_FROM_FOLLOWINGS } from '../constants/actionTypes'
 
-const removeFromFollowings = (userId: number) => ({
+export const removeFromFollowings = (userId: number) => ({
   type: REMOVE_FROM_FOLLOWINGS
   , userId
 })

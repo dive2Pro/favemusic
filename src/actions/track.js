@@ -5,12 +5,12 @@
 import * as actionTypes from '../constants/actionTypes'
 import apiUrl from '../services/soundcloundApi'
 import { syncEntities } from './entities'
-const addToFavorites = (trackId: number) => ({
+export const addToFavorites = (trackId: number) => ({
   type: actionTypes.ADD_TO_FAVORITES
   , trackId
 })
 
-const removeFromFavorites = (trackId: number) => ({
+export const removeFromFavorites = (trackId: number) => ({
   type: actionTypes.REMOVE_FROM_FAVORITES
   , trackId
 })

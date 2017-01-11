@@ -118,7 +118,6 @@ describe('User Reducer Test', () => {
       , userId: removeFollowingsTrack
     }
     const result = user(initState, action)
-    console.log(result);
     const expected = {
       activitiesIds: []
       , followersIds: []

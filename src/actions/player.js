@@ -12,7 +12,7 @@ const setIsPlaying = (isPlaying) => ({
   , isPlaying
 })
 
-const setActiveTrack = (activeTrackId) => ({
+export const setActiveTrack = (activeTrackId) => ({
   type: actionTypes.SET_ACTIVE_TRACK
   , activeTrackId
 })
