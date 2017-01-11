@@ -2,7 +2,6 @@
  * Created by hyc on 16-12-31.
  */
 import * as actionTypes from '../constants/actionTypes'
-import SC from 'soundcloud'
 import {
   CLIENT_ID,
   REDIRECT_URI,

@@ -4,12 +4,7 @@ import LoadingSpinner from './LoadingSpinner'
 import TrackItemContainer from './TrackItem'
 import UserItemContainer from './UserItem'
 
-type MosaicpropsType = {
-  isMoreToggled: ?boolean,
-  requestInProcess: ?boolean
-};
-
-const renderUser = (entities: {}) => (id: number, idx: number) => {
+export const renderUser = (entities: { }) => (id: number, idx: number) => {
   // const isFollowing = followingsIds ? followingsIds
   //   .some((followingId: number) => followingId === id) : false
   const user = entities[id]
@@ -22,7 +17,7 @@ const renderUser = (entities: {}) => (id: number, idx: number) => {
   )
 }
 
-const renderTrack = (eneities: {}) => (id: number, idx: number) => {
+export const renderTrack = (eneities: {}) => (id: number, idx: number) => {
   const track = eneities[id]
   return (
     <li key={idx}>
@@ -31,7 +26,7 @@ const renderTrack = (eneities: {}) => (id: number, idx: number) => {
   )
 }
 
-const renderMosaic = ({ ...props }: basePropsType) => {
+export const renderMosaic = ({ ...props }: basePropsType) => {
   const { ids, kind, requestInProcess, entities } = props
   console.info('renderMosaic : ', ids);
   if (!ids || requestInProcess) {
@@ -53,7 +48,7 @@ const renderMosaic = ({ ...props }: basePropsType) => {
   }
 }
 
-const renderNextButton = ({ ...props }: {}) => {
+export const renderNextButton = ({ ...props }: {}) => {
   const { nextHref, fetchMoreF, user, isExpand } = props
   if (!nextHref || isExpand) {
     return (
@@ -70,7 +65,7 @@ const renderNextButton = ({ ...props }: {}) => {
   }
 }
 
-const renderChevron = ({ ids, isExpanded }: {}) => {
+export const renderChevron = ({ ids, isExpanded }: {}) => {
   if (ids.length > 4) {
     return (<i className={`fa ${isExpanded ? 'fa-chevron-up' : 'fa-chevron-down'}`} />)
   } else {
@@ -78,7 +73,7 @@ const renderChevron = ({ ids, isExpanded }: {}) => {
   }
 }
 
-const List = ({ ...props }: MosaicpropsType) => {
+const List = ({ ...props }: basePropsType) => {
   const { title, isExpanded, toggleExpandF } = props
   return (
     <div className="list">
@@ -88,7 +83,7 @@ const List = ({ ...props }: MosaicpropsType) => {
           {renderChevron({ ...props })}
         </a>
       </h2>
-      <div className={isExpanded ? 'more' : ''}>
+      <div className={isExpanded ? 'more-visible' : ''}>
         {
           renderMosaic({ ...props })
         }

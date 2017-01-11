@@ -8,12 +8,14 @@
       "type": "node",
       "request": "launch",
       "name": "Mocha Test",
-      "program": "${workspaceRoot}/node_modules/mocha/bin/_mocha",
+      "program": "${workspaceRoot}/node_modules/.bin/istanbul",
       "stopOnEntry": false,
       "runtimeExecutable": null,
       "cwd": "${workspaceRoot}",
       "args": [
-        "--no-timeouts"
+        "cover"
+        ,"${workspaceRoot}/node_modules/.bin/_mocha"
+        ,"--no-timeouts"
         ,"--compilers", "js:babel-core/register"
         ,"--require", "babel-polyfill"
         ,"./tests/setup.js"
