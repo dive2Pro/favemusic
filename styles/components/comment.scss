@@ -1,0 +1,27 @@
+.comments {
+  display: flex;
+  flex: 1 1 90%;
+  opacity: 0;
+  visibility: hidden;
+  width:100%;
+  &-item {
+    display: flex;
+    flex: 1 1;
+    border-bottom: $darkBorder;
+    img {
+
+    }
+    &-content {
+      display: flex;
+      flex: 1;
+    }
+    &-meta {
+
+    }
+  }
+  &.active {
+    opacity: 1;
+    visibility: visible;
+    margin: $padding;
+  }
+}

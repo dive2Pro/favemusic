@@ -18,7 +18,7 @@
     pointer-events: all;
   }
   &-menu {
-    display: flex; 
+    display: flex;
     font-size: $menuSize;
     border-bottom: $darkBorder;
     padding:$padding/2;
@@ -26,7 +26,6 @@
   }
   &-content {
     position: relative;
-    display: flex;
     justify-content: flex-start;
     flex: 1;
     // margin-left: 25%;

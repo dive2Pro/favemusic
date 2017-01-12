@@ -7,7 +7,6 @@ import PreviewTrack from './preview'
 import PlaylistTrack from './playlist'
 /* eslint-enable max-len */
 
-
 function mapStateToProps(state, ownState) {
   return {
     ids: ownState.ids
@@ -22,14 +21,13 @@ function mapStateToProps(state, ownState) {
   }
 }
 
-
 function mapDispatchToProps(dispatch: Function) {
   return {
     activateTrackF: bindActionCreators(actions.activateTrackF, dispatch)
     , addTrackToPlaylistF: bindActionCreators(actions.addTrackToPlaylistF, dispatch)
     , removeTrackFromPlaylistF: bindActionCreators(actions.removeTrackFromPlaylistF
-      , dispatch
-    )
+      , dispatch)
+    , deeptoggledF: bindActionCreators(actions.setDeepToggledF, dispatch)
   }
 }
 const StreamTrackContainer = connect(mapStateToProps, mapDispatchToProps)(StreamTrack)

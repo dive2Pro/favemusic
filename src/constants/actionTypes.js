@@ -61,6 +61,8 @@ export const RESET_SESSION = 'RESET_SESSION'
 // toggle
 export const SET_TOGGLED = 'SET_TOGGLED'
 export const RESET_TOGGLED = 'RESET_TOGGLED'
+export const SET_DEEP_TOGGLED = 'SET_DEEP_TOGGLED'
+export const RESET_ALL_DEEP_TOGGLED = 'RESET_ALL_DEEP_TOGGLED'
 
 // comment
 export const MERGE_COMMENTS_OF_ID = 'MERGE_COMMENT'

@@ -40,7 +40,9 @@ const PlaylistTrack = ({ ...props }) => {
         {renderImage(artwork_url, title, avatar_url)}
       </div>
       <div className="mini-track-content">
-        <Permalink href={permalink_url} text={name} />
+        <div className="mini-track-content-info">
+          <Permalink href={permalink_url} text={name} />
+        </div>
         {renderActions({ ...props, track })}
       </div>
     </div>

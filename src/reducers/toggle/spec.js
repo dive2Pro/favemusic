@@ -74,3 +74,73 @@ describe('SET_TOGGLED', () => {
   })
 }
 )
+
+describe('SET_DEEP_TOGGLED', () => {
+  it('SET_DEEP_TOGGLED  when there are no toggleObject', (done: Function) => {
+    const toggleType = toggleTypes.PLAYLISTTYPE
+    const trackId = 1234
+    const action = {
+      type: actionTypes.SET_DEEP_TOGGLED
+      , toggleType
+      , trackId
+    }
+    const initState = {
+
+    }
+
+    const expectedState = {
+      [toggleType]: {
+        [trackId]: true
+      }
+    }
+    const result = toggle(initState, action)
+
+    expect(result).to.deep.eq(expectedState)
+    done()
+  })
+  it('SET_DEEP_TOGGLED  when there are already toggleObject', (done: Function) => {
+    const toggleType = toggleTypes.PLAYLISTTYPE
+    const trackId = 1234
+    const action = {
+      type: actionTypes.SET_DEEP_TOGGLED
+      , toggleType
+      , trackId
+    }
+    const initState = {
+      [toggleType]: {
+        [trackId]: true
+      }
+    }
+
+    const expectedState = {
+      [toggleType]: {
+        [trackId]: false
+      }
+    }
+    const result = toggle(initState, action)
+
+    expect(result).to.deep.eq(expectedState)
+    done()
+  })
+  it('RESET_DEEP_TOGGLED  when there are already toggleObject', (done: Function) => {
+    const toggleType = toggleTypes.PLAYLISTTYPE
+    const action = {
+      type: actionTypes.RESET_ALL_DEEP_TOGGLED
+      , toggleType
+    }
+    const initState = {
+      [toggleType]: {
+        123: true
+        , 321: true
+      }
+    }
+
+    const expectedState = {
+      [toggleType]: { }
+    }
+    const result = toggle(initState, action)
+    expect(result).to.deep.eq(expectedState)
+    done()
+  })
+}
+)

@@ -14,12 +14,11 @@ const mergeCommentsById = (commentsIds, trackId) => ({
   , commentsIds
   , trackId
 })
-const fetchCommentById = (trackId) => {
+const fetchCommentByIdF = (trackId,nextHref) => {
   return (dispatch, getState) => {
     const isRequestInprocess = getState().request[COMMENTS] && getState().request[COMMENTS][trackId]
     if (isRequestInprocess) return
     dispatch(setRequestTypeInProcess(true, COMMENTS))
-    const nextHref = getState().comment[trackId].nextHref
     const initHref = `tracks/${trackId}/comments?linked_partitioning=1&limit=20&offset=0`
     const url = getLazyLoadingCommentUrl(nextHref, initHref)
     const promise = fetch(url)
@@ -38,4 +37,4 @@ const fetchCommentById = (trackId) => {
   }
 }
 
-export { fetchCommentById }
+export { fetchCommentByIdF }

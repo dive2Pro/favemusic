@@ -6,7 +6,8 @@ import WaveFormSc from '../WaveformSc/index'
 import Artwork from '../Artwork/index'
 import InfoList from '../InfoList/index'
 import Permalink from '../Permalink/index'
-
+import CommentsContainer from '../Comments/index'
+import { COMMENTSTYPE } from '../../constants/toggleTypes'
 /* eslint-enable max-len */
 
 class Track extends Component {
@@ -28,7 +29,6 @@ class Track extends Component {
   renderWaveform(id, idx) {
     const { track, song } = this.state
     if (isNotTrack(song)) return (<div></div>)
-
     return (<WaveFormSc track={track} id={id} idx={idx} />)
   }
 
@@ -44,14 +44,14 @@ class Track extends Component {
           <i
             className={`fa ${currentTrackIsPlaying ? 'fa-pause' : 'fa-play'}`}
             onClick={() => activateTrackF(track.id)}
-            />
+          />
         </div>
 
         <div className="track-actions-item">
           <i
             className="fa fa-list"
             onClick={() => addTrackToPlaylistF(track.id)}
-            > </i>
+          > </i>
         </div>
       </div>
     )
@@ -60,7 +60,7 @@ class Track extends Component {
   render() {
     const {
       activateTrackF, activeTrackId
-      , isPlaying, idx
+      , isPlaying, idx, deeptoggledF
     } = this.props
     const { track, song, user } = this.state
     const { origin } = song
@@ -80,28 +80,35 @@ class Track extends Component {
       , { className: "fa fa-download", count: download_count }
     ]
     return (
-      <div className={"track " + (isVisible ? "active" : "")}>
-        <div className="track-img">
-          <Artwork size={80} image={artwork_url} optionalImg={avatar_url} alt={title} />
-        </div>
-
-        <div className="track-content">
-          <div className="track-content-name">
-            <Permalink href={user.permalink_url} text={username} />
-            <div>{fromNow(created_at)}</div>
+      <div className="stream">
+        <div className={"track " + (isVisible ? "active" : "")}>
+          <div
+            onClick={() => deeptoggledF(COMMENTSTYPE, id)}
+            className="track-img">
+            <Artwork
+              size={80} image={artwork_url} optionalImg={avatar_url}
+              alt={title} />
           </div>
-          <div className="track-content-meta">
-            <Permalink href={permalink_url} text={title} />
-            <div>{durationFormat(duration)}</div>
+          <div className="track-content">
+            <div className="track-content-name">
+              <Permalink href={user.permalink_url} text={username} />
+              <div>{fromNow(created_at)}</div>
+            </div>
+            <div className="track-content-meta">
+              <Permalink href={permalink_url} text={title} />
+              <div>{durationFormat(duration)}</div>
+            </div>
+            <div
+              className="track-content-waveform"
+              >
+              {this.renderWaveform(id, idx)}
+            </div>
+            <InfoList infoConfigurations={infoConfigurations} />
           </div>
-          <div className="track-content-waveform">
-            {this.renderWaveform(id, idx)}
-          </div>
-          <InfoList infoConfigurations={infoConfigurations} />
-        </div>
-        {this.renderActions(track, activateTrackF, isPlaying)}
-      </
-      div >
+          {this.renderActions(track, activateTrackF, isPlaying)}
+        </div >
+        <CommentsContainer trackId={id} />
+      </div>
     )
   }
 }
