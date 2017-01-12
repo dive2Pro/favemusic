@@ -1,9 +1,6 @@
 import React from "react";
 import { isSameTrackAndPlaying, isSameById } from "../services/player";
 import Actions from "./Actions";
-import { connect } from "react-redux";
-import * as actions from "../actions/actionCreator";
-import { bindActionCreators } from "redux";
 import Permalink from "./Permalink";
 
 const renderImage = (artwork_url, title, avatar_url) => {
@@ -50,22 +47,5 @@ const PlaylistTrack = ({ ...props }) => {
   );
 };
 
-function mapStateToProps(state: baseStateType, ownState: {}) {
-  return {
-    id: ownState.id
-    , users: state.entities.users
-    , tracks: state.entities.tracks
-    , activeTrackId: state.player.activeTrackId
-    , isPlaying: state.player.isPlaying
-  };
-}
-function mapDispatchToProps(dispatch: Function) {
-  return {
-    activateTrackF: bindActionCreators(actions.activateTrackF, dispatch)
-    , removeTrackFromPlaylistF: bindActionCreators(
-      actions.removeTrackFromPlaylistF,
-      dispatch
-    )
-  };
-}
-export default connect(mapStateToProps, mapDispatchToProps)(PlaylistTrack)
+
+export default PlaylistTrack

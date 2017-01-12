@@ -1,11 +1,11 @@
 // @flow
 import React from 'react'
-import PlaylistTrackContainer from './PlaylistTrack'
 import { connect } from 'react-redux';
 import * as actions from '../actions/actionCreator.js'
 import { PLAYLISTTYPE } from '../constants/toggleTypes'
 import { bindActionCreators } from 'redux'
 import map from 'lodash/map'
+import { PlaylistTrackContainer } from './TrackContainer'
 type PropsType = {
   activeTrack: Object,
   isPlaying: boolean,
