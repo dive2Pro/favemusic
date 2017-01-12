@@ -12,7 +12,7 @@ import useScrollMiddleware from 'react-router-scroll/lib/useScroll'
 require('../styles/index.scss')
 require('font-awesome/css/font-awesome.css')
 function userScrollCallback(preRouterProps, { location }) {
-  console.info(preRouterProps, '----', location)
+  console.log(preRouterProps, '----', location)
   return true
 }
 /**

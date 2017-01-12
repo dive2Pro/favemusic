@@ -1,7 +1,7 @@
 // @flow
 import React from 'react'
 import LoadingSpinner from './LoadingSpinner'
-import TrackItemContainer from './TrackItem'
+import { PreviewTrackContainer } from './TrackContainer'
 import UserItemContainer from './UserItem'
 import classnames from 'classnames'
 import map from 'lodash/map'
@@ -20,7 +20,7 @@ const SpecificUserItem = ({ user, idx }: {}) => {
 const SpecificTrackItem = ({ track, idx}: {}) => {
   return (
     <li>
-      <TrackItemContainer idx={idx} track={track} />
+      <PreviewTrackContainer idx={idx} track={track} />
     </li>
   )
 }

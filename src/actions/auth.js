@@ -49,6 +49,7 @@ export const init = () =>
     const oauth_token = Cookies.get(OAUTH_TOKEN)
     console.info('oauth_token = ', oauth_token)
     if (oauth_token !== undefined && oauth_token !== null && oauth_token !== 'null') {
+      dispatch(changeLocation('/dashboard'))
       dispatch(fetchUser(oauth_token))
     } else {
       console.info('dispatch - --', routerActions)

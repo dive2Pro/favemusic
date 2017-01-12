@@ -2,12 +2,9 @@
 import React, { Component } from 'react'
 import { isNotTrack, fromNow, durationFormat } from '../services/track'
 import { isSameTrackAndPlaying, isSameById } from '../services/player.js'
-import { connect } from 'react-redux'
-import * as actions from '../actions/actionCreator'
 import WaveFormSc from './WaveformSc'
 import Artwork from './Artwork'
 import InfoList from './InfoList'
-import { bindActionCreators } from 'redux'
 import Permalink from './Permalink'
 
 /* eslint-enable max-len */
@@ -47,14 +44,14 @@ class Track extends Component {
           <i
             className={`fa ${currentTrackIsPlaying ? 'fa-pause' : 'fa-play'}`}
             onClick={() => activateTrackF(track.id)}
-          />
+            />
         </div>
 
         <div className="track-actions-item">
           <i
             className="fa fa-list"
             onClick={() => addTrackToPlaylistF(track.id)}
-          > </i>
+            > </i>
         </div>
       </div>
     )
@@ -104,27 +101,9 @@ class Track extends Component {
         </div>
         {this.renderActions(track, activateTrackF, isPlaying)}
       </
-        div >
+      div >
     )
   }
 }
 
-function mapStateToProps(state, ownState) {
-  return {
-    ids: ownState.ids
-    , id: ownState.id
-    , tracks: state.entities.tracks
-    , users: state.entities.users
-    , songs: state.entities.songs
-    , isPlaying: state.player.isPlaying
-  }
-}
-
-function mapDispatchToProps(dispatch: Function) {
-  return {
-    activateTrackF: bindActionCreators(actions.activateTrackF, dispatch)
-    , addTrackToPlaylistF: bindActionCreators(actions.addTrackToPlaylistF, dispatch)
-  }
-}
-export default connect(mapStateToProps, mapDispatchToProps)(Track)
-
+export default Track

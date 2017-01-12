@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import * as actions from '../actions/actionCreator.js'
 import { DEFAULT_GENRE, GENRES } from '../constants/genre'
 import { Link } from 'react-router'
-import { browse } from '../constants/pathname'
+// import { browse } from '../constants/pathname'
 import { bindActionCreators } from 'redux'
 import map from 'lodash/map'
 type PropsType = {
@@ -12,10 +12,10 @@ type PropsType = {
   login: () => void,
   logout: () => void
 };
-const MenuItem = ({ genreItem }: { }) => (
+const MenuItem = ({ genreItem, pathname }: {}) => (
   <li>
     <Link
-      to={`/${browse}?genre=${genreItem}`} activeClassName="menu-item-selected"
+      to={`${pathname}?genre=${genreItem}`} activeClassName="menu-item-selected"
       className="menu-item"
       >
       {genreItem}
@@ -23,16 +23,16 @@ const MenuItem = ({ genreItem }: { }) => (
   </li>
 )
 const renderHeader = ({ ...props }: PropsType) => {
-  const { currentUser, login, logout } = props
+  const { currentUser, login, logout, pathname } = props
   const name = currentUser ? currentUser.username : 'Welcome'
   return (
     <div className="header-content">
       <div>
-        <h1>Hello <Link to="/dashboard">{name}</Link></h1>
+        <h1>Hello <Link to={!currentUser ? "/dashboard" : "/browse"}>{name}</Link></h1>
       </div>
       <ul>
         {map(GENRES, (gereItem: string, idx: number) => (
-          <MenuItem key={idx} genreItem={gereItem} />
+          <MenuItem key={idx} genreItem={gereItem} pathname={pathname} />
         ))}
       </ul>
       <div className="header-login">
@@ -55,11 +55,12 @@ Header.defaultProps = {
 };
 
 function mapStateToProps(state: Object, ownState: {}) {
-  // console.info('state = ', state);
+  console.info('state = ', state);
+  console.info('ownState = ', ownState);
   return {
     currentUser: state.auth.user
     , genre: ownState.genre
-    , pathname: ownState.pathname
+    , pathname: window.location.pathname
   }
 }
 
