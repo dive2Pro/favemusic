@@ -1,17 +1,17 @@
 /**
  * Created by hyc on 16-12-31.
  */
-import { toggleFollowingF } from './followings'
-import { init, login, logout } from './auth'
-import { setToggledF } from './toggle'
-import { fetchActivities, fetchFollowersF, fetchFavoritesF, fetchFollowingsF } from './user'
-import { fetchActivitiesByGenre } from './browse'
-import { likeF } from './track'
+import { toggleFollowingF } from './following/index'
+import { init, login, logout } from './auth/index'
+import { setToggledF } from './toggle/index'
+import { fetchActivities, fetchFollowersF, fetchFavoritesF, fetchFollowingsF } from './user/index'
+import { fetchActivitiesByGenre } from './browse/index'
+import { likeF } from './track/index'
 import {
   togglePlayTrack, activeIterateTrack,
   activateTrackF, removeTrackFromPlaylistF, addTrackToPlaylistF
   , clearPlayListF
-} from './player'
+} from './player/index'
 
 export {
   init
