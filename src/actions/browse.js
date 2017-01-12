@@ -20,7 +20,7 @@ const mergeActivitiesByGenre = (activitiesIds: Array<Number>, genre: 'foo') =>
 export const fetchActivitiesByGenre = (nextHref: string, genre: string = 'house') => {
   return (dispatch: () => void, getState: () => Object) => {
     const initHref = unauthApiUrl(
-      `tracks?linked_partitioning=1&limit=50&offset=0&tags=${genre}`, '&')
+      `tracks?linked_partitioning=1&limit=50&offset=0&tags=${genre.toLocaleLowerCase()}`, '&')
     const url = nextHref || initHref
     const requestInprocess = getState().request[requestTypes.ACTIVITIES_BYGENRE]
     if (requestInprocess) {

@@ -10,7 +10,7 @@ const ActivitiesDom = ({ activitiesIds, activeTrackId }: { activitiesIds: [], ac
       {activitiesIds && map(activitiesIds,
         (id: number, idx: number): number => {
           return (
-            <li key={idx}>
+            <li key={id}>
               <TrackContainer
                 idx={idx}
                 id={id}

@@ -5,7 +5,6 @@ const initialState = {
 const setRequestTypeInProcess = (state: {}, inProcess: boolean, requestType: string) => {
   const requestObject = {}
   requestObject[requestType] = inProcess
-  // Object.assign({}, state.requestObject, { [requestType]: inProcess })
   return { ...state, ...requestObject }
 }
 

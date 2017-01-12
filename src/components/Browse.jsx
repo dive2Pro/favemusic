@@ -10,17 +10,17 @@ class BrowserContainer extends Component {
   props: basePropsType;
 
   fetchActivitiesByGenreFunc = () => {
+    if (!this.shouldFetchMoreFiltedActivities()) return
     const { fetchActivitiesByGenre, genre, nextHref } = this.props
     fetchActivitiesByGenre(nextHref, genre)
   }
 
   componentDidMount() {
-    if (!this.shouldFetchMoreFiltedActivities()) return
     this.fetchActivitiesByGenreFunc()
   }
 
   componentDidUpdate() {
-    // this.fetchActivitiesByGenre()
+    this.fetchActivitiesByGenreFunc()
   }
   /**
    * need
@@ -37,6 +37,7 @@ class BrowserContainer extends Component {
     } = this.props
     if (!activitiesByGenre) return
     const filteredActivitiesByGenre = activitiesByGenre[genre]
+    console.info('filteredActivitiesByGenre = ', filteredActivitiesByGenre);
     return (
       <Activities
         activitiesIds={filteredActivitiesByGenre}
@@ -58,10 +59,13 @@ class BrowserContainer extends Component {
 
 function mapStateToProps(state: Object, routeState: Object) {
   const { browse, entities, player, request, paginate } = state
-  const genre = routeState.location.query.genre
+  let genre = routeState.location.query.genre
+  genre = genre && genre.trim().replace(' ', '')
+  console.info('genre = ', genre);
   return {
     activitiesByGenre: browse
     , nextHref: paginate[genre]
+    , genre
     , activeTrackId: player.activeTrackId
     , requestInProcess: request[ACTIVITIES_BYGENRE]
     , tracks: entities.tracks

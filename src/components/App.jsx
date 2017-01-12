@@ -14,9 +14,8 @@ const Main = ({ children, genre }) => {
     </div>
   )
 }
+
 function mapStateToProps(state, ownState) {
-  console.info('state', state);
-  console.info('ownState', ownState);
   return {
     genre: ownState.location.query.genre
     , children: ownState.children

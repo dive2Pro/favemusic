@@ -8,6 +8,7 @@ import * as requestTypes from '../constants/requestTypes'
 import FollowingsList from './FollowingsList'
 import FollowersList from './FollowersList'
 import FavoritesList from './FavoritesList'
+import { ACTIVITIES } from '../constants/paginateLinkTypes.js'
 class App extends Component {
   props: basePropsType;
   init: () => void
@@ -24,9 +25,10 @@ class App extends Component {
   render() {
     const {
       fetchActivities
-      , requestObject
+      , requestInProcess
       , activitiesIds
       , activeTrackId
+      , nextHref
     } = this.props
     return (
       <div className="dashboard">
@@ -34,8 +36,8 @@ class App extends Component {
           <Activities
             activitiesIds={activitiesIds}
             activeTrackId={activeTrackId}
-            requestInProcess={requestObject[requestTypes.ACTIVITIES]}
-            scrollFunc={() => fetchActivities(requestObject[requestTypes.ACTIVITIES])}
+            requestInProcess={requestInProcess}
+            scrollFunc={() => fetchActivities(nextHref)}
             />
         </div>
         <div className="dashboard-side">
@@ -48,15 +50,15 @@ class App extends Component {
   }
 }
 
-function mapStateToProps(state: Object, routeState: Object) {
-  const { auth, user, player, request } = state
+function mapStateToProps(state: Object) {
+  const { auth, user, player, request, paginate } = state
   console.info(state)
   return {
     currentUser: auth.user
     , activitiesIds: user.activitiesIds
-    , requestObject: request
+    , requestInProcess: request[requestTypes.ACTIVITIES]
     , activeTrackId: player.activeTrackId
-    , pathname: routeState.location.pathname
+    , nextHref: paginate[ACTIVITIES]
   }
 }
 
