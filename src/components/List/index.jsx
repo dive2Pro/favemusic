@@ -4,7 +4,8 @@ import LoadingSpinner from '../LoadingSpinner/index'
 import { PreviewTrackContainer } from '../Track/index'
 import UserItemContainer from '../User/index'
 import classnames from 'classnames'
-import map from 'lodash/map'
+import map from '../../services/map'
+
 const SpecificUserItem = ({ user, idx }: {}) => {
   // const isFollowing = followingsIds ? followingsIds
   //   .some((followingId: number) => followingId === id) : false
@@ -12,12 +13,12 @@ const SpecificUserItem = ({ user, idx }: {}) => {
     <li key={idx}>
       <UserItemContainer
         user={user}
-        />
+      />
     </li>
   )
 }
 
-const SpecificTrackItem = ({ track, idx}: {}) => {
+const SpecificTrackItem = ({ track, idx }: {}) => {
   return (
     <li>
       <PreviewTrackContainer idx={idx} track={track} />
@@ -34,12 +35,12 @@ export const Mosaic = ({ ...props }: basePropsType) => {
   }
   if (kind === "user") {
     return (<div className="list-content">
-      <ul>{map(ids, (id: number, idx: number) => {
+      <ul>{map((id: number, idx: number) => {
         const user = entities[id]
         return (
           <SpecificUserItem key={idx} user={user} idx={idx} />
         )
-      })}</ul>
+      }, ids)}</ul>
     </div>)
   } else if (kind === "track") {
     console.info('ids  = ', ids.map);
@@ -68,7 +69,7 @@ export const NextButton = ({ ...props }: {}) => {
       <button
         className="ghost"
         onClick={() => fetchMoreF(user, nextHref)}
-        >LoadMore
+      >LoadMore
       </button>
     </div>
   )

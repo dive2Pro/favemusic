@@ -1,6 +1,7 @@
 /* @flow */
 import React from 'react'
-import map from 'lodash/map'
+import map from '../../services/map'
+
 import classnames from "classnames"
 type ConfiguType = {
   fn: () => void,
@@ -30,10 +31,10 @@ const Actions = (props: {
 
   return (
     <div className={clazzName}>
-      {map(configuration, (cfg: ConfiguType, idx: number) => (
-        <Action cfg={cfg} key={idx} />
-      )
-      )}
+      {map((cfg: ConfiguType, idx: number) => (
+          <Action cfg={cfg} key={idx} />
+        )
+        , configuration)}
     </div>
   )
 }

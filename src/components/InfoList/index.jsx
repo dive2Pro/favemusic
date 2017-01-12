@@ -1,5 +1,6 @@
 import React from 'react'
-import map from 'lodash/map'
+import map from '../../services/map'
+
 export const InfoItem = ({ info, idx }) => (
   <div key={idx} className="info-list-item">
     <i className={info.className}>
@@ -11,7 +12,7 @@ export const InfoItem = ({ info, idx }) => (
 const InfoList = ({ infoConfigurations }) => {
   return (
     <div className="info-list">
-      {map(infoConfigurations, (info, idx) => (<InfoItem key={idx} info={info} idx={idx} />))}
+      {map((info, idx) => (<InfoItem key={idx} info={info} idx={idx} />), infoConfigurations)}
     </div>
   )
 }

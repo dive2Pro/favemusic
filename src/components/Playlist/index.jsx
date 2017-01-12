@@ -4,7 +4,8 @@ import { connect } from 'react-redux';
 import * as actions from '../../actions/actionCreator.js'
 import { PLAYLISTTYPE } from '../../constants/toggleTypes'
 import { bindActionCreators } from 'redux'
-import map from 'lodash/map'
+import map from '../../services/map'
+
 import { PlaylistTrackContainer } from '../Track/index'
 type PropsType = {
   activeTrack: Object,
@@ -32,13 +33,13 @@ const renderMenu = (clearPlayListF: Function) => {
 const renderPlaylist = (playlist: []) => {
   return (
     <ul className="playlist-content">
-      {map(playlist, (id: number, idx: number) => {
+      {map((id: number, idx: number) => {
         return (
           <li key={idx}>
             <PlaylistTrackContainer id={id} />
           </li>
         )
-      })}</ul>
+      }, playlist)}</ul>
   )
 }
 

@@ -4,9 +4,9 @@ import { connect } from 'react-redux';
 import * as actions from '../../actions/actionCreator.js'
 import { DEFAULT_GENRE, GENRES } from '../../constants/genre'
 import { Link } from 'react-router'
-// import { browse } from '../constants/pathname'
 import { bindActionCreators } from 'redux'
-import map from 'lodash/map'
+import map from '../../services/map'
+
 type PropsType = {
   currentUser: Object,
   login: () => void,
@@ -17,7 +17,7 @@ const MenuItem = ({ genreItem, pathname }: {}) => (
     <Link
       to={`${pathname}?genre=${genreItem}`} activeClassName="menu-item-selected"
       className="menu-item"
-      >
+    >
       {genreItem}
     </Link>
   </li>
@@ -31,9 +31,9 @@ const renderHeader = ({ ...props }: PropsType) => {
         <h1>Hello <Link to={!currentUser ? "/dashboard" : "/browse"}>{name}</Link></h1>
       </div>
       <ul>
-        {map(GENRES, (gereItem: string, idx: number) => (
+        {map((gereItem: string, idx: number) => (
           <MenuItem key={idx} genreItem={gereItem} pathname={pathname} />
-        ))}
+        ), GENRES)}
       </ul>
       <div className="header-login">
         <a href="#" onClick={currentUser ? () => logout() : () => login()}>
