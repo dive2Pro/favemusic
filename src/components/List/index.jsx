@@ -43,14 +43,14 @@ export const Mosaic = ({ ...props }: basePropsType) => {
       }, ids)}</ul>
     </div>)
   } else if (kind === "track") {
-    console.info('ids  = ', ids.map);
+    console.info('ids  = ', ids);
     return (<div className="list-content">
-      <ul>{map(ids, (id: number, idx: number) => {
+      <ul>{map((id: number, idx: number) => {
         const track = entities[id]
         return (
           <SpecificTrackItem key={idx} id={id} track={track} />
         )
-      })}</ul>
+      }, ids)}</ul>
     </div>)
   }
 }

@@ -8,6 +8,7 @@ import browse from './browse/index'
 import request from './request/index'
 import paginate from './paginate/index'
 import entities from './entities/index'
+import comment from './comment/index'
 import { routerReducer } from 'react-router-redux'
 import player from './player/index'
 import toggle from './toggle/index'
@@ -23,6 +24,7 @@ export default combineReducers({
   , paginate
   , entities
   , toggle
+  , comment
   , routing: routerReducer
 
 })

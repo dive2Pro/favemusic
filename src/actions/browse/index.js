@@ -7,7 +7,7 @@ import { setPaginateLink } from '../paginate/index'
 import * as requestTypes from '../../constants/requestTypes'
 import { mergeTrackEntities, mergeSongEntities, mergeUserEntities } from '../entities/index'
 import { normalize, schema } from 'normalizr'
-import { songSchema } from '../../constants/schema'
+import { songSchema } from '../../schemas/song'
 
 const mergeActivitiesByGenre = (activitiesIds: Array<Number>, genre: 'foo') =>
   ({

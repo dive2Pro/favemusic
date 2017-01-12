@@ -39,3 +39,10 @@ export function getLazyLoadingUrl(user, nextHref, initHref) {
     return apiUrl(`${urlPrefix}/${initHref}`, '&')
   }
 }
+
+export function getLazyLoadingCommentUrl(nextHref, initHref) {
+  if (nextHref) {
+    return nextHref
+  }
+  return unauthApiUrl(initHref, "&")
+}

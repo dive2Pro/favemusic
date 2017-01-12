@@ -1,5 +1,4 @@
 // @flow
-import { } from '../../constants/schema'
 import { MERGE_USER_ENTITIES, MERGE_TRACK_ENTITIES, MERGE_SONGS_ENTITIES, SYNC_ENTITEIS } from '../../constants/actionTypes'
 
 function mergeUserEntities(state: {}, mergeUsers: []) {
