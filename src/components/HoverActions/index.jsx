@@ -32,7 +32,7 @@ const Actions = (props: {
   return (
     <div className={clazzName}>
       {map((cfg: ConfiguType, idx: number) => (
-          <Action cfg={cfg} key={idx} />
+        <Action cfg={cfg} key={idx} />
         )
         , configuration)}
     </div>

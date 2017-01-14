@@ -89,7 +89,7 @@
   "scripts": {
     "start": "node scripts/start.js",
     "build": "node scripts/build.js",
-    "test": "NODE_ENV=test mocha --timeout 2000  --compilers  js:babel-core/register --require babel-polyfill ./tests/setup.js 'tests/**/*.test.@(js|jsx)'",
+    "test": "NODE_ENV=test mocha --timeout 2000  --compilers  js:babel-core/register --require babel-polyfill ./tests/setup.js 'tests/**/*.test.@(js)'",
     "test-r": "NODE_ENV=test istanbul cover node_modules/.bin/_mocha -- --compilers js:babel-core/register --require babel-polyfill --colors ./tests/setup.js 'src/**/**/spec.js'"
   },
   "jest": {

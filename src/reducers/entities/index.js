@@ -1,5 +1,7 @@
 // @flow
-import { MERGE_USER_ENTITIES, MERGE_TRACK_ENTITIES, MERGE_SONGS_ENTITIES, SYNC_ENTITEIS } from '../../constants/actionTypes'
+import { MERGE_USER_ENTITIES, MERGE_TRACK_ENTITIES,
+  MERGE_SONGS_ENTITIES, SYNC_ENTITEIS
+  , MERGE_COMMENTS_ENTITIES} from '../../constants/actionTypes'
 
 function mergeUserEntities(state: {}, mergeUsers: []) {
   const users = {
@@ -13,6 +15,7 @@ const initialState = {
   users: {}
   , tracks: {}
   , songs: {}
+  , comments: {}
 }
 function mergeTrackEntities(state: {}, mergeTracks: {}) {
   const tracks = {
@@ -30,6 +33,13 @@ function mergeSongsEntities(state: {}, mergeSongs: {}) {
   }
   return { ...state, songs }
 }
+function mergeCommentsEntities(state: {}, mergecomments: {}) {
+  const comments = {
+    ...state.comments
+    , ...mergecomments
+  }
+  return { ...state, comments }
+}
 
 function syncEntiteis(state: {}, activeTrack: {}, key: "foo") {
   const objs = state[key]
@@ -45,6 +55,8 @@ export default function (state: {} = initialState, action: Action) {
       return mergeTrackEntities(state, action.tracks)
     case MERGE_SONGS_ENTITIES:
       return mergeSongsEntities(state, action.songs)
+    case MERGE_COMMENTS_ENTITIES:
+      return mergeCommentsEntities(state, action.comments)
     case SYNC_ENTITEIS:
       return syncEntiteis(state, action.activeTrack, action.key)
     default: return state

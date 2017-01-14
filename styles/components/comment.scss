@@ -4,13 +4,11 @@
   opacity: 0;
   visibility: hidden;
   width:100%;
+  flex-direction: column;
   &-item {
     display: flex;
     flex: 1 1;
     border-bottom: $darkBorder;
-    img {
-
-    }
     &-content {
       display: flex;
       flex: 1;

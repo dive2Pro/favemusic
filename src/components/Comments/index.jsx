@@ -7,41 +7,61 @@ import { COMMENTSTYPE } from '../../constants/toggleTypes'
 import map from '../../services/map'
 import classnames from 'classnames'
 import { bindActionCreators } from 'redux'
-const LoadMoreOrLoading = ({ isLoading }) => {
-  return (
-    <div>
-      <LoadingSpinner isLoading={isLoading} />
-    </div>
-  )
+import Artwork from '../Artwork/index'
+import { fromNow } from '../../services/track'
+
+const LoadMoreOrLoading = ({ isLoading, fetchComment }) => {
+  if (isLoading) {
+    return (
+      <div>
+        <LoadingSpinner isLoading={isLoading} />
+      </div>
+    )
+  } else {
+    return (
+      <div>
+        <button onClick={fetchComment}>Load More</button>
+      </div>
+    )
+  }
 }
-const Item = ({ title }) => (
-  <div>
-    {title}
+
+const Item = ({ comment, user }) => (
+  <div className='comments-item'>
+    <Artwork
+      alt={comment.kind}
+      image={user.avatar_url}
+      size={30}/>
+    <div>
+      {comment.body}
+    </div>
+    <div>
+      {fromNow(comment.created_at)}
+    </div>
   </div>
 )
 class Comments extends Component {
-  componentDidMount() {
-    const { trackId, nextHref, fetchComment } = this.props
-  }
 
   render() {
-    const { comments, isReqInprocess, isVisible } = this.props
+    const { commentsIds, trackId, commentUsers
+      , commentEntities, isReqInprocess, isVisible, fetchComment, nextHref } = this.props
     const visiClass = classnames(
       'comments'
       , {
-        "active": isVisible
+        active: isVisible
       }
     )
     return (
       <div className={visiClass}>
         {map(
-          (comment, idx) => {
+          (id, idx) => {
+            const comment = commentEntities[id]
             return (<Item
               key={idx}
+              user={commentUsers[comment.user]}
               comment={comment} />)
-          }
-          , comments)}
-        <LoadMoreOrLoading isLoading={isReqInprocess} />
+          }, commentsIds) }
+        <LoadMoreOrLoading fetchComment={() => fetchComment(trackId, nextHref) } isLoading={isReqInprocess} />
       </div>
     )
   }
@@ -51,12 +71,16 @@ const mapStateToProps = (state, ownState) => {
   const nextHref = state.paginate[COMMENTS] && state.paginate[COMMENTS][trackId]
   const isReqInprocess = state.request[COMMENTS] && state.request[COMMENTS][trackId]
   const isVisible = state.toggle[COMMENTSTYPE] && state.toggle[COMMENTSTYPE][trackId]
+  const commentEntities = state.entities && state.entities.comments
+  const commentUsers = state.entities&&state.entities.users
   return {
     trackId
-    , comments: state.comment[trackId]
+    , commentsIds: state.comment[trackId] && state.comment[trackId].commentsIds
     , nextHref
     , isReqInprocess
     , isVisible
+    , commentEntities
+    , commentUsers
   }
 }
 const mapDispatchToProps = (dispatch) => {

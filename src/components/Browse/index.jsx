@@ -37,7 +37,6 @@ class BrowserContainer extends Component {
     } = this.props
     if (!activitiesByGenre) return
     const filteredActivitiesByGenre = activitiesByGenre[genre]
-    console.info('filteredActivitiesByGenre = ', filteredActivitiesByGenre);
     return (
       <Activities
         activitiesIds={filteredActivitiesByGenre}

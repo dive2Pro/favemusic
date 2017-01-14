@@ -15,7 +15,6 @@ export const FollowingsList = ({ ...props }: MosaicpropsType) => {
       title={title}
       ids={ids}
       kind={kind}
-
       toggleExpandF={toggleExpandF}
       isExpanded={isExpanded}
       nextHref={nextHref}
