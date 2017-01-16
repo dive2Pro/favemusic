@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import LoadingSpinner from '../LoadingSpinner'
 import { fetchCommentByIdF } from '../../actions/actionCreator'
 import { COMMENTS } from '../../constants/paginateLinkTypes'
 import { COMMENTSTYPE } from '../../constants/toggleTypes'
@@ -9,22 +8,8 @@ import classnames from 'classnames'
 import { bindActionCreators } from 'redux'
 import Artwork from '../Artwork/index'
 import { fromNow } from '../../services/track'
+import MoreButton from '../MoreButton/index'
 
-const LoadMoreOrLoading = ({ isLoading, fetchComment }) => {
-  if (isLoading) {
-    return (
-      <div>
-        <LoadingSpinner isLoading={isLoading} />
-      </div>
-    )
-  } else {
-    return (
-      <div>
-        <button onClick={fetchComment}>Load More</button>
-      </div>
-    )
-  }
-}
 
 const Item = ({ comment, user }) => (
   <div className="comments-item">
@@ -61,7 +46,7 @@ class Comments extends Component {
               user={commentUsers[comment.user]}
               comment={comment} />)
           }, commentsIds)}
-        <LoadMoreOrLoading
+        <MoreButton
           fetchComment={() => fetchComment(trackId, nextHref)}
           isLoading={isReqInprocess} />
       </div>
