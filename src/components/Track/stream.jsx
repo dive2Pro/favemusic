@@ -34,27 +34,28 @@ class Track extends Component {
     return (<WaveFormSc track={track} id={id} idx={idx} />)
   }
 
-  renderActions(track, isPlaying) {
-    const { activeTrackId, addTrackToPlaylistF, id, deeptoggledF } = this.props
+  renderActions(track) {
+    const { addTrackToPlaylistF, id, deeptoggledF } = this.props
     const { stream_url } = track
     if (!stream_url) return
 
-    const currentTrackIsPlaying = isSameTrackAndPlaying(activeTrackId, id, isPlaying)
-    
+    // const currentTrackIsPlaying = isSameTrackAndPlaying(activeTrackId, id, isPlaying)
     return (
-      <div className="track-actions">
-        <div className="track-actions-item">
+      <div className="track-meta-actions">
+        <div className="track-meta-actions-item">
           <i
             className={`fa fa-comment`}
             onClick={() => deeptoggledF(COMMENTSTYPE, id)}
-          />
+            >
+          Comments</i>
         </div>
 
-        <div className="track-actions-item">
+        <div className="track-meta-actions-item">
           <i
             className="fa fa-list"
             onClick={() => addTrackToPlaylistF(track.id)}
-          > </i>
+            />
+          Add to Playlist
         </div>
       </div>
     )
@@ -63,7 +64,7 @@ class Track extends Component {
   render() {
     const {
       activateTrackF, activeTrackId
-      , isPlaying, idx, deeptoggledF
+      , isPlaying, idx
     } = this.props
     const { track, song, user } = this.state
     const { origin } = song
@@ -82,12 +83,13 @@ class Track extends Component {
       , { className: "fa fa-comment", count: comment_count }
       , { className: "fa fa-download", count: download_count }
     ]
-    const currentTrackIsPlaying = isSameTrackAndPlaying(activeTrackId, id, isPlaying)    
+    const currentTrackIsPlaying = isSameTrackAndPlaying(activeTrackId, id, isPlaying)
     const artwork_clazz = classnames("fa", {
       "fa-pause": currentTrackIsPlaying
-    }, {
-      "fa-play": !currentTrackIsPlaying  
-    }
+    },
+      {
+        "fa-play": !currentTrackIsPlaying
+      }
     )
     return (
       <div className="stream">
@@ -95,7 +97,7 @@ class Track extends Component {
           <ActionArtwork
             isVisible={isVisible}
             className={artwork_clazz}
-            action={() => activateTrackF(id) }
+            action={() => activateTrackF(id)}
             >
             <Artwork
               size={80} image={artwork_url} optionalImg={avatar_url}
@@ -104,11 +106,7 @@ class Track extends Component {
           <div className="track-content">
             <div className="track-content-name">
               <Permalink href={user.permalink_url} text={username} />
-              <div>{fromNow(created_at)}</div>
-            </div>
-            <div className="track-content-meta">
-              <Permalink href={permalink_url} text={title} />
-              <div>{durationFormat(duration)}</div>
+              - <Permalink href={permalink_url} text={title} />
             </div>
             <div
               className="track-content-waveform"
@@ -117,7 +115,12 @@ class Track extends Component {
             </div>
             <InfoList infoConfigurations={infoConfigurations} />
           </div>
-          {this.renderActions(track, isPlaying)}
+          <div className="track-meta">
+            <div className="track-meta-info">
+              <div>{fromNow(created_at)}/{durationFormat(duration)}</div>
+            </div>
+            {this.renderActions(track, isPlaying)}
+          </div>
         </div >
         <CommentsContainer trackId={id} />
       </div>

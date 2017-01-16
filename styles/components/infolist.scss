@@ -1,8 +1,8 @@
 .info-list {
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
-  flex-grow: 4;
+  justify-content: flex-start;
+  // flex-grow: 4;
   &-item {
     flex: 1 1;
   }

@@ -7,26 +7,24 @@
     display: flex;
     height: 80px;
     border: $border;
-    
+    position: relative;
     &-img {
       overflow: hidden;
       cursor: pointer;
     }
     &-content {
-      width: 90%;
       padding: ($padding/8);
       display: flex;
       flex-direction: column;
       position: relative;
       justify-content: space-between;
       height: 80px;
-
-      &-name,
-      &-meta {
+      flex: 1;
+      &-name{
         display: flex;
-        justify-content: space-between;
-        width: 90%;
+        
       }
+     
       &-waveform {
         opacity: 0.2;
         pointer-events: none;
@@ -38,7 +36,6 @@
         }
       }
       &-info {
-        width: 100%;
         left: $padding/2;
         display: flex;
         &-item {
@@ -46,36 +43,52 @@
         }
       }
     }
-    &-actions {
-      position: relative;
+     &-meta {
       display: flex;
-      flex-direction: column;
-      justify-content: space-around;
-      opacity: 0;
-      margin: 0;
-      transition: all 0.2s;
-      &-item {
-        i {
-          font-size: 20px;
-          cursor: pointer;
-        }
-        &:hover {
-          color: $mainColor;
+      flex-direction: column;  
+      margin-right: $padding/4;
+      &-info{
+        flex: 1;
+        justify-content: flex-end;
+        display: flex;
+      }
+      &-actions {
+        display: flex;
+        justify-content: space-around;
+        opacity: 0;
+        margin: 0;
+        transition: all 0.2s;
+        flex: 1;
+        align-items: flex-end;
+        &-item {
+         border: $darkBorder;
+          border-radius: 5px;
+          padding: 0 ($padding/4);
+          i {
+            font-size: 20px;
+            cursor: pointer;
+          }
+          &:hover {
+            color: $mainColor;
+          }
+          &:first-child{
+          margin-right: $padding/4;
+          }
         }
       }
-    }
-    &:hover .track-actions {
-      opacity: 1;
-      margin: 0 ($padding/2);
-    }
-    &:hover .track-content-waveform {
-      opacity: 1;
-    }
-    &:hover .track-content-info {
-      opacity: 1;
-    }
-    &.active .track-actions {
-      opacity: 1;
-    }
+      &:hover .track-meta-actions {
+        opacity: 1;
+        // margin: 0 ($padding/2);
+      }
+      &:hover .track-content-waveform {
+        opacity: 1;
+      }
+      &:hover .track-meta-info {
+        opacity: 1;
+      }
+      &.active .track-meta-actions {
+        opacity: 1;
+        }
+      }
   }
 }
