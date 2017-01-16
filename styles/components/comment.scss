@@ -3,15 +3,19 @@
   flex: 1 1 90%;
   opacity: 0;
   visibility: hidden;
-  width:100%;
   flex-direction: column;
+  border: $border;
+  height: 0;
   &-item {
     display: flex;
     flex: 1 1;
     border-bottom: $darkBorder;
-    &-content {
+    justify-content: flex-start;
+    align-items: center;
+    &-body {
       display: flex;
       flex: 1;
+      text-indent: 20px;
     }
     &-meta {
 
@@ -21,5 +25,7 @@
     opacity: 1;
     visibility: visible;
     margin: $padding;
+    height: initial;
+    
   }
 }

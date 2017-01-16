@@ -27,15 +27,15 @@ const LoadMoreOrLoading = ({ isLoading, fetchComment }) => {
 }
 
 const Item = ({ comment, user }) => (
-  <div className='comments-item'>
+  <div className="comments-item">
     <Artwork
       alt={comment.kind}
       image={user.avatar_url}
-      size={30}/>
-    <div>
+      size={30} />
+    <div className="comments-item-body">
       {comment.body}
     </div>
-    <div>
+    <div className="comments-item-meta">
       {fromNow(comment.created_at)}
     </div>
   </div>
@@ -60,8 +60,10 @@ class Comments extends Component {
               key={idx}
               user={commentUsers[comment.user]}
               comment={comment} />)
-          }, commentsIds) }
-        <LoadMoreOrLoading fetchComment={() => fetchComment(trackId, nextHref) } isLoading={isReqInprocess} />
+          }, commentsIds)}
+        <LoadMoreOrLoading
+          fetchComment={() => fetchComment(trackId, nextHref)}
+          isLoading={isReqInprocess} />
       </div>
     )
   }
@@ -72,7 +74,7 @@ const mapStateToProps = (state, ownState) => {
   const isReqInprocess = state.request[COMMENTS] && state.request[COMMENTS][trackId]
   const isVisible = state.toggle[COMMENTSTYPE] && state.toggle[COMMENTSTYPE][trackId]
   const commentEntities = state.entities && state.entities.comments
-  const commentUsers = state.entities&&state.entities.users
+  const commentUsers = state.entities && state.entities.users
   return {
     trackId
     , commentsIds: state.comment[trackId] && state.comment[trackId].commentsIds

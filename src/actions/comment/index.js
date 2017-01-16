@@ -18,23 +18,23 @@ const fetchCommentByIdF = (trackId, nextHref) => {
   return (dispatch, getState) => {
     const isRequestInprocess = getState().request[COMMENTS] && getState().request[COMMENTS][trackId]
     if (isRequestInprocess) return
-    dispatch(setDeepRequestTypeInProcess(true, COMMENTS,trackId))
+    dispatch(setDeepRequestTypeInProcess(true, COMMENTS, trackId))
     const initHref = `tracks/${trackId}/comments?linked_partitioning=1&limit=20&offset=0`
     const url = getLazyLoadingCommentUrl(nextHref, initHref)
 
     return fetch(url)
             .then(response => response.json())
             .then(data => {
-              dispatch(setDeepPaginateLink(data.next_href, trackId, COMMENTS,trackId))
+              dispatch(setDeepPaginateLink(data.next_href, trackId, COMMENTS, trackId))
               const normalizedObj = normalize(data.collection, new schema.Array(commentSchema))
               dispatch(mergeCommentEntities(normalizedObj.entities.comments))
               dispatch(mergeUserEntities(normalizedObj.entities.users))
               dispatch(mergeCommentsById(normalizedObj.result, trackId))
-              dispatch(setDeepRequestTypeInProcess(false, COMMENTS,trackId))
+              dispatch(setDeepRequestTypeInProcess(false, COMMENTS, trackId))
             })
           .catch((err) => {
             console.error(err)
-            dispatch(setDeepRequestTypeInProcess(false, COMMENTS,trackId))
+            dispatch(setDeepRequestTypeInProcess(false, COMMENTS, trackId))
           })
   }
 }

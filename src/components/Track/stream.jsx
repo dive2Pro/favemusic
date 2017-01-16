@@ -8,6 +8,8 @@ import InfoList from '../InfoList/index'
 import Permalink from '../Permalink/index'
 import CommentsContainer from '../Comments/index'
 import { COMMENTSTYPE } from '../../constants/toggleTypes'
+import ActionArtwork from '../ActionArtwork/index'
+import classnames from 'classnames'
 /* eslint-enable max-len */
 
 class Track extends Component {
@@ -32,18 +34,19 @@ class Track extends Component {
     return (<WaveFormSc track={track} id={id} idx={idx} />)
   }
 
-  renderActions(track, activateTrackF, isPlaying) {
-    const { activeTrackId, addTrackToPlaylistF, id } = this.props
+  renderActions(track, isPlaying) {
+    const { activeTrackId, addTrackToPlaylistF, id, deeptoggledF } = this.props
     const { stream_url } = track
     if (!stream_url) return
 
     const currentTrackIsPlaying = isSameTrackAndPlaying(activeTrackId, id, isPlaying)
+    
     return (
       <div className="track-actions">
         <div className="track-actions-item">
           <i
-            className={`fa ${currentTrackIsPlaying ? 'fa-pause' : 'fa-play'}`}
-            onClick={() => activateTrackF(track.id)}
+            className={`fa fa-comment`}
+            onClick={() => deeptoggledF(COMMENTSTYPE, id)}
           />
         </div>
 
@@ -79,16 +82,25 @@ class Track extends Component {
       , { className: "fa fa-comment", count: comment_count }
       , { className: "fa fa-download", count: download_count }
     ]
+    const currentTrackIsPlaying = isSameTrackAndPlaying(activeTrackId, id, isPlaying)    
+    const artwork_clazz = classnames("fa", {
+      "fa-pause": currentTrackIsPlaying
+    }, {
+      "fa-play": !currentTrackIsPlaying  
+    }
+    )
     return (
       <div className="stream">
         <div className={"track " + (isVisible ? "active" : "")}>
-          <div
-            onClick={() => deeptoggledF(COMMENTSTYPE, id)}
-            className="track-img">
+          <ActionArtwork
+            isVisible={isVisible}
+            className={artwork_clazz}
+            action={() => activateTrackF(id) }
+            >
             <Artwork
               size={80} image={artwork_url} optionalImg={avatar_url}
               alt={title} />
-          </div>
+          </ActionArtwork>
           <div className="track-content">
             <div className="track-content-name">
               <Permalink href={user.permalink_url} text={username} />
@@ -105,7 +117,7 @@ class Track extends Component {
             </div>
             <InfoList infoConfigurations={infoConfigurations} />
           </div>
-          {this.renderActions(track, activateTrackF, isPlaying)}
+          {this.renderActions(track, isPlaying)}
         </div >
         <CommentsContainer trackId={id} />
       </div>

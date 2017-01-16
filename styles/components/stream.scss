@@ -3,10 +3,11 @@
   flex-direction: column;
   margin: ($padding/2) 0;
   background: $backgroundSecondary;
-  border: $border;
   .track {
     display: flex;
     height: 80px;
+    border: $border;
+    
     &-img {
       overflow: hidden;
       cursor: pointer;
