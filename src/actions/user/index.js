@@ -1,4 +1,4 @@
-import apiUrl, { addAccessToken, getLazyLoadingUrl } from '../../services/soundcloundApi'
+import apiUrl, { addAccessToken, getLazyLoadingUserUrl } from '../../services/soundcloundApi'
 import Cookies from 'js-cookie'
 import * as actionTypes from '../../constants/actionTypes'
 import { OAUTH_TOKEN } from '../../constants/authentification'
@@ -39,7 +39,7 @@ const mergeFavorites = (favorites) => ({
 export const fetchFollowersF = (user, nextHref) => {
   const accessToken = Cookies.get(OAUTH_TOKEN)
   const initHref = `followers?limit=20&offset=0&oauth_token=${accessToken}`
-  const followersUrl = getLazyLoadingUrl(user, nextHref, initHref)
+  const followersUrl = getLazyLoadingUserUrl(user, nextHref, initHref)
 
   return (dispatch, getState) => {
     const request = getState().request
@@ -75,7 +75,7 @@ export const fetchFollowingsF = (user, nextHref) =>
   (dispatch, getState) => {
     const accessToken = Cookies.get(OAUTH_TOKEN)
     const initHref = `followings?limit=20&offset=0&oauth_token=${accessToken}`
-    const followingsUrl = getLazyLoadingUrl(user, nextHref, initHref)
+    const followingsUrl = getLazyLoadingUserUrl(user, nextHref, initHref)
     const requestInProcess = getState().request[requestTypes.FOLLOWINGS]
 
     if (requestInProcess) return ""
@@ -136,7 +136,7 @@ export const fetchFavoritesF = (user, nextHref) =>
     if (favoritesRequestInProcess) {
       return;
     }
-    const favoritesUrl = getLazyLoadingUrl(user, nextHref, 'favorites?limit=20&offset=0')
+    const favoritesUrl = getLazyLoadingUserUrl(user, nextHref, 'favorites?limit=20&offset=0')
     dispatch(setRequestTypeInProcess(true, requestTypes.FAVORITES))
     return fetch(favoritesUrl)
       .then(response => {
