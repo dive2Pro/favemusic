@@ -26,7 +26,6 @@ const Item = ({ comment, user }) => (
   </div>
 )
 class Comments extends Component {
-
   render() {
     const { commentsIds, trackId, commentUsers
       , commentEntities, isReqInprocess, isVisible, fetchComment, nextHref } = this.props
@@ -47,6 +46,7 @@ class Comments extends Component {
               comment={comment} />)
           }, commentsIds)}
         <MoreButton
+          nextHref={nextHref}
           fetchComment={() => fetchComment(trackId, nextHref)}
           isLoading={isReqInprocess} />
       </div>

@@ -1,6 +1,6 @@
 import List, {
   Chevron
-  , NextButton, Mosaic
+  , Mosaic
 } from './index'
 
 describe('Test List Component', () => {
@@ -122,45 +122,4 @@ describe('Test Mosaic Component', () => {
   )
 }
 )
-
-describe('Test NextButton Component', () => {
-  let props;
-  beforeEach(() => {
-    props = {
-      ids: [1, 2, 3, 4, 5, 6, 7]
-      , isExpanded: true
-      , user: 'hyc'
-      , fetchMoreF: () => { }
-      , nextHref: 'www.google.com'
-      , requestInProcess: false
-    }
-  })
-  it('NextButton is render', done => {
-    const element = shallow(<NextButton {...props} />)
-    expect(element.find('.ghost')).to.have.length(1)
-    done()
-  }
-  )
-  it('NextButton, does no render when lis is collapsed ', done => {
-    props.isExpanded = false
-    const element = shallow(<NextButton {...props} />)
-    expect(element.find('.ghost')).to.have.length(0)
-    done()
-  }
-  )
-  it('NextButton, does no render when nextHref is empty ', done => {
-    props.nextHref = null
-    const element = shallow(<NextButton {...props} />)
-    expect(element.find('.ghost')).to.have.length(0)
-    done()
-  }
-  )
-  it('NextButton , render a LoadingSpinner when requestInProcess is inProcess ', done => {
-    props.requestInProcess = true
-    const element = shallow(<NextButton {...props} />)
-    expect(element.find('LoadingSpinner')).to.have.length(1)
-    done()
-  }
-  )
-}
 )

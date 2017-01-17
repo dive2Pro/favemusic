@@ -5,7 +5,7 @@ import { PreviewTrackContainer } from '../Track/index'
 import UserItemContainer from '../User/index'
 import classnames from 'classnames'
 import map from '../../services/map'
-
+import MoreButton from '../MoreButton/index'
 const SpecificUserItem = ({ user, idx }: {}) => {
   // const isFollowing = followingsIds ? followingsIds
   //   .some((followingId: number) => followingId === id) : false
@@ -43,7 +43,6 @@ export const Mosaic = ({ ...props }: basePropsType) => {
       }, ids)}</ul>
     </div>)
   } else if (kind === "track") {
-    console.info('ids  = ', ids);
     return (<div className="list-content">
       <ul>{map((id: number, idx: number) => {
         const track = entities[id]
@@ -53,26 +52,6 @@ export const Mosaic = ({ ...props }: basePropsType) => {
       }, ids)}</ul>
     </div>)
   }
-}
-
-export const NextButton = ({ ...props }: {}) => {
-  const { nextHref, fetchMoreF, user, isExpanded, requestInProcess } = props
-  if (!nextHref || !isExpanded) {
-    return (<span></span>)
-  } else if (requestInProcess) {
-    return (
-      <LoadingSpinner isLoading={requestInProcess} />
-    )
-  }
-  return (
-    <div>
-      <button
-        className="ghost"
-        onClick={() => fetchMoreF(user, nextHref)}
-      >LoadMore
-      </button>
-    </div>
-  )
 }
 
 export const Chevron = ({ ids, isExpanded }: {}) => {
@@ -104,9 +83,7 @@ const List = ({ ...props }: basePropsType) => {
       <div className={isExpanded ? 'more-visible' : ''}>
         <Mosaic { ...props } />
       </div>
-      <div className="list-action">
-        <NextButton { ...props } />
-      </div>
+      <MoreButton { ...props } />
     </div>
   )
 }
