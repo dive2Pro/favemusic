@@ -19,20 +19,22 @@
     margin-left: 25%;
     &-name {
       flex: 1;
+      cursor: pointer;
     }
-    div {
-      margin: auto $padding;
+    &-action {
+      font-size: 20px;
+      &:hover {
+        color: $mainColor;
+      }
       i {
-        cursor: pointer;
-        font-size: 20px;
         width: 20px;
-        &:hover {
-          color: $mainColor;
-        }
         &.is-favorite {
           color: $mainColor;
         }
       }
+    }
+    div {
+      margin: auto $padding;
     }
   }
 }

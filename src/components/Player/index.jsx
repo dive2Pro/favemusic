@@ -34,12 +34,12 @@ class Player extends Component {
     const { stream_url, username, title } = track
     return (
       <div className="player-content">
-        <div>
+        <div className="player-content-action">
           <ButtonInline onClick={() => activeIterateTrack(activeTrackId, -1)} >
             <i className="fa fa-step-backward">&nbsp;</i>
           </ButtonInline>
         </div>
-        <div >
+        <div className="player-content-action" >
           <ButtonInline onClick={() => this.togglePlay()} >
             <i
               className={`fa ${isPlaying ? 'fa-pause' : 'fa-play'}`}>
@@ -47,7 +47,7 @@ class Player extends Component {
             </i>
           </ButtonInline>
         </div>
-        <div>
+        <div className="player-content-action">
           <ButtonInline
             onClick={() => activeIterateTrack(activeTrackId, 1)}
             >
@@ -57,14 +57,14 @@ class Player extends Component {
         <div className="player-content-name">
           {username} - {title}
         </div>
-        <div>
+        <div className="player-content-action">
           <ButtonInline
             onClick={() => setToggledF(PLAYLISTTYPE)}
             >
             <i className="fa fa-list">&nbsp;</i>
           </ButtonInline>
         </div>
-        {isLogined && (<div>
+        {isLogined && (<div className="player-content-action">
           <ButtonInline
             onClick={() => likeF(track)}
             >
