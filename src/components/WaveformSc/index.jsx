@@ -38,7 +38,7 @@ class WaveformContainer extends React.Component {
   render() {
     const { id, idx } = this.props
     return (
-      <div id={`waveform-${id}-${idx}`} className="track-content-waveform-json">
+      <div id={`waveform-${id}-${idx}`} className="track-waveform-json">
       </div>
     )
   }

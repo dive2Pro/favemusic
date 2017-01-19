@@ -12,6 +12,20 @@
       overflow: hidden;
       cursor: pointer;
     }
+    &-waveform {
+      opacity: 0.2;
+      position: absolute;
+      top: 0;
+      left: 60px;
+      width: calc(100%-60px);
+      height: 100%;
+      pointer-events: none;
+      padding: ($padding/8) 0;
+      display: flex;
+      &-json {
+        height: 20px;
+      }
+    }
     &-content {
       padding: ($padding/8);
       display: flex;
@@ -19,21 +33,9 @@
       position: relative;
       justify-content: space-between;
       height: 80px;
-      flex: 2;
-      &-name{
+      flex: 1;
+      &-name {
         display: flex;
-        
-      }
-     
-      &-waveform {
-        opacity: 0.2;
-        pointer-events: none;
-        padding: ($padding/8) 0;
-        display: flex;
-        &-json {
-          width: 90%;
-          height: 20px;
-        }
       }
       &-info {
         left: $padding/2;
@@ -43,11 +45,11 @@
         }
       }
     }
-     &-meta {
+    &-meta {
       display: flex;
-      flex-direction: column;  
+      flex-direction: column;
       margin-right: $padding/4;
-      &-info{
+      &-info {
         flex: 1;
         justify-content: flex-end;
         display: flex;
@@ -61,7 +63,6 @@
         flex: 1;
         align-items: flex-end;
         &-item {
-      
           i {
             font-size: inherit;
             transform: translateY(-8px);
@@ -70,14 +71,13 @@
           &:hover {
             color: $mainColor;
           }
-          &:first-child{
-          margin-right: $padding/4;
+          &:first-child {
+            margin-right: $padding/4;
           }
         }
       }
       &:hover .track-meta-actions {
         opacity: 1;
-        // margin: 0 ($padding/2);
       }
       &:hover .track-content-waveform {
         opacity: 1;
@@ -87,7 +87,7 @@
       }
       &.active .track-meta-actions {
         opacity: 1;
-        }
       }
+    }
   }
 }

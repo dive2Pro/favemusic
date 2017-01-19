@@ -5,27 +5,28 @@ import { bindActionCreators } from 'redux'
 import * as actions from '../../actions/actionCreator'
 import { COMMENTSTYPE } from '../../constants/toggleTypes'
 const TrackActions = ({onOpenComments, onAddTrackToPlaylist}) => {
+  const isSmall= true
   return (
     <div className="track-meta-actions">
       <div className="track-meta-actions-item">
         <ButtonGhost
-          isSmall={'true'}
+          isSmall={isSmall}
           onClick={onOpenComments}
           >
           <i className={`fa fa-comment`}>
-          Comments
           </i>
+          Comments
         </ButtonGhost>
       </div>
 
       <div className="track-meta-actions-item">
         <ButtonGhost
-          isSmall={'true'}
+          isSmall={isSmall}
           onClick={onAddTrackToPlaylist}
           >
           <i className="fa fa-list">
-          Add to Playlist
           </i>
+          Add to Playlist
         </ButtonGhost>
       </div>
     </div>
