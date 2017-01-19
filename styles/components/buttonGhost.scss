@@ -1,0 +1,27 @@
+.button-ghost{
+  display: inline-block;
+  border:1px solid $mainColor;
+  height: $padding;
+  line-height: $padding;
+  color:$mainColor;
+  border-radius: 5px;
+  background-clip: padding-box;
+  padding: 0.5em 1.5em;
+  font-weight: bold;
+  transition: all 0.2s ease;
+  background: transparent;
+  cursor:pointer;
+
+  &-small{
+    height: $padding/2;
+    line-height: $padding/2;
+  }
+  &:hover{
+    transition: 0.2s ease;
+    background-color: $mainColor;
+    color: #fff;
+  }
+  &:focus{
+    outline: none;
+  }
+}

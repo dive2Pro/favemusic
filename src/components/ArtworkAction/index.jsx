@@ -3,13 +3,13 @@ import classnames from 'classnames'
 
 const ActionArtwork = ({ isVisible, action, className, children }) => {
   const overlayClass = classnames(
-    "action-artwork-overlay"
+    "artwork-action-overlay"
     , {
-      "action-artwork-overlay-visible": isVisible
+      "artwork-action-overlay-visible": isVisible
     }
   )
   return (
-    <div className="action-artwork">
+    <div className="artwork-action">
       <div>{children}</div>
       <div className={overlayClass} onClick={action} >
         <i className={className}></i>
@@ -17,5 +17,10 @@ const ActionArtwork = ({ isVisible, action, className, children }) => {
     </div>
   )
 }
-
+ActionArtwork.propTypes = {
+  action: React.PropTypes.func
+  , isVisible: React.PropTypes.bool
+  , className: React.PropTypes.string
+  , children: React.PropTypes.object
+}
 export default ActionArtwork

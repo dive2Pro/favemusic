@@ -1,7 +1,7 @@
 /* @flow */
 import React from 'react'
 import map from '../../services/map'
-
+import { ButtonInline } from '../ButtonInline/index'
 import classnames from "classnames"
 type ConfiguType = {
   fn: () => void,
@@ -11,10 +11,10 @@ type ConfiguType = {
 export const Action = ({ cfg }: {}) => {
   const { fn, className } = cfg
   return (
-    <div className="actions-item">
-      <i onClick={() => fn()} className={className}>
+    <ButtonInline onClick={() => fn()}>
+      <i className={className}>
       </i>
-    </div>
+    </ButtonInline>
   )
 }
 const Actions = (props: {
@@ -33,8 +33,7 @@ const Actions = (props: {
     <div className={clazzName}>
       {map((cfg: ConfiguType, idx: number) => (
         <Action cfg={cfg} key={idx} />
-        )
-        , configuration)}
+        ), configuration)}
     </div>
   )
 }

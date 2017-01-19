@@ -1,11 +1,11 @@
 // @flow
 import React from 'react'
-import LoadingSpinner from '../LoadingSpinner/index'
 import { PreviewTrackContainer } from '../Track/index'
 import UserItemContainer from '../User/index'
 import classnames from 'classnames'
 import map from '../../services/map'
-import MoreButton from '../MoreButton/index'
+import ButtonMore from '../ButtonMore/index'
+import { ButtonInline } from '../ButtonInline/index'
 const SpecificUserItem = ({ user, idx }: {}) => {
   // const isFollowing = followingsIds ? followingsIds
   //   .some((followingId: number) => followingId === id) : false
@@ -27,12 +27,7 @@ const SpecificTrackItem = ({ track, idx }: {}) => {
 }
 
 export const Mosaic = ({ ...props }: basePropsType) => {
-  const { ids, kind, requestInProcess, entities } = props
-  if (!ids || requestInProcess) {
-    return (
-      <div><LoadingSpinner isLoading={requestInProcess} /></div>
-    )
-  }
+  const { ids, kind, entities } = props
   if (kind === "user") {
     return (<div className="list-content">
       <ul>{map((id: number, idx: number) => {
@@ -75,15 +70,15 @@ const List = ({ ...props }: basePropsType) => {
   return (
     <div className="list">
       <h2>
-        <a href="#" onClick={toggleExpandF}>
+        <ButtonInline onClick={toggleExpandF}>
           {title}&nbsp;
           <Chevron { ...props } />
-        </a>
+        </ButtonInline>
       </h2>
       <div className={isExpanded ? 'more-visible' : ''}>
         <Mosaic { ...props } />
       </div>
-      <MoreButton { ...props } />
+      <ButtonMore { ...props } />
     </div>
   )
 }

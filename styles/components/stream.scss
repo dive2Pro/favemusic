@@ -19,7 +19,7 @@
       position: relative;
       justify-content: space-between;
       height: 80px;
-      flex: 1;
+      flex: 2;
       &-name{
         display: flex;
         
@@ -61,11 +61,10 @@
         flex: 1;
         align-items: flex-end;
         &-item {
-         border: $darkBorder;
-          border-radius: 5px;
-          padding: 0 ($padding/4);
+      
           i {
-            font-size: 20px;
+            font-size: inherit;
+            transform: translateY(-8px);
             cursor: pointer;
           }
           &:hover {

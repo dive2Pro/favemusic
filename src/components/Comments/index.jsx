@@ -8,7 +8,7 @@ import classnames from 'classnames'
 import { bindActionCreators } from 'redux'
 import Artwork from '../Artwork/index'
 import { fromNow } from '../../services/track'
-import MoreButton from '../MoreButton/index'
+import ButtonMore from '../ButtonMore/index'
 
 
 const Item = ({ comment, user }) => (
@@ -45,10 +45,10 @@ class Comments extends Component {
               user={commentUsers[comment.user]}
               comment={comment} />)
           }, commentsIds)}
-        <MoreButton
+        <ButtonMore
           nextHref={nextHref}
           fetchComment={() => fetchComment(trackId, nextHref)}
-          isLoading={isReqInprocess} />
+          isLoading={isReqInprocess || !commentsIds} />
       </div>
     )
   }
@@ -75,5 +75,5 @@ const mapDispatchToProps = (dispatch) => {
     fetchComment: bindActionCreators(fetchCommentByIdF, dispatch)
   }
 }
-
+export { Comments }
 export default connect(mapStateToProps, mapDispatchToProps)(Comments)

@@ -40,7 +40,7 @@ const ActivitiesContainer = ({
 }: ActivitiesPropsType) =>
   (<div>
     <ActivitiesDom activitiesIds={activitiesIds} activeTrackId={activeTrackId} />
-    <ActivitiesRequestDom requestInProcess={requestInProcess} />
+    <ActivitiesRequestDom requestInProcess={requestInProcess || !activitiesIds} />
   </div >
   )
 export default FetchOnScroll(ActivitiesContainer);

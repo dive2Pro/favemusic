@@ -7,9 +7,9 @@ import Artwork from '../Artwork/index'
 import InfoList from '../InfoList/index'
 import Permalink from '../Permalink/index'
 import CommentsContainer from '../Comments/index'
-import { COMMENTSTYPE } from '../../constants/toggleTypes'
-import ActionArtwork from '../ActionArtwork/index'
+import ArtworkAction from '../ArtworkAction/index'
 import classnames from 'classnames'
+import TrackActions from '../TrackActions/index'
 /* eslint-enable max-len */
 
 class Track extends Component {
@@ -32,33 +32,6 @@ class Track extends Component {
     const { track, song } = this.state
     if (isNotTrack(song)) return (<div></div>)
     return (<WaveFormSc track={track} id={id} idx={idx} />)
-  }
-
-  renderActions(track) {
-    const { addTrackToPlaylistF, id, deeptoggledF } = this.props
-    const { stream_url } = track
-    if (!stream_url) return
-
-    // const currentTrackIsPlaying = isSameTrackAndPlaying(activeTrackId, id, isPlaying)
-    return (
-      <div className="track-meta-actions">
-        <div className="track-meta-actions-item">
-          <i
-            className={`fa fa-comment`}
-            onClick={() => deeptoggledF(COMMENTSTYPE, id)}
-            >
-          Comments</i>
-        </div>
-
-        <div className="track-meta-actions-item">
-          <i
-            className="fa fa-list"
-            onClick={() => addTrackToPlaylistF(track.id)}
-            />
-          Add to Playlist
-        </div>
-      </div>
-    )
   }
 
   render() {
@@ -94,7 +67,7 @@ class Track extends Component {
     return (
       <div className="stream">
         <div className={"track " + (isVisible ? "active" : "")}>
-          <ActionArtwork
+          <ArtworkAction
             isVisible={isVisible}
             className={artwork_clazz}
             action={() => activateTrackF(id)}
@@ -102,7 +75,7 @@ class Track extends Component {
             <Artwork
               size={80} image={artwork_url} optionalImg={avatar_url}
               alt={title} />
-          </ActionArtwork>
+          </ArtworkAction>
           <div className="track-content">
             <div className="track-content-name">
               <Permalink href={user.permalink_url} text={username} />
@@ -119,7 +92,7 @@ class Track extends Component {
             <div className="track-meta-info">
               <div>{fromNow(created_at)}/{durationFormat(duration)}</div>
             </div>
-            {this.renderActions(track, isPlaying)}
+            <TrackActions id={track.id} />
           </div>
         </div >
         <CommentsContainer trackId={id} />

@@ -5,7 +5,7 @@ import * as actions from '../../actions/actionCreator.js'
 import { PLAYLISTTYPE } from '../../constants/toggleTypes'
 import { bindActionCreators } from 'redux'
 import map from '../../services/map'
-
+import { ButtonInline } from '../ButtonInline/index'
 import { PlaylistTrackContainer } from '../Track/index'
 type PropsType = {
   activeTrack: Object,
@@ -25,7 +25,7 @@ const renderMenu = (clearPlayListF: Function) => {
     <div className="playlist-menu">
       <div>Player Queue</div>
       <div>
-        <button onClick={() => clearPlayListF()} className="inline">Clear Queue</button>
+        <ButtonInline onClick={() => clearPlayListF()} >Clear Queue</ButtonInline>
       </div>
     </div>
   )

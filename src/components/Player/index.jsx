@@ -6,7 +6,7 @@ import { connect } from 'react-redux';
 import * as actions from '../../actions/actionCreator.js'
 import { PLAYLISTTYPE } from '../../constants/toggleTypes'
 import { bindActionCreators } from 'redux'
-
+import { ButtonInline } from '../ButtonInline/index'
 class Player extends Component {
   props: basePropsType;
 
@@ -35,40 +35,42 @@ class Player extends Component {
     return (
       <div className="player-content">
         <div>
-          <i
-            className="fa fa-step-backward"
-            onClick={() => activeIterateTrack(activeTrackId, -1)}
-            >&nbsp;</i>
+          <ButtonInline onClick={() => activeIterateTrack(activeTrackId, -1)} >
+            <i className="fa fa-step-backward">&nbsp;</i>
+          </ButtonInline>
         </div>
-
         <div >
-          <i
-            onClick={() => this.togglePlay()}
-            className={`fa ${isPlaying ? 'fa-pause' : 'fa-play'}`}
-            >&nbsp;</i>
+          <ButtonInline onClick={() => this.togglePlay()} >
+            <i
+              className={`fa ${isPlaying ? 'fa-pause' : 'fa-play'}`}>
+              &nbsp;
+            </i>
+          </ButtonInline>
         </div>
-
         <div>
-          <i
-            className="fa fa-step-forward"
+          <ButtonInline
             onClick={() => activeIterateTrack(activeTrackId, 1)}
-            >&nbsp;</i>
+            >
+            <i className="fa fa-step-forward">&nbsp;</i>
+          </ButtonInline>
         </div>
         <div className="player-content-name">
           {username} - {title}
         </div>
         <div>
-          <i
-            className="fa fa-list"
+          <ButtonInline
             onClick={() => setToggledF(PLAYLISTTYPE)}
-            >&nbsp;</i>
+            >
+            <i className="fa fa-list">&nbsp;</i>
+          </ButtonInline>
         </div>
         {isLogined && (<div>
-          <i
-            className={"fa fa-heart " + (track.user_favorite ? "is-favorite" : "")}
+          <ButtonInline
             onClick={() => likeF(track)}
             >
-          </i>
+            <i className={"fa fa-heart " + (track.user_favorite ? "is-favorite" : "")}>
+            </i>
+          </ButtonInline>
         </div>)}
         <audio
           ref="audio" id="audio"
