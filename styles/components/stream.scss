@@ -26,6 +26,9 @@
         height: 20px;
       }
     }
+    &-artwork{
+      overflow: hidden;
+    }
     &-content {
       padding: ($padding/8);
       display: flex;
