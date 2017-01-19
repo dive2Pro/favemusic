@@ -3,12 +3,13 @@
   flex-direction: row;
   &-main,
   &-content-side {
-    margin: 0 $padding $padding 0;
+    margin-right: $padding;
   }
   &-main {
-    width: 70%;
+     flex-grow: 3;
   }
   &-side {
-    width: 30%;
+     flex-grow: 1;
+    
   }
 }

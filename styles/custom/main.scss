@@ -6,7 +6,7 @@ body {
   -webkit-font-smoothing: antialiased;
   color: $fontColor;
   letter-spacing: 0.02rem;
-  margin: ($padding*4) 2%;
+  margin: ($padding*4) ($padding*2);
 
   ul, li {
     list-style: none;
