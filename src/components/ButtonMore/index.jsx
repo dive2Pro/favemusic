@@ -2,7 +2,7 @@ import React from 'react'
 import LoadingSpinner from '../LoadingSpinner/index'
 import ButtonGhost from '../ButtonGhost/index'
 const ButtonMore = ({ isLoading, fetchComment, nextHref, isHidden }) => {
-  if (isLoading || !nextHref || isHidden) {
+  if (isLoading ||  isHidden) {
     return (<noscript />)
   }
   return (

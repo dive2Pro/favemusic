@@ -67,15 +67,16 @@ class Track extends Component {
     return (
       <div className="stream">
         <div className={"track " + (isVisible ? "active" : "")}>
-          <div className="track-artwork"><ArtworkAction
-            isVisible={isVisible}
-            className={artwork_clazz}
-            action={() => activateTrackF(id)}
-            >
-            <Artwork
-              size={80} image={artwork_url} optionalImg={avatar_url}
-              alt={title} />
-          </ArtworkAction></div>
+          <div className="track-artwork">
+            <ArtworkAction
+              isVisible={isVisible}
+              className={artwork_clazz}
+              action={() => activateTrackF(id)}
+              >
+              <Artwork
+                size={80} image={artwork_url} optionalImg={avatar_url}
+                alt={title} />
+            </ArtworkAction></div>
           <div className="track-content">
             <div className="track-content-name">
               <Permalink href={user.permalink_url} text={username} />
