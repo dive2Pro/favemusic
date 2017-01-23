@@ -1,16 +1,24 @@
 import React from 'react'
 import FetchOnScroll from '../FetchOnScroll/index'
-import { StreamTrackContainer } from '../Track/index'
+import {StreamTrackContainer} from '../Track/index'
 import LoadingSpinner from '../LoadingSpinner/index'
 import map from '../../services/map'
-import { StreamInteraction } from '../StreamInteractions/index'
 
-const ActivitiesDom = ({ activitiesIds, activeTrackId }: { activitiesIds: [], activeTrackId: number }) =>
-  (<div>
-    <StreamInteraction />
+const ActivitiesDom = ({
+  activitiesIds
+  , activeTrackId
+  , trackEntities
+  , activeFilter
+}: {activitiesIds: [], activeTrackId: number}) => (
+  <div>
     <ul>
       {activitiesIds && map(
         (id: number, idx: number): number => {
+          const activity = trackEntities[id]
+          console.log(activity, '-------')
+          if (!activeFilter(activity)) {
+            return null;
+          }
           return (
             <li key={id + "-" + idx}>
               <StreamTrackContainer
@@ -24,7 +32,7 @@ const ActivitiesDom = ({ activitiesIds, activeTrackId }: { activitiesIds: [], ac
       }
     </ul>
   </div>
-  )
+)
 
 const ActivitiesRequestDom = (requestInProcess: true) => {
   if (requestInProcess) {
@@ -38,10 +46,16 @@ const ActivitiesContainer = ({
   activitiesIds
   , activeTrackId
   , requestInProcess
-}: ActivitiesPropsType) =>
-  (<div>
-    <ActivitiesDom activitiesIds={activitiesIds} activeTrackId={activeTrackId} />
+  , trackEntities
+  , activeFilter
+}: ActivitiesPropsType) => (
+  <div>
+    <ActivitiesDom
+      trackEntities={trackEntities}
+      activitiesIds={activitiesIds}
+      activeFilter={activeFilter}
+      activeTrackId={activeTrackId} />
     <ActivitiesRequestDom requestInProcess={requestInProcess || !activitiesIds} />
-  </div >
-  )
+  </div>
+)
 export default FetchOnScroll(ActivitiesContainer);

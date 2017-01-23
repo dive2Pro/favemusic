@@ -35,6 +35,8 @@ declare type ActivitiesPropsType = {
   activitiesIds: []
   , activeTrackId: number
   , requestInProcess: boolean
+  , trackEntities: []
+  , activeFilter: Function
 }
 declare type ArtworkPropsType = {
   activitiesIds: []
