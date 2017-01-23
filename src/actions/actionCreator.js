@@ -18,7 +18,7 @@ import {
   activateTrackF, removeTrackFromPlaylistF, addTrackToPlaylistF
   , clearPlayListF
 } from './player/index'
-
+import { filterByDuration } from './filter/index'
 export {
   init
   , login
@@ -39,4 +39,5 @@ export {
   , likeF
   , clearPlayListF
   , toggleFollowingF
+  , filterByDuration
 }

@@ -12,6 +12,7 @@ import comment from './comment/index'
 import { routerReducer } from 'react-router-redux'
 import player from './player/index'
 import toggle from './toggle/index'
+import filter from './filter/index'
 /**
  * 最后，时刻谨记永远不要在克隆 state 前修改它。
  */
@@ -25,6 +26,6 @@ export default combineReducers({
   , entities
   , toggle
   , comment
+  , filter
   , routing: routerReducer
-
 })

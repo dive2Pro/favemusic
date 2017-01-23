@@ -27,7 +27,7 @@ export function isNotTrack(track) {
 
 export function isTrack(track) {
   const {origin, type} = track
-  return !origin || !type || type !== trackTypes.PLAYLIST || type !== trackTypes.PLAYLIST_REPOST
+  return origin && type && (type !== trackTypes.PLAYLIST || type !== trackTypes.PLAYLIST_REPOST)
 }
 
 export function normalizeSamples(samples) {

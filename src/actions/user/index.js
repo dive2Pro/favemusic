@@ -121,7 +121,7 @@ export const fetchActivities = (nextHref) => {
     return fetch(activitiesUrl)
       .then(response => response.json())
       .then(data => {
-        const typeMap = flow(filter(isTrack), toIdAndType)(data.collection)
+        const typeMap = flow(filter(isTrack), map(toIdAndType))(data.collection)
         dispatch(mergeTrackTypesTrack(filter(value => value.type === trackTypes.TRACK)), typeMap)
         dispatch(mergeTrackTypesRepost(filter(value => value.type === trackTypes.TRACK_REPOST)), typeMap)
         const t_data = flow(map(addIdFromOrigin))(data.collection)

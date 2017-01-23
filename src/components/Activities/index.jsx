@@ -3,10 +3,11 @@ import FetchOnScroll from '../FetchOnScroll/index'
 import { StreamTrackContainer } from '../Track/index'
 import LoadingSpinner from '../LoadingSpinner/index'
 import map from '../../services/map'
+import { StreamInteraction } from '../StreamInteractions/index'
 
 const ActivitiesDom = ({ activitiesIds, activeTrackId }: { activitiesIds: [], activeTrackId: number }) =>
   (<div>
-    <h2>activities</h2>
+    <StreamInteraction />
     <ul>
       {activitiesIds && map(
         (id: number, idx: number): number => {
