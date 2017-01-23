@@ -28,10 +28,11 @@ class WaveformContainer extends React.Component {
     )
 
     isPngWaveform(waveform_url) && (
-      new Waveform({
-        container
-        , innerColor: '#61b25a'
-      }).dataFromSoundCloudTrack(track)
+      // new Waveform({
+      //   container
+      //   , innerColor: '#61b25a'
+      // }).dataFromSoundCloudTrack(track)
+      console.log(waveform_url, "unused")
     )
   }
 

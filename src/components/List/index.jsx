@@ -4,7 +4,7 @@ import { PreviewTrackContainer } from '../Track/index'
 import UserItemContainer from '../User/index'
 import classnames from 'classnames'
 import map from '../../services/map'
-import ButtonMore from '../ButtonMore/index'
+import { ButtonMore } from '../ButtonMore/index'
 import { ButtonInline } from '../ButtonInline/index'
 const SpecificUserItem = ({ user, idx }: {}) => {
   // const isFollowing = followingsIds ? followingsIds

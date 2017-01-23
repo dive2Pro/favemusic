@@ -38,6 +38,7 @@ class Track extends Component {
     const {
       activateTrackF, activeTrackId
       , isPlaying, idx
+      // , typeTracks, typeReposts
     } = this.props
     const { track, song, user } = this.state
     const { origin } = song

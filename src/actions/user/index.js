@@ -1,16 +1,19 @@
-import apiUrl, { addAccessToken, getLazyLoadingUserUrl } from '../../services/soundcloundApi'
+import flow from 'lodash/fp/flow'
+import map from '../../services/map'
+import filter from 'lodash/fp/filter'
+import apiUrl, {addAccessToken, getLazyLoadingUserUrl} from '../../services/soundcloundApi';
 import Cookies from 'js-cookie'
 import * as actionTypes from '../../constants/actionTypes'
-import { OAUTH_TOKEN } from '../../constants/authentification'
-import { wrapInOrigin, addIdFromOrigin } from '../../services/track'
-import { setRequestTypeInProcess } from '../request/index'
+import {OAUTH_TOKEN} from '../../constants/authentification'
+import {wrapInOrigin, addIdFromOrigin, toIdAndType, isTrack} from '../../services/track'
+import {setRequestTypeInProcess} from '../request/index'
 import * as requestTypes from '../../constants/requestTypes'
 import * as paginateLinkTypes from '../../constants/paginateLinkTypes'
-import { setPaginateLink } from '../paginate/index'
-import { userSchema } from '../../schemas/user'
-import { songSchema } from '../../schemas/song'
-import { normalize, schema } from 'normalizr'
-import { mergeUserEntities, mergeTrackEntities, mergeSongEntities } from '../entities/index'
+import {setPaginateLink} from '../paginate/index'
+import {userSchema} from '../../schemas/user'
+import {songSchema} from '../../schemas/song'
+import {normalize, schema} from 'normalizr'
+import {mergeUserEntities, mergeTrackEntities, mergeSongEntities} from '../entities/index'
 
 
 export const mergeFollowings = (followings) => ({
@@ -30,6 +33,15 @@ export const mergeFollowers = (followers) => ({
   , followers
 })
 
+const mergeTrackTypesTrack = (tracks) => ({
+  type: actionTypes.MERGE_TRACK_TYPES_TRACK
+  , tracks
+})
+
+const mergeTrackTypesRepost = (tracks) => ({
+  type: actionTypes.MERGE_TRACK_TYPES_REPOST
+  , tracks
+})
 const mergeFavorites = (favorites) => ({
   type: actionTypes.MERGE_FAVORITES
   , favorites
@@ -53,11 +65,9 @@ export const fetchFollowersF = (user, nextHref) => {
       .then(data => {
         // tree shaker
         const normaObj = normalize(data.collection, new schema.Array(userSchema))
-        console.info(normaObj);
         dispatch(mergeUserEntities(normaObj.entities.users))
         // only ids
         dispatch(mergeFollowers(normaObj.result))
-
         dispatch(setRequestTypeInProcess(false, requestTypes.FOLLOWERS))
 
         if (data.nextHref) {
@@ -106,16 +116,16 @@ export const fetchActivities = (nextHref) => {
     if (activitiesRequestInProcess) {
       return;
     }
-    console.info('activitiesUrl = ', activitiesUrl)
     dispatch(setRequestTypeInProcess(true, requestTypes.ACTIVITIES))
 
     return fetch(activitiesUrl)
       .then(response => response.json())
       .then(data => {
-        const t_data = data.collection.map(addIdFromOrigin)
-        console.info('t_data= ', t_data);
+        const typeMap = flow(filter(isTrack), toIdAndType)(data.collection)
+        dispatch(mergeTrackTypesTrack(filter(value => value.type === 'track')), typeMap)
+        dispatch(mergeTrackTypesRepost(filter(value => value.type === 'track-repost')), typeMap)
+        const t_data = flow(map(addIdFromOrigin))(data.collection)
         const normalizedObj = normalize(t_data, new schema.Array(songSchema))
-        console.info('normalizedObj = ', normalizedObj)
         dispatch(mergeSongEntities(normalizedObj.entities.songs))
         dispatch(mergeTrackEntities(normalizedObj.entities.origins))
         dispatch(mergeUserEntities(normalizedObj.entities.users))
@@ -145,7 +155,8 @@ export const fetchFavoritesF = (user, nextHref) =>
       })
       .then(data => {
         console.info('data = ', data);
-        const normalizedObj = normalize(data.map(wrapInOrigin), new schema.Array(songSchema))
+        const normalizedObj = normalize(data.map(wrapInOrigin),
+          new schema.Array(songSchema))
         dispatch(mergeTrackEntities(normalizedObj.entities.origins))
         dispatch(mergeFavorites(normalizedObj.result))
         dispatch(setPaginateLink(data.next_href, paginateLinkTypes.FAVORITES))

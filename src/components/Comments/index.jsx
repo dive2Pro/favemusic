@@ -8,7 +8,7 @@ import classnames from 'classnames'
 import { bindActionCreators } from 'redux'
 import Artwork from '../Artwork/index'
 import { fromNow } from '../../services/track'
-import ButtonMore from '../ButtonMore/index'
+import { ButtonMore } from '../ButtonMore/index'
 
 
 const Item = ({ comment, user }) => (

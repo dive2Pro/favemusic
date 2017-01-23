@@ -1,8 +1,9 @@
 import React from 'react'
 import LoadingSpinner from '../LoadingSpinner/index'
-import ButtonGhost from '../ButtonGhost/index'
-const ButtonMore = ({ isLoading, fetchComment, nextHref, isHidden }) => {
-  if (isLoading ||  isHidden) {
+import { ButtonGhost } from '../ButtonGhost/index'
+
+const ButtonMore = ({ isLoading, fetchComment, isHidden }) => {
+  if (isLoading || isHidden) {
     return (<noscript />)
   }
   return (
@@ -12,5 +13,5 @@ const ButtonMore = ({ isLoading, fetchComment, nextHref, isHidden }) => {
     </div>
   )
 }
-export default ButtonMore
+export { ButtonMore }
 

@@ -5,7 +5,7 @@ import { bindActionCreators } from 'redux'
 import * as actions from '../../actions/actionCreator'
 import { COMMENTSTYPE } from '../../constants/toggleTypes'
 const TrackActions = ({onOpenComments, onAddTrackToPlaylist}) => {
-  const isSmall= true
+  const isSmall = true
   return (
     <div className="track-meta-actions">
       <div className="track-meta-actions-item">

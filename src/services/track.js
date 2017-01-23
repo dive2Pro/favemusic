@@ -21,8 +21,12 @@ export function getTrackIcon(type) {
   }
 }
 export function isNotTrack(track) {
-  const { origin, type } = track
+  const {origin, type} = track
   return !origin || !type || type === ACTIVITY_TYPES.playlist || type === ACTIVITY_TYPES.playlistRepost
+}
+
+export function isTrack(track) {
+  return track.type === ACTIVITY_TYPES.track
 }
 
 export function normalizeSamples(samples) {
@@ -77,4 +81,11 @@ export function fromNow(createAt) {
 
 export function geneWaveFormElementId(id, idx) {
   return `waveform-${id}-${idx}`
+}
+
+export function toIdAndType(o) {
+  return {
+    type: o.type
+    , id: o.origin.id
+  }
 }

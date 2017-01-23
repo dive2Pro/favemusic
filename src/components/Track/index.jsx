@@ -18,6 +18,8 @@ function mapStateToProps(state, ownState) {
     , track: ownState.track
     , idx: ownState.idx
     , activeTrackId: state.player.activeTrackId
+    , typeReposts: state.user.typeReposts
+    , typeTracks: state.user.typeTracks
   }
 }
 

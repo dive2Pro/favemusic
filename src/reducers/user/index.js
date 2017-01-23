@@ -1,6 +1,7 @@
 
 import * as actionTypes from '../../constants/actionTypes'
 import { isSameById } from '../../services/player'
+import reduce from 'lodash/fp/reduce'
 
 const concatList = (currentList, targetList) => {
   return [
@@ -34,6 +35,8 @@ const initialState = {
   , followersIds: []
   , followingsIds: []
   , favoritesIds: []
+  , typeReposts: {}
+  , typeTracks: {}
 }
 
 const addToFavorites = (state, trackId) => {
@@ -66,6 +69,31 @@ const removeFromFollowings = (state: {}, userId: number) => {
   return { ...state, followingsIds }
 }
 
+const countByType = (result, track) => {
+  /* eslint-disable no-param-reassign*/
+  result[track.id] = result[track.id] ? result[track.id] + 1 : result[track.id]
+  /* eslint-enable no-param-reassign*/
+  return result
+}
+
+const mergeTrackTypesRepost = (state, tracks) => {
+  const { typeReposts } = state
+  const mergeType = reduce(countByType, typeReposts)
+  return {
+    ...state
+    , typeReposts: mergeType(tracks)
+  }
+}
+
+const mergeTrackTypesTrack = (state, tracks) => {
+  const { typeTracks } = state
+  const mergeType = reduce(countByType, typeTracks)
+  return {
+    ...state
+    , typeTracks: mergeType(tracks)
+  }
+}
+
 export default function (state = initialState, action) {
   switch (action.type) {
     case actionTypes.MERGE_FOLLOWINGS:
@@ -76,7 +104,10 @@ export default function (state = initialState, action) {
       return mergeActivities(state, action.activities)
     case actionTypes.MERGE_FOLLOWERS:
       return mergeFollowers(state, action.followers)
-
+    case actionTypes.MERGE_TRACK_TYPES_REPOST:
+      return mergeTrackTypesRepost(state, action.tracks)
+    case actionTypes.MERGE_TRACK_TYPES_TRACK:
+      return mergeTrackTypesTrack(state, action.tracks)
     case actionTypes.ADD_TO_FAVORITES:
       return addToFavorites(state, action.trackId)
     case actionTypes.REMOVE_FROM_FAVORITES:
