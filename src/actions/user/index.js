@@ -14,7 +14,7 @@ import {userSchema} from '../../schemas/user'
 import {songSchema} from '../../schemas/song'
 import {normalize, schema} from 'normalizr'
 import {mergeUserEntities, mergeTrackEntities, mergeSongEntities} from '../entities/index'
-
+import * as trackTypes from '../../constants/trackTypes'
 
 export const mergeFollowings = (followings) => ({
   type: actionTypes.MERGE_FOLLOWINGS
@@ -122,8 +122,8 @@ export const fetchActivities = (nextHref) => {
       .then(response => response.json())
       .then(data => {
         const typeMap = flow(filter(isTrack), toIdAndType)(data.collection)
-        dispatch(mergeTrackTypesTrack(filter(value => value.type === 'track')), typeMap)
-        dispatch(mergeTrackTypesRepost(filter(value => value.type === 'track-repost')), typeMap)
+        dispatch(mergeTrackTypesTrack(filter(value => value.type === trackTypes.TRACK)), typeMap)
+        dispatch(mergeTrackTypesRepost(filter(value => value.type === trackTypes.TRACK_REPOST)), typeMap)
         const t_data = flow(map(addIdFromOrigin))(data.collection)
         const normalizedObj = normalize(t_data, new schema.Array(songSchema))
         dispatch(mergeSongEntities(normalizedObj.entities.songs))
