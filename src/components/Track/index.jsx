@@ -21,6 +21,7 @@ function mapStateToProps(state, ownState) {
     , activeTrackId: state.player.activeTrackId
     , typeReposts: state.user.typeReposts
     , typeTracks: state.user.typeTracks
+    , sortType: state.sort.sortType
   }
 }
 

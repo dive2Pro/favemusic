@@ -10,6 +10,7 @@ import CommentsContainer from '../Comments/index'
 import ArtworkAction from '../ArtworkAction/index'
 import classnames from 'classnames'
 import TrackActions from '../TrackActions/index'
+import * as sortTypes from '../../constants/sortTypes'
 /* eslint-enable max-len */
 
 class Track extends Component {
@@ -38,6 +39,7 @@ class Track extends Component {
       activateTrackF, activeTrackId
       , isPlaying, idx, activity
       // , typeTracks, typeReposts
+      , sortType
     } = this.props
     const { song, user } = this.state
     const { origin } = song
@@ -49,13 +51,6 @@ class Track extends Component {
     } = activity
     const { avatar_url, username } = user
     const isVisible = isSameById(activeTrackId)(id)
-    const infoConfigurations = [
-      { className: "fa fa-play", count: playback_count }
-      , { className: "fa fa-heart", count: likes_count }
-      , { className: "fa fa-retweet", count: reposts_count }
-      , { className: "fa fa-comment", count: comment_count }
-      , { className: "fa fa-download", count: download_count }
-    ]
     const currentTrackIsPlaying = isSameTrackAndPlaying(activeTrackId, id, isPlaying)
     const artwork_clazz = classnames("fa", {
       "fa-pause": currentTrackIsPlaying
@@ -64,6 +59,13 @@ class Track extends Component {
         "fa-play": !currentTrackIsPlaying
       }
     )
+    const infoConfigurations = [
+      { className: "fa fa-play", count: playback_count, activeSort: sortType === sortTypes.PLAYS }
+      , { className: "fa fa-heart", count: likes_count, activeSort: sortType === sortTypes.FAVORITES }
+      , { className: "fa fa-retweet", count: reposts_count, activeSort: sortType === sortTypes.REPOSTS }
+      , { className: "fa fa-comment", count: comment_count }
+      , { className: "fa fa-download", count: download_count }
+    ]
     return (
       <div className="stream">
         <div className={"track " + (isVisible ? "active" : "")}>

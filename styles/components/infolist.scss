@@ -5,5 +5,8 @@
   // flex-grow: 4;
   &-item {
     flex: 1 1;
+    &-active{
+      color:$mainColor;
+    }
   }
 }
