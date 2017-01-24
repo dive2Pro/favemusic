@@ -13,6 +13,7 @@ import { routerReducer } from 'react-router-redux'
 import player from './player/index'
 import toggle from './toggle/index'
 import filter from './filter/index'
+import sort from './sort/index'
 /**
  * 最后，时刻谨记永远不要在克隆 state 前修改它。
  */
@@ -27,5 +28,6 @@ export default combineReducers({
   , toggle
   , comment
   , filter
+  , sort
   , routing: routerReducer
 })

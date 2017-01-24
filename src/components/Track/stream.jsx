@@ -15,39 +15,38 @@ import TrackActions from '../TrackActions/index'
 class Track extends Component {
 
   componentWillMount() {
-    const { tracks, songs, users, id } = this.props
-    const song = songs[id]
-    const track = tracks[song.id]
-    const user = users[track.user]
+    const { activity, songs, users } = this.props
+    const song = songs[activity.id]
+    const user = users[activity.user]
     this.setState(() => {
       return {
         song
-        , track
         , user
       }
     })
   }
 
   renderWaveform(id, idx) {
-    const { track, song } = this.state
+    const { song } = this.state
+    const { activity } = this.props
     if (isNotTrack(song)) return (<div></div>)
-    return (<WaveFormSc track={track} id={id} idx={idx} />)
+    return (<WaveFormSc track={activity} id={id} idx={idx} />)
   }
 
   render() {
     const {
       activateTrackF, activeTrackId
-      , isPlaying, idx
+      , isPlaying, idx, activity
       // , typeTracks, typeReposts
     } = this.props
-    const { track, song, user } = this.state
+    const { song, user } = this.state
     const { origin } = song
     if (!origin) return (<div></div>)
     const {
       title, permalink_url, artwork_url, playback_count,
       comment_count, download_count, likes_count, reposts_count, id
       , duration, created_at
-    } = track
+    } = activity
     const { avatar_url, username } = user
     const isVisible = isSameById(activeTrackId)(id)
     const infoConfigurations = [
@@ -94,7 +93,7 @@ class Track extends Component {
             <div className="track-meta-info">
               <div>{fromNow(created_at)}/{durationFormat(duration)}</div>
             </div>
-            <TrackActions id={track.id} />
+            <TrackActions id={activity.id} />
           </div>
         </div >
         <CommentsContainer trackId={id} />

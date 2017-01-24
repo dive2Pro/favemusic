@@ -8,7 +8,7 @@ import {DURATION_FILTER_FUNCTIONS} from '../../constants/durationFilter'
 import {ACTIVITIES} from '../../constants/paginateLinkTypes'
 import * as requestTypes from '../../constants/requestTypes'
 import * as actions from '../../actions/actionCreator'
-
+import { SORTFUNCTIONS } from '../../constants/sort'
 const StreamActivities = ({
   fetchActivities
   , requestInProcess
@@ -16,6 +16,7 @@ const StreamActivities = ({
   , activeTrackId
   , activeFilter
   , trackEntities
+  , sortFunc
   , nextHref}) => {
   return (
     <div>
@@ -27,14 +28,16 @@ const StreamActivities = ({
         scrollFunc={() => fetchActivities(nextHref)}
         activeFilter={activeFilter}
         trackEntities={trackEntities}
+        sortFunc={sortFunc}
       />
     </div>
   )
 }
 
 const mapStateToProps = (state) => {
-  const {user, player, request, paginate, filter, entities } = state
+  const {user, player, request, paginate, filter, entities, sort } = state
   const filters = [DURATION_FILTER_FUNCTIONS[filter.durationType]]
+  console.info(SORTFUNCTIONS[sort.sortType])
   return {
     activitiesIds: user.activitiesIds
     , activeTrackId: player.activeTrackId
@@ -42,6 +45,7 @@ const mapStateToProps = (state) => {
     , nextHref: paginate[ACTIVITIES]
     , trackEntities: entities.tracks
     , activeFilter: getAndCombined(filters)
+    , sortFunc: SORTFUNCTIONS[sort.sortType]
   }
 }
 

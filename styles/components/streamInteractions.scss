@@ -5,5 +5,23 @@
     background: $backgroundSecondary;
     border: $border;
     padding:($padding/2);
+    margin-right:($padding/2);
+  }
+}
+.stream-interaction {
+  display: flex;
+  align-items: flex-end;
+  &-icon {
+    font-size: $mediumIcon;
+    &-active {
+      color: $mainColor;
+    }
+  }
+  &-content {
+    display: flex;
+    font-size: $menuSize;
+    div {
+      margin: 0 ($padding/4)
+    }
   }
 }

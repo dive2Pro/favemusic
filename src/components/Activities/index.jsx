@@ -3,31 +3,23 @@ import FetchOnScroll from '../FetchOnScroll/index'
 import {StreamTrackContainer} from '../Track/index'
 import LoadingSpinner from '../LoadingSpinner/index'
 import map from '../../services/map'
-
+import filter from 'lodash/fp/filter'
 const ActivitiesDom = ({
-  activitiesIds
-  , activeTrackId
-  , trackEntities
-  , activeFilter
-}: {activitiesIds: [], activeTrackId: number}) => (
+  activities
+}: {activities: []}) => (
   <div>
     <ul>
-      {activitiesIds && map(
-        (id: number, idx: number): number => {
-          const activity = trackEntities[id]
-          if (!activeFilter(activity)) {
-            return null;
-          }
+      {map(
+        (activity: number, idx: number): number => {
           return (
-            <li key={id + "-" + idx}>
+            <li key={activity.id + "-" + idx}>
               <StreamTrackContainer
                 idx={idx}
-                id={id}
-                activeTrackId={activeTrackId}
+                activity={activity}
               />
             </li>)
         }
-        , activitiesIds)
+        , activities)
       }
     </ul>
   </div>
@@ -40,21 +32,25 @@ const ActivitiesRequestDom = (requestInProcess: true) => {
     return (<div>...</div>)
   }
 }
-
+const getMatchedEntities = (ids, entities) => {
+  return map(id => entities[id], ids)
+}
 const ActivitiesContainer = ({
   activitiesIds
-  , activeTrackId
   , requestInProcess
   , trackEntities
   , activeFilter
-}: ActivitiesPropsType) => (
-  <div>
-    <ActivitiesDom
-      trackEntities={trackEntities}
-      activitiesIds={activitiesIds}
-      activeFilter={activeFilter}
-      activeTrackId={activeTrackId} />
-    <ActivitiesRequestDom requestInProcess={requestInProcess || !activitiesIds} />
-  </div>
-)
+  , sortFunc
+}: ActivitiesPropsType) => {
+  const matchedEntities = getMatchedEntities(activitiesIds, trackEntities)
+  const filterEntities = filter(activeFilter, matchedEntities)
+  const sortedEntities = sortFunc(filterEntities)
+  return (
+    <div>
+      <ActivitiesDom
+        activities={sortedEntities} />
+      <ActivitiesRequestDom requestInProcess={requestInProcess || !activitiesIds} />
+    </div>
+  )
+}
 export default FetchOnScroll(ActivitiesContainer);

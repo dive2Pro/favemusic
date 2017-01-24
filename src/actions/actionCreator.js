@@ -19,6 +19,8 @@ import {
   , clearPlayListF
 } from './player/index'
 import { filterByDuration } from './filter/index'
+import { sortByTypeF } from './sort/index'
+
 export {
   init
   , login
@@ -40,4 +42,5 @@ export {
   , clearPlayListF
   , toggleFollowingF
   , filterByDuration
+  , sortByTypeF
 }

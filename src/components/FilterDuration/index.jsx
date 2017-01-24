@@ -25,19 +25,19 @@ const FilterDuration = ({toggleDurationType, durationType}) => {
     </ButtonActive>
   ), filterTypes)
   const filterDurationIconClass = classnames(
-    'filter-duration-icon'
+    'stream-interaction-icon'
     , {
-      'filter-duration-icon-active': hasAciveFilter(durationType)
+      'stream-interaction-icon-active': hasAciveFilter(durationType)
     }
   )
   return (
-    <div className="filter-duration">
+    <div className="stream-interaction">
       <div className={filterDurationIconClass}>
         <ButtonInline onClick={() => toggleDurationType(filterTypes.ALL)}>
           <i className="fa fa-filter" />
         </ButtonInline>
       </div>
-      <div className="filter-duration-content">
+      <div className="stream-interaction-content">
         {BAs}
       </div>
     </div>
