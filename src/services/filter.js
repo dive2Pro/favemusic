@@ -15,7 +15,6 @@ const getOrCombined = (filters) =>
 const getAndCombined = (filters) =>
   (obj) =>
     every((fn) => {
-      console.info('fn-----', fn, filters)
       return fn(obj)
     }, filters)
 

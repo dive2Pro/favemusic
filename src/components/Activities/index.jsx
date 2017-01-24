@@ -15,7 +15,6 @@ const ActivitiesDom = ({
       {activitiesIds && map(
         (id: number, idx: number): number => {
           const activity = trackEntities[id]
-          console.log(activity, '-------')
           if (!activeFilter(activity)) {
             return null;
           }

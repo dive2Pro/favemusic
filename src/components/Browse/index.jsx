@@ -34,6 +34,7 @@ class BrowserContainer extends Component {
   renderInnerComopnent() {
     const {
       requestInProcess, activitiesByGenre, genre, activeTrackId
+      , trackEntities
     } = this.props
     if (!activitiesByGenre) return
     const filteredActivitiesByGenre = activitiesByGenre[genre]
@@ -43,6 +44,8 @@ class BrowserContainer extends Component {
         activeTrackId={activeTrackId}
         requestInProcess={requestInProcess}
         scrollFunc={() => this.fetchActivitiesByGenreFunc()}
+        trackEntities={trackEntities}
+        activeFilter={() => true}
         />
     )
   }
@@ -60,14 +63,13 @@ function mapStateToProps(state: Object, routeState: Object) {
   const { browse, entities, player, request, paginate } = state
   let genre = routeState.location.query.genre
   genre = genre && genre.trim().replace(' ', '')
-  console.info('genre = ', genre);
   return {
     activitiesByGenre: browse
     , nextHref: paginate[genre]
     , genre
     , activeTrackId: player.activeTrackId
     , requestInProcess: request[ACTIVITIES_BYGENRE]
-    , tracks: entities.tracks
+    , trackEntities: entities.tracks
     , songs: entities.songs
     , users: entities.users
   }

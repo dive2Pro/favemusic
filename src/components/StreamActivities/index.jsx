@@ -42,7 +42,6 @@ const mapStateToProps = (state) => {
     , nextHref: paginate[ACTIVITIES]
     , trackEntities: entities.tracks
     , activeFilter: getAndCombined(filters)
-    //   (obj) => every(fn()=>fn(obj), (activity) => isMixDuration())
   }
 }
 

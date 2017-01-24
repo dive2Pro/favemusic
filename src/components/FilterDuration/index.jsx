@@ -33,7 +33,7 @@ const FilterDuration = ({toggleDurationType, durationType}) => {
   return (
     <div className="filter-duration">
       <div className={filterDurationIconClass}>
-        <ButtonInline onClick={() => toggleDurationType(filterTypes.NONE)}>
+        <ButtonInline onClick={() => toggleDurationType(filterTypes.ALL)}>
           <i className="fa fa-filter" />
         </ButtonInline>
       </div>

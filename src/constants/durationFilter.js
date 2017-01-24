@@ -2,7 +2,7 @@ import * as filterTypes from './filterTypes'
 import moment from 'moment'
 
 const DURATION_FILTER_NAMES = {
-  [filterTypes.NONE]: 'NONE'
+  [filterTypes.ALL]: 'ALL'
   , [filterTypes.FILTER_DURATION_MIX]: "MIX"
   , [filterTypes.FILTER_DURATION_TRACK]: "TRACK"
 }
@@ -12,7 +12,7 @@ const isMixDuration = (activity) => {
 }
 
 const DURATION_FILTER_FUNCTIONS = {
-  [filterTypes.NONE]: () => true
+  [filterTypes.ALL]: () => true
   , [filterTypes.FILTER_DURATION_TRACK]: (activity) =>
     !isMixDuration(activity)
   , [filterTypes.FILTER_DURATION_MIX]: (activity) =>

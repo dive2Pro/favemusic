@@ -2,7 +2,7 @@ import * as actionTypes from '../../constants/actionTypes'
 import * as filterTypes from '../../constants/filterTypes'
 
 const initialState = {
-  durationType: filterTypes.NONE
+  durationType: filterTypes.ALL
 }
 
 const setfilterByDuration = (state, filterType) => {
