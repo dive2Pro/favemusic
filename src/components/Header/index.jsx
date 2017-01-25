@@ -55,8 +55,6 @@ Header.defaultProps = {
 };
 
 function mapStateToProps(state: Object, ownState: {}) {
-  console.info('state = ', state);
-  console.info('ownState = ', ownState);
   return {
     currentUser: state.auth.user
     , genre: ownState.genre

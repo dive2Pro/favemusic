@@ -18,7 +18,7 @@ import {
   activateTrackF, removeTrackFromPlaylistF, addTrackToPlaylistF
   , clearPlayListF
 } from './player/index'
-import { filterByDuration } from './filter/index'
+import { filterByDuration, filterByName } from './filter/index'
 import { sortByTypeF } from './sort/index'
 
 export {
@@ -43,4 +43,5 @@ export {
   , toggleFollowingF
   , filterByDuration
   , sortByTypeF
+  , filterByName
 }

@@ -6,4 +6,10 @@ const filterByDuration = (filterType) => {
     , filterType
   }
 }
-export { filterByDuration }
+
+const filterByName = (filterName) => ({
+  type: actionTypes.FILTER_BY_NAME
+  , filterName
+})
+
+export { filterByDuration, filterByName }

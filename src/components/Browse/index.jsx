@@ -5,6 +5,10 @@ import Activities from '../Activities/index'
 import { DEFAULT_GENRE } from '../../constants/genre'
 import { ACTIVITIES_BYGENRE } from '../../constants/requestTypes'
 import { bindActionCreators } from 'redux'
+import { SORTFUNCTIONS } from '../../constants/sort'
+import * as sortTypes from '../../constants/sortTypes'
+import { DURATION_FILTER_FUNCTIONS } from '../../constants/durationFilter'
+import { ALL } from '../../constants/filterTypes'
 
 class BrowserContainer extends Component {
   props: basePropsType;
@@ -33,19 +37,21 @@ class BrowserContainer extends Component {
 
   renderInnerComopnent() {
     const {
-      requestInProcess, activitiesByGenre, genre, activeTrackId
-      , trackEntities
+      requestInProcess, activitiesByGenre
+      , genre, trackEntities
     } = this.props
-    if (!activitiesByGenre) return
+    if (!activitiesByGenre) {
+      return
+    }
     const filteredActivitiesByGenre = activitiesByGenre[genre]
     return (
       <Activities
         activitiesIds={filteredActivitiesByGenre}
-        activeTrackId={activeTrackId}
         requestInProcess={requestInProcess}
         scrollFunc={() => this.fetchActivitiesByGenreFunc()}
         trackEntities={trackEntities}
-        activeFilter={() => true}
+        activeFilter={DURATION_FILTER_FUNCTIONS[ALL]}
+        sortFunc={SORTFUNCTIONS[sortTypes.NONE]}
         />
     )
   }
@@ -60,14 +66,13 @@ class BrowserContainer extends Component {
 }
 
 function mapStateToProps(state: Object, routeState: Object) {
-  const { browse, entities, player, request, paginate } = state
+  const { browse, entities, request, paginate } = state
   let genre = routeState.location.query.genre
   genre = genre && genre.trim().replace(' ', '')
   return {
     activitiesByGenre: browse
     , nextHref: paginate[genre]
     , genre
-    , activeTrackId: player.activeTrackId
     , requestInProcess: request[ACTIVITIES_BYGENRE]
     , trackEntities: entities.tracks
     , songs: entities.songs

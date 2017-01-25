@@ -25,7 +25,7 @@ const ActivitiesDom = ({
   </div>
 )
 
-const ActivitiesRequestDom = (requestInProcess: true) => {
+const ActivitiesRequestDom = (requestInProcess: Boolean) => {
   if (requestInProcess) {
     return (<LoadingSpinner isLoading={requestInProcess} />)
   } else {
@@ -49,7 +49,9 @@ const ActivitiesContainer = ({
     <div>
       <ActivitiesDom
         activities={sortedEntities} />
-      <ActivitiesRequestDom requestInProcess={requestInProcess || !activitiesIds} />
+      <ActivitiesRequestDom
+        requestInProcess={requestInProcess
+        || !activitiesIds} />
     </div>
   )
 }
