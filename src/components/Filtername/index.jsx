@@ -2,16 +2,15 @@ import React from 'react'
 import {bindActionCreators} from 'redux'
 import {connect} from 'react-redux'
 import {filterByName} from '../../actions/actionCreator'
-import debounce from 'lodash/debounce'
+// todo import debounce from 'lodash/debounce'
 import classnames from 'classnames'
 
 class Filtername extends React.Component {
 
   onInputChange = () => {
     const value = this.input.value
-    const {filterFunc} = this.props
-    console.log(' - -- - - - - -- - - ')
-    // debounce(() => filterFunc(value), 500)
+    const { filterFunc } = this.props
+    filterFunc(value)
   }
 
   render() {
@@ -29,7 +28,8 @@ class Filtername extends React.Component {
         </div>
         <div className="stream-interaction-content">
           <input
-            onChange={() => debounce(this.onInputChange)}
+            className="input-menu"
+            onChange={this.onInputChange}
             type="text"
             ref={(inp) => { this.input = inp }}
           />

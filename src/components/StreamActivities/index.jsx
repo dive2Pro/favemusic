@@ -9,6 +9,8 @@ import {ACTIVITIES} from '../../constants/paginateLinkTypes'
 import * as requestTypes from '../../constants/requestTypes'
 import * as actions from '../../actions/actionCreator'
 import { SORTFUNCTIONS } from '../../constants/sort'
+import { nameFilter } from '../../constants/nameFilter'
+
 const StreamActivities = ({
   fetchActivities
   , requestInProcess
@@ -36,8 +38,10 @@ const StreamActivities = ({
 
 const mapStateToProps = (state) => {
   const {user, player, request, paginate, filter, entities, sort } = state
-  const filters = [DURATION_FILTER_FUNCTIONS[filter.durationType]]
-  console.info(SORTFUNCTIONS[sort.sortType])
+  const filters = [
+    DURATION_FILTER_FUNCTIONS[filter.durationType]
+    , nameFilter(filter.filterName)
+  ]
   return {
     activitiesIds: user.activitiesIds
     , activeTrackId: player.activeTrackId
