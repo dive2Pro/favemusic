@@ -11,7 +11,21 @@ import ArtworkAction from '../ArtworkAction/index'
 import classnames from 'classnames'
 import TrackActions from '../TrackActions/index'
 import * as sortTypes from '../../constants/sortTypes'
+import { ALL } from '../../constants/filterTypes'
 /* eslint-enable max-len */
+
+const Duration = ({ isActive, duration}) => {
+  const durationClass = classnames(
+    {
+      "active-duration-filter": isActive
+    }
+  )
+  return (
+    <div className={durationClass}>
+      {durationFormat(duration)}
+    </div>
+  )
+}
 
 class Track extends Component {
 
@@ -39,7 +53,7 @@ class Track extends Component {
       activateTrackF, activeTrackId
       , isPlaying, idx, activity
       // , typeTracks, typeReposts
-      , sortType
+      , sortType, durationType
     } = this.props
     const { song, user } = this.state
     const { origin } = song
@@ -93,7 +107,12 @@ class Track extends Component {
           </div>
           <div className="track-meta">
             <div className="track-meta-info">
-              <div>{fromNow(created_at)}/{durationFormat(duration)}</div>
+              <div>
+                <Duration
+                  isActive={durationType !== ALL}
+                  duration={duration}
+                />
+                /{fromNow(created_at)}</div>
             </div>
             <TrackActions id={activity.id} />
           </div>

@@ -22,6 +22,7 @@ function mapStateToProps(state, ownState) {
     , typeReposts: state.user.typeReposts
     , typeTracks: state.user.typeTracks
     , sortType: state.sort.sortType
+    , durationType: state.filter.durationType
   }
 }
 

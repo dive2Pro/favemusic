@@ -10,7 +10,7 @@ import classnames from 'classnames'
 import {ButtonInline} from '../ButtonInline/index'
 
 const hasAciveFilter = (durationType) => {
-  const {FILTER_DURATION_MIX, FILTER_DURATION_TRACK} = filterTypes
+  const { FILTER_DURATION_MIX, FILTER_DURATION_TRACK } = filterTypes
   return durationType === FILTER_DURATION_MIX || durationType === FILTER_DURATION_TRACK
 }
 
