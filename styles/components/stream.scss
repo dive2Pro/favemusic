@@ -16,14 +16,15 @@
       opacity: 0.2;
       position: absolute;
       top: 0;
-      left: 60px;
-      width: calc(100%- 60px);
       height: 100%;
       pointer-events: none;
-      padding: ($padding/8) 0;
       display: flex;
+      left: 80px;
+      width: calc(100% - 80px);
+      padding: 2.5px 0;
       &-json {
-        height: 20px;
+        height: 100%;
+        width: 100%;
       }
     }
     &-artwork{
@@ -68,7 +69,6 @@
         &-item {
           i {
             font-size: inherit;
-            transform: translateY(-8px);
             cursor: pointer;
           }
           &:hover {

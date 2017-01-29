@@ -31,7 +31,7 @@ const renderHeader = ({ ...props }: PropsType) => {
         <h1>Hello <Link to={!currentUser ? "/dashboard" : "/browse"}>{name}</Link></h1>
       </div>
       <ul>
-        {map((gereItem: string, idx: number) => (
+        {!currentUser && map((gereItem: string, idx: number) => (
           <MenuItem key={idx} genreItem={gereItem} pathname={pathname} />
         ), GENRES)}
       </ul>

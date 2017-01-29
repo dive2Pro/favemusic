@@ -78,7 +78,7 @@ const List = ({ ...props }: basePropsType) => {
       <div className={isExpanded ? 'more-visible' : ''}>
         <Mosaic { ...props } />
       </div>
-      <ButtonMore { ...props } />
+      <ButtonMore { ...props } isHidden={!isExpanded} />
     </div>
   )
 }

@@ -93,15 +93,13 @@ class Track extends Component {
                 size={80} image={artwork_url} optionalImg={avatar_url}
                 alt={title} />
             </ArtworkAction></div>
+          <div className="track-waveform">
+            {this.renderWaveform(id, idx)}
+          </div>
           <div className="track-content">
             <div className="track-content-name">
               <Permalink href={user.permalink_url} text={username} />
               - <Permalink href={permalink_url} text={title} />
-            </div>
-            <div
-              className="track-content-waveform"
-              >
-              {this.renderWaveform(id, idx)}
             </div>
             <InfoList infoConfigurations={infoConfigurations} />
           </div>

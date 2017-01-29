@@ -26,6 +26,14 @@ const Item = ({ comment, user }) => (
   </div>
 )
 class Comments extends Component {
+
+  componentWillReceiveProps(nextProps) {
+    const { isVisible, commentsIds, fetchComment, nextHref, trackId } = nextProps
+    if (!commentsIds && isVisible) {
+      fetchComment(trackId, nextHref)
+    }
+  }
+
   render() {
     const { commentsIds, trackId, commentUsers
       , commentEntities, isReqInprocess, isVisible, fetchComment, nextHref } = this.props

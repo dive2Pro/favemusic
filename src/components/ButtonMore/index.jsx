@@ -7,7 +7,7 @@ const ButtonMore = ({ isLoading, fetchComment, isHidden }) => {
     return (<noscript />)
   }
   return (
-    <div>
+    <div className="button-more">
       <ButtonGhost onClick={fetchComment}>Load More</ButtonGhost>
       <LoadingSpinner isLoading={isLoading} />
     </div>
