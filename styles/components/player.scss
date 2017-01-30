@@ -32,6 +32,9 @@
           color: $mainColor;
         }
       }
+      .active{
+        color: $mainColor;
+      }
     }
     div {
       margin: auto $padding;

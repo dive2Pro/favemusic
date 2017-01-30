@@ -1,5 +1,7 @@
 import * as actionTypes from '../../constants/actionTypes'
+
 const initialState = {}
+
 const setToggled = (state, toggleType) => {
   const toggleObject = {}
   toggleObject[toggleType] = !state[toggleType]

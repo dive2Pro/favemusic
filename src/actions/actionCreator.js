@@ -16,7 +16,7 @@ import { fetchCommentByIdF } from './comment/index'
 import {
   togglePlayTrack, activeIterateTrack,
   activateTrackF, removeTrackFromPlaylistF, addTrackToPlaylistF
-  , clearPlayListF
+  , clearPlayListF, toggleShuffleMode
 } from './player/index'
 import { filterByDuration, filterByName } from './filter/index'
 import { sortByTypeF } from './sort/index'
@@ -44,4 +44,5 @@ export {
   , filterByDuration
   , sortByTypeF
   , filterByName
+  , toggleShuffleMode
 }

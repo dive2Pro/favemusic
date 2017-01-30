@@ -6,7 +6,7 @@ import { isSameTrackAndPlaying, isSameById } from '../../services/player'
 import { syncEntities } from '../entities/index'
 import { resetToggledF } from '../toggle/index'
 import { PLAYLISTTYPE } from '../../constants/toggleTypes'
-
+import random from 'lodash/random'
 const setIsPlaying = (isPlaying) => ({
   type: actionTypes.SET_IS_PLAYING
   , isPlaying
@@ -37,8 +37,7 @@ const deactivateTrack = () => ({
 
 const getIterateTrackId = (playlist, activeTrackId, iterate) => {
   const index = playlist.findIndex(isSameById(activeTrackId))
-  const iterateTrackId = playlist[(index + iterate)]
-  return iterateTrackId
+  return playlist[(index + iterate)]
 }
 
 export const togglePlayTrack = (isPlaying) =>
@@ -70,17 +69,44 @@ export const addTrackToPlaylistF = (trackId) =>
     dispath(setTrackInPlaylist(trackId))
   }
 
+const setIsShuffleMode = (isShuffleMode) => ({
+  type: actionTypes.SETSHUFFLEMODE
+  , isShuffleMode
+})
+
+export const toggleShuffleMode = (isShuffleMode) =>
+  (dispatch) => {
+    dispatch(setIsShuffleMode(isShuffleMode))
+  }
+
+const getShuffleId = (activeTrackId, playlist) => {
+  const size = playlist.length
+  const nextId = playlist[random(0, size-1)]
+  if (activeTrackId === nextId) {
+    return getShuffleId(activeTrackId, playlist)
+  } else {
+    return nextId
+  }
+}
+
 
 export const activeIterateTrack = (activeTrackId, iterate = 1) =>
   (dispatch, getState) => {
-    const player = getState().player
-      , tracks = getState().entities.tracks
+    const state = getState();
+    const player = state.player
+      , tracks = state.entities.tracks
     const playlist = player.playlist
+    const isShuffleMode = player.isShuffleMode
     const iterateTrackId = getIterateTrackId(playlist, activeTrackId, iterate)
-      , activeTrack = tracks[activeTrackId]
-    if (iterateTrackId) {
+    let activeTrack = tracks[activeTrackId]
+    if (iterateTrackId && isShuffleMode === false) {
       dispatch(setActiveTrack(iterateTrackId))
-      togglePlayTrack(true)
+      dispatch(togglePlayTrack(true))
+    } else if (isShuffleMode) {
+      const shuffleId = getShuffleId(activeTrackId, playlist);
+      dispatch(setActiveTrack(shuffleId))
+      dispatch(togglePlayTrack(true))
+      activeTrack = tracks[shuffleId]
     } else {
       dispatch(togglePlayTrack(false))
     }
@@ -107,7 +133,7 @@ export const removeTrackFromPlaylistF = (trackId) =>
   }
 /**
  *  const setPlaylist = (playlist: []) => ({
- * type: actionTypes.SET_PLAY_LIST
+ *   type: actionTypes.SET_PLAY_LIST
  * , playlist})
  */
 

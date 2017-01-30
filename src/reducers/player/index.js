@@ -8,6 +8,7 @@ const initialState = {
   activeTrackId: null
   , isPlaying: false
   , playlist: []
+  , isShuffleMode: false
 }
 
 const setTrackInPlaylist = (state, trackId) => {
@@ -40,15 +41,14 @@ export default function playerReducer(state = initialState, action) {
       return { ...state, activeTrackId: action.activeTrackId }
     case actionTypes.SET_TRACK_IN_PLAYLIST:
       return setTrackInPlaylist(state, action.trackId)
-
     case actionTypes.REMOVE_TRACK_FROM_PLAYLIST:
       return removeTrackFromPlaylist(state, action.trackId)
-
     case actionTypes.DEACTIVE_TRACK:
       return deactivateTrack(state)
-
     case actionTypes.RESET_PLAYLIST:
       return resetPlaylist(state)
+    case actionTypes.SETSHUFFLEMODE:
+      return { ...state, isShuffleMode: action.isShuffleMode}
     default:
       return state
   }

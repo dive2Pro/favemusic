@@ -27,7 +27,8 @@ class Player extends Component {
       isPlaying, activeTrackId,
       activeIterateTrack, tracks
       , likeF, setToggledF
-      , isLogined
+      , isLogined, playCount
+      , toggleShuffleMode, isShuffleMode
     } = this.props
     if (!activeTrackId) return
     const track = tracks[activeTrackId]
@@ -62,6 +63,14 @@ class Player extends Component {
             onClick={() => setToggledF(PLAYLISTTYPE)}
             >
             <i className="fa fa-list">&nbsp;</i>
+            {playCount}
+          </ButtonInline>
+        </div>
+        <div className="player-content-action">
+          <ButtonInline
+            onClick={() => toggleShuffleMode(!isShuffleMode)}
+          >
+            <i className={"fa fa-random " + (isShuffleMode ? "is-favorite" : "")} />
           </ButtonInline>
         </div>
         {isLogined && (<div className="player-content-action">
@@ -99,6 +108,8 @@ function mapStateToProps(state: Object) {
     , activeTrackId: player.activeTrackId
     , tracks: entities.tracks
     , isLogined: auth.user !== null
+    , playCount: player.playlist.length
+    , isShuffleMode: player.isShuffleMode
   }
 }
 function mapDispatchToProps(dispatch: Function) {
@@ -107,6 +118,7 @@ function mapDispatchToProps(dispatch: Function) {
     , activeIterateTrack: bindActionCreators(actions.activeIterateTrack, dispatch)
     , setToggledF: bindActionCreators(actions.setToggledF, dispatch)
     , togglePlayTrack: bindActionCreators(actions.togglePlayTrack, dispatch)
+    , toggleShuffleMode: bindActionCreators(actions.toggleShuffleMode, dispatch)
   }
 }
 export default connect(mapStateToProps, mapDispatchToProps)(Player)
