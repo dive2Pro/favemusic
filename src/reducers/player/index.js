@@ -9,6 +9,8 @@ const initialState = {
   , isPlaying: false
   , playlist: []
   , isShuffleMode: false
+  , isMute: false
+  , audioValue: 25
 }
 
 const setTrackInPlaylist = (state, trackId) => {
@@ -49,6 +51,10 @@ export default function playerReducer(state = initialState, action) {
       return resetPlaylist(state)
     case actionTypes.SETSHUFFLEMODE:
       return { ...state, isShuffleMode: action.isShuffleMode}
+    case actionTypes.TOGGLE_AUDIO_MUTE:
+      return { ...state, isMute: action.isMute}
+    case actionTypes.SET_VOLUME_VALUE:
+      return { ...state, audioValue: action.value}
     default:
       return state
   }

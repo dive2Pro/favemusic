@@ -1,0 +1,33 @@
+.volume {
+  position: fixed;
+  background: $nav;
+  right: 5%;
+  bottom: $padding *3 ;
+  width: $padding * 4;
+  height: $padding * 10;
+  border: $darkBorder;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  transition: all 0.2s ease;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  &-size {
+    color: $mainColor;
+    font-size: $bigIcon;
+  }
+
+  &-slider {
+
+  }
+
+  &-action {
+
+  }
+
+  &.is-visible {
+    opacity: 1;
+  }
+}
+

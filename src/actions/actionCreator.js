@@ -17,6 +17,7 @@ import {
   togglePlayTrack, activeIterateTrack,
   activateTrackF, removeTrackFromPlaylistF, addTrackToPlaylistF
   , clearPlayListF, toggleShuffleMode
+  , changeVolumeF, muteOrUnmuteF
 } from './player/index'
 import { filterByDuration, filterByName } from './filter/index'
 import { sortByTypeF } from './sort/index'
@@ -45,4 +46,6 @@ export {
   , sortByTypeF
   , filterByName
   , toggleShuffleMode
+  , changeVolumeF
+  , muteOrUnmuteF
 }

@@ -4,16 +4,22 @@ import ReactDOM from 'react-dom'
 import { addAccessToken } from '../../services/soundcloundApi'
 import { connect } from 'react-redux';
 import * as actions from '../../actions/actionCreator.js'
-import { PLAYLISTTYPE } from '../../constants/toggleTypes'
+import { PLAYLISTTYPE, ADJUSTVOLUME } from '../../constants/toggleTypes'
 import { bindActionCreators } from 'redux'
 import { ButtonInline } from '../ButtonInline/index'
+
+
 class Player extends Component {
   props: basePropsType;
+  setAudioVolume = () => { }
 
   componentDidUpdate() {
     const audioElement = ReactDOM.findDOMNode(this.refs.audio)
     if (!audioElement) return
-    const { isPlaying } = this.props;
+    const { isPlaying, isMute, audioValue } = this.props;
+    this.setAudioVolume(audioElement)
+    audioElement.muted = isMute
+    audioElement.volume = audioValue
     isPlaying ? audioElement.play() : audioElement.pause()
   }
 
@@ -29,6 +35,7 @@ class Player extends Component {
       , likeF, setToggledF
       , isLogined, playCount
       , toggleShuffleMode, isShuffleMode
+      , isOpenPlaylist
     } = this.props
     if (!activeTrackId) return
     const track = tracks[activeTrackId]
@@ -62,7 +69,7 @@ class Player extends Component {
           <ButtonInline
             onClick={() => setToggledF(PLAYLISTTYPE)}
             >
-            <i className="fa fa-list">&nbsp;</i>
+            <i className={"fa fa-list " + (isOpenPlaylist ? " is-favorite" : "")}>&nbsp;</i>
             {playCount}
           </ButtonInline>
         </div>
@@ -71,6 +78,11 @@ class Player extends Component {
             onClick={() => toggleShuffleMode(!isShuffleMode)}
           >
             <i className={"fa fa-random " + (isShuffleMode ? "is-favorite" : "")} />
+          </ButtonInline>
+        </div>
+        <div className="player-content-action">
+          <ButtonInline onClick={() => setToggledF(ADJUSTVOLUME)}>
+            <i className="fa fa-volume-up"> </i>
           </ButtonInline>
         </div>
         {isLogined && (<div className="player-content-action">
@@ -82,7 +94,7 @@ class Player extends Component {
           </ButtonInline>
         </div>)}
         <audio
-          ref="audio" id="audio"
+          ref={(audio: Audio) => { this.audio = audio }} id="audio"
           src={addAccessToken(stream_url, '?')}
           >
         </audio>
@@ -102,7 +114,7 @@ class Player extends Component {
 }
 
 function mapStateToProps(state: Object) {
-  const { player, auth, entities } = state
+  const { player, auth, entities, toggle } = state
   return {
     isPlaying: player.isPlaying
     , activeTrackId: player.activeTrackId
@@ -110,6 +122,9 @@ function mapStateToProps(state: Object) {
     , isLogined: auth.user !== null
     , playCount: player.playlist.length
     , isShuffleMode: player.isShuffleMode
+    , isOpenPlaylist: toggle[PLAYLISTTYPE]
+    , audioValue: player.audioValue
+    , isMute: player.isMute
   }
 }
 function mapDispatchToProps(dispatch: Function) {

@@ -81,7 +81,7 @@ export const toggleShuffleMode = (isShuffleMode) =>
 
 const getShuffleId = (activeTrackId, playlist) => {
   const size = playlist.length
-  const nextId = playlist[random(0, size-1)]
+  const nextId = playlist[random(0, size - 1)]
   if (activeTrackId === nextId) {
     return getShuffleId(activeTrackId, playlist)
   } else {
@@ -147,4 +147,24 @@ export const clearPlayListF = () =>
     dispatch(deactivateTrack())
     dispatch(resetPlaylist())
     dispatch(resetToggledF(PLAYLISTTYPE))
+  }
+
+const setAudioMute = (isMute) => ({
+  type: actionTypes.TOGGLE_AUDIO_MUTE
+  , isMute
+})
+
+export const muteOrUnmuteF = (isMute) =>
+  dispatch => {
+    dispatch(setAudioMute(!isMute))
+  }
+
+const changeAudioValue = (value) => ({
+  type: actionTypes.SET_VOLUME_VALUE
+  , value
+})
+
+export const changeVolumeF = (value) =>
+  dispatch => {
+    dispatch(changeAudioValue(value))
   }

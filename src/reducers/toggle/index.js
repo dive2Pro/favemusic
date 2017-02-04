@@ -19,9 +19,11 @@ const setDeepToggled = (state, reveivedToggleType, trackId) => {
   toggleType[trackId] = !toggleType[trackId]
   return { ...state, [reveivedToggleType]: toggleType }
 }
+
 const resetAllDeepToggled = (state, reveivedToggleType) => {
   return { ...state, [reveivedToggleType]: {} }
 }
+
 const toggle = (state = initialState, action: Action) => {
   switch (action.type) {
     case actionTypes.SET_TOGGLED:

@@ -6,7 +6,7 @@
   width: $padding*18;
   height: $padding*15;
   border: $darkBorder;
-  overflow: scroll;
+  overflow: hidden;
   opacity: 0;
   display: flex;
   transition: height 0.2s;
